@@ -1,3 +1,6 @@
+# v0.9.10
+- Update deps
+
 # v0.9.9
 - Actually fix bar graph
 

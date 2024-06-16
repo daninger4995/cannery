@@ -12,7 +12,7 @@
     phx-submit="save"
   >
     <div
-      :if={@changeset.action && not @changeset.valid?()}
+      :if={@changeset.action && not @changeset.valid?}
       class="invalid-feedback col-span-3 text-center"
     >
       <%= changeset_errors(@changeset) %>

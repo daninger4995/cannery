@@ -16,7 +16,7 @@
     </h3>
 
     <div
-      :if={@email_changeset.action && not @email_changeset.valid?()}
+      :if={@email_changeset.action && not @email_changeset.valid?}
       class="alert alert-danger col-span-3"
     >
       <%= dgettext("errors", "Oops, something went wrong! Please check the errors below.") %>
@@ -58,7 +58,7 @@
     </h3>
 
     <div
-      :if={@password_changeset.action && not @password_changeset.valid?()}
+      :if={@password_changeset.action && not @password_changeset.valid?}
       class="alert alert-danger col-span-3"
     >
       <%= dgettext("errors", "Oops, something went wrong! Please check the errors below.") %>
@@ -112,7 +112,7 @@
     ) %>
 
     <div
-      :if={@locale_changeset.action && not @locale_changeset.valid?()}
+      :if={@locale_changeset.action && not @locale_changeset.valid?}
       class="alert alert-danger col-span-3"
     >
       <%= dgettext("errors", "Oops, something went wrong! Please check the errors below.") %>

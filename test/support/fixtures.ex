@@ -48,9 +48,6 @@ defmodule Cannery.Fixtures do
   def extract_user_token(fun) do
     %{args: %{attrs: attrs, email: email_key, user_id: user_id}} = fun.(&"[TOKEN]#{&1}[TOKEN]")
 
-    # convert atoms to string keys
-    attrs = attrs |> Map.new(fn {atom_key, value} -> {atom_key |> Atom.to_string(), value} end)
-
     email =
       email_key
       |> Atom.to_string()

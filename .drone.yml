@@ -17,7 +17,7 @@ steps:
       - .mix
 
 - name: test
-  image: elixir:1.17.0-otp-27-alpine
+  image: elixir:1.16.3-otp-26-alpine
   environment:
     TEST_DATABASE_URL: ecto://postgres:postgres@database/cannery_test
     HOST: testing.example.tld

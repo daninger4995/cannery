@@ -14,7 +14,7 @@ defmodule Cannery.Logger do
       |> Map.put(:stacktrace, Exception.format_stacktrace(stacktrace))
       |> pretty_encode()
 
-    Logger.error("#{meta.reason}: #{data}")
+    Logger.error("Oban exception: #{data}")
   end
 
   def handle_event([:oban, :job, :start], measure, meta, _config) do

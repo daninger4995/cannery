@@ -1,4 +1,5 @@
 # v0.9.10
+- Fix issue with logger failing on oban exceptions
 - Update deps
 
 # v0.9.9

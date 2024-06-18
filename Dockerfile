@@ -1,4 +1,4 @@
-FROM elixir:1.16.3-otp-26-alpine AS build
+FROM elixir:1.17.0-otp-27-alpine AS build
 
 # install build dependencies
 RUN apk add --no-cache build-base npm git python3
@@ -7,8 +7,8 @@ RUN apk add --no-cache build-base npm git python3
 WORKDIR /app
 
 # install hex + rebar
-RUN mix local.hex --force && \
-    mix local.rebar --force
+RUN mix local.rebar --force &&
+    mix local.hex --force
 
 # set build ENV
 ENV MIX_ENV=prod

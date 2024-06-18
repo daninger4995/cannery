@@ -1,3 +1,6 @@
+# v0.10.0
+- Update deps
+
 # v0.9.10
 - Fix issue with logger failing on oban exceptions
 - Fix an issue with emails not being able to be sent

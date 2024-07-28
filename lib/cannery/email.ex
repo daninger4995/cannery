@@ -26,21 +26,21 @@ defmodule Cannery.Email do
   end
 
   @spec generate_email(key :: String.t(), User.t(), attrs :: map()) :: t()
-  def generate_email("welcome", user, %{url: url}) do
+  def generate_email("welcome", user, %{"url" => url}) do
     user
     |> base_email(dgettext("emails", "Confirm your Cannery account"))
     |> html_email(:confirm_email_html, %{user: user, url: url})
     |> text_email(:confirm_email_text, %{user: user, url: url})
   end
 
-  def generate_email("reset_password", user, %{url: url}) do
+  def generate_email("reset_password", user, %{"url" => url}) do
     user
     |> base_email(dgettext("emails", "Reset your Cannery password"))
     |> html_email(:reset_password_html, %{user: user, url: url})
     |> text_email(:reset_password_text, %{user: user, url: url})
   end
 
-  def generate_email("update_email", user, %{url: url}) do
+  def generate_email("update_email", user, %{"url" => url}) do
     user
     |> base_email(dgettext("emails", "Update your Cannery email"))
     |> html_email(:update_email_html, %{user: user, url: url})

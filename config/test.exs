@@ -32,4 +32,4 @@ config :logger, level: :warning
 config :phoenix, :plug_init_mode, :runtime
 
 # Disable Oban
-config :cannery, Oban, queues: false, plugins: false
+config :cannery, Oban, queues: false, plugins: false, testing: :manual

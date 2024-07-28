@@ -19,7 +19,7 @@ defmodule CanneryWeb.ContainerLive.FormComponent do
 
   @impl true
   def handle_event("validate", %{"container" => container_params}, socket) do
-    {:noreply, socket |> assign_changeset(container_params)}
+    {:noreply, socket |> assign_changeset(container_params, :validate)}
   end
 
   def handle_event(
@@ -32,14 +32,9 @@ defmodule CanneryWeb.ContainerLive.FormComponent do
 
   defp assign_changeset(
          %{assigns: %{action: action, container: container, current_user: user}} = socket,
-         container_params
+         container_params,
+         changeset_action \\ nil
        ) do
-    changeset_action =
-      case action do
-        create when create in [:new, :clone] -> :insert
-        :edit -> :update
-      end
-
     changeset =
       case action do
         create when create in [:new, :clone] ->
@@ -50,9 +45,13 @@ defmodule CanneryWeb.ContainerLive.FormComponent do
       end
 
     changeset =
-      case changeset |> Changeset.apply_action(changeset_action) do
-        {:ok, _data} -> changeset
-        {:error, changeset} -> changeset
+      if changeset_action do
+        case changeset |> Changeset.apply_action(changeset_action) do
+          {:ok, _data} -> changeset
+          {:error, changeset} -> changeset
+        end
+      else
+        changeset
       end
 
     socket |> assign(:changeset, changeset)

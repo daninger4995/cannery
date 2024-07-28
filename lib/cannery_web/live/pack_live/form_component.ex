@@ -22,24 +22,13 @@ defmodule CanneryWeb.PackLive.FormComponent do
 
   @spec update(Socket.t()) :: {:ok, Socket.t()}
   def update(%{assigns: %{current_user: current_user}} = socket) do
-    %{assigns: %{types: types, containers: containers}} =
-      socket =
+    socket =
       socket
       |> assign(:pack_create_limit, @pack_create_limit)
       |> assign(:types, Ammo.list_types(current_user))
       |> assign_new(:containers, fn -> Containers.list_containers(current_user) end)
 
-    params =
-      if types |> List.first() |> is_nil(),
-        do: %{},
-        else: %{} |> Map.put("type_id", types |> List.first() |> Map.get(:id))
-
-    params =
-      if containers |> List.first() |> is_nil(),
-        do: params,
-        else: params |> Map.put("container_id", containers |> List.first() |> Map.get(:id))
-
-    {:ok, socket |> assign_changeset(params)}
+    {:ok, socket |> assign_changeset(%{})}
   end
 
   @impl true
@@ -92,9 +81,13 @@ defmodule CanneryWeb.PackLive.FormComponent do
       end
 
     changeset =
-      case changeset |> Changeset.apply_action(changeset_action || default_action) do
-        {:ok, _data} -> changeset
-        {:error, changeset} -> changeset
+      if changeset_action do
+        case changeset |> Changeset.apply_action(changeset_action) do
+          {:ok, _data} -> changeset
+          {:error, changeset} -> changeset
+        end
+      else
+        changeset
       end
 
     socket |> assign(:changeset, changeset)

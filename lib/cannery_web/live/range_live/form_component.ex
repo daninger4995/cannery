@@ -71,24 +71,25 @@ defmodule CanneryWeb.RangeLive.FormComponent do
            }
          } = socket,
          shot_record_params,
-         action \\ nil
+         changeset_action \\ nil
        ) do
-    default_action =
+    changeset =
       case live_action do
-        :add_shot_record -> :insert
-        editing when editing in [:edit, :edit_shot_record] -> :update
+        :add_shot_record ->
+          shot_record |> ShotRecord.create_changeset(user, pack, shot_record_params)
+
+        editing when editing in [:edit, :edit_shot_record] ->
+          shot_record |> ShotRecord.update_changeset(user, shot_record_params)
       end
 
     changeset =
-      case default_action do
-        :insert -> shot_record |> ShotRecord.create_changeset(user, pack, shot_record_params)
-        :update -> shot_record |> ShotRecord.update_changeset(user, shot_record_params)
-      end
-
-    changeset =
-      case changeset |> Changeset.apply_action(action || default_action) do
-        {:ok, _data} -> changeset
-        {:error, changeset} -> changeset
+      if changeset_action do
+        case changeset |> Changeset.apply_action(changeset_action) do
+          {:ok, _data} -> changeset
+          {:error, changeset} -> changeset
+        end
+      else
+        changeset
       end
 
     socket |> assign(:changeset, changeset)

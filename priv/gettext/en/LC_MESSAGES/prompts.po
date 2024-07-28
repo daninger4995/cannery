@@ -10,10 +10,10 @@ msgid ""
 msgstr ""
 "Language: en\n"
 
-#: lib/cannery_web/live/container_live/form_component.ex:77
-#: lib/cannery_web/live/invite_live/form_component.ex:68
-#: lib/cannery_web/live/tag_live/form_component.ex:66
-#: lib/cannery_web/live/type_live/form_component.ex:76
+#: lib/cannery_web/live/container_live/form_component.ex:88
+#: lib/cannery_web/live/invite_live/form_component.ex:79
+#: lib/cannery_web/live/tag_live/form_component.ex:77
+#: lib/cannery_web/live/type_live/form_component.ex:87
 #, elixir-autogen, elixir-format
 msgid "%{name} created successfully"
 msgstr ""
@@ -31,10 +31,10 @@ msgstr ""
 msgid "%{name} has been deleted"
 msgstr ""
 
-#: lib/cannery_web/live/container_live/form_component.ex:58
-#: lib/cannery_web/live/invite_live/form_component.ex:50
-#: lib/cannery_web/live/tag_live/form_component.ex:48
-#: lib/cannery_web/live/type_live/form_component.ex:57
+#: lib/cannery_web/live/container_live/form_component.ex:69
+#: lib/cannery_web/live/invite_live/form_component.ex:61
+#: lib/cannery_web/live/tag_live/form_component.ex:59
+#: lib/cannery_web/live/type_live/form_component.ex:68
 #, elixir-autogen, elixir-format
 msgid "%{name} updated successfully"
 msgstr ""
@@ -145,7 +145,7 @@ msgstr ""
 msgid "Adding..."
 msgstr ""
 
-#: lib/cannery_web/components/add_shot_record_component.ex:54
+#: lib/cannery_web/components/add_shot_record_component.ex:62
 #, elixir-autogen, elixir-format
 msgid "Shots recorded successfully"
 msgstr ""
@@ -167,7 +167,7 @@ msgstr ""
 msgid "Shot records deleted succesfully"
 msgstr ""
 
-#: lib/cannery_web/live/range_live/form_component.ex:53
+#: lib/cannery_web/live/range_live/form_component.ex:54
 #, elixir-autogen, elixir-format
 msgid "Shot records updated successfully"
 msgstr ""
@@ -224,12 +224,12 @@ msgstr ""
 msgid "Ammo unstaged succesfully"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/form_component.ex:107
+#: lib/cannery_web/live/pack_live/form_component.ex:118
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Ammo updated successfully"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/form_component.ex:166
+#: lib/cannery_web/live/pack_live/form_component.ex:177
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Ammo added successfully"
 msgid_plural "Ammo added successfully"

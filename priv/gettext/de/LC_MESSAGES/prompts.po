@@ -23,10 +23,10 @@ msgstr ""
 ## Run "mix gettext.extract" to bring this file up to
 ## date. Leave "msgstr"s empty as changing them here has no
 ## effect: edit them in PO (.po) files instead.
-#: lib/cannery_web/live/container_live/form_component.ex:77
-#: lib/cannery_web/live/invite_live/form_component.ex:68
-#: lib/cannery_web/live/tag_live/form_component.ex:66
-#: lib/cannery_web/live/type_live/form_component.ex:76
+#: lib/cannery_web/live/container_live/form_component.ex:88
+#: lib/cannery_web/live/invite_live/form_component.ex:79
+#: lib/cannery_web/live/tag_live/form_component.ex:77
+#: lib/cannery_web/live/type_live/form_component.ex:87
 #, elixir-autogen, elixir-format
 msgid "%{name} created successfully"
 msgstr "%{name} erfolgreich erstellt"
@@ -44,10 +44,10 @@ msgstr "%{name} erfolgreich gelöscht"
 msgid "%{name} has been deleted"
 msgstr "%{name} wurde gelöscht"
 
-#: lib/cannery_web/live/container_live/form_component.ex:58
-#: lib/cannery_web/live/invite_live/form_component.ex:50
-#: lib/cannery_web/live/tag_live/form_component.ex:48
-#: lib/cannery_web/live/type_live/form_component.ex:57
+#: lib/cannery_web/live/container_live/form_component.ex:69
+#: lib/cannery_web/live/invite_live/form_component.ex:61
+#: lib/cannery_web/live/tag_live/form_component.ex:59
+#: lib/cannery_web/live/type_live/form_component.ex:68
 #, elixir-autogen, elixir-format
 msgid "%{name} updated successfully"
 msgstr "%{name} erfolgreich aktualisiert"
@@ -166,7 +166,7 @@ msgstr "%{tag_name} wurde von %{container_name} entfernt"
 msgid "Adding..."
 msgstr "Füge hinzu..."
 
-#: lib/cannery_web/components/add_shot_record_component.ex:54
+#: lib/cannery_web/components/add_shot_record_component.ex:62
 #, elixir-autogen, elixir-format
 msgid "Shots recorded successfully"
 msgstr "Schüsse erfolgreich dokumentiert"
@@ -188,7 +188,7 @@ msgstr "Sind sie sicher, dass sie die Schießkladde löschen möchten?"
 msgid "Shot records deleted succesfully"
 msgstr "Schießkladde erfolgreich gelöscht"
 
-#: lib/cannery_web/live/range_live/form_component.ex:53
+#: lib/cannery_web/live/range_live/form_component.ex:54
 #, elixir-autogen, elixir-format
 msgid "Shot records updated successfully"
 msgstr "Schießkladde erfolgreich aktualisiert"
@@ -245,12 +245,12 @@ msgstr "Munitionsgruppe erfolgreich gelöscht"
 msgid "Ammo unstaged succesfully"
 msgstr "Munition erfolgreich demarkiert"
 
-#: lib/cannery_web/live/pack_live/form_component.ex:107
+#: lib/cannery_web/live/pack_live/form_component.ex:118
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Ammo updated successfully"
 msgstr "Munitionsgruppe erfolgreich aktualisiert"
 
-#: lib/cannery_web/live/pack_live/form_component.ex:166
+#: lib/cannery_web/live/pack_live/form_component.ex:177
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Ammo added successfully"
 msgid_plural "Ammo added successfully"

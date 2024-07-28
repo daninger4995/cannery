@@ -9,8 +9,9 @@ config :bcrypt_elixir, :log_rounds, 1
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :cannery, Cannery.Repo,
+  pool_size: 10,
   pool: Ecto.Adapters.SQL.Sandbox,
-  pool_size: 10
+  timeout: 60000
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.

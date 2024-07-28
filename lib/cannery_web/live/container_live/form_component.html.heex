@@ -21,34 +21,38 @@
     <%= label(f, :name, gettext("Name"), class: "title text-lg text-primary-600") %>
     <%= text_input(f, :name,
       class: "input input-primary col-span-2",
-      placeholder: gettext("My cool ammo can"),
-      maxlength: 255
+      maxlength: 255,
+      phx_debounce: 300,
+      placeholder: gettext("My cool ammo can")
     ) %>
     <%= error_tag(f, :name, "col-span-3 text-center") %>
 
     <%= label(f, :desc, gettext("Description"), class: "title text-lg text-primary-600") %>
     <%= textarea(f, :desc,
-      id: "container-form-desc",
       class: "input input-primary col-span-2",
-      placeholder: gettext("Metal ammo can with the anime girl sticker"),
-      phx_update: "ignore"
+      id: "container-form-desc",
+      phx_debounce: 300,
+      phx_update: "ignore",
+      placeholder: gettext("Metal ammo can with the anime girl sticker")
     ) %>
     <%= error_tag(f, :desc, "col-span-3 text-center") %>
 
     <%= label(f, :type, gettext("Type"), class: "title text-lg text-primary-600") %>
     <%= text_input(f, :type,
       class: "input input-primary col-span-2",
-      placeholder: gettext("Magazine, Clip, Ammo Box, etc"),
-      maxlength: 255
+      maxlength: 255,
+      phx_debounce: 300,
+      placeholder: gettext("Magazine, Clip, Ammo Box, etc")
     ) %>
     <%= error_tag(f, :type, "col-span-3 text-center") %>
 
     <%= label(f, :location, gettext("Location"), class: "title text-lg text-primary-600") %>
     <%= textarea(f, :location,
-      id: "container-form-location",
       class: "input input-primary col-span-2",
-      placeholder: gettext("On the bookshelf"),
-      phx_update: "ignore"
+      id: "container-form-location",
+      phx_debounce: 300,
+      phx_update: "ignore",
+      placeholder: gettext("On the bookshelf")
     ) %>
     <%= error_tag(f, :location, "col-span-3 text-center") %>
 

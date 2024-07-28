@@ -108,10 +108,10 @@
       >
         <%= text_input(f, :search_term,
           class: "grow input input-primary",
-          value: @search,
-          role: "search",
           phx_debounce: 300,
-          placeholder: gettext("Search shot records")
+          placeholder: gettext("Search shot records"),
+          role: "search",
+          value: @search
         ) %>
       </.form>
     </div>

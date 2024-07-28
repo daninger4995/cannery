@@ -28,10 +28,10 @@
       >
         <%= text_input(f, :search_term,
           class: "grow input input-primary",
-          value: @search,
-          role: "search",
           phx_debounce: 300,
-          placeholder: gettext("Search containers")
+          placeholder: gettext("Search containers"),
+          role: "search",
+          value: @search
         ) %>
       </.form>
 

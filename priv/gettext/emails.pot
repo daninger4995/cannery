@@ -49,7 +49,7 @@ msgstr ""
 msgid "You can reset your password by visiting the URL below:"
 msgstr ""
 
-#: lib/cannery/accounts/email.ex:31
+#: lib/cannery/email.ex:31
 #, elixir-autogen, elixir-format
 msgid "Confirm your Cannery account"
 msgstr ""
@@ -65,7 +65,7 @@ msgstr ""
 msgid "If you didn't request this change from Cannery, please ignore this."
 msgstr ""
 
-#: lib/cannery/accounts/email.ex:38
+#: lib/cannery/email.ex:38
 #, elixir-autogen, elixir-format
 msgid "Reset your Cannery password"
 msgstr ""
@@ -80,7 +80,7 @@ msgstr ""
 msgid "This email was sent from Cannery, the self-hosted firearm tracker website."
 msgstr ""
 
-#: lib/cannery/accounts/email.ex:45
+#: lib/cannery/email.ex:45
 #, elixir-autogen, elixir-format
 msgid "Update your Cannery email"
 msgstr ""

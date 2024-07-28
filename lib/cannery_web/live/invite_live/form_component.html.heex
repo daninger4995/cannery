@@ -22,7 +22,10 @@
       class: "title text-lg text-primary-600",
       maxlength: 255
     ) %>
-    <%= text_input(f, :name, class: "input input-primary col-span-2") %>
+    <%= text_input(f, :name,
+      class: "input input-primary col-span-2",
+      phx_debounce: 300
+    ) %>
     <%= error_tag(f, :name, "col-span-3") %>
 
     <%= label(f, :uses_left, gettext("Uses left"), class: "title text-lg text-primary-600") %>

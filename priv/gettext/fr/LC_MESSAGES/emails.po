@@ -65,7 +65,7 @@ msgstr ""
 ## Run "mix gettext.extract" to bring this file up to
 ## date. Leave "msgstr"s empty as changing them here has no
 ## effect: edit them in PO (.po) files instead.
-#: lib/cannery/accounts/email.ex:31
+#: lib/cannery/email.ex:31
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Confirm your Cannery account"
 msgstr "Confirmer votre compte %{name}"
@@ -83,7 +83,7 @@ msgstr ""
 "Si vous n’avez pas demandé ce changement depuis %{name}, veuillez ignorer "
 "ceci."
 
-#: lib/cannery/accounts/email.ex:38
+#: lib/cannery/email.ex:38
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Reset your Cannery password"
 msgstr "Réinitialiser votre mot de passe %{name}"
@@ -100,7 +100,7 @@ msgstr ""
 msgid "This email was sent from Cannery, the self-hosted firearm tracker website."
 msgstr "Ce mél a été envoyé depuis %{name}, le site web de suivi d’arme à feu."
 
-#: lib/cannery/accounts/email.ex:45
+#: lib/cannery/email.ex:45
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Update your Cannery email"
 msgstr "Mettre à jour votre mél %{name}"

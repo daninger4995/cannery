@@ -33,7 +33,9 @@ defmodule CanneryWeb.Components.AddShotRecordComponent do
       ) do
     params = shot_record_params |> process_params(pack)
 
-    changeset = %ShotRecord{} |> ShotRecord.create_changeset(current_user, pack, params)
+    changeset =
+      %ShotRecord{}
+      |> ShotRecord.create_changeset(current_user, pack, params)
 
     changeset =
       case changeset |> Changeset.apply_action(:validate) do

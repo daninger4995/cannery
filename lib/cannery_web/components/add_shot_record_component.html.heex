@@ -37,11 +37,12 @@
 
     <%= label(f, :notes, gettext("Notes"), class: "title text-lg text-primary-600") %>
     <%= textarea(f, :notes,
-      id: "add-shot-record-form-notes",
       class: "input input-primary col-span-2",
+      id: "add-shot-record-form-notes",
       maxlength: 255,
-      placeholder: gettext("Really great weather"),
-      phx_update: "ignore"
+      phx_debounce: 300,
+      phx_update: "ignore",
+      placeholder: gettext("Really great weather")
     ) %>
     <%= error_tag(f, :notes, "col-span-3") %>
 

@@ -42,7 +42,8 @@
     <%= label(f, :lot_number, gettext("Lot number"), class: "title text-lg text-primary-600") %>
     <%= text_input(f, :lot_number,
       class: "text-center col-span-2 input input-primary",
-      maxlength: 255
+      maxlength: 255,
+      phx_debounce: 300
     ) %>
     <%= error_tag(f, :price_paid, "col-span-3 text-center") %>
 
@@ -56,8 +57,9 @@
 
     <%= label(f, :notes, gettext("Notes"), class: "title text-lg text-primary-600") %>
     <%= textarea(f, :notes,
-      id: "pack-form-notes",
       class: "text-center col-span-2 input input-primary",
+      id: "pack-form-notes",
+      phx_debounce: 300,
       phx_update: "ignore"
     ) %>
     <%= error_tag(f, :notes, "col-span-3 text-center") %>

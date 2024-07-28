@@ -142,12 +142,12 @@ msgstr ""
 msgid "Tag could not be removed"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/form_component.ex:159
+#: lib/cannery_web/live/pack_live/form_component.ex:141
 #, elixir-autogen, elixir-format
 msgid "Could not parse number of copies"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/form_component.ex:149
+#: lib/cannery_web/live/pack_live/form_component.ex:131
 #, elixir-autogen, elixir-format
 msgid "Invalid number of copies, must be between 1 and %{max}. Was %{multiplier}"
 msgstr ""

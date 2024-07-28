@@ -66,7 +66,7 @@ msgstr "Sie können ihr Passwort unter folgender URL zurücksetzen:"
 ## Run "mix gettext.extract" to bring this file up to
 ## date. Leave "msgstr"s empty as changing them here has no
 ## effect: edit them in PO (.po) files instead.
-#: lib/cannery/accounts/email.ex:31
+#: lib/cannery/email.ex:31
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Confirm your Cannery account"
 msgstr "Bestätigen Sie ihr %{name} Nutzerkonto"
@@ -86,7 +86,7 @@ msgstr ""
 "Falls Sie die Änderung von %{name} nicht angefragt haben, ignorieren Sie "
 "diese Nachricht bitte."
 
-#: lib/cannery/accounts/email.ex:38
+#: lib/cannery/email.ex:38
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Reset your Cannery password"
 msgstr "Passwort für %{name} zurücksetzen"
@@ -105,7 +105,7 @@ msgstr ""
 "Diese Nachricht wurde von %{name} gesandt, einem selbst-gehosteten "
 "Schusswaffenmanager."
 
-#: lib/cannery/accounts/email.ex:45
+#: lib/cannery/email.ex:45
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Update your Cannery email"
 msgstr "Aktualisieren Sie %{name} Mailadresse"

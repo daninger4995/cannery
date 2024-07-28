@@ -10,10 +10,10 @@
 msgid ""
 msgstr ""
 
-#: lib/cannery_web/live/container_live/form_component.ex:89
-#: lib/cannery_web/live/invite_live/form_component.ex:80
-#: lib/cannery_web/live/tag_live/form_component.ex:78
-#: lib/cannery_web/live/type_live/form_component.ex:88
+#: lib/cannery_web/live/container_live/form_component.ex:77
+#: lib/cannery_web/live/invite_live/form_component.ex:68
+#: lib/cannery_web/live/tag_live/form_component.ex:66
+#: lib/cannery_web/live/type_live/form_component.ex:76
 #, elixir-autogen, elixir-format
 msgid "%{name} created successfully"
 msgstr ""
@@ -31,10 +31,10 @@ msgstr ""
 msgid "%{name} has been deleted"
 msgstr ""
 
-#: lib/cannery_web/live/container_live/form_component.ex:70
-#: lib/cannery_web/live/invite_live/form_component.ex:62
-#: lib/cannery_web/live/tag_live/form_component.ex:60
-#: lib/cannery_web/live/type_live/form_component.ex:69
+#: lib/cannery_web/live/container_live/form_component.ex:58
+#: lib/cannery_web/live/invite_live/form_component.ex:50
+#: lib/cannery_web/live/tag_live/form_component.ex:48
+#: lib/cannery_web/live/type_live/form_component.ex:57
 #, elixir-autogen, elixir-format
 msgid "%{name} updated successfully"
 msgstr ""
@@ -109,13 +109,13 @@ msgstr ""
 msgid "Please check your email to verify your account"
 msgstr ""
 
-#: lib/cannery_web/components/add_shot_record_component.html.heex:58
-#: lib/cannery_web/live/container_live/form_component.html.heex:57
-#: lib/cannery_web/live/invite_live/form_component.html.heex:37
-#: lib/cannery_web/live/pack_live/form_component.html.heex:91
-#: lib/cannery_web/live/range_live/form_component.html.heex:46
-#: lib/cannery_web/live/tag_live/form_component.html.heex:39
-#: lib/cannery_web/live/type_live/form_component.html.heex:360
+#: lib/cannery_web/components/add_shot_record_component.html.heex:59
+#: lib/cannery_web/live/container_live/form_component.html.heex:61
+#: lib/cannery_web/live/invite_live/form_component.html.heex:40
+#: lib/cannery_web/live/pack_live/form_component.html.heex:93
+#: lib/cannery_web/live/range_live/form_component.html.heex:47
+#: lib/cannery_web/live/tag_live/form_component.html.heex:43
+#: lib/cannery_web/live/type_live/form_component.html.heex:383
 #, elixir-autogen, elixir-format
 msgid "Saving..."
 msgstr ""
@@ -145,7 +145,7 @@ msgstr ""
 msgid "Adding..."
 msgstr ""
 
-#: lib/cannery_web/components/add_shot_record_component.ex:60
+#: lib/cannery_web/components/add_shot_record_component.ex:54
 #, elixir-autogen, elixir-format
 msgid "Shots recorded successfully"
 msgstr ""
@@ -167,7 +167,7 @@ msgstr ""
 msgid "Shot records deleted succesfully"
 msgstr ""
 
-#: lib/cannery_web/live/range_live/form_component.ex:54
+#: lib/cannery_web/live/range_live/form_component.ex:53
 #, elixir-autogen, elixir-format
 msgid "Shot records updated successfully"
 msgstr ""
@@ -198,7 +198,7 @@ msgstr ""
 msgid "You'll need to"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/form_component.html.heex:84
+#: lib/cannery_web/live/pack_live/form_component.html.heex:86
 #, elixir-autogen, elixir-format
 msgid "Creating..."
 msgstr ""
@@ -224,12 +224,12 @@ msgstr ""
 msgid "Ammo unstaged succesfully"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/form_component.ex:125
+#: lib/cannery_web/live/pack_live/form_component.ex:107
 #, elixir-autogen, elixir-format
 msgid "Ammo updated successfully"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/form_component.ex:184
+#: lib/cannery_web/live/pack_live/form_component.ex:166
 #, elixir-autogen, elixir-format
 msgid "Ammo added successfully"
 msgid_plural "Ammo added successfully"

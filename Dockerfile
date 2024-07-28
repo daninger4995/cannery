@@ -7,7 +7,7 @@ RUN apk add --no-cache build-base npm git python3
 WORKDIR /app
 
 # install hex + rebar
-RUN mix local.rebar --force &&
+RUN mix local.rebar --force && \
     mix local.hex --force
 
 # set build ENV

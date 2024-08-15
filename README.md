@@ -94,6 +94,7 @@ license can be found at
 
 # Links
 
+- [Website](https://cannery.app): Project website
 - [Gitea](https://gitea.bubbletea.dev/shibao/cannery): Main repo, feature
   requests and bug reports
 - [Github](https://github.com/shibaobun/cannery): Source code mirror, please

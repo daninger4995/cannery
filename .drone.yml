@@ -36,7 +36,7 @@ steps:
   - mix test.all
 
 - name: build and publish stable
-  image: thegeeklab/drone-docker-buildx
+  image: plugins/docker
   privileged: true
   settings:
     repo: shibaobun/cannery
@@ -44,6 +44,7 @@ steps:
     compress: true
     platforms:
       - linux/amd64
+      - linux/arm64
     username:
       from_secret: docker_username
     password:
@@ -54,7 +55,7 @@ steps:
     - stable
 
 - name: build and publish tagged version
-  image: thegeeklab/drone-docker-buildx
+  image: plugins/docker
   privileged: true
   settings:
     repo: shibaobun/cannery
@@ -62,6 +63,7 @@ steps:
     compress: true
     platforms:
       - linux/amd64
+      - linux/arm64
     username:
       from_secret: docker_username
     password:

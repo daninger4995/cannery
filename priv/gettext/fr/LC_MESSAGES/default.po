@@ -86,7 +86,7 @@ msgstr "Matériau de la caisse"
 
 #: lib/cannery_web/components/move_pack_component.ex:64
 #: lib/cannery_web/components/pack_table_component.ex:76
-#: lib/cannery_web/live/pack_live/form_component.html.heex:69
+#: lib/cannery_web/live/pack_live/form_component.html.heex:84
 #, elixir-autogen, elixir-format
 msgid "Container"
 msgstr "Conteneur"
@@ -106,7 +106,7 @@ msgid "Corrosive"
 msgstr "Corrosive"
 
 #: lib/cannery_web/components/pack_table_component.ex:104
-#: lib/cannery_web/live/pack_live/form_component.html.heex:30
+#: lib/cannery_web/live/pack_live/form_component.html.heex:45
 #, elixir-autogen, elixir-format
 msgid "Count"
 msgstr "Quantité"
@@ -280,7 +280,7 @@ msgstr "Aucun tag"
 
 #: lib/cannery_web/components/add_shot_record_component.html.heex:38
 #: lib/cannery_web/components/shot_record_table_component.ex:46
-#: lib/cannery_web/live/pack_live/form_component.html.heex:60
+#: lib/cannery_web/live/pack_live/form_component.html.heex:75
 #: lib/cannery_web/live/pack_live/show.ex:90
 #: lib/cannery_web/live/range_live/form_component.html.heex:30
 #, elixir-autogen, elixir-format
@@ -305,7 +305,7 @@ msgid "Pressure"
 msgstr "Pression"
 
 #: lib/cannery_web/components/pack_table_component.ex:92
-#: lib/cannery_web/live/pack_live/form_component.html.heex:37
+#: lib/cannery_web/live/pack_live/form_component.html.heex:52
 #, elixir-autogen, elixir-format
 msgid "Price paid"
 msgstr "Prix payé"
@@ -395,7 +395,7 @@ msgstr "Traceuse"
 #: lib/cannery_web/components/move_pack_component.ex:65
 #: lib/cannery_web/components/pack_table_component.ex:108
 #: lib/cannery_web/live/container_live/form_component.html.heex:40
-#: lib/cannery_web/live/pack_live/form_component.html.heex:22
+#: lib/cannery_web/live/pack_live/form_component.html.heex:37
 #, elixir-autogen, elixir-format
 msgid "Type"
 msgstr "Type"
@@ -655,7 +655,7 @@ msgstr "Réinitialiser votre mot de passe"
 msgid "Record Shots"
 msgstr "Enregistrer des tirs"
 
-#: lib/cannery_web/live/pack_live/form_component.html.heex:81
+#: lib/cannery_web/live/pack_live/form_component.html.heex:96
 #, elixir-autogen, elixir-format
 msgid "Copies"
 msgstr "Exemplaires"
@@ -982,7 +982,7 @@ msgid "Never used"
 msgstr ""
 
 #: lib/cannery_web/components/pack_table_component.ex:71
-#: lib/cannery_web/live/pack_live/form_component.html.heex:52
+#: lib/cannery_web/live/pack_live/form_component.html.heex:67
 #, elixir-autogen, elixir-format
 msgid "Purchased on"
 msgstr ""
@@ -1268,6 +1268,7 @@ msgid "None specified"
 msgstr ""
 
 #: lib/cannery_web/live/container_live/show.html.heex:100
+#: lib/cannery_web/live/pack_live/form_component.html.heex:30
 #: lib/cannery_web/live/pack_live/index.html.heex:61
 #: lib/cannery_web/live/range_live/index.html.heex:94
 #: lib/cannery_web/live/type_live/form_component.html.heex:28
@@ -1293,6 +1294,7 @@ msgid "Projectile"
 msgstr ""
 
 #: lib/cannery_web/live/container_live/show.html.heex:98
+#: lib/cannery_web/live/pack_live/form_component.html.heex:28
 #: lib/cannery_web/live/pack_live/index.html.heex:59
 #: lib/cannery_web/live/range_live/index.html.heex:92
 #: lib/cannery_web/live/type_live/form_component.html.heex:26
@@ -1347,6 +1349,7 @@ msgid "Shot type:"
 msgstr ""
 
 #: lib/cannery_web/live/container_live/show.html.heex:99
+#: lib/cannery_web/live/pack_live/form_component.html.heex:29
 #: lib/cannery_web/live/pack_live/index.html.heex:60
 #: lib/cannery_web/live/range_live/index.html.heex:93
 #: lib/cannery_web/live/type_live/form_component.html.heex:27
@@ -1391,6 +1394,7 @@ msgstr ""
 
 #: lib/cannery_web/components/type_table_component.ex:149
 #: lib/cannery_web/live/container_live/show.html.heex:91
+#: lib/cannery_web/live/pack_live/form_component.html.heex:22
 #: lib/cannery_web/live/pack_live/index.html.heex:50
 #: lib/cannery_web/live/range_live/index.html.heex:83
 #: lib/cannery_web/live/type_live/form_component.html.heex:21
@@ -1436,7 +1440,7 @@ msgid "No Types"
 msgstr "Type"
 
 #: lib/cannery_web/components/pack_table_component.ex:84
-#: lib/cannery_web/live/pack_live/form_component.html.heex:44
+#: lib/cannery_web/live/pack_live/form_component.html.heex:59
 #, elixir-autogen, elixir-format
 msgid "Lot number"
 msgstr ""
@@ -1444,4 +1448,9 @@ msgstr ""
 #: lib/cannery_web/components/core_components/pack_card.html.heex:51
 #, elixir-autogen, elixir-format
 msgid "Lot number:"
+msgstr ""
+
+#: lib/cannery_web/live/pack_live/form_component.html.heex:27
+#, elixir-autogen, elixir-format
+msgid "Any"
 msgstr ""

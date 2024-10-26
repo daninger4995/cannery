@@ -159,20 +159,15 @@ msgstr ""
 msgid "Tag could not be removed"
 msgstr "Le tag n’a pas pu être retiré"
 
-#: lib/cannery_web/live/pack_live/form_component.ex:152
+#: lib/cannery_web/live/pack_live/form_component.ex:175
 #, elixir-autogen, elixir-format
 msgid "Could not parse number of copies"
 msgstr "Impossible d'analyser le nombre de copies"
 
-#: lib/cannery_web/live/pack_live/form_component.ex:142
+#: lib/cannery/ammo.ex:1028
 #, elixir-autogen, elixir-format
 msgid "Invalid number of copies, must be between 1 and %{max}. Was %{multiplier}"
 msgstr "Nombre de copies invalide, doit être 1 et %{max}. Été %{multiplier}"
-
-#: lib/cannery/ammo.ex:974
-#, elixir-autogen, elixir-format
-msgid "Invalid multiplier"
-msgstr "Multiplicateur invalide"
 
 #: lib/cannery_web/live/range_live/index.html.heex:71
 #, elixir-autogen, elixir-format
@@ -204,11 +199,6 @@ msgstr "La quantité doit être inférieur à %{count}"
 msgid "can't be blank"
 msgstr ""
 
-#: lib/cannery/ammo/pack.ex:100
-#, elixir-autogen, elixir-format, fuzzy
-msgid "Please select a type and container"
-msgstr "Veuillez choisir un type de munitions et un conteneur"
-
 #: lib/cannery_web/controllers/error_html.ex:11
 #: lib/cannery_web/controllers/error_json.ex:9
 #, elixir-autogen, elixir-format, fuzzy
@@ -224,3 +214,13 @@ msgstr ""
 #, elixir-autogen, elixir-format
 msgid "You must log in to access this page."
 msgstr ""
+
+#: lib/cannery/ammo/pack.ex:104
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Please select a valid container"
+msgstr "Veuillez choisir un type de munitions et un conteneur"
+
+#: lib/cannery/ammo/pack.ex:102
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Please select a valid type"
+msgstr "Veuillez choisir un utilisateur valide et un groupe de munitions"

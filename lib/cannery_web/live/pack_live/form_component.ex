@@ -9,7 +9,11 @@ defmodule CanneryWeb.PackLive.FormComponent do
   alias Ecto.Changeset
   alias Phoenix.LiveView.Socket
 
-  @pack_create_limit 10_000
+  @impl true
+  @spec mount(Socket.t()) :: {:ok, Socket.t()}
+  def mount(socket) do
+    {:ok, socket |> assign(:class, :all)}
+  end
 
   @impl true
   @spec update(
@@ -24,7 +28,6 @@ defmodule CanneryWeb.PackLive.FormComponent do
   def update(%{assigns: %{current_user: current_user}} = socket) do
     socket =
       socket
-      |> assign(:pack_create_limit, @pack_create_limit)
       |> assign(:types, Ammo.list_types(current_user))
       |> assign_new(:containers, fn -> Containers.list_containers(current_user) end)
 
@@ -33,7 +36,20 @@ defmodule CanneryWeb.PackLive.FormComponent do
 
   @impl true
   def handle_event("validate", %{"pack" => pack_params}, socket) do
-    {:noreply, socket |> assign_changeset(pack_params, :validate)}
+    matched_class =
+      case pack_params["class"] do
+        "rifle" -> :rifle
+        "shotgun" -> :shotgun
+        "pistol" -> :pistol
+        _other -> :all
+      end
+
+    socket =
+      socket
+      |> assign_changeset(pack_params, :validate)
+      |> assign(:class, matched_class)
+
+    {:noreply, socket}
   end
 
   def handle_event(
@@ -51,9 +67,16 @@ defmodule CanneryWeb.PackLive.FormComponent do
     containers |> Enum.map(fn %{id: id, name: name} -> {name, id} end)
   end
 
-  @spec type_options([Type.t()]) :: [{String.t(), Type.id()}]
-  defp type_options(types) do
+  @spec type_options([Type.t()], Type.class() | :all) ::
+          [{String.t(), Type.id()}]
+  defp type_options(types, :all) do
     types |> Enum.map(fn %{id: id, name: name} -> {name, id} end)
+  end
+
+  defp type_options(types, selected_class) do
+    types
+    |> Enum.filter(fn %{class: class} -> class == selected_class end)
+    |> Enum.map(fn %{id: id, name: name} -> {name, id} end)
   end
 
   # Save Helpers
@@ -126,53 +149,15 @@ defmodule CanneryWeb.PackLive.FormComponent do
   end
 
   defp save_pack(
-         %{assigns: %{changeset: changeset}} = socket,
+         %{assigns: %{changeset: changeset, current_user: current_user, return_to: return_to}} =
+           socket,
          action,
          %{"multiplier" => multiplier_str} = pack_params
        )
        when action in [:new, :clone] do
     socket =
-      case multiplier_str |> Integer.parse() do
-        {multiplier, _remainder}
-        when multiplier >= 1 and multiplier <= @pack_create_limit ->
-          socket |> create_multiple(pack_params, multiplier)
-
-        {multiplier, _remainder} ->
-          error_msg =
-            dgettext(
-              "errors",
-              "Invalid number of copies, must be between 1 and %{max}. Was %{multiplier}",
-              max: @pack_create_limit,
-              multiplier: multiplier
-            )
-
-          save_multiplier_error(socket, changeset, error_msg)
-
-        :error ->
-          error_msg = dgettext("errors", "Could not parse number of copies")
-          save_multiplier_error(socket, changeset, error_msg)
-      end
-
-    {:noreply, socket}
-  end
-
-  @spec save_multiplier_error(Socket.t(), Changeset.t(), String.t()) :: Socket.t()
-  defp save_multiplier_error(socket, changeset, error_msg) do
-    {:error, changeset} =
-      changeset
-      |> Changeset.add_error(:multiplier, error_msg)
-      |> Changeset.apply_action(:insert)
-
-    socket |> assign(:changeset, changeset)
-  end
-
-  defp create_multiple(
-         %{assigns: %{current_user: current_user, return_to: return_to}} = socket,
-         pack_params,
-         multiplier
-       ) do
-    case Ammo.create_packs(pack_params, multiplier, current_user) do
-      {:ok, {count, _packs}} ->
+      with {multiplier, _remainder} <- multiplier_str |> Integer.parse(),
+           {:ok, {count, _packs}} <- Ammo.create_packs(pack_params, multiplier, current_user) do
         prompt =
           dngettext(
             "prompts",
@@ -182,9 +167,21 @@ defmodule CanneryWeb.PackLive.FormComponent do
           )
 
         socket |> put_flash(:info, prompt) |> push_navigate(to: return_to)
+      else
+        {:error, %Changeset{} = changeset} ->
+          socket |> assign(changeset: changeset)
 
-      {:error, %Changeset{} = changeset} ->
-        socket |> assign(changeset: changeset)
-    end
+        :error ->
+          error_msg = dgettext("errors", "Could not parse number of copies")
+
+          {:error, changeset} =
+            changeset
+            |> Changeset.add_error(:multiplier, error_msg)
+            |> Changeset.apply_action(:insert)
+
+          socket |> assign(:changeset, changeset)
+      end
+
+    {:noreply, socket}
   end
 end

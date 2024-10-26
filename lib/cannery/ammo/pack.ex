@@ -70,34 +70,43 @@ defmodule Cannery.Ammo.Pack do
         ) :: changeset()
   def create_changeset(
         pack,
-        %Type{id: type_id},
-        %Container{id: container_id, user_id: user_id},
+        type,
+        container,
         %User{id: user_id},
         attrs
       )
-      when is_binary(type_id) and is_binary(container_id) and is_binary(user_id) do
+      when is_binary(user_id) do
+    type_id =
+      case type do
+        %Type{id: type_id} when is_binary(type_id) ->
+          type_id
+
+        _invalid_type ->
+          nil
+      end
+
+    container_id =
+      case container do
+        %Container{id: container_id, user_id: ^user_id} when is_binary(container_id) ->
+          container_id
+
+        _invalid_container ->
+          nil
+      end
+
     pack
     |> change(type_id: type_id)
-    |> change(user_id: user_id)
     |> change(container_id: container_id)
-    |> cast(attrs, [:count, :price_paid, :notes, :staged, :purchased_on, :lot_number])
+    |> change(user_id: user_id)
+    |> cast(attrs, [:count, :lot_number, :notes, :price_paid, :purchased_on, :staged])
+    |> validate_required(:type_id, message: dgettext("errors", "Please select a valid type"))
+    |> validate_required(:container_id,
+      message: dgettext("errors", "Please select a valid container")
+    )
     |> validate_number(:count, greater_than: 0)
     |> validate_number(:price_paid, greater_than_or_equal_to: 0)
     |> validate_length(:lot_number, max: 255)
     |> validate_required([:count, :staged, :purchased_on, :type_id, :container_id, :user_id])
-  end
-
-  @doc """
-  Invalid changeset, used to prompt user to select type and container
-  """
-  def create_changeset(pack, _invalid_type, _invalid_container, _invalid_user, attrs) do
-    pack
-    |> cast(attrs, [:type_id, :container_id])
-    |> validate_required([:type_id, :container_id])
-    |> validate_number(:count, greater_than: 0)
-    |> validate_number(:price_paid, greater_than_or_equal_to: 0)
-    |> validate_length(:lot_number, max: 255)
-    |> add_error(:invalid, dgettext("errors", "Please select a type and container"))
   end
 
   @doc false

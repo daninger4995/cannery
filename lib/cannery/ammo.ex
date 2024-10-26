@@ -959,25 +959,79 @@ defmodule Cannery.Ammo do
 
   defp do_create_packs(
          %{"type_id" => type_id, "container_id" => container_id} = attrs,
-         _multiplier,
+         multiplier,
          user
        )
        when is_binary(type_id) and is_binary(container_id) do
-    changeset =
-      %Pack{}
-      |> Pack.create_changeset(
-        get_type!(type_id, user),
-        Containers.get_container!(container_id, user),
-        user,
-        attrs
-      )
-      |> Changeset.add_error(:multiplier, dgettext("errors", "Invalid multiplier"))
-
-    {:error, changeset}
+    %Pack{}
+    |> Pack.create_changeset(
+      get_type!(type_id, user),
+      Containers.get_container!(container_id, user),
+      user,
+      attrs
+    )
+    |> maybe_add_multiplier_error(multiplier)
+    |> Changeset.apply_action(:insert)
   end
 
-  defp do_create_packs(invalid_attrs, _multiplier, user) do
-    {:error, %Pack{} |> Pack.create_changeset(nil, nil, user, invalid_attrs)}
+  defp do_create_packs(
+         %{"type_id" => type_id} = attrs,
+         multiplier,
+         user
+       )
+       when is_binary(type_id) do
+    %Pack{}
+    |> Pack.create_changeset(
+      get_type!(type_id, user),
+      nil,
+      user,
+      attrs
+    )
+    |> maybe_add_multiplier_error(multiplier)
+    |> Changeset.apply_action(:insert)
+  end
+
+  defp do_create_packs(
+         %{"container_id" => container_id} = attrs,
+         multiplier,
+         user
+       )
+       when is_binary(container_id) do
+    %Pack{}
+    |> Pack.create_changeset(
+      nil,
+      Containers.get_container!(container_id, user),
+      user,
+      attrs
+    )
+    |> maybe_add_multiplier_error(multiplier)
+    |> Changeset.apply_action(:insert)
+  end
+
+  defp do_create_packs(invalid_attrs, multiplier, user) do
+    %Pack{}
+    |> Pack.create_changeset(nil, nil, user, invalid_attrs)
+    |> maybe_add_multiplier_error(multiplier)
+    |> Changeset.apply_action(:insert)
+  end
+
+  defp maybe_add_multiplier_error(changeset, multiplier)
+       when multiplier >= 1 and
+              multiplier <= @pack_create_limit do
+    changeset
+  end
+
+  defp maybe_add_multiplier_error(changeset, multiplier) do
+    changeset
+    |> Changeset.add_error(
+      :multiplier,
+      dgettext(
+        "errors",
+        "Invalid number of copies, must be between 1 and %{max}. Was %{multiplier}",
+        max: @pack_create_limit,
+        multiplier: multiplier
+      )
+    )
   end
 
   @spec preload_pack(Pack.t()) :: Pack.t()

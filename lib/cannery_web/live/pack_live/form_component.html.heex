@@ -19,8 +19,23 @@
       <%= changeset_errors(@changeset) %>
     </div>
 
+    <%= label(f, :class, gettext("Class"), class: "title text-lg text-primary-600") %>
+    <%= select(
+      f,
+      :class,
+      [
+        {gettext("Any"), :all},
+        {gettext("Rifle"), :rifle},
+        {gettext("Shotgun"), :shotgun},
+        {gettext("Pistol"), :pistol}
+      ],
+      class: "text-center col-span-2 input input-primary",
+      value: @class
+    ) %>
+    <%= error_tag(f, :class, "col-span-3 text-center") %>
+
     <%= label(f, :type_id, gettext("Type"), class: "title text-lg text-primary-600") %>
-    <%= select(f, :type_id, type_options(@types),
+    <%= select(f, :type_id, type_options(@types, @class),
       class: "text-center col-span-2 input input-primary",
       id: "pack-form-type-select",
       phx_hook: "SlimSelect"
@@ -80,7 +95,6 @@
 
         <%= label(f, :multiplier, gettext("Copies"), class: "title text-lg text-primary-600") %>
         <%= number_input(f, :multiplier,
-          max: @pack_create_limit,
           class: "text-center input input-primary",
           value: 1,
           phx_update: "ignore"

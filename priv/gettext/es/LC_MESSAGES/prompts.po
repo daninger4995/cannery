@@ -131,7 +131,7 @@ msgstr "Por favor chequea el correo para verificar tu cuenta"
 #: lib/cannery_web/components/add_shot_record_component.html.heex:59
 #: lib/cannery_web/live/container_live/form_component.html.heex:61
 #: lib/cannery_web/live/invite_live/form_component.html.heex:40
-#: lib/cannery_web/live/pack_live/form_component.html.heex:97
+#: lib/cannery_web/live/pack_live/form_component.html.heex:111
 #: lib/cannery_web/live/range_live/form_component.html.heex:47
 #: lib/cannery_web/live/tag_live/form_component.html.heex:43
 #: lib/cannery_web/live/type_live/form_component.html.heex:387
@@ -218,7 +218,7 @@ msgstr "%{name} eliminado exitosamente"
 msgid "You'll need to"
 msgstr "Necesitará hacerlo"
 
-#: lib/cannery_web/live/pack_live/form_component.html.heex:90
+#: lib/cannery_web/live/pack_live/form_component.html.heex:104
 #, elixir-autogen, elixir-format
 msgid "Creating..."
 msgstr "Creando..."
@@ -244,12 +244,12 @@ msgstr "Munición borrada exitosamente"
 msgid "Ammo unstaged succesfully"
 msgstr "Munición descargada exitosamente"
 
-#: lib/cannery_web/live/pack_live/form_component.ex:118
+#: lib/cannery_web/live/pack_live/form_component.ex:141
 #, elixir-autogen, elixir-format
 msgid "Ammo updated successfully"
 msgstr "Munición actualizada exitosamente"
 
-#: lib/cannery_web/live/pack_live/form_component.ex:177
+#: lib/cannery_web/live/pack_live/form_component.ex:162
 #, elixir-autogen, elixir-format
 msgid "Ammo added successfully"
 msgid_plural "Ammo added successfully"

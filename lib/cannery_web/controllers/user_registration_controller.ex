@@ -1,6 +1,5 @@
 defmodule CanneryWeb.UserRegistrationController do
   use CanneryWeb, :controller
-  import CanneryWeb.Gettext
   alias Cannery.{Accounts, Accounts.Invites}
   alias Ecto.Changeset
 

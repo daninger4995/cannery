@@ -338,7 +338,7 @@ msgstr ""
 "Auto-hébergez votre propre instance ou utilisez celle d’une personne à "
 "laquelle vous faîtes confiance."
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:10
+#: lib/cannery_web/controllers/user_settings_controller.ex:9
 #: lib/cannery_web/controllers/user_settings_html/edit.html.heex:3
 #, elixir-autogen, elixir-format
 msgid "Settings"
@@ -623,7 +623,7 @@ msgstr "Pourcentage restant :"
 msgid "Rounds used"
 msgstr "Cartouches utilisées"
 
-#: lib/cannery_web/controllers/user_confirmation_controller.ex:8
+#: lib/cannery_web/controllers/user_confirmation_controller.ex:6
 #, elixir-autogen, elixir-format
 msgid "Confirm your account"
 msgstr "Confirmez votre compte"
@@ -638,7 +638,7 @@ msgstr "Mot de passe oublié ?"
 msgid "Log in"
 msgstr "Se connecter"
 
-#: lib/cannery_web/controllers/user_registration_controller.ex:32
+#: lib/cannery_web/controllers/user_registration_controller.ex:31
 #, elixir-autogen, elixir-format
 msgid "Register"
 msgstr "S’enregistrer"

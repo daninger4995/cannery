@@ -6,12 +6,8 @@ defmodule Cannery.Ammo.Pack do
   amount paid for that ammunition, or what condition it is in
   """
 
-  use Ecto.Schema
-  import CanneryWeb.Gettext
-  import Ecto.Changeset
-  alias Cannery.Ammo.Type
-  alias Cannery.{Accounts.User, Containers, Containers.Container}
-  alias Ecto.{Changeset, UUID}
+  use Cannery, :schema
+  alias Cannery.{Ammo.Type, Containers, Containers.Container}
 
   @derive {Jason.Encoder,
            only: [
@@ -24,8 +20,6 @@ defmodule Cannery.Ammo.Pack do
              :type_id,
              :container_id
            ]}
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
   schema "packs" do
     field :count, :integer
     field :notes, :string

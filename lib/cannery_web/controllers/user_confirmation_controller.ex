@@ -1,7 +1,5 @@
 defmodule CanneryWeb.UserConfirmationController do
   use CanneryWeb, :controller
-
-  import CanneryWeb.Gettext
   alias Cannery.Accounts
 
   def new(conn, _params) do

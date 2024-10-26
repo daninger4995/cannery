@@ -4,13 +4,9 @@ defmodule Cannery.Containers.ContainerTag do
   Cannery.Containers.Tag.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
+  use Cannery, :schema
   alias Cannery.Containers.{Container, Tag}
-  alias Ecto.{Changeset, UUID}
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
   schema "container_tags" do
     belongs_to :container, Container
     belongs_to :tag, Tag

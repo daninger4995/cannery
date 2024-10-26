@@ -3,10 +3,8 @@ defmodule Cannery.Accounts.Invites do
   The Invites context.
   """
 
-  import Ecto.Query, warn: false
-  alias Ecto.Multi
-  alias Cannery.Accounts.{Invite, User}
-  alias Cannery.Repo
+  use Cannery, :context
+  alias Cannery.Accounts.Invite
 
   @invite_token_length 20
 

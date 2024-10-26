@@ -3,11 +3,9 @@ defmodule Cannery.Containers do
   The Containers context.
   """
 
-  import CanneryWeb.Gettext
-  import Ecto.Query, warn: false
-  alias Cannery.{Accounts.User, Ammo.Pack, Repo}
+  use Cannery, :context
+  alias Cannery.Ammo.Pack
   alias Cannery.Containers.{Container, ContainerTag, Tag}
-  alias Ecto.{Changeset, Queryable}
 
   @container_preloads [:tags]
 

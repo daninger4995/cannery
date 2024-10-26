@@ -3,11 +3,8 @@ defmodule Cannery.ActivityLog.ShotRecord do
   A shot record records a group of ammo shot during a range trip
   """
 
-  use Ecto.Schema
-  import CanneryWeb.Gettext
-  import Ecto.Changeset
-  alias Cannery.{Accounts.User, Ammo, Ammo.Pack}
-  alias Ecto.{Changeset, UUID}
+  use Cannery, :schema
+  alias Cannery.{Ammo, Ammo.Pack}
 
   @derive {Jason.Encoder,
            only: [

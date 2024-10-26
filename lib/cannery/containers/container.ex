@@ -3,10 +3,8 @@ defmodule Cannery.Containers.Container do
   A container that holds ammunition and belongs to a user.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
-  alias Ecto.{Changeset, UUID}
-  alias Cannery.{Accounts.User, Containers.ContainerTag, Containers.Tag}
+  use Cannery, :schema
+  alias Cannery.{Containers.ContainerTag, Containers.Tag}
 
   @derive {Jason.Encoder,
            only: [
@@ -17,8 +15,6 @@ defmodule Cannery.Containers.Container do
              :type,
              :tags
            ]}
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
   schema "containers" do
     field :name, :string
     field :desc, :string

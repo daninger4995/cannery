@@ -1,5 +1,5 @@
 defmodule CanneryWeb.ErrorJSON do
-  import CanneryWeb.Gettext
+  use Gettext, backend: CanneryWeb.Gettext
 
   def render(template, _assigns) do
     error_string =

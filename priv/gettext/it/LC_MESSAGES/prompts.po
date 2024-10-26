@@ -50,7 +50,7 @@ msgstr ""
 msgid "%{name} updated successfully"
 msgstr ""
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:29
+#: lib/cannery_web/controllers/user_settings_controller.ex:28
 #, elixir-autogen, elixir-format
 msgid "A link to confirm your email change has been sent to the new address."
 msgstr ""
@@ -85,12 +85,12 @@ msgstr ""
 msgid "Are you sure you want to log out?"
 msgstr ""
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:77
+#: lib/cannery_web/controllers/user_settings_controller.ex:76
 #, elixir-autogen, elixir-format
 msgid "Email changed successfully."
 msgstr ""
 
-#: lib/cannery_web/controllers/user_confirmation_controller.ex:23
+#: lib/cannery_web/controllers/user_confirmation_controller.ex:21
 #, elixir-autogen, elixir-format
 msgid "If your email is in our system and it has not been confirmed yet, you will receive an email with instructions shortly."
 msgstr ""
@@ -110,12 +110,12 @@ msgstr ""
 msgid "Password reset successfully."
 msgstr ""
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:49
+#: lib/cannery_web/controllers/user_settings_controller.ex:48
 #, elixir-autogen, elixir-format
 msgid "Password updated successfully."
 msgstr ""
 
-#: lib/cannery_web/controllers/user_registration_controller.ex:65
+#: lib/cannery_web/controllers/user_registration_controller.ex:64
 #, elixir-autogen, elixir-format
 msgid "Please check your email to verify your account"
 msgstr ""
@@ -131,7 +131,7 @@ msgstr ""
 msgid "Saving..."
 msgstr ""
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:95
+#: lib/cannery_web/controllers/user_settings_controller.ex:94
 #, elixir-autogen, elixir-format
 msgid "Your account has been deleted"
 msgstr ""
@@ -183,7 +183,7 @@ msgstr ""
 msgid "Shot records updated successfully"
 msgstr ""
 
-#: lib/cannery_web/controllers/user_confirmation_controller.ex:37
+#: lib/cannery_web/controllers/user_confirmation_controller.ex:35
 #, elixir-autogen, elixir-format
 msgid "%{email} confirmed successfully."
 msgstr ""
@@ -219,7 +219,7 @@ msgstr ""
 msgid "Are you sure you want to change your language?"
 msgstr ""
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:65
+#: lib/cannery_web/controllers/user_settings_controller.ex:64
 #, elixir-autogen, elixir-format
 msgid "Language updated successfully."
 msgstr ""

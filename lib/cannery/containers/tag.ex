@@ -4,10 +4,7 @@ defmodule Cannery.Containers.Tag do
   text and bg colors.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
-  alias Cannery.Accounts.User
-  alias Ecto.{Changeset, UUID}
+  use Cannery, :schema
 
   @derive {Jason.Encoder,
            only: [
@@ -16,8 +13,6 @@ defmodule Cannery.Containers.Tag do
              :bg_color,
              :text_color
            ]}
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
   schema "tags" do
     field :name, :string
     field :bg_color, :string

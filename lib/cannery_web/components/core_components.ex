@@ -4,7 +4,8 @@ defmodule CanneryWeb.CoreComponents do
   """
   use Phoenix.Component
   use CanneryWeb, :verified_routes
-  import CanneryWeb.{Gettext, HTMLHelpers}
+  use Gettext, backend: CanneryWeb.Gettext
+  import CanneryWeb.HTMLHelpers
   alias Cannery.{Accounts, Accounts.Invite, Accounts.User}
   alias Cannery.{Ammo, Ammo.Pack}
   alias Cannery.{Containers.Container, Containers.Tag}

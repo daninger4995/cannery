@@ -1,6 +1,5 @@
 defmodule CanneryWeb.UserSettingsController do
   use CanneryWeb, :controller
-  import CanneryWeb.Gettext
   alias Cannery.Accounts
   alias CanneryWeb.UserAuth
 

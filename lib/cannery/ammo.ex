@@ -3,13 +3,11 @@ defmodule Cannery.Ammo do
   The Ammo context.
   """
 
-  import CanneryWeb.Gettext
-  import Ecto.Query, warn: false
-  alias Cannery.{Accounts.User, Containers, Repo}
+  use Cannery, :context
+  alias Cannery.Containers
   alias Cannery.Containers.{Container, ContainerTag, Tag}
   alias Cannery.{ActivityLog, ActivityLog.ShotRecord}
   alias Cannery.Ammo.{Pack, Type}
-  alias Ecto.{Changeset, Queryable}
 
   @pack_create_limit 10_000
   @pack_preloads [:type]

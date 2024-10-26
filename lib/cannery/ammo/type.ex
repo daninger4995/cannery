@@ -5,11 +5,8 @@ defmodule Cannery.Ammo.Type do
   Contains statistical information about the ammunition.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
-  alias Cannery.Accounts.User
+  use Cannery, :schema
   alias Cannery.Ammo.Pack
-  alias Ecto.{Changeset, UUID}
 
   @derive {Jason.Encoder,
            only: [
@@ -46,8 +43,6 @@ defmodule Cannery.Ammo.Type do
              :shot_charge_weight,
              :dram_equivalent
            ]}
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
   schema "types" do
     field :name, :string
     field :desc, :string

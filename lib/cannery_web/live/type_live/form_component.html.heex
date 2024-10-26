@@ -22,7 +22,11 @@
     <%= select(
       f,
       :class,
-      [{gettext("Rifle"), :rifle}, {gettext("Shotgun"), :shotgun}, {gettext("Pistol"), :pistol}],
+      [
+        {gettext("Rifle"), :rifle},
+        {gettext("Shotgun"), :shotgun},
+        {gettext("Pistol"), :pistol}
+      ],
       class: "text-center col-span-2 input input-primary",
       maxlength: 255
     ) %>

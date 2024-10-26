@@ -21,7 +21,9 @@
 
     <%= label(f, :type_id, gettext("Type"), class: "title text-lg text-primary-600") %>
     <%= select(f, :type_id, type_options(@types),
-      class: "text-center col-span-2 input input-primary"
+      class: "text-center col-span-2 input input-primary",
+      id: "pack-form-type-select",
+      phx_hook: "SlimSelect"
     ) %>
     <%= error_tag(f, :type_id, "col-span-3 text-center") %>
 
@@ -66,7 +68,9 @@
 
     <%= label(f, :container, gettext("Container"), class: "title text-lg text-primary-600") %>
     <%= select(f, :container_id, container_options(@containers),
-      class: "text-center col-span-2 input input-primary"
+      class: "text-center col-span-2 input input-primary",
+      id: "pack-form-container-select",
+      phx_hook: "SlimSelect"
     ) %>
     <%= error_tag(f, :container_id, "col-span-3 text-center") %>
 

@@ -24,15 +24,16 @@ import 'phoenix_html'
 // Establish Phoenix Socket and LiveView configuration.
 import { Socket } from 'phoenix'
 import { LiveSocket } from 'phoenix_live_view'
-import topbar from 'topbar'
-import ShotLogChart from './shot_log_chart'
 import Date from './date'
 import DateTime from './datetime'
+import ShotLogChart from './shot_log_chart'
+import SlimSelect from './slim_select'
+import topbar from 'topbar'
 
 const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute('content')
 const liveSocket = new LiveSocket('/live', Socket, {
   params: { _csrf_token: csrfToken },
-  hooks: { Date, DateTime, ShotLogChart }
+  hooks: { Date, DateTime, ShotLogChart, SlimSelect }
 })
 
 // Show progress bar on live navigation and form submits

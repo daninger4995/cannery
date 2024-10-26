@@ -131,10 +131,10 @@ msgstr "Por favor chequea el correo para verificar tu cuenta"
 #: lib/cannery_web/components/add_shot_record_component.html.heex:59
 #: lib/cannery_web/live/container_live/form_component.html.heex:61
 #: lib/cannery_web/live/invite_live/form_component.html.heex:40
-#: lib/cannery_web/live/pack_live/form_component.html.heex:93
+#: lib/cannery_web/live/pack_live/form_component.html.heex:97
 #: lib/cannery_web/live/range_live/form_component.html.heex:47
 #: lib/cannery_web/live/tag_live/form_component.html.heex:43
-#: lib/cannery_web/live/type_live/form_component.html.heex:383
+#: lib/cannery_web/live/type_live/form_component.html.heex:387
 #, elixir-autogen, elixir-format
 msgid "Saving..."
 msgstr "Guardando..."
@@ -160,7 +160,7 @@ msgstr "%{name} añadido exitosamente"
 msgid "%{tag_name} has been removed from %{container_name}"
 msgstr "se ha removido %{tag_name} de %{container_name}"
 
-#: lib/cannery_web/live/container_live/edit_tags_component.html.heex:53
+#: lib/cannery_web/live/container_live/edit_tags_component.html.heex:55
 #, elixir-autogen, elixir-format
 msgid "Adding..."
 msgstr "Añadiendo..."
@@ -218,7 +218,7 @@ msgstr "%{name} eliminado exitosamente"
 msgid "You'll need to"
 msgstr "Necesitará hacerlo"
 
-#: lib/cannery_web/live/pack_live/form_component.html.heex:86
+#: lib/cannery_web/live/pack_live/form_component.html.heex:90
 #, elixir-autogen, elixir-format
 msgid "Creating..."
 msgstr "Creando..."

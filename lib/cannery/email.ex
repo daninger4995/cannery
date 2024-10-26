@@ -7,8 +7,8 @@ defmodule Cannery.Email do
   `lib/cannery_web/components/layouts/email_text.txt.eex` for text emails.
   """
 
+  use Gettext, backend: CanneryWeb.Gettext
   import Swoosh.Email
-  import CanneryWeb.Gettext
   import Phoenix.Template
   alias Cannery.Accounts.User
   alias CanneryWeb.{EmailHTML, Layouts}

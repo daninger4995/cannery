@@ -3,10 +3,7 @@ defmodule Cannery.Accounts.UserToken do
   Schema for a user's session token
   """
 
-  use Ecto.Schema
-  import Ecto.Query
-  alias Cannery.Accounts.User
-  alias Ecto.{Association, UUID}
+  use Cannery, :schema
 
   @hash_algorithm :sha256
   @rand_size 32
@@ -18,8 +15,6 @@ defmodule Cannery.Accounts.UserToken do
   @change_email_validity_in_days 7
   @session_validity_in_days 60
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
   schema "users_tokens" do
     field :token, :binary
     field :context, :string

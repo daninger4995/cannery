@@ -5,13 +5,8 @@ defmodule Cannery.Accounts.Invite do
   `:uses_left` is defined.
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
-  alias Cannery.Accounts.User
-  alias Ecto.{Association, Changeset, UUID}
+  use Cannery, :schema
 
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
   schema "invites" do
     field :name, :string
     field :token, :string

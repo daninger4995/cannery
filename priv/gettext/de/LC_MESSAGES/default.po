@@ -338,7 +338,7 @@ msgstr ""
 "Hosten Sie Ihre eigene Instanz oder verwenden Sie eine Instanz, der Sie "
 "vertrauen."
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:10
+#: lib/cannery_web/controllers/user_settings_controller.ex:9
 #: lib/cannery_web/controllers/user_settings_html/edit.html.heex:3
 #, elixir-autogen, elixir-format
 msgid "Settings"
@@ -621,7 +621,7 @@ msgstr "Prozent verbleibend:"
 msgid "Rounds used"
 msgstr "Patronen verbraucht"
 
-#: lib/cannery_web/controllers/user_confirmation_controller.ex:8
+#: lib/cannery_web/controllers/user_confirmation_controller.ex:6
 #, elixir-autogen, elixir-format
 msgid "Confirm your account"
 msgstr "Bestätigen Sie ihr Nutzerkonto"
@@ -636,7 +636,7 @@ msgstr "Passwort vergessen?"
 msgid "Log in"
 msgstr "Einloggen"
 
-#: lib/cannery_web/controllers/user_registration_controller.ex:32
+#: lib/cannery_web/controllers/user_registration_controller.ex:31
 #, elixir-autogen, elixir-format
 msgid "Register"
 msgstr "Registrieren"

@@ -3,10 +3,8 @@ defmodule Cannery.ActivityLog do
   The ActivityLog context.
   """
 
-  import Ecto.Query, warn: false
-  alias Cannery.Ammo.{Pack, Type}
-  alias Cannery.{Accounts.User, ActivityLog.ShotRecord, Repo}
-  alias Ecto.{Multi, Queryable}
+  use Cannery, :context
+  alias Cannery.{ActivityLog.ShotRecord, Ammo.Pack, Ammo.Type}
 
   @type list_shot_records_option ::
           {:search, String.t() | nil}

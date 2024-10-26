@@ -4,9 +4,9 @@ defmodule CanneryWeb.UserAuth do
   """
 
   use CanneryWeb, :verified_routes
+  use Gettext, backend: CanneryWeb.Gettext
   import Plug.Conn
   import Phoenix.Controller
-  import CanneryWeb.Gettext
   alias Cannery.{Accounts, Accounts.User}
 
   # Make the remember me cookie valid for 60 days.

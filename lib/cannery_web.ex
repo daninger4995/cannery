@@ -42,9 +42,10 @@ defmodule CanneryWeb do
         formats: [:html, :json],
         layouts: [html: CanneryWeb.Layouts]
 
+      use Gettext, backend: CanneryWeb.Gettext
+
       # credo:disable-for-next-line Credo.Check.Consistency.MultiAliasImportRequireUse
       import Plug.Conn
-      import CanneryWeb.Gettext
 
       unquote(verified_routes())
     end
@@ -84,8 +85,9 @@ defmodule CanneryWeb do
   defp html_helpers do
     quote do
       use PhoenixHTMLHelpers
+      use Gettext, backend: CanneryWeb.Gettext
       import Phoenix.{Component, HTML, HTML.Form}
-      import CanneryWeb.{ErrorHelpers, Gettext, CoreComponents, HTMLHelpers}
+      import CanneryWeb.{ErrorHelpers, CoreComponents, HTMLHelpers}
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS

@@ -3,10 +3,9 @@ defmodule Cannery.Accounts do
   The Accounts context.
   """
 
-  import Ecto.Query, warn: false
-  alias Cannery.{Mailer, Repo}
-  alias Cannery.Accounts.{Invite, Invites, User, UserToken}
-  alias Ecto.{Changeset, Multi}
+  use Cannery, :context
+  alias Cannery.Mailer
+  alias Cannery.Accounts.{Invite, Invites, UserToken}
   alias Oban.Job
 
   ## Database getters

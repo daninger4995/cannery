@@ -52,7 +52,7 @@ msgstr "%{name} ha sido borrado"
 msgid "%{name} updated successfully"
 msgstr "%{name} actualizado exitosamente"
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:29
+#: lib/cannery_web/controllers/user_settings_controller.ex:28
 #, elixir-autogen, elixir-format
 msgid "A link to confirm your email change has been sent to the new address."
 msgstr ""
@@ -89,12 +89,12 @@ msgstr "Está seguro que desea eliminar su cuenta?"
 msgid "Are you sure you want to log out?"
 msgstr "Está seguro que desea cerrar sesión?"
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:77
+#: lib/cannery_web/controllers/user_settings_controller.ex:76
 #, elixir-autogen, elixir-format
 msgid "Email changed successfully."
 msgstr "Correo electrónico cambiado exitosamente."
 
-#: lib/cannery_web/controllers/user_confirmation_controller.ex:23
+#: lib/cannery_web/controllers/user_confirmation_controller.ex:21
 #, elixir-autogen, elixir-format
 msgid "If your email is in our system and it has not been confirmed yet, you will receive an email with instructions shortly."
 msgstr ""
@@ -118,12 +118,12 @@ msgstr "Sesión cerrada exitosamente."
 msgid "Password reset successfully."
 msgstr "Contraseña reiniciada exitosamente."
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:49
+#: lib/cannery_web/controllers/user_settings_controller.ex:48
 #, elixir-autogen, elixir-format
 msgid "Password updated successfully."
 msgstr "Contraseña cambiada exitosamente."
 
-#: lib/cannery_web/controllers/user_registration_controller.ex:65
+#: lib/cannery_web/controllers/user_registration_controller.ex:64
 #, elixir-autogen, elixir-format
 msgid "Please check your email to verify your account"
 msgstr "Por favor chequea el correo para verificar tu cuenta"
@@ -139,7 +139,7 @@ msgstr "Por favor chequea el correo para verificar tu cuenta"
 msgid "Saving..."
 msgstr "Guardando..."
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:95
+#: lib/cannery_web/controllers/user_settings_controller.ex:94
 #, elixir-autogen, elixir-format
 msgid "Your account has been deleted"
 msgstr "Su cuenta ha sido eliminada"
@@ -192,7 +192,7 @@ msgstr "Récord de disparos borrado exitosamente"
 msgid "Shot records updated successfully"
 msgstr "Récord de disparos actualizado exitosamente"
 
-#: lib/cannery_web/controllers/user_confirmation_controller.ex:37
+#: lib/cannery_web/controllers/user_confirmation_controller.ex:35
 #, elixir-autogen, elixir-format
 msgid "%{email} confirmed successfully."
 msgstr "%{email} confirmado exitosamente."
@@ -228,7 +228,7 @@ msgstr "Creando..."
 msgid "Are you sure you want to change your language?"
 msgstr "¿Está segure de que quiere cambiar el idioma?"
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:65
+#: lib/cannery_web/controllers/user_settings_controller.ex:64
 #, elixir-autogen, elixir-format
 msgid "Language updated successfully."
 msgstr "Idioma cambiado exitosamente."

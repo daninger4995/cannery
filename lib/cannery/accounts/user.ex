@@ -3,11 +3,8 @@ defmodule Cannery.Accounts.User do
   A Cannery user
   """
 
-  use Ecto.Schema
-  import Ecto.Changeset
-  import CanneryWeb.Gettext
-  alias Ecto.{Association, Changeset, UUID}
-  alias Cannery.Accounts.{Invite, User}
+  use Cannery, :schema
+  alias Cannery.Accounts.Invite
 
   @derive {Jason.Encoder,
            only: [
@@ -20,8 +17,6 @@ defmodule Cannery.Accounts.User do
              :updated_at
            ]}
   @derive {Inspect, except: [:password]}
-  @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :binary_id
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true

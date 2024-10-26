@@ -1,3 +1,6 @@
+# v0.9.12
+- Update deps
+
 # v0.9.11
 - Fix an issue with emails not being able to be sent for real this time
 - Fix some dropdowns not filling in the correct data

@@ -1,4 +1,5 @@
 # v0.9.12
+- Add SlimSelect to select elements with user content
 - Fix registration page not offering all translations
 - Update deps
 

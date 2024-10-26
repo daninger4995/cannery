@@ -8,6 +8,8 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
 @import "@fortawesome/fontawesome-free/scss/solid";
 @import "@fortawesome/fontawesome-free/scss/brands";
 
+@import "slim-select/styles";
+
 @import "components";
 
 /* fix firefox scrollbars */
@@ -151,4 +153,58 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
 @keyframes fade-out-keys{
   0% { opacity: 1; }
   100% { opacity: 0; }
+}
+
+.ss-main {
+  @apply input;
+}
+
+.ss-main.input-primary {
+  @apply border-primary-500 hover:border-primary-600 active:border-primary-600;
+}
+
+.ss-content {
+  @apply input;
+}
+
+.ss-content.input-primary {
+  @apply border-primary-500 hover:border-primary-600 active:border-primary-600;
+}
+
+.ss-content.ss-open-above {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.ss-content.ss-open-below {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.ss-search input[type="search"] {
+  @apply input;
+}
+
+.ss-content.input-primary .ss-search input[type="search"] {
+  @apply border-primary-500 hover:border-primary-600 active:border-primary-600;
+}
+
+.ss-content.ss-open-above .ss-search {
+  padding: var(--ss-spacing-l) 0 0 0;
+}
+
+.ss-content.ss-open-below .ss-search {
+  padding: 0 0 var(--ss-spacing-l) 0;
+}
+
+.ss-content.ss-open-above .ss-list > *:not(:first-child) {
+  margin: var(--ss-spacing-l) 0 0 0;
+}
+
+.ss-content.ss-open-below .ss-list > *:not(:last-child) {
+  margin: 0 0 var(--ss-spacing-l) 0;
+}
+
+.ss-content .ss-list .ss-option {
+  border-radius: var(--ss-border-radius);
 }

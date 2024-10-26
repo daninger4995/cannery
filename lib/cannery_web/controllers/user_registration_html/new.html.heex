@@ -29,7 +29,12 @@
     <%= select(
       f,
       :locale,
-      [{gettext("English"), "en_US"}],
+      [
+        {"English", "en_US"},
+        {"Deutsch", "de"},
+        {"Français", "fr"},
+        {"Español", "es"}
+      ],
       class: "input input-primary col-span-2"
     ) %>
     <%= error_tag(f, :locale) %>

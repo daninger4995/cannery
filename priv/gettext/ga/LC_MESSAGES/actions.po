@@ -65,7 +65,7 @@ msgstr ""
 msgid "Delete User"
 msgstr ""
 
-#: lib/cannery_web/controllers/user_registration_html/new.html.heex:47
+#: lib/cannery_web/controllers/user_registration_html/new.html.heex:52
 #: lib/cannery_web/controllers/user_reset_password_html/new.html.heex:3
 #: lib/cannery_web/controllers/user_session_html/new.html.heex:46
 #, elixir-autogen, elixir-format
@@ -79,7 +79,7 @@ msgstr ""
 
 #: lib/cannery_web/components/core_components/topbar.html.heex:94
 #: lib/cannery_web/controllers/user_confirmation_html/new.html.heex:28
-#: lib/cannery_web/controllers/user_registration_html/new.html.heex:44
+#: lib/cannery_web/controllers/user_registration_html/new.html.heex:49
 #: lib/cannery_web/controllers/user_reset_password_html/edit.html.heex:41
 #: lib/cannery_web/controllers/user_reset_password_html/new.html.heex:28
 #: lib/cannery_web/controllers/user_session_html/new.html.heex:3
@@ -106,7 +106,7 @@ msgstr ""
 #: lib/cannery_web/components/core_components/topbar.html.heex:89
 #: lib/cannery_web/controllers/user_confirmation_html/new.html.heex:25
 #: lib/cannery_web/controllers/user_registration_html/new.html.heex:3
-#: lib/cannery_web/controllers/user_registration_html/new.html.heex:37
+#: lib/cannery_web/controllers/user_registration_html/new.html.heex:42
 #: lib/cannery_web/controllers/user_reset_password_html/edit.html.heex:38
 #: lib/cannery_web/controllers/user_reset_password_html/new.html.heex:25
 #: lib/cannery_web/controllers/user_session_html/new.html.heex:43

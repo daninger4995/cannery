@@ -663,22 +663,6 @@ msgstr "Kopien"
 msgid "Added on:"
 msgstr "Hinzugefügt am:"
 
-#: lib/cannery_web/controllers/user_registration_html/new.html.heex:32
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:127
-#, elixir-autogen, elixir-format
-msgid "English"
-msgstr "Englisch"
-
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:129
-#, elixir-autogen, elixir-format
-msgid "French"
-msgstr "Französisch"
-
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:128
-#, elixir-autogen, elixir-format
-msgid "German"
-msgstr "Deutsch"
-
 #: lib/cannery_web/controllers/user_registration_html/new.html.heex:28
 #, elixir-autogen, elixir-format
 msgid "Language"
@@ -1034,11 +1018,6 @@ msgstr ""
 #: lib/cannery_web/live/range_live/index.html.heex:112
 #, elixir-autogen, elixir-format
 msgid "Search shot records"
-msgstr ""
-
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:130
-#, elixir-autogen, elixir-format
-msgid "Spanish"
 msgstr ""
 
 #: lib/cannery_web/components/layouts.ex:15

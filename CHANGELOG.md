@@ -1,4 +1,5 @@
 # v0.9.12
+- Fix registration page not offering all translations
 - Update deps
 
 # v0.9.11

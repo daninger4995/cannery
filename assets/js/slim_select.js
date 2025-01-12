@@ -3,7 +3,12 @@ import SlimSelect from 'slim-select'
 export default {
   initalizeSlimSelect (el) {
     // eslint-disable-next-line no-new
-    el.slimselect = new SlimSelect({ select: el })
+    el.slimselect = new SlimSelect({
+      select: el,
+      settings: {
+        contentPosition: 'fixed'
+      }
+    })
 
     const main = document.querySelector(`.ss-main[data-id="${el.dataset.id}"]`)
     main.setAttribute('id', `${el.dataset.id}-main`)

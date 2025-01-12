@@ -1,3 +1,6 @@
+# v0.9.13
+- Update deps
+
 # v0.9.12
 - Allow filtering ammo types when creating new packs
 - Add SlimSelect to select elements with user content

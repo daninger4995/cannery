@@ -218,7 +218,7 @@ defmodule Cannery.Accounts do
 
     with {:ok, query} <- UserToken.verify_change_email_token_query(token, context),
          %UserToken{sent_to: email} <- Repo.one(query),
-         {:ok, _} <- Repo.transaction(user_email_multi(user, email, context)) do
+         {:ok, _result} <- Repo.transaction(user_email_multi(user, email, context)) do
       :ok
     else
       _error_tuple -> :error

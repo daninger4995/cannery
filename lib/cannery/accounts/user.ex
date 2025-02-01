@@ -136,7 +136,7 @@ defmodule Cannery.Accounts.User do
     |> cast(attrs, [:email])
     |> validate_email()
     |> case do
-      %{changes: %{email: _}} = changeset -> changeset
+      %{changes: %{email: _email}} = changeset -> changeset
       %{} = changeset -> add_error(changeset, :email, dgettext("errors", "did not change"))
     end
   end

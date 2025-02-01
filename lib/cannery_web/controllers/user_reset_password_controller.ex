@@ -40,7 +40,7 @@ defmodule CanneryWeb.UserResetPasswordController do
   # leaked token giving the user access to the account.
   def update(conn, %{"user" => user_params}) do
     case Accounts.reset_user_password(conn.assigns.user, user_params) do
-      {:ok, _} ->
+      {:ok, _socket} ->
         conn
         |> put_flash(:info, dgettext("prompts", "Password reset successfully."))
         |> redirect(to: ~p"/users/log_in")

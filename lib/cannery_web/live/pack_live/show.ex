@@ -72,7 +72,7 @@ defmodule CanneryWeb.PackLive.Show do
         %{"id" => id},
         %{assigns: %{pack: %{id: pack_id}, current_user: current_user}} = socket
       ) do
-    {:ok, _} =
+    {:ok, _shot_record} =
       ActivityLog.get_shot_record!(id, current_user)
       |> ActivityLog.delete_shot_record(current_user)
 
@@ -136,7 +136,7 @@ defmodule CanneryWeb.PackLive.Show do
 
           :actions ->
             ~H"""
-            <div class="px-4 py-2 space-x-4 flex justify-center items-center">
+            <div class="flex justify-center items-center px-4 py-2 space-x-4">
               <.link
                 patch={~p"/ammo/show/#{@pack}/edit/#{@shot_record}"}
                 class="text-primary-600 link"

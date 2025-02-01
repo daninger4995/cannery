@@ -91,7 +91,7 @@ defmodule CanneryWeb.RangeLive.Index do
 
   @impl true
   def handle_event("delete", %{"id" => id}, %{assigns: %{current_user: current_user}} = socket) do
-    {:ok, _} =
+    {:ok, _shot_record} =
       ActivityLog.get_shot_record!(id, current_user)
       |> ActivityLog.delete_shot_record(current_user)
 

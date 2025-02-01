@@ -172,19 +172,19 @@ msgstr "Ajout en cours…"
 msgid "Shots recorded successfully"
 msgstr "Tirs enregistré avec succès"
 
-#: lib/cannery_web/live/range_live/index.html.heex:34
+#: lib/cannery_web/live/range_live/index.html.heex:57
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to unstage this ammo?"
 msgstr "Êtes-vous certain·e de vouloir désélectionner cette munition ?"
 
 #: lib/cannery_web/live/pack_live/show.ex:157
-#: lib/cannery_web/live/range_live/index.html.heex:151
+#: lib/cannery_web/live/range_live/index.html.heex:189
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to delete this shot record?"
 msgstr "Êtes-vous certain·e de vouloir supprimer cet enregistrement de tir ?"
 
 #: lib/cannery_web/live/pack_live/show.ex:79
-#: lib/cannery_web/live/range_live/index.ex:78
+#: lib/cannery_web/live/range_live/index.ex:98
 #, elixir-autogen, elixir-format
 msgid "Shot records deleted succesfully"
 msgstr "Enregistrements de tir supprimés avec succès"
@@ -241,7 +241,7 @@ msgstr "Langue mise à jour avec succès."
 msgid "Ammo deleted succesfully"
 msgstr "Groupe de munition supprimé avec succès"
 
-#: lib/cannery_web/live/range_live/index.ex:91
+#: lib/cannery_web/live/range_live/index.ex:111
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Ammo unstaged succesfully"
 msgstr "Groupe de munition désélectionner avec succès"

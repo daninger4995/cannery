@@ -166,7 +166,7 @@ msgstr "¿Por qué no preparar parte para disparar?"
 
 #: lib/cannery_web/live/pack_live/index.html.heex:127
 #: lib/cannery_web/live/pack_live/show.html.heex:90
-#: lib/cannery_web/live/range_live/index.html.heex:42
+#: lib/cannery_web/live/range_live/index.html.heex:65
 #, elixir-autogen, elixir-format
 msgid "Record shots"
 msgstr "Tiros récord"
@@ -224,13 +224,13 @@ msgid "Set Unlimited"
 msgstr "Activar ilimitados"
 
 #: lib/cannery_web/live/pack_live/show.html.heex:82
-#: lib/cannery_web/live/range_live/index.html.heex:38
+#: lib/cannery_web/live/range_live/index.html.heex:61
 #, elixir-autogen, elixir-format
 msgid "Stage for range"
 msgstr "Preparar para el campo de tiro"
 
 #: lib/cannery_web/live/pack_live/show.html.heex:81
-#: lib/cannery_web/live/range_live/index.html.heex:37
+#: lib/cannery_web/live/range_live/index.html.heex:60
 #, elixir-autogen, elixir-format
 msgid "Unstage from range"
 msgstr "Desmontar del campo de tiro"
@@ -286,6 +286,7 @@ msgid "Edit invite for %{invite_name}"
 msgstr ""
 
 #: lib/cannery_web/live/pack_live/index.html.heex:120
+#: lib/cannery_web/live/range_live/index.html.heex:35
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Stage"
 msgstr "Preparar munición"
@@ -297,6 +298,7 @@ msgid "Tag %{container_name}"
 msgstr ""
 
 #: lib/cannery_web/live/pack_live/index.html.heex:119
+#: lib/cannery_web/live/range_live/index.html.heex:34
 #, elixir-autogen, elixir-format
 msgid "Unstage"
 msgstr ""
@@ -326,13 +328,13 @@ msgid "View pack of %{pack_count} bullets"
 msgstr ""
 
 #: lib/cannery_web/live/pack_live/show.ex:159
-#: lib/cannery_web/live/range_live/index.html.heex:154
+#: lib/cannery_web/live/range_live/index.html.heex:192
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Delete shot record of %{shot_record_count} shots"
 msgstr ""
 
 #: lib/cannery_web/live/pack_live/show.ex:144
-#: lib/cannery_web/live/range_live/index.html.heex:137
+#: lib/cannery_web/live/range_live/index.html.heex:175
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Edit shot record of %{shot_record_count} shots"
 msgstr ""

@@ -426,8 +426,8 @@ msgstr "Keine Tags für diesen Behälter"
 
 #: lib/cannery_web/components/core_components/topbar.html.heex:48
 #: lib/cannery_web/components/pack_table_component.ex:80
-#: lib/cannery_web/live/range_live/index.ex:55
-#: lib/cannery_web/live/range_live/index.ex:65
+#: lib/cannery_web/live/range_live/index.ex:75
+#: lib/cannery_web/live/range_live/index.ex:85
 #, elixir-autogen, elixir-format
 msgid "Range"
 msgstr "Schießplatz"
@@ -461,15 +461,15 @@ msgstr "Keine Munition selektiert"
 msgid "Record shots"
 msgstr "Schüsse dokumentieren"
 
-#: lib/cannery_web/live/range_live/index.html.heex:52
-#: lib/cannery_web/live/range_live/index.html.heex:121
+#: lib/cannery_web/live/range_live/index.html.heex:75
+#: lib/cannery_web/live/range_live/index.html.heex:159
 #, elixir-autogen, elixir-format
 msgid "No shots recorded"
 msgstr "Keine Schüsse dokumentiert"
 
 #: lib/cannery_web/components/shot_record_table_component.ex:45
 #: lib/cannery_web/live/pack_live/show.ex:89
-#: lib/cannery_web/live/range_live/index.html.heex:66
+#: lib/cannery_web/live/range_live/index.html.heex:89
 #, elixir-autogen, elixir-format
 msgid "Rounds shot"
 msgstr "Patronen abgefeuert"
@@ -484,7 +484,7 @@ msgstr "Munition verschieben"
 msgid "No other containers"
 msgstr "Kein weiterer Behälter"
 
-#: lib/cannery_web/live/range_live/index.html.heex:57
+#: lib/cannery_web/live/range_live/index.html.heex:80
 #, elixir-autogen, elixir-format
 msgid "Shot log"
 msgstr "Schießkladde"
@@ -647,8 +647,8 @@ msgid "Reset your password"
 msgstr "Passwort zurücksetzen"
 
 #: lib/cannery_web/live/pack_live/show.ex:40
-#: lib/cannery_web/live/range_live/index.ex:31
-#: lib/cannery_web/live/range_live/index.ex:47
+#: lib/cannery_web/live/range_live/index.ex:51
+#: lib/cannery_web/live/range_live/index.ex:67
 #, elixir-autogen, elixir-format
 msgid "Record Shots"
 msgstr "Schüsse dokumentieren"
@@ -762,7 +762,7 @@ msgstr ""
 msgid "%{percentage}%"
 msgstr ""
 
-#: lib/cannery_web/live/range_live/index.ex:153
+#: lib/cannery_web/live/range_live/index.ex:207
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Rounds shot: %{count}"
 msgstr "Patronen abgefeuert"
@@ -826,7 +826,7 @@ msgstr ""
 msgid "Used rounds:"
 msgstr ""
 
-#: lib/cannery_web/live/range_live/index.html.heex:68
+#: lib/cannery_web/live/range_live/index.html.heex:91
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Rounds shot chart"
 msgstr "Patronen abgefeuert"
@@ -1015,7 +1015,7 @@ msgstr ""
 msgid "Search tags"
 msgstr ""
 
-#: lib/cannery_web/live/range_live/index.html.heex:112
+#: lib/cannery_web/live/range_live/index.html.heex:135
 #, elixir-autogen, elixir-format
 msgid "Search shot records"
 msgstr ""
@@ -1183,7 +1183,7 @@ msgstr ""
 
 #: lib/cannery_web/live/container_live/show.html.heex:97
 #: lib/cannery_web/live/pack_live/index.html.heex:58
-#: lib/cannery_web/live/range_live/index.html.heex:91
+#: lib/cannery_web/live/range_live/index.html.heex:114
 #: lib/cannery_web/live/type_live/index.html.heex:37
 #, elixir-autogen, elixir-format
 msgid "All"
@@ -1267,7 +1267,7 @@ msgstr ""
 #: lib/cannery_web/live/container_live/show.html.heex:100
 #: lib/cannery_web/live/pack_live/form_component.html.heex:30
 #: lib/cannery_web/live/pack_live/index.html.heex:61
-#: lib/cannery_web/live/range_live/index.html.heex:94
+#: lib/cannery_web/live/range_live/index.html.heex:117
 #: lib/cannery_web/live/type_live/form_component.html.heex:28
 #: lib/cannery_web/live/type_live/index.html.heex:40
 #: lib/cannery_web/live/type_live/show.html.heex:56
@@ -1293,7 +1293,7 @@ msgstr ""
 #: lib/cannery_web/live/container_live/show.html.heex:98
 #: lib/cannery_web/live/pack_live/form_component.html.heex:28
 #: lib/cannery_web/live/pack_live/index.html.heex:59
-#: lib/cannery_web/live/range_live/index.html.heex:92
+#: lib/cannery_web/live/range_live/index.html.heex:115
 #: lib/cannery_web/live/type_live/form_component.html.heex:26
 #: lib/cannery_web/live/type_live/index.html.heex:38
 #: lib/cannery_web/live/type_live/show.html.heex:54
@@ -1348,7 +1348,7 @@ msgstr ""
 #: lib/cannery_web/live/container_live/show.html.heex:99
 #: lib/cannery_web/live/pack_live/form_component.html.heex:29
 #: lib/cannery_web/live/pack_live/index.html.heex:60
-#: lib/cannery_web/live/range_live/index.html.heex:93
+#: lib/cannery_web/live/range_live/index.html.heex:116
 #: lib/cannery_web/live/type_live/form_component.html.heex:27
 #: lib/cannery_web/live/type_live/index.html.heex:39
 #: lib/cannery_web/live/type_live/show.html.heex:52
@@ -1393,7 +1393,7 @@ msgstr ""
 #: lib/cannery_web/live/container_live/show.html.heex:91
 #: lib/cannery_web/live/pack_live/form_component.html.heex:22
 #: lib/cannery_web/live/pack_live/index.html.heex:50
-#: lib/cannery_web/live/range_live/index.html.heex:83
+#: lib/cannery_web/live/range_live/index.html.heex:106
 #: lib/cannery_web/live/type_live/form_component.html.heex:21
 #: lib/cannery_web/live/type_live/index.html.heex:29
 #: lib/cannery_web/live/type_live/show.html.heex:46
@@ -1413,7 +1413,7 @@ msgid "Used up!"
 msgstr ""
 
 #: lib/cannery_web/live/pack_live/show.ex:41
-#: lib/cannery_web/live/range_live/index.ex:39
+#: lib/cannery_web/live/range_live/index.ex:59
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Edit Shot Record"
 msgstr "Schießkladde editieren"
@@ -1451,3 +1451,8 @@ msgstr ""
 #, elixir-autogen, elixir-format
 msgid "Any"
 msgstr ""
+
+#: lib/cannery_web/live/range_live/index.html.heex:149
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Dates"
+msgstr "Datum"

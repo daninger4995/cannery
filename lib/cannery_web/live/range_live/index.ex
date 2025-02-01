@@ -9,11 +9,31 @@ defmodule CanneryWeb.RangeLive.Index do
 
   @impl true
   def mount(%{"search" => search}, _session, socket) do
-    {:ok, socket |> assign(class: :all, search: search) |> display_shot_records()}
+    socket =
+      socket
+      |> assign(
+        class: :all,
+        start_date: Date.shift(Date.utc_today(), year: -1),
+        end_date: Date.utc_today(),
+        search: search
+      )
+      |> display_shot_records()
+
+    {:ok, socket}
   end
 
   def mount(_params, _session, socket) do
-    {:ok, socket |> assign(class: :all, search: nil) |> display_shot_records()}
+    socket =
+      socket
+      |> assign(
+        class: :all,
+        start_date: Date.shift(Date.utc_today(), year: -1),
+        end_date: Date.utc_today(),
+        search: nil
+      )
+      |> display_shot_records()
+
+    {:ok, socket}
   end
 
   @impl true
@@ -116,11 +136,45 @@ defmodule CanneryWeb.RangeLive.Index do
     {:noreply, socket |> assign(:class, :all) |> display_shot_records()}
   end
 
+  def handle_event(
+        "change_dates",
+        %{
+          "dates_start" => start_date,
+          "dates_end" => end_date
+        },
+        socket
+      ) do
+    socket =
+      socket
+      |> assign(
+        start_date: start_date,
+        end_date: end_date
+      )
+      |> display_shot_records()
+
+    {:noreply, socket}
+  end
+
   @spec display_shot_records(Socket.t()) :: Socket.t()
   defp display_shot_records(
-         %{assigns: %{class: class, search: search, current_user: current_user}} = socket
+         %{
+           assigns: %{
+             class: class,
+             start_date: start_date,
+             end_date: end_date,
+             search: search,
+             current_user: current_user
+           }
+         } = socket
        ) do
-    shot_records = ActivityLog.list_shot_records(current_user, search: search, class: class)
+    shot_records =
+      ActivityLog.list_shot_records(current_user,
+        class: class,
+        end_date: end_date,
+        search: search,
+        start_date: start_date
+      )
+
     packs = Ammo.list_packs(current_user, staged: true)
     chart_data = shot_records |> get_chart_data_for_shot_record()
     original_counts = packs |> Ammo.get_original_counts(current_user)
@@ -153,6 +207,5 @@ defmodule CanneryWeb.RangeLive.Index do
         label: gettext("Rounds shot: %{count}", count: sum)
       }
     end)
-    |> Enum.sort_by(fn %{date: date} -> date end, Date)
   end
 end

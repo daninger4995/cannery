@@ -171,19 +171,19 @@ msgstr "Füge hinzu..."
 msgid "Shots recorded successfully"
 msgstr "Schüsse erfolgreich dokumentiert"
 
-#: lib/cannery_web/live/range_live/index.html.heex:34
+#: lib/cannery_web/live/range_live/index.html.heex:57
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to unstage this ammo?"
 msgstr "Sind sie sicher, dass Sie diese Munition demarkieren möchten?"
 
 #: lib/cannery_web/live/pack_live/show.ex:157
-#: lib/cannery_web/live/range_live/index.html.heex:151
+#: lib/cannery_web/live/range_live/index.html.heex:189
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to delete this shot record?"
 msgstr "Sind sie sicher, dass sie die Schießkladde löschen möchten?"
 
 #: lib/cannery_web/live/pack_live/show.ex:79
-#: lib/cannery_web/live/range_live/index.ex:78
+#: lib/cannery_web/live/range_live/index.ex:98
 #, elixir-autogen, elixir-format
 msgid "Shot records deleted succesfully"
 msgstr "Schießkladde erfolgreich gelöscht"
@@ -240,7 +240,7 @@ msgstr "Spracheinstellung gespeichert."
 msgid "Ammo deleted succesfully"
 msgstr "Munitionsgruppe erfolgreich gelöscht"
 
-#: lib/cannery_web/live/range_live/index.ex:91
+#: lib/cannery_web/live/range_live/index.ex:111
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Ammo unstaged succesfully"
 msgstr "Munition erfolgreich demarkiert"

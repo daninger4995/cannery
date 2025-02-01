@@ -168,7 +168,7 @@ msgstr "No se ha podido procesar el número de copias"
 msgid "Invalid number of copies, must be between 1 and %{max}. Was %{multiplier}"
 msgstr "Número inválido de copias, debe ser entre 1 y %{max}. Fue %{multiplier"
 
-#: lib/cannery_web/live/range_live/index.html.heex:71
+#: lib/cannery_web/live/range_live/index.html.heex:94
 #, elixir-autogen, elixir-format
 msgid "Your browser does not support the canvas element."
 msgstr "Su navegador no es compatible con el elemento lienzo."

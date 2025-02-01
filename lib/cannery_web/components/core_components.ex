@@ -141,6 +141,18 @@ defmodule CanneryWeb.CoreComponents do
   """
   def datetime(assigns)
 
+  attr :name, :string, required: true
+
+  attr :start_date, :string,
+    default: Date.utc_today() |> Date.shift(year: -1) |> Date.to_iso8601()
+
+  attr :end_date, :string, default: Date.utc_today() |> Date.to_iso8601()
+
+  @doc """
+  Phoenix.Component for an element that generates date fields for a range
+  """
+  def date_range(assigns)
+
   @spec cast_datetime(NaiveDateTime.t() | nil) :: String.t()
   defp cast_datetime(%NaiveDateTime{} = datetime) do
     datetime |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601(:extended)

@@ -9,6 +9,8 @@ defmodule Cannery.ActivityLog do
   @type list_shot_records_option ::
           {:search, String.t() | nil}
           | {:class, Type.class() | :all | nil}
+          | {:start_date, String.t() | nil}
+          | {:end_date, String.t() | nil}
           | {:pack_id, Pack.id() | nil}
   @type list_shot_records_options :: [list_shot_records_option()]
 
@@ -49,6 +51,8 @@ defmodule Cannery.ActivityLog do
     |> list_shot_records_search(Keyword.get(opts, :search))
     |> list_shot_records_class(Keyword.get(opts, :class))
     |> list_shot_records_pack_id(Keyword.get(opts, :pack_id))
+    |> list_shot_records_start_date(Keyword.get(opts, :start_date))
+    |> list_shot_records_end_date(Keyword.get(opts, :end_date))
     |> Repo.all()
   end
 
@@ -99,6 +103,20 @@ defmodule Cannery.ActivityLog do
     do: query |> where([sr: sr], sr.pack_id == ^pack_id)
 
   defp list_shot_records_pack_id(query, _all), do: query
+
+  @spec list_shot_records_start_date(Queryable.t(), String.t() | nil) :: Queryable.t()
+  defp list_shot_records_start_date(query, start_date) when start_date |> is_binary() do
+    query |> where([sr: sr], sr.date >= ^Date.from_iso8601!(start_date))
+  end
+
+  defp list_shot_records_start_date(query, _all), do: query
+
+  @spec list_shot_records_end_date(Queryable.t(), String.t() | nil) :: Queryable.t()
+  defp list_shot_records_end_date(query, end_date) when end_date |> is_binary() do
+    query |> where([sr: sr], sr.date <= ^Date.from_iso8601!(end_date))
+  end
+
+  defp list_shot_records_end_date(query, _all), do: query
 
   @doc """
   Returns a count of shot records.

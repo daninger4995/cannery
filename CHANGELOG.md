@@ -1,4 +1,5 @@
 # v0.9.13
+- Fix dates not rendering properly in table
 - Update deps
 
 # v0.9.12

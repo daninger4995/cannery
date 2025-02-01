@@ -20,6 +20,7 @@ defmodule CanneryWeb.Components.TableComponent do
   """
 
   use CanneryWeb, :live_component
+  alias Cannery.{ComparableDate, ComparableDateTime}
   alias Phoenix.LiveView.Socket
   require Integer
 
@@ -110,7 +111,7 @@ defmodule CanneryWeb.Components.TableComponent do
   end
 
   defp sort_by_custom_sort_value_or_value(rows, key, sort_mode, type)
-       when type in [Date, DateTime] do
+       when type in [ComparableDate, ComparableDateTime, Date, DateTime] do
     rows
     |> Enum.sort_by(
       fn row ->

@@ -1,7 +1,7 @@
 export default {
   displayDateTime (el) {
     const date =
-      Intl.DateTimeFormat([], { dateStyle: 'short', timeStyle: 'long' })
+      Intl.DateTimeFormat([], { timeZone: 'UTC', dateStyle: 'short', timeStyle: 'long' })
         .format(new Date(el.dateTime))
 
     el.innerText = date

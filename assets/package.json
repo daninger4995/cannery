@@ -3,8 +3,8 @@
   "description": " ",
   "license": "MIT",
   "engines": {
-    "node": "v23.0.0",
-    "npm": "10.9.0"
+    "node": "v23.7.0",
+    "npm": "10.9.2"
   },
   "scripts": {
     "deploy": "NODE_ENV=production webpack --mode production",
@@ -35,7 +35,7 @@
     "glob": "^11.0.1",
     "mini-css-extract-plugin": "^2.9.2",
     "npm-check-updates": "^17.1.13",
-    "postcss": "^8.4.49",
+    "postcss": "^8.5.1",
     "postcss-import": "^16.1.0",
     "postcss-loader": "^8.1.1",
     "postcss-preset-env": "^10.1.3",

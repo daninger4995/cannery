@@ -20,6 +20,8 @@ config :cannery, CanneryWeb.Endpoint,
   secret_key_base: "S3qq9QtUdsFtlYej+HTjAVN95uP5i5tf2sPYINWSQfCKJghFj2B1+wTAoljZyHOK",
   server: false
 
+config :cannery, env: :test
+
 # In test we don't send emails.
 config :cannery, Cannery.Mailer, adapter: Swoosh.Adapters.Test
 

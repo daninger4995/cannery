@@ -60,7 +60,7 @@ msgstr ""
 "dirección."
 
 #: lib/cannery_web/live/invite_live/index.html.heex:110
-#: lib/cannery_web/live/invite_live/index.html.heex:138
+#: lib/cannery_web/live/invite_live/index.html.heex:145
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to delete %{email}? This action is permanent!"
 msgstr "Está seguro que desea eliminar %{email}? Esta acción es permanente!"
@@ -279,7 +279,7 @@ msgstr "%{name} activado exitosamente"
 msgid "%{invite_name} updated succesfully"
 msgstr "%{name} actualizado exitosamente"
 
-#: lib/cannery_web/live/invite_live/index.ex:125
+#: lib/cannery_web/live/invite_live/index.ex:139
 #, elixir-autogen, elixir-format, fuzzy
 msgid "%{user_email} deleted succesfully"
 msgstr "%{name} borrado exitosamente"
@@ -297,4 +297,9 @@ msgstr "Está seguro que desea hacer %{name} ilimitado?"
 #: lib/cannery_web/live/range_live/index.ex:114
 #, elixir-autogen, elixir-format
 msgid "Container unstaged succesfully"
+msgstr ""
+
+#: lib/cannery_web/live/invite_live/index.ex:128
+#, elixir-autogen, elixir-format
+msgid "Email resent to %{user_email} succesfully"
 msgstr ""

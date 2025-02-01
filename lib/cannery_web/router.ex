@@ -120,7 +120,7 @@ defmodule CanneryWeb.Router do
   #
   # Note that preview only shows emails that were sent by the same
   # node running the Phoenix server.
-  if Mix.env() == :dev do
+  if Application.compile_env(:cannery, :env) == :dev do
     scope "/dev" do
       pipe_through :browser
 

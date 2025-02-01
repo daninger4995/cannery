@@ -1,10 +1,10 @@
-<div class="mx-auto flex flex-col justify-center items-center space-y-4 max-w-3xl">
-  <h1 class="title text-2xl title-primary-500">
+<div class="flex flex-col justify-center items-center mx-auto space-y-4 max-w-3xl">
+  <h1 class="text-2xl title title-primary-500">
     <%= gettext("Invites") %>
   </h1>
 
   <%= if @invites |> Enum.empty?() do %>
-    <h1 class="title text-xl text-primary-600">
+    <h1 class="text-xl title text-primary-600">
       <%= gettext("No invites") %>
       <%= display_emoji("😔") %>
     </h1>
@@ -95,7 +95,7 @@
   <%= unless @admins |> Enum.empty?() do %>
     <hr class="hr" />
 
-    <h1 class="title text-2xl text-primary-600">
+    <h1 class="text-2xl title text-primary-600">
       <%= gettext("Admins") %>
     </h1>
 
@@ -123,27 +123,38 @@
   <%= unless @users |> Enum.empty?() do %>
     <hr class="hr" />
 
-    <h1 class="title text-2xl text-primary-600">
+    <h1 class="text-2xl title text-primary-600">
       <%= gettext("Users") %>
     </h1>
 
     <div class="flex flex-col justify-center items-stretch space-y-4">
       <.user_card :for={user <- @users} user={user}>
-        <.link
-          href="#"
-          class="text-primary-600 link"
-          phx-click="delete_user"
-          phx-value-id={user.id}
-          data-confirm={
-            dgettext(
-              "prompts",
-              "Are you sure you want to delete %{email}? This action is permanent!",
-              email: user.email
-            )
-          }
-        >
-          <i class="fa-fw fa-lg fas fa-trash"></i>
-        </.link>
+        <div class="flex justify-center items-center space-x-2">
+          <.link
+            :if={!user.confirmed_at}
+            class="text-primary-600 link"
+            href="#"
+            phx-click="resend_email_verification"
+            phx-value-id={user.id}
+          >
+            <i class="fa-fw fa-lg fas fa-paper-plane"></i>
+          </.link>
+          <.link
+            class="text-primary-600 link"
+            data-confirm={
+              dgettext(
+                "prompts",
+                "Are you sure you want to delete %{email}? This action is permanent!",
+                email: user.email
+              )
+            }
+            href="#"
+            phx-click="delete_user"
+            phx-value-id={user.id}
+          >
+            <i class="fa-fw fa-lg fas fa-trash"></i>
+          </.link>
+        </div>
       </.user_card>
     </div>
   <% end %>

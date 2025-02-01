@@ -1,4 +1,5 @@
 # v0.9.13
+- Add button to resend email verification email
 - Move staging to container, rather than ammo
 - Add date restriction dropdown to range page
 - Fix dates not rendering properly in table

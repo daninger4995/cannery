@@ -547,7 +547,7 @@ defmodule Cannery.Ammo do
 
   @spec list_packs_staged(Queryable.t(), staged :: boolean() | nil) :: Queryable.t()
   defp list_packs_staged(query, staged) when staged |> is_boolean(),
-    do: query |> where([p: p], p.staged == ^staged)
+    do: query |> where([c: c], c.staged == ^staged)
 
   defp list_packs_staged(query, _nil), do: query
 

@@ -4,7 +4,8 @@ defmodule CanneryWeb.RangeLive.Index do
   """
 
   use CanneryWeb, :live_view
-  alias Cannery.{ActivityLog, ActivityLog.ShotRecord, Ammo}
+  alias Cannery.{ActivityLog, ActivityLog.ShotRecord}
+  alias Cannery.{Ammo, Containers}
   alias Phoenix.LiveView.Socket
 
   @impl true
@@ -101,14 +102,16 @@ defmodule CanneryWeb.RangeLive.Index do
 
   def handle_event(
         "toggle_staged",
-        %{"pack_id" => pack_id},
+        %{"container_id" => container_id},
         %{assigns: %{current_user: current_user}} = socket
       ) do
-    pack = Ammo.get_pack!(pack_id, current_user)
+    container = Containers.get_container!(container_id, current_user)
 
-    {:ok, _pack} = pack |> Ammo.update_pack(%{"staged" => !pack.staged}, current_user)
+    {:ok, _container} =
+      container
+      |> Containers.update_container(current_user, %{"staged" => !container.staged})
 
-    prompt = dgettext("prompts", "Ammo unstaged succesfully")
+    prompt = dgettext("prompts", "Container unstaged succesfully")
     {:noreply, socket |> put_flash(:info, prompt) |> display_shot_records()}
   end
 
@@ -175,6 +178,10 @@ defmodule CanneryWeb.RangeLive.Index do
         start_date: start_date
       )
 
+    containers =
+      Containers.list_containers(current_user, staged: true)
+      |> Map.new(fn container = %{id: container_id} -> {container_id, container} end)
+
     packs = Ammo.list_packs(current_user, staged: true)
     chart_data = shot_records |> get_chart_data_for_shot_record()
     original_counts = packs |> Ammo.get_original_counts(current_user)
@@ -184,6 +191,7 @@ defmodule CanneryWeb.RangeLive.Index do
 
     socket
     |> assign(
+      containers: containers,
       packs: packs,
       original_counts: original_counts,
       cprs: cprs,

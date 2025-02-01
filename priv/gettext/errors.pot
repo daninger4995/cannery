@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 
-#: lib/cannery/containers.ex:222
+#: lib/cannery/containers.ex:234
 #, elixir-autogen, elixir-format
 msgid "Container must be empty before deleting"
 msgstr ""
@@ -152,7 +152,7 @@ msgstr ""
 msgid "Invalid number of copies, must be between 1 and %{max}. Was %{multiplier}"
 msgstr ""
 
-#: lib/cannery_web/live/range_live/index.html.heex:94
+#: lib/cannery_web/live/range_live/index.html.heex:83
 #, elixir-autogen, elixir-format
 msgid "Your browser does not support the canvas element."
 msgstr ""
@@ -198,12 +198,12 @@ msgstr ""
 msgid "You must log in to access this page."
 msgstr ""
 
-#: lib/cannery/ammo/pack.ex:98
+#: lib/cannery/ammo/pack.ex:101
 #, elixir-autogen, elixir-format
 msgid "Please select a valid container"
 msgstr ""
 
-#: lib/cannery/ammo/pack.ex:96
+#: lib/cannery/ammo/pack.ex:99
 #, elixir-autogen, elixir-format
 msgid "Please select a valid type"
 msgstr ""

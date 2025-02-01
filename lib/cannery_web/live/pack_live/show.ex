@@ -58,16 +58,6 @@ defmodule CanneryWeb.PackLive.Show do
   end
 
   def handle_event(
-        "toggle_staged",
-        _params,
-        %{assigns: %{pack: pack, current_user: current_user}} = socket
-      ) do
-    {:ok, pack} = pack |> Ammo.update_pack(%{"staged" => !pack.staged}, current_user)
-
-    {:noreply, socket |> display_pack(pack)}
-  end
-
-  def handle_event(
         "delete_shot_record",
         %{"id" => id},
         %{assigns: %{pack: %{id: pack_id}, current_user: current_user}} = socket

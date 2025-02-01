@@ -1,34 +1,34 @@
-<div class="space-y-4 flex flex-col justify-center items-center">
-  <h1 class="title text-2xl title-primary-500">
+<div class="flex flex-col justify-center items-center space-y-4">
+  <h1 class="text-2xl title title-primary-500">
     <%= @container.name %>
   </h1>
 
-  <span :if={@container.desc} class="rounded-lg title text-lg">
+  <span :if={@container.desc} class="text-lg rounded-lg title">
     <%= gettext("Description:") %>
     <%= @container.desc %>
   </span>
 
-  <span class="rounded-lg title text-lg">
+  <span class="text-lg rounded-lg title">
     <%= gettext("Type:") %>
     <%= @container.type %>
   </span>
 
-  <span :if={@container.location} class="rounded-lg title text-lg">
+  <span :if={@container.location} class="text-lg rounded-lg title">
     <%= gettext("Location:") %>
     <%= @container.location %>
   </span>
 
-  <span class="rounded-lg title text-lg">
+  <span class="text-lg rounded-lg title">
     <%= gettext("Packs:") %>
     <%= @packs_count %>
   </span>
 
-  <span class="rounded-lg title text-lg">
+  <span class="text-lg rounded-lg title">
     <%= gettext("Rounds:") %>
     <%= @round_count %>
   </span>
 
-  <div class="flex space-x-4 justify-center items-center text-primary-600">
+  <div class="flex justify-center items-center space-x-4 text-primary-600">
     <.link
       patch={~p"/container/edit/#{@container}"}
       class="text-primary-600 link"
@@ -52,11 +52,19 @@
     </.link>
   </div>
 
+  <div class="flex flex-wrap justify-center items-center text-primary-600">
+    <button type="button" class="mx-4 my-2 btn btn-primary" phx-click="toggle_staged">
+      <%= if @container.staged,
+        do: dgettext("actions", "Unstage from range"),
+        else: dgettext("actions", "Stage for range") %>
+    </button>
+  </div>
+
   <hr class="mb-4 hr" />
 
   <%= if @container.tags |> Enum.empty?() do %>
     <div class="flex flex-row justify-center items-center space-x-4">
-      <h2 class="title text-lg text-primary-600">
+      <h2 class="text-lg title text-primary-600">
         <%= gettext("No tags for this container") %>
         <%= display_emoji("😔") %>
       </h2>
@@ -105,15 +113,15 @@
     </.form>
 
     <.toggle_button action="toggle_table" value={@view_table}>
-      <span class="title text-lg text-primary-600">
+      <span class="text-lg title text-primary-600">
         <%= gettext("View as table") %>
       </span>
     </.toggle_button>
   </div>
 
-  <div class="w-full p-4">
+  <div class="p-4 w-full">
     <%= if @packs |> Enum.empty?() do %>
-      <h2 class="mx-4 title text-lg text-primary-600 text-center">
+      <h2 class="mx-4 text-lg text-center title text-primary-600">
         <%= gettext("No ammo in this container") %>
       </h2>
     <% else %>
@@ -131,7 +139,7 @@
             </.link>
           </:type>
           <:actions :let={%{count: pack_count} = pack}>
-            <div class="py-2 px-4 h-full space-x-4 flex justify-center items-center">
+            <div class="flex justify-center items-center px-4 py-2 space-x-4 h-full">
               <.link
                 navigate={~p"/ammo/show/#{pack}"}
                 class="text-primary-600 link"

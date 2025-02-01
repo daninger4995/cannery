@@ -1,43 +1,43 @@
-<div class="mx-auto space-y-4 max-w-3xl flex flex-col justify-center items-center">
-  <h1 class="title text-2xl title-primary-500">
+<div class="flex flex-col justify-center items-center mx-auto space-y-4 max-w-3xl">
+  <h1 class="text-2xl title title-primary-500">
     <%= @pack.type.name %>
   </h1>
 
-  <div class="space-y-2 flex flex-col justify-center items-center">
-    <span class="rounded-lg title text-lg">
+  <div class="flex flex-col justify-center items-center space-y-2">
+    <span class="text-lg rounded-lg title">
       <%= gettext("Count:") %>
       <%= @pack.count %>
     </span>
 
-    <span class="rounded-lg title text-lg">
+    <span class="text-lg rounded-lg title">
       <%= gettext("Original count:") %>
       <%= @original_count %>
     </span>
 
-    <span class="rounded-lg title text-lg">
+    <span class="text-lg rounded-lg title">
       <%= gettext("Percentage left:") %>
       <%= gettext("%{percentage}%", percentage: @percentage_remaining) %>
     </span>
 
     <%= if @pack.notes do %>
-      <span class="rounded-lg title text-lg">
+      <span class="text-lg rounded-lg title">
         <%= gettext("Notes:") %>
         <%= @pack.notes %>
       </span>
     <% end %>
 
-    <span class="rounded-lg title text-lg">
+    <span class="text-lg rounded-lg title">
       <%= gettext("Purchased on:") %>
       <.date id={"#{@pack.id}-purchased-on"} date={@pack.purchased_on} />
     </span>
 
     <%= if @pack.price_paid do %>
-      <span class="rounded-lg title text-lg">
+      <span class="text-lg rounded-lg title">
         <%= gettext("Original cost:") %>
         <%= gettext("$%{amount}", amount: display_currency(@pack.price_paid)) %>
       </span>
 
-      <span class="rounded-lg title text-lg">
+      <span class="text-lg rounded-lg title">
         <%= gettext("Current value:") %>
         <%= gettext("$%{amount}",
           amount: display_currency(@pack.price_paid * @percentage_remaining / 100)
@@ -76,12 +76,6 @@
     </div>
 
     <div class="flex flex-wrap justify-center items-center text-primary-600">
-      <button type="button" class="mx-4 my-2 btn btn-primary" phx-click="toggle_staged">
-        <%= if @pack.staged,
-          do: dgettext("actions", "Unstage from range"),
-          else: dgettext("actions", "Stage for range") %>
-      </button>
-
       <.link patch={~p"/ammo/show/move/#{@pack}"} class="btn btn-primary">
         <%= dgettext("actions", "Move ammo") %>
       </.link>
@@ -96,7 +90,7 @@
 
   <div>
     <%= if @container do %>
-      <h1 class="mb-4 px-4 py-2 text-center rounded-lg title text-xl">
+      <h1 class="px-4 py-2 mb-4 text-xl text-center rounded-lg title">
         <%= gettext("Stored in") %>
       </h1>
 
@@ -109,7 +103,7 @@
   <%= unless @shot_records |> Enum.empty?() do %>
     <hr class="mb-4 w-full" />
 
-    <h1 class="mb-4 px-4 py-2 text-center rounded-lg title text-xl">
+    <h1 class="px-4 py-2 mb-4 text-xl text-center rounded-lg title">
       <%= gettext("Rounds used") %>
     </h1>
 

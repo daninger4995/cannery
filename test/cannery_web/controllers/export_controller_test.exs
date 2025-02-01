@@ -50,7 +50,6 @@ defmodule CanneryWeb.ExportControllerTest do
         "notes" => pack.notes,
         "price_paid" => pack.price_paid,
         "lot_number" => pack.lot_number,
-        "staged" => pack.staged,
         "used_count" => ActivityLog.get_used_count(current_user, pack_id: pack.id),
         "original_count" => pack |> Ammo.get_original_count(current_user),
         "cpr" => pack |> Ammo.get_cpr(current_user),
@@ -103,6 +102,7 @@ defmodule CanneryWeb.ExportControllerTest do
         "id" => container.id,
         "location" => container.location,
         "name" => container.name,
+        "staged" => container.staged,
         "tags" => [
           %{
             "id" => tag.id,

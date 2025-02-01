@@ -9,7 +9,9 @@ defmodule Cannery.Containers do
 
   @container_preloads [:tags]
 
-  @type list_containers_option :: {:search, String.t() | nil}
+  @type list_containers_option ::
+          {:search, String.t() | nil}
+          | {:staged, boolean() | nil}
   @type list_containers_options :: [list_containers_option()]
 
   @doc """
@@ -20,7 +22,10 @@ defmodule Cannery.Containers do
       iex> list_containers(%User{id: 123})
       [%Container{}, ...]
 
-      iex> list_containers(%User{id: 123}, search: "cool")
+      iex> list_containers(%User{id: 123},
+      ...>   search: "cool",
+      ...>   staged: true
+      ...> )
       [%Container{name: "my cool container"}, ...]
 
   """
@@ -37,8 +42,15 @@ defmodule Cannery.Containers do
       preload: ^@container_preloads
     )
     |> list_containers_search(Keyword.get(opts, :search))
+    |> list_containers_staged(Keyword.get(opts, :staged))
     |> Repo.all()
   end
+
+  @spec list_containers_staged(Queryable.t(), staged :: boolean() | nil) :: Queryable.t()
+  defp list_containers_staged(query, staged) when staged |> is_boolean(),
+    do: query |> where([c: c], c.staged == ^staged)
+
+  defp list_containers_staged(query, _nil), do: query
 
   @spec list_containers_search(Queryable.t(), search :: String.t() | nil) :: Queryable.t()
   defp list_containers_search(query, search) when search in ["", nil],

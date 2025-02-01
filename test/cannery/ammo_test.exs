@@ -860,11 +860,13 @@ defmodule Cannery.AmmoTest do
 
     test "list_packs/2 returns all relevant packs including staged", %{
       type: type,
-      container: container,
       pack: unstaged_pack,
       current_user: current_user
     } do
-      {1, [staged_pack]} = pack_fixture(%{staged: true}, type, container, current_user)
+      staged_container =
+        container_fixture(%{name: "fantastic container", staged: true}, current_user)
+
+      {1, [staged_pack]} = pack_fixture(type, staged_container, current_user)
 
       assert Ammo.list_packs(current_user, staged: false) == [unstaged_pack]
       assert Ammo.list_packs(current_user, staged: true) == [staged_pack]

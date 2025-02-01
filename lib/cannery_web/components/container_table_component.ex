@@ -4,6 +4,7 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
   """
   use CanneryWeb, :live_component
   alias Cannery.{Accounts.User, Ammo, Containers.Container}
+  alias CanneryWeb.Components.TableComponent
   alias Ecto.UUID
   alias Phoenix.LiveView.{Rendered, Socket}
 
@@ -13,6 +14,7 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
             required(:id) => UUID.t(),
             required(:current_user) => User.t(),
             optional(:containers) => [Container.t()],
+            optional(:range) => Rendered.t(),
             optional(:tag_actions) => Rendered.t(),
             optional(:actions) => Rendered.t(),
             optional(any()) => any()
@@ -23,6 +25,7 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
     socket =
       socket
       |> assign(assigns)
+      |> assign_new(:range, fn -> [] end)
       |> assign_new(:tag_actions, fn -> [] end)
       |> assign_new(:actions, fn -> [] end)
       |> display_containers()
@@ -35,6 +38,7 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
            assigns: %{
              containers: containers,
              current_user: current_user,
+             range: range,
              tag_actions: tag_actions,
              actions: actions
            }
@@ -62,13 +66,22 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
       end)
       |> Enum.concat([
         %{label: gettext("Packs"), key: :packs, type: :integer},
-        %{label: gettext("Rounds"), key: :rounds, type: :integer},
-        %{label: gettext("Tags"), key: :tags, type: :tags},
-        %{label: gettext("Actions"), key: :actions, sortable: false, type: :actions}
+        %{label: gettext("Rounds"), key: :rounds, type: :integer}
       ])
+      |> Enum.concat(
+        [
+          %{label: gettext("Tags"), key: :tags, type: :tags},
+          %{label: gettext("Actions"), key: :actions, sortable: false, type: :actions}
+        ]
+        |> TableComponent.maybe_compose_columns(
+          %{label: gettext("Range"), key: :range},
+          range != []
+        )
+      )
 
     extra_data = %{
       current_user: current_user,
+      range: range,
       tag_actions: tag_actions,
       actions: actions,
       pack_count:
@@ -134,6 +147,15 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
 
   defp get_value_for_key(:rounds, %{id: container_id}, %{round_count: round_count}) do
     round_count |> Map.get(container_id, 0)
+  end
+
+  defp get_value_for_key(:range, %{staged: staged} = container, %{range: range}) do
+    assigns = %{range: range, container: container}
+
+    {staged,
+     ~H"""
+     <%= render_slot(@range, @container) %>
+     """}
   end
 
   defp get_value_for_key(:tags, container, %{tag_actions: tag_actions}) do

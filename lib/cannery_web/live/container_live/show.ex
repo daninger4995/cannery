@@ -78,6 +78,18 @@ defmodule CanneryWeb.ContainerLive.Show do
     {:noreply, socket}
   end
 
+  def handle_event(
+        "toggle_staged",
+        _params,
+        %{assigns: %{container: container, current_user: current_user}} = socket
+      ) do
+    {:ok, _container} =
+      container
+      |> Containers.update_container(current_user, %{"staged" => !container.staged})
+
+    {:noreply, socket |> render_container()}
+  end
+
   def handle_event("toggle_table", _params, %{assigns: %{view_table: view_table}} = socket) do
     {:noreply, socket |> assign(:view_table, !view_table) |> render_container()}
   end

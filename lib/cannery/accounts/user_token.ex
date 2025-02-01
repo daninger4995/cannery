@@ -150,7 +150,7 @@ defmodule Cannery.Accounts.UserToken do
     from t in __MODULE__, where: t.user_id == ^user.id
   end
 
-  def user_and_contexts_query(user, [_ | _] = contexts) do
+  def user_and_contexts_query(user, [_first | _rest] = contexts) do
     from t in __MODULE__, where: t.user_id == ^user.id and t.context in ^contexts
   end
 end

@@ -310,7 +310,7 @@ defmodule Cannery.AccountsTest do
     test "deletes all tokens for the given user", %{user: user} do
       _session_token = Accounts.generate_user_session_token(user)
 
-      {:ok, _} =
+      {:ok, _user} =
         Accounts.update_user_password(user, valid_user_password(), %{
           password: "new valid password"
         })

@@ -1,5 +1,5 @@
-<div class="flex flex-col space-y-8 justify-center items-center">
-  <h1 class="title text-2xl title-primary-500">
+<div class="flex flex-col justify-center items-center space-y-8">
+  <h1 class="text-2xl title title-primary-500">
     <%= gettext("Ammo") %>
   </h1>
 
@@ -25,7 +25,7 @@
         </.link>
       </div>
     <% @packs_count == 0 -> %>
-      <h2 class="title text-xl text-primary-600">
+      <h2 class="text-xl title text-primary-600">
         <%= gettext("No ammo") %>
         <%= display_emoji("😔") %>
       </h2>
@@ -38,7 +38,7 @@
         <%= dgettext("actions", "Add Ammo") %>
       </.link>
 
-      <div class="w-full flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 max-w-2xl">
+      <div class="flex flex-col justify-center items-center space-y-4 w-full max-w-2xl sm:flex-row sm:space-y-0 sm:space-x-4">
         <.form
           :let={f}
           for={%{}}
@@ -71,7 +71,7 @@
           as={:search}
           phx-change="search"
           phx-submit="search"
-          class="grow flex items-center"
+          class="flex items-center grow"
         >
           <%= text_input(f, :search_term,
             class: "grow input input-primary",
@@ -83,14 +83,14 @@
         </.form>
 
         <.toggle_button action="toggle_show_used" value={@show_used}>
-          <span class="title text-lg text-primary-600">
+          <span class="text-lg title text-primary-600">
             <%= gettext("Show used") %>
           </span>
         </.toggle_button>
       </div>
 
       <%= if @packs |> Enum.empty?() do %>
-        <h2 class="title text-xl text-primary-600">
+        <h2 class="text-xl title text-primary-600">
           <%= gettext("No Ammo") %>
           <%= display_emoji("😔") %>
         </h2>
@@ -108,18 +108,7 @@
             </.link>
           </:type>
           <:range :let={pack}>
-            <div class="min-w-20 py-2 px-4 h-full flex flew-wrap justify-center items-center">
-              <button
-                type="button"
-                class="mx-2 my-1 text-sm btn btn-primary"
-                phx-click="toggle_staged"
-                phx-value-pack_id={pack.id}
-              >
-                <%= if pack.staged,
-                  do: dgettext("actions", "Unstage"),
-                  else: dgettext("actions", "Stage") %>
-              </button>
-
+            <div class="flex flex-wrap justify-center items-center px-4 py-2 h-full min-w-20">
               <.link
                 patch={~p"/ammo/add_shot_record/#{pack}"}
                 class="mx-2 my-1 text-sm btn btn-primary"
@@ -129,7 +118,7 @@
             </div>
           </:range>
           <:container :let={{pack, %{name: container_name} = container}}>
-            <div class="min-w-20 py-2 px-4 h-full flex flew-wrap justify-center items-center">
+            <div class="flex flex-wrap justify-center items-center px-4 py-2 h-full min-w-20">
               <.link navigate={~p"/container/#{container}"} class="mx-2 my-1 link">
                 <%= container_name %>
               </.link>
@@ -140,7 +129,7 @@
             </div>
           </:container>
           <:actions :let={%{count: pack_count} = pack}>
-            <div class="py-2 px-4 h-full space-x-4 flex justify-center items-center">
+            <div class="flex justify-center items-center px-4 py-2 space-x-4 h-full">
               <.link
                 navigate={~p"/ammo/show/#{pack}"}
                 class="text-primary-600 link"

@@ -8,17 +8,19 @@ defmodule Cannery.Containers.Container do
 
   @derive {Jason.Encoder,
            only: [
-             :id,
-             :name,
              :desc,
+             :id,
              :location,
-             :type,
-             :tags
+             :name,
+             :staged,
+             :tags,
+             :type
            ]}
   schema "containers" do
-    field :name, :string
     field :desc, :string
     field :location, :string
+    field :name, :string
+    field :staged, :boolean, default: false
     field :type, :string
 
     field :user_id, :binary_id
@@ -29,10 +31,11 @@ defmodule Cannery.Containers.Container do
   end
 
   @type t :: %__MODULE__{
-          id: id(),
-          name: String.t(),
           desc: String.t(),
+          id: id(),
           location: String.t(),
+          name: String.t(),
+          staged: boolean(),
           type: String.t(),
           user_id: User.id(),
           tags: [Tag.t()] | nil,
@@ -48,19 +51,40 @@ defmodule Cannery.Containers.Container do
   def create_changeset(container, %User{id: user_id}, attrs) do
     container
     |> change(user_id: user_id)
-    |> cast(attrs, [:name, :desc, :type, :location])
+    |> cast(attrs, [
+      :desc,
+      :location,
+      :name,
+      :staged,
+      :type
+    ])
     |> validate_length(:name, max: 255)
     |> validate_length(:type, max: 255)
-    |> validate_required([:name, :type, :user_id])
+    |> validate_required([
+      :name,
+      :staged,
+      :type,
+      :user_id
+    ])
   end
 
   @doc false
   @spec update_changeset(t() | new_container(), attrs :: map()) :: changeset()
   def update_changeset(container, attrs) do
     container
-    |> cast(attrs, [:name, :desc, :type, :location])
+    |> cast(attrs, [
+      :desc,
+      :location,
+      :name,
+      :staged,
+      :type
+    ])
     |> validate_length(:name, max: 255)
     |> validate_length(:type, max: 255)
-    |> validate_required([:name, :type])
+    |> validate_required([
+      :name,
+      :staged,
+      :type
+    ])
   end
 end

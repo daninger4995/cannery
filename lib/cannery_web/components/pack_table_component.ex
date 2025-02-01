@@ -201,13 +201,12 @@ defmodule CanneryWeb.Components.PackTableComponent do
      """}
   end
 
-  defp get_value_for_key(:range, %{staged: staged} = pack, %{range: range}) do
+  defp get_value_for_key(:range, pack, %{range: range}) do
     assigns = %{range: range, pack: pack}
 
-    {staged,
-     ~H"""
-     <%= render_slot(@range, @pack) %>
-     """}
+    ~H"""
+    <%= render_slot(@range, @pack) %>
+    """
   end
 
   defp get_value_for_key(

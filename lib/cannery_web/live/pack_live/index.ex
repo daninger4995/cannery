@@ -96,18 +96,6 @@ defmodule CanneryWeb.PackLive.Index do
     {:noreply, socket |> put_flash(:info, prompt) |> display_packs()}
   end
 
-  def handle_event(
-        "toggle_staged",
-        %{"pack_id" => id},
-        %{assigns: %{current_user: current_user}} = socket
-      ) do
-    pack = Ammo.get_pack!(id, current_user)
-
-    {:ok, _pack} = pack |> Ammo.update_pack(%{"staged" => !pack.staged}, current_user)
-
-    {:noreply, socket |> display_packs()}
-  end
-
   def handle_event("toggle_show_used", _params, %{assigns: %{show_used: show_used}} = socket) do
     {:noreply, socket |> assign(:show_used, !show_used) |> display_packs()}
   end

@@ -1,10 +1,10 @@
-<div class="flex flex-col space-y-8 justify-center items-center">
-  <h1 class="title text-2xl title-primary-500">
+<div class="flex flex-col justify-center items-center space-y-8">
+  <h1 class="text-2xl title title-primary-500">
     <%= gettext("Containers") %>
   </h1>
 
   <%= if @containers |> Enum.empty?() and @search |> is_nil() do %>
-    <h2 class="title text-xl text-primary-600">
+    <h2 class="text-xl title text-primary-600">
       <%= gettext("No containers") %>
       <%= display_emoji("😔") %>
     </h2>
@@ -17,14 +17,14 @@
       <%= dgettext("actions", "New Container") %>
     </.link>
 
-    <div class="w-full flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 max-w-2xl">
+    <div class="flex flex-col justify-center items-center space-y-4 w-full max-w-2xl sm:flex-row sm:space-y-0 sm:space-x-4">
       <.form
         :let={f}
         for={%{}}
         as={:search}
         phx-change="search"
         phx-submit="search"
-        class="grow flex items-center"
+        class="flex items-center grow"
       >
         <%= text_input(f, :search_term,
           class: "grow input input-primary",
@@ -36,14 +36,14 @@
       </.form>
 
       <.toggle_button action="toggle_table" value={@view_table}>
-        <span class="title text-lg text-primary-600">
+        <span class="text-lg title text-primary-600">
           <%= gettext("View as table") %>
         </span>
       </.toggle_button>
     </div>
 
     <%= if @containers |> Enum.empty?() do %>
-      <h2 class="title text-xl text-primary-600">
+      <h2 class="text-xl title text-primary-600">
         <%= gettext("No containers") %>
         <%= display_emoji("😔") %>
       </h2>
@@ -56,6 +56,20 @@
           containers={@containers}
           current_user={@current_user}
         >
+          <:range :let={container}>
+            <div class="flex justify-center items-center px-4 py-2 h-full min-w-20 flex-wrap">
+              <button
+                type="button"
+                class="mx-2 my-1 text-sm btn btn-primary"
+                phx-click="toggle_staged"
+                phx-value-container_id={container.id}
+              >
+                <%= if container.staged,
+                  do: dgettext("actions", "Unstage"),
+                  else: dgettext("actions", "Stage") %>
+              </button>
+            </div>
+          </:range>
           <:tag_actions :let={container}>
             <div class="mx-4 my-2">
               <.link
@@ -109,7 +123,7 @@
           </:actions>
         </.live_component>
       <% else %>
-        <div class="w-full flex flex-row flex-wrap justify-center items-stretch">
+        <div class="flex flex-row flex-wrap justify-center items-stretch w-full">
           <.container_card
             :for={container <- @containers}
             container={container}

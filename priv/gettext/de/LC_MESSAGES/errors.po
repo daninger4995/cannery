@@ -23,7 +23,7 @@ msgstr ""
 ## Run "mix gettext.extract" to bring this file up to
 ## date. Leave "msgstr"s empty as changing them here has no
 ## effect: edit them in PO (.po) files instead.
-#: lib/cannery/containers.ex:222
+#: lib/cannery/containers.ex:234
 #, elixir-autogen, elixir-format
 msgid "Container must be empty before deleting"
 msgstr "Behälter muss vor dem Löschen leer sein"
@@ -170,7 +170,7 @@ msgstr ""
 "Ungültige Nummer an Kopien. Muss zwischen 1 and %{max} liegen. War "
 "%{multiplier}"
 
-#: lib/cannery_web/live/range_live/index.html.heex:94
+#: lib/cannery_web/live/range_live/index.html.heex:83
 #, elixir-autogen, elixir-format
 msgid "Your browser does not support the canvas element."
 msgstr ""
@@ -216,12 +216,12 @@ msgstr ""
 msgid "You must log in to access this page."
 msgstr ""
 
-#: lib/cannery/ammo/pack.ex:98
+#: lib/cannery/ammo/pack.ex:101
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Please select a valid container"
 msgstr ""
 
-#: lib/cannery/ammo/pack.ex:96
+#: lib/cannery/ammo/pack.ex:99
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Please select a valid type"
 msgstr ""

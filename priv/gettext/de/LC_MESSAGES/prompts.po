@@ -65,15 +65,15 @@ msgstr ""
 "Sind Sie sicher, dass sie %{email} löschen möchten? Dies kann nicht "
 "zurückgenommen werden!"
 
-#: lib/cannery_web/live/container_live/index.html.heex:99
-#: lib/cannery_web/live/container_live/index.html.heex:157
+#: lib/cannery_web/live/container_live/index.html.heex:113
+#: lib/cannery_web/live/container_live/index.html.heex:171
 #: lib/cannery_web/live/container_live/show.html.heex:45
 #: lib/cannery_web/live/tag_live/index.html.heex:63
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to delete %{name}?"
 msgstr "Sind Sie sicher, dass sie %{name} löschen möchten?"
 
-#: lib/cannery_web/live/pack_live/index.html.heex:185
+#: lib/cannery_web/live/pack_live/index.html.heex:174
 #: lib/cannery_web/live/pack_live/show.html.heex:69
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to delete this ammo?"
@@ -171,19 +171,14 @@ msgstr "Füge hinzu..."
 msgid "Shots recorded successfully"
 msgstr "Schüsse erfolgreich dokumentiert"
 
-#: lib/cannery_web/live/range_live/index.html.heex:57
-#, elixir-autogen, elixir-format
-msgid "Are you sure you want to unstage this ammo?"
-msgstr "Sind sie sicher, dass Sie diese Munition demarkieren möchten?"
-
-#: lib/cannery_web/live/pack_live/show.ex:157
-#: lib/cannery_web/live/range_live/index.html.heex:189
+#: lib/cannery_web/live/pack_live/show.ex:147
+#: lib/cannery_web/live/range_live/index.html.heex:178
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to delete this shot record?"
 msgstr "Sind sie sicher, dass sie die Schießkladde löschen möchten?"
 
-#: lib/cannery_web/live/pack_live/show.ex:79
-#: lib/cannery_web/live/range_live/index.ex:98
+#: lib/cannery_web/live/pack_live/show.ex:69
+#: lib/cannery_web/live/range_live/index.ex:99
 #, elixir-autogen, elixir-format
 msgid "Shot records deleted succesfully"
 msgstr "Schießkladde erfolgreich gelöscht"
@@ -239,11 +234,6 @@ msgstr "Spracheinstellung gespeichert."
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Ammo deleted succesfully"
 msgstr "Munitionsgruppe erfolgreich gelöscht"
-
-#: lib/cannery_web/live/range_live/index.ex:111
-#, elixir-autogen, elixir-format, fuzzy
-msgid "Ammo unstaged succesfully"
-msgstr "Munition erfolgreich demarkiert"
 
 #: lib/cannery_web/live/pack_live/form_component.ex:141
 #, elixir-autogen, elixir-format, fuzzy
@@ -302,3 +292,8 @@ msgstr "Sind Sie sicher, dass sie die Einladung für %{name} löschen möchten?"
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Are you sure you want to make %{invite_name} unlimited?"
 msgstr "Sind Sie sicher, dass sie %{name} auf unbegrenzt setzen möchten?"
+
+#: lib/cannery_web/live/range_live/index.ex:114
+#, elixir-autogen, elixir-format
+msgid "Container unstaged succesfully"
+msgstr ""

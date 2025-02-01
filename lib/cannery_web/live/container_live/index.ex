@@ -112,6 +112,20 @@ defmodule CanneryWeb.ContainerLive.Index do
     {:noreply, socket |> push_patch(to: ~p"/containers/search/#{search_term}")}
   end
 
+  def handle_event(
+        "toggle_staged",
+        %{"container_id" => id},
+        %{assigns: %{current_user: current_user}} = socket
+      ) do
+    container = Containers.get_container!(id, current_user)
+
+    {:ok, _container} =
+      container
+      |> Containers.update_container(current_user, %{"staged" => !container.staged})
+
+    {:noreply, socket |> display_containers()}
+  end
+
   defp display_containers(%{assigns: %{search: search, current_user: current_user}} = socket) do
     socket |> assign(:containers, Containers.list_containers(current_user, search: search))
   end

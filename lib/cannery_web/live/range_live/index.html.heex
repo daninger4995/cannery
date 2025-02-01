@@ -3,18 +3,18 @@
     <%= gettext("Range day") %>
   </h1>
 
-  <%= if @packs |> Enum.empty?() do %>
+  <%= if @containers |> Enum.empty?() do %>
     <h1 class="text-xl title text-primary-600">
-      <%= gettext("No ammo staged") %>
+      <%= gettext("No containers staged") %>
       <%= display_emoji("😔") %>
     </h1>
 
-    <.link navigate={~p"/ammo"} class="btn btn-primary">
+    <.link navigate={~p"/containers"} class="btn btn-primary">
       <%= dgettext("actions", "Why not get some ready to shoot?") %>
     </.link>
   <% else %>
-    <.link navigate={~p"/ammo"} class="btn btn-primary">
-      <%= dgettext("actions", "Stage ammo") %>
+    <.link navigate={~p"/containers"} class="btn btn-primary">
+      <%= dgettext("actions", "Stage containers") %>
     </.link>
 
     <div class="flex flex-row flex-wrap justify-center items-stretch w-full">
@@ -42,25 +42,14 @@
 
     <div class="flex flex-row flex-wrap justify-center items-stretch w-full">
       <.pack_card
-        :for={%{id: pack_id} = pack <- @packs}
+        :for={%{id: pack_id, container_id: container_id} = pack <- @packs}
         pack={pack}
         original_count={Map.fetch!(@original_counts, pack_id)}
         cpr={Map.get(@cprs, pack_id)}
         last_used_date={Map.get(@last_used_dates, pack_id)}
         current_user={@current_user}
+        container={Map.fetch!(@containers, container_id)}
       >
-        <button
-          type="button"
-          class="btn btn-primary"
-          phx-click="toggle_staged"
-          phx-value-pack_id={pack.id}
-          data-confirm={"#{dgettext("prompts", "Are you sure you want to unstage this ammo?")}"}
-        >
-          <%= if pack.staged,
-            do: dgettext("actions", "Unstage from range"),
-            else: dgettext("actions", "Stage for range") %>
-        </button>
-
         <.link patch={~p"/range/add_shot_record/#{pack}"} class="btn btn-primary">
           <%= dgettext("actions", "Record shots") %>
         </.link>

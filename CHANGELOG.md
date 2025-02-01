@@ -1,4 +1,5 @@
 # v0.9.13
+- Add date restriction dropdown to range page
 - Fix dates not rendering properly in table
 - Update deps
 

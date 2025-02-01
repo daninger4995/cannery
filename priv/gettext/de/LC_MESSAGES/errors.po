@@ -170,7 +170,7 @@ msgstr ""
 "Ungültige Nummer an Kopien. Muss zwischen 1 and %{max} liegen. War "
 "%{multiplier}"
 
-#: lib/cannery_web/live/range_live/index.html.heex:71
+#: lib/cannery_web/live/range_live/index.html.heex:94
 #, elixir-autogen, elixir-format
 msgid "Your browser does not support the canvas element."
 msgstr ""

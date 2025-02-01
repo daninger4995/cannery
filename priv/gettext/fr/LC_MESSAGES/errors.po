@@ -169,7 +169,7 @@ msgstr "Impossible d'analyser le nombre de copies"
 msgid "Invalid number of copies, must be between 1 and %{max}. Was %{multiplier}"
 msgstr "Nombre de copies invalide, doit être 1 et %{max}. Été %{multiplier}"
 
-#: lib/cannery_web/live/range_live/index.html.heex:71
+#: lib/cannery_web/live/range_live/index.html.heex:94
 #, elixir-autogen, elixir-format
 msgid "Your browser does not support the canvas element."
 msgstr ""

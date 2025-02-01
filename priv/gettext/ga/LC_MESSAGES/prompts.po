@@ -161,19 +161,19 @@ msgstr ""
 msgid "Shots recorded successfully"
 msgstr ""
 
-#: lib/cannery_web/live/range_live/index.html.heex:34
+#: lib/cannery_web/live/range_live/index.html.heex:57
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to unstage this ammo?"
 msgstr ""
 
 #: lib/cannery_web/live/pack_live/show.ex:157
-#: lib/cannery_web/live/range_live/index.html.heex:151
+#: lib/cannery_web/live/range_live/index.html.heex:189
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to delete this shot record?"
 msgstr ""
 
 #: lib/cannery_web/live/pack_live/show.ex:79
-#: lib/cannery_web/live/range_live/index.ex:78
+#: lib/cannery_web/live/range_live/index.ex:98
 #, elixir-autogen, elixir-format
 msgid "Shot records deleted succesfully"
 msgstr ""
@@ -230,7 +230,7 @@ msgstr ""
 msgid "Ammo deleted succesfully"
 msgstr ""
 
-#: lib/cannery_web/live/range_live/index.ex:91
+#: lib/cannery_web/live/range_live/index.ex:111
 #, elixir-autogen, elixir-format
 msgid "Ammo unstaged succesfully"
 msgstr ""

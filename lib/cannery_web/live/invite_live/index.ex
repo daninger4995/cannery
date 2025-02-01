@@ -116,6 +116,20 @@ defmodule CanneryWeb.InviteLive.Index do
     {:noreply, socket |> put_flash(:info, dgettext("prompts", "Copied to clipboard"))}
   end
 
+  def handle_event("resend_email_verification", %{"id" => id}, socket) do
+    %{email: user_email} = user = Accounts.get_user!(id)
+
+    Accounts.deliver_user_confirmation_instructions(
+      user,
+      fn token -> url(CanneryWeb.Endpoint, ~p"/users/confirm/#{token}") end
+    )
+
+    prompt =
+      dgettext("prompts", "Email resent to %{user_email} succesfully", user_email: user_email)
+
+    {:noreply, socket |> put_flash(:info, prompt) |> display_invites()}
+  end
+
   def handle_event(
         "delete_user",
         %{"id" => id},

@@ -14,6 +14,8 @@ config :cannery, CanneryWeb.Endpoint, cache_static_manifest: "priv/static/cache_
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :cannery, env: :prod
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

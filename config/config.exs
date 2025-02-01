@@ -8,6 +8,7 @@
 import Config
 
 config :cannery,
+  env: :dev,
   ecto_repos: [Cannery.Repo],
   generators: [binary_id: true]
 

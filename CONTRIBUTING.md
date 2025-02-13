@@ -127,7 +127,7 @@ In `test` mode (or in the Docker container), Cannery will listen for the same en
 In `prod` mode (or in the Docker container), Cannery will listen for the same environment variables as dev mode, but also include the following at runtime:
 
 - `SECRET_KEY_BASE`: Secret key base used to sign cookies. Must be generated
-  with `docker run -it shibaobun/cannery mix phx.gen.secret` and set for server to start.
+  with `docker run -it shibaobun/cannery priv/random.sh` and set for server to start.
 - `SMTP_HOST`: The url for your SMTP email provider. Must be set
 - `SMTP_PORT`: The port for your SMTP relay. Defaults to `587`.
 - `SMTP_USERNAME`: The username for your SMTP relay. Must be set!

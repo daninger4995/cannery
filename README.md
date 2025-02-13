@@ -60,7 +60,7 @@ You can use the following environment variables to configure Cannery in
   Defaults to `false`.
 - `POOL_SIZE`: Controls the pool size to use with PostgreSQL. Defaults to `10`.
 - `SECRET_KEY_BASE`: Secret key base used to sign cookies. Must be generated
-  with `docker run -it shibaobun/cannery mix phx.gen.secret` and set for server to start.
+  with `docker run -it shibaobun/cannery priv/random.sh` and set for server to start.
 - `REGISTRATION`: Controls if user sign-up should be invite only or set to
   public. Set to `public` to enable public registration. Defaults to `invite`.
 - `LOCALE`: Sets a custom default locale. Defaults to `en_US`

@@ -3,8 +3,7 @@
   "description": " ",
   "license": "MIT",
   "engines": {
-    "node": "v23.7.0",
-    "npm": "10.9.2"
+    "node": "v23.7.0"
   },
   "scripts": {
     "deploy": "NODE_ENV=production webpack --mode production",

@@ -25,13 +25,12 @@ RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
 COPY lib lib
 COPY priv priv
 COPY assets assets
-RUN npm run --prefix ./assets deploy
 RUN mix do phx.digest, gettext.extract
 
 # compile and build release
 # uncomment COPY if rel/ exists
 # COPY rel rel
-RUN mix do compile, release
+RUN mix do assets.deploy, compile, release
 
 # prepare release image
 FROM alpine:latest AS app
@@ -42,6 +41,8 @@ RUN apk upgrade --no-cache && \
 WORKDIR /app
 
 RUN chown nobody:nobody /app
+
+ENV MIX_ENV=prod
 
 USER nobody:nobody
 

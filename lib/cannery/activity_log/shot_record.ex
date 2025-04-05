@@ -24,7 +24,7 @@ defmodule Cannery.ActivityLog.ShotRecord do
     field :user_id, :binary_id
     field :pack_id, :binary_id
 
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime_usec)
   end
 
   @type t :: %__MODULE__{
@@ -34,8 +34,8 @@ defmodule Cannery.ActivityLog.ShotRecord do
           date: Date.t() | nil,
           pack_id: Pack.id(),
           user_id: User.id(),
-          inserted_at: NaiveDateTime.t(),
-          updated_at: NaiveDateTime.t()
+          inserted_at: DateTime.t(),
+          updated_at: DateTime.t()
         }
   @type new_shot_record :: %__MODULE__{}
   @type id :: UUID.t()

@@ -32,7 +32,7 @@ defmodule Cannery.Accounts.UserToken do
           sent_to: String.t(),
           user: User.t() | Association.NotLoaded.t(),
           user_id: User.id() | nil,
-          inserted_at: NaiveDateTime.t()
+          inserted_at: DateTime.t()
         }
   @type new_user_token :: %__MODULE__{}
   @type id :: UUID.t()

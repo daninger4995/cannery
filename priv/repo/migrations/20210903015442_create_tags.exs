@@ -10,7 +10,7 @@ defmodule Cannery.Repo.Migrations.CreateTags do
 
       add :user_id, references(:users, on_delete: :delete_all, type: :binary_id)
 
-      timestamps(type: :utc_datetime)
+      timestamps(type: :naive_datetime)
     end
 
     create index(:tags, [:user_id])

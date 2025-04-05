@@ -10,7 +10,7 @@ defmodule Cannery.Repo.Migrations.CreateUsersAuthTables do
       add :hashed_password, :string, null: false
       add :confirmed_at, :naive_datetime
       add :role, :string
-      timestamps(type: :utc_datetime)
+      timestamps(type: :naive_datetime)
     end
 
     create unique_index(:users, [:email])

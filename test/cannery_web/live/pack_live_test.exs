@@ -157,7 +157,7 @@ defmodule CanneryWeb.PackLiveTest do
         |> follow_redirect(conn, ~p"/ammo")
 
       assert html =~ "Ammo added successfully"
-      assert html =~ "\n42\n"
+      assert html =~ " 42\n"
     end
 
     test "saves multiple new packs", %{conn: conn, current_user: current_user} do
@@ -220,7 +220,7 @@ defmodule CanneryWeb.PackLiveTest do
         |> follow_redirect(conn, ~p"/ammo")
 
       assert html =~ "Ammo updated successfully"
-      assert html =~ "\n43\n"
+      assert html =~ " 43\n"
     end
 
     test "clones pack in listing", %{conn: conn, pack: pack} do
@@ -242,7 +242,7 @@ defmodule CanneryWeb.PackLiveTest do
         |> follow_redirect(conn, ~p"/ammo")
 
       assert html =~ "Ammo added successfully"
-      assert html =~ "\n42\n"
+      assert html =~ " 42\n"
       assert html =~ "$#{display_currency(120.5)}"
     end
 
@@ -286,7 +286,7 @@ defmodule CanneryWeb.PackLiveTest do
         |> follow_redirect(conn, ~p"/ammo")
 
       assert html =~ "Ammo added successfully"
-      assert html =~ "\n43\n"
+      assert html =~ " 43\n"
       assert html =~ "$#{display_currency(120.5)}"
     end
 
@@ -334,7 +334,7 @@ defmodule CanneryWeb.PackLiveTest do
       assert html =~ "Show used"
       refute html =~ "$#{display_currency(50.00)}"
       percentage = pack |> Ammo.get_percentage_remaining(current_user)
-      refute html =~ "\n#{"#{percentage}%"}\n"
+      refute html =~ " #{"#{percentage}%"}\n"
 
       html =
         show_live
@@ -343,7 +343,7 @@ defmodule CanneryWeb.PackLiveTest do
 
       assert html =~ "$#{display_currency(50.00)}"
       percentage = pack |> Ammo.get_percentage_remaining(current_user)
-      assert html =~ "\n#{"#{percentage}%"}\n"
+      assert html =~ " #{"#{percentage}%"}\n"
     end
   end
 

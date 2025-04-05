@@ -11,13 +11,13 @@ defmodule Cannery.Accounts.Invite do
     field :name, :string
     field :token, :string
     field :uses_left, :integer, default: nil
-    field :disabled_at, :naive_datetime
+    field :disabled_at, :utc_datetime_usec
 
     belongs_to :created_by, User
 
     has_many :users, User
 
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime_usec)
   end
 
   @type t :: %__MODULE__{
@@ -25,12 +25,12 @@ defmodule Cannery.Accounts.Invite do
           name: String.t(),
           token: token(),
           uses_left: integer() | nil,
-          disabled_at: NaiveDateTime.t(),
+          disabled_at: DateTime.t(),
           created_by: User.t() | nil | Association.NotLoaded.t(),
           created_by_id: User.id() | nil,
           users: [User.t()] | Association.NotLoaded.t(),
-          inserted_at: NaiveDateTime.t(),
-          updated_at: NaiveDateTime.t()
+          inserted_at: DateTime.t(),
+          updated_at: DateTime.t()
         }
   @type new_invite :: %__MODULE__{}
   @type id :: UUID.t()

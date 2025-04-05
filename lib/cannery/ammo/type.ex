@@ -90,7 +90,7 @@ defmodule Cannery.Ammo.Type do
     field :user_id, :binary_id
     has_many :packs, Pack
 
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime_usec)
   end
 
   @type t :: %__MODULE__{
@@ -129,8 +129,8 @@ defmodule Cannery.Ammo.Type do
           dram_equivalent: String.t() | nil,
           user_id: User.id(),
           packs: [Pack.t()] | nil,
-          inserted_at: NaiveDateTime.t(),
-          updated_at: NaiveDateTime.t()
+          inserted_at: DateTime.t(),
+          updated_at: DateTime.t()
         }
   @type new_type :: %__MODULE__{}
   @type id :: UUID.t()

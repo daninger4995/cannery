@@ -1,6 +1,7 @@
 # v0.9.14
 - Update deps
 - Fix wrapping issues with search bars
+- Improve accuracy of timestamps
 
 # v0.9.13
 - Add button to resend email verification email

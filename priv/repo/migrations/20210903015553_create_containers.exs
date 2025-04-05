@@ -11,7 +11,7 @@ defmodule Cannery.Repo.Migrations.CreateContainers do
 
       add :user_id, references(:users, on_delete: :delete_all, type: :binary_id)
 
-      timestamps(type: :utc_datetime)
+      timestamps(type: :naive_datetime)
     end
 
     create index(:containers, [:user_id])

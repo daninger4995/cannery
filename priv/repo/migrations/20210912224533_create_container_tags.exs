@@ -8,7 +8,7 @@ defmodule Cannery.Repo.Migrations.CreateContainerTags do
       add :container_id, references(:containers, on_delete: :delete_all, type: :binary_id)
       add :tag_id, references(:tags, on_delete: :delete_all, type: :binary_id)
 
-      timestamps(type: :utc_datetime)
+      timestamps(type: :naive_datetime)
     end
 
     create index(:container_tags, [:container_id])

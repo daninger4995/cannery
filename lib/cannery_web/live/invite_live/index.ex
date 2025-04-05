@@ -93,7 +93,7 @@ defmodule CanneryWeb.InviteLive.Index do
         %{"id" => id},
         %{assigns: %{current_user: current_user}} = socket
       ) do
-    now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
+    now = DateTime.utc_now()
 
     socket =
       Invites.get_invite!(id, current_user)

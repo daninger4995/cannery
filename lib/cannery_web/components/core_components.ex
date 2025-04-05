@@ -136,7 +136,7 @@ defmodule CanneryWeb.CoreComponents do
   attr :datetime, :any, required: true, doc: "A `DateTime` struct or nil"
 
   @doc """
-  Phoenix.Component for a <time> element that renders the naivedatetime in the
+  Phoenix.Component for a <time> element that renders the DateTime in the
   user's local timezone
   """
   def datetime(assigns)
@@ -153,8 +153,8 @@ defmodule CanneryWeb.CoreComponents do
   """
   def date_range(assigns)
 
-  @spec cast_datetime(NaiveDateTime.t() | nil) :: String.t()
-  defp cast_datetime(%NaiveDateTime{} = datetime) do
+  @spec cast_datetime(DateTime.t() | nil) :: String.t()
+  defp cast_datetime(%DateTime{} = datetime) do
     datetime |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601(:extended)
   end
 

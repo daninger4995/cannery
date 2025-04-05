@@ -22,7 +22,7 @@ defmodule Cannery.Accounts.User do
     field :password, :string, virtual: true
     field :hashed_password, :string
     field :current_password, :string, virtual: true, redact: true
-    field :confirmed_at, :naive_datetime
+    field :confirmed_at, :utc_datetime_usec
     field :role, Ecto.Enum, values: [:admin, :user], default: :user
     field :locale, :string
 
@@ -30,7 +30,7 @@ defmodule Cannery.Accounts.User do
 
     belongs_to :invite, Invite
 
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime_usec)
   end
 
   @type t :: %User{
@@ -38,14 +38,14 @@ defmodule Cannery.Accounts.User do
           email: String.t(),
           password: String.t(),
           hashed_password: String.t(),
-          confirmed_at: NaiveDateTime.t(),
+          confirmed_at: DateTime.t(),
           role: role(),
           locale: String.t() | nil,
           created_invites: [Invite.t()] | Association.NotLoaded.t(),
           invite: Invite.t() | nil | Association.NotLoaded.t(),
           invite_id: Invite.id() | nil,
-          inserted_at: NaiveDateTime.t(),
-          updated_at: NaiveDateTime.t()
+          inserted_at: DateTime.t(),
+          updated_at: DateTime.t()
         }
   @type new_user :: %User{}
   @type id :: UUID.t()
@@ -168,7 +168,7 @@ defmodule Cannery.Accounts.User do
   """
   @spec confirm_changeset(t() | changeset()) :: changeset()
   def confirm_changeset(user_or_changeset) do
-    now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
+    now = DateTime.utc_now()
     user_or_changeset |> change(confirmed_at: now)
   end
 

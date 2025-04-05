@@ -11,7 +11,7 @@ defmodule Cannery.Containers.ContainerTag do
     belongs_to :container, Container
     belongs_to :tag, Tag
 
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime_usec)
   end
 
   @type t :: %__MODULE__{
@@ -20,8 +20,8 @@ defmodule Cannery.Containers.ContainerTag do
           container_id: Container.id(),
           tag: Tag.t(),
           tag_id: Tag.id(),
-          inserted_at: NaiveDateTime.t(),
-          updated_at: NaiveDateTime.t()
+          inserted_at: DateTime.t(),
+          updated_at: DateTime.t()
         }
   @type new_container_tag :: %__MODULE__{}
   @type id :: UUID.t()

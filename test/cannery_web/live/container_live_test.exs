@@ -305,7 +305,7 @@ defmodule CanneryWeb.ContainerLiveTest do
       {:ok, _show_live, html} = live(conn, ~p"/container/#{container}")
 
       assert html =~ type_name
-      assert html =~ "\n20\n"
+      assert html =~ " 20\n"
     end
 
     test "displays pack in table",
@@ -318,7 +318,7 @@ defmodule CanneryWeb.ContainerLiveTest do
         |> render_click()
 
       assert html =~ type_name
-      assert html =~ "\n20\n"
+      assert html =~ " 20\n"
     end
   end
 end

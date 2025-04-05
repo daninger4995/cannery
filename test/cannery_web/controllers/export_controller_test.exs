@@ -131,8 +131,8 @@ defmodule CanneryWeb.ExportControllerTest do
         "id" => current_user.id,
         "locale" => current_user.locale,
         "role" => to_string(current_user.role),
-        "inserted_at" => current_user.inserted_at |> NaiveDateTime.to_iso8601(),
-        "updated_at" => current_user.updated_at |> NaiveDateTime.to_iso8601()
+        "inserted_at" => current_user.inserted_at |> DateTime.to_iso8601(),
+        "updated_at" => current_user.updated_at |> DateTime.to_iso8601()
       }
 
       json_resp = conn |> json_response(200)

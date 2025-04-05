@@ -261,9 +261,9 @@ defmodule CanneryWeb.TypeLiveTest do
       assert html =~ "Total ever rounds"
       assert html =~ "Used packs"
       assert html =~ "Total ever packs"
-      assert html =~ "\n20\n"
-      assert html =~ "\n0\n"
-      assert html =~ "\n1\n"
+      assert html =~ "20\n"
+      assert html =~ " 0\n"
+      assert html =~ " 1\n"
 
       shot_record_fixture(%{count: 5}, current_user, pack)
       {:ok, index_live, _html} = live(conn, ~p"/catalog")
@@ -273,8 +273,8 @@ defmodule CanneryWeb.TypeLiveTest do
         |> element(~s/input[type="checkbox"][aria-labelledby="toggle_show_used-label"}]/)
         |> render_click()
 
-      assert html =~ "\n15\n"
-      assert html =~ "\n5\n"
+      assert html =~ " 15\n"
+      assert html =~ " 5\n"
     end
   end
 
@@ -325,7 +325,7 @@ defmodule CanneryWeb.TypeLiveTest do
     } do
       {:ok, _show_live, html} = live(conn, ~p"/type/#{type}")
       assert html =~ type_name
-      assert html =~ "\n20\n"
+      assert html =~ " 20\n"
       assert html =~ container_name
     end
 
@@ -338,7 +338,7 @@ defmodule CanneryWeb.TypeLiveTest do
         |> element(~s/input[type="checkbox"][aria-labelledby="toggle_table-label"}]/)
         |> render_click()
 
-      assert html =~ "\n20\n"
+      assert html =~ " 20\n"
       assert html =~ container_name
     end
   end
@@ -350,14 +350,14 @@ defmodule CanneryWeb.TypeLiveTest do
          %{conn: conn, type: type, container: %{name: container_name}} do
       {:ok, show_live, html} = live(conn, ~p"/type/#{type}")
       assert html =~ "Show used"
-      refute html =~ "\n20\n"
+      refute html =~ " 20\n"
 
       html =
         show_live
         |> element(~s/input[type="checkbox"][aria-labelledby="toggle_show_used-label"}]/)
         |> render_click()
 
-      assert html =~ "\n20\n"
+      assert html =~ " 20\n"
       assert html =~ "Empty"
       assert html =~ container_name
     end
@@ -372,14 +372,14 @@ defmodule CanneryWeb.TypeLiveTest do
         |> render_click()
 
       assert html =~ "Show used"
-      refute html =~ "\n20\n"
+      refute html =~ " 20\n"
 
       html =
         show_live
         |> element(~s/input[type="checkbox"][aria-labelledby="toggle_show_used-label"}]/)
         |> render_click()
 
-      assert html =~ "\n20\n"
+      assert html =~ " 20\n"
       assert html =~ "Empty"
       assert html =~ container_name
     end

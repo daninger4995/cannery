@@ -20,7 +20,7 @@ defmodule Cannery.Containers.Tag do
 
     field :user_id, :binary_id
 
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime_usec)
   end
 
   @type t :: %__MODULE__{
@@ -29,8 +29,8 @@ defmodule Cannery.Containers.Tag do
           bg_color: String.t(),
           text_color: String.t(),
           user_id: User.id(),
-          inserted_at: NaiveDateTime.t(),
-          updated_at: NaiveDateTime.t()
+          inserted_at: DateTime.t(),
+          updated_at: DateTime.t()
         }
   @type new_tag() :: %__MODULE__{}
   @type id() :: UUID.t()

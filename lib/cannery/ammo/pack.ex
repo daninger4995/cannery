@@ -30,7 +30,7 @@ defmodule Cannery.Ammo.Pack do
     field :container_id, :binary_id
     field :user_id, :binary_id
 
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime_usec)
   end
 
   @type t :: %__MODULE__{
@@ -44,8 +44,8 @@ defmodule Cannery.Ammo.Pack do
           type_id: Type.id(),
           container_id: Container.id(),
           user_id: User.id(),
-          inserted_at: NaiveDateTime.t(),
-          updated_at: NaiveDateTime.t()
+          inserted_at: DateTime.t(),
+          updated_at: DateTime.t()
         }
   @type new_pack :: %__MODULE__{}
   @type id :: UUID.t()

@@ -27,7 +27,7 @@ defmodule Cannery.Containers.Container do
 
     many_to_many :tags, Tag, join_through: ContainerTag
 
-    timestamps(type: :utc_datetime)
+    timestamps(type: :utc_datetime_usec)
   end
 
   @type t :: %__MODULE__{
@@ -39,8 +39,8 @@ defmodule Cannery.Containers.Container do
           type: String.t(),
           user_id: User.id(),
           tags: [Tag.t()] | nil,
-          inserted_at: NaiveDateTime.t(),
-          updated_at: NaiveDateTime.t()
+          inserted_at: DateTime.t(),
+          updated_at: DateTime.t()
         }
   @type new_container :: %__MODULE__{}
   @type id :: UUID.t()

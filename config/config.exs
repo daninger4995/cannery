@@ -10,7 +10,7 @@ import Config
 config :cannery,
   env: :dev,
   ecto_repos: [Cannery.Repo],
-  generators: [binary_id: true, timestamp_type: :utc_datetime]
+  generators: [binary_id: true, timestamp_type: :utc_datetime_usec]
 
 config :cannery, Cannery.Accounts, registration: System.get_env("REGISTRATION", "invite")
 

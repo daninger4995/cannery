@@ -123,7 +123,7 @@ defmodule Cannery.Accounts.Invites do
   end
 
   defp decrement_invite_changeset(%Invite{uses_left: 1} = invite) do
-    now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
+    now = DateTime.utc_now()
     invite |> Invite.update_changeset(%{uses_left: 0, disabled_at: now})
   end
 

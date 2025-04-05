@@ -920,7 +920,7 @@ defmodule Cannery.Ammo do
               multiplier <= @pack_create_limit and
               type_id |> is_binary() and
               container_id |> is_binary() do
-    now = NaiveDateTime.utc_now() |> NaiveDateTime.truncate(:second)
+    now = DateTime.utc_now()
 
     changesets =
       Enum.map(1..multiplier, fn _count ->

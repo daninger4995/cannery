@@ -11,7 +11,7 @@ defmodule Cannery.Repo.Migrations.CreateInvites do
 
       add :user_id, references(:users, on_delete: :delete_all, type: :binary_id)
 
-      timestamps(type: :naive_datetime)
+      timestamps()
     end
 
     create index(:invites, [:user_id])

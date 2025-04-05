@@ -31,8 +31,7 @@ steps:
   - mix deps.get
   - npm set cache .npm
   - npm --prefix ./assets ci --no-audit --prefer-offline
-  - npm run --prefix ./assets deploy
-  - mix do phx.digest, gettext.extract
+  - mix do phx.digest, gettext.extract, assets.deploy
   - mix test.all
 
 - name: build and publish stable

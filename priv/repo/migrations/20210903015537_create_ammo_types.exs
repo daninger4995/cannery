@@ -31,7 +31,7 @@ defmodule Cannery.Repo.Migrations.CreateAmmoTypes do
 
       add :user_id, references(:users, on_delete: :delete_all, type: :binary_id)
 
-      timestamps(type: :naive_datetime)
+      timestamps()
     end
   end
 end

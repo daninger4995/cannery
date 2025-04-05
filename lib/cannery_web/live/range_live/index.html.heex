@@ -1,20 +1,20 @@
 <div class="flex flex-col justify-center items-center space-y-8">
   <h1 class="text-2xl title title-primary-500">
-    <%= gettext("Range day") %>
+    {gettext("Range day")}
   </h1>
 
   <%= if @containers |> Enum.empty?() do %>
     <h1 class="text-xl title text-primary-600">
-      <%= gettext("No containers staged") %>
-      <%= display_emoji("😔") %>
+      {gettext("No containers staged")}
+      {display_emoji("😔")}
     </h1>
 
     <.link navigate={~p"/containers"} class="btn btn-primary">
-      <%= dgettext("actions", "Why not get some ready to shoot?") %>
+      {dgettext("actions", "Why not get some ready to shoot?")}
     </.link>
   <% else %>
     <.link navigate={~p"/containers"} class="btn btn-primary">
-      <%= dgettext("actions", "Stage containers") %>
+      {dgettext("actions", "Stage containers")}
     </.link>
 
     <div class="flex flex-row flex-wrap justify-center items-stretch w-full">
@@ -30,9 +30,9 @@
             phx-click="toggle_staged"
             phx-value-container_id={container_id}
           >
-            <%= if container.staged,
+            {if container.staged,
               do: dgettext("actions", "Unstage"),
-              else: dgettext("actions", "Stage") %>
+              else: dgettext("actions", "Stage")}
           </button>
         </div>
       </.container_card>
@@ -51,7 +51,7 @@
         container={Map.fetch!(@containers, container_id)}
       >
         <.link patch={~p"/range/add_shot_record/#{pack}"} class="btn btn-primary">
-          <%= dgettext("actions", "Record shots") %>
+          {dgettext("actions", "Record shots")}
         </.link>
       </.pack_card>
     </div>
@@ -61,12 +61,12 @@
 
   <%= if @shot_record_count == 0 do %>
     <h1 class="text-xl title text-primary-600">
-      <%= gettext("No shots recorded") %>
-      <%= display_emoji("😔") %>
+      {gettext("No shots recorded")}
+      {display_emoji("😔")}
     </h1>
   <% else %>
     <h1 class="text-2xl title text-primary-600">
-      <%= gettext("Shot log") %>
+      {gettext("Shot log")}
     </h1>
 
     <canvas
@@ -80,10 +80,10 @@
       aria-label={gettext("Rounds shot chart")}
       role="img"
     >
-      <%= dgettext("errors", "Your browser does not support the canvas element.") %>
+      {dgettext("errors", "Your browser does not support the canvas element.")}
     </canvas>
 
-    <div class="flex flex-col justify-center items-center space-y-4 w-full max-w-2xl sm:flex-row sm:space-y-0 sm:space-x-4">
+    <div class="flex flex-col flex-wrap justify-center items-center space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
       <.form
         :let={f}
         for={%{}}
@@ -92,11 +92,9 @@
         phx-submit="change_class"
         class="flex items-center"
       >
-        <%= label(f, :class, gettext("Class"),
-          class: "title text-primary-600 text-lg text-center"
-        ) %>
+        {label(f, :class, gettext("Class"), class: "title text-primary-600 text-lg text-center")}
 
-        <%= select(
+        {select(
           f,
           :class,
           [
@@ -105,9 +103,9 @@
             {gettext("Shotgun"), :shotgun},
             {gettext("Pistol"), :pistol}
           ],
-          class: "mx-2 my-1 min-w-md input input-primary",
+          class: "mx-2 my-1 min-w-20 input input-primary",
           value: @class
-        ) %>
+        )}
       </.form>
 
       <.form
@@ -118,13 +116,13 @@
         phx-submit="search"
         class="flex items-center grow"
       >
-        <%= text_input(f, :search_term,
+        {text_input(f, :search_term,
           class: "grow input input-primary",
           phx_debounce: 300,
           placeholder: gettext("Search shot records"),
           role: "search",
           value: @search
-        ) %>
+        )}
       </.form>
 
       <.form
@@ -135,9 +133,9 @@
         phx-submit="change_dates"
         class="flex items-center"
       >
-        <%= label(f, :dates_start, gettext("Dates"),
+        {label(f, :dates_start, gettext("Dates"),
           class: "title text-primary-600 text-lg text-center"
-        ) %>
+        )}
 
         <.date_range name="dates" />
       </.form>
@@ -145,8 +143,8 @@
 
     <%= if @shot_records |> Enum.empty?() do %>
       <h1 class="text-xl title text-primary-600">
-        <%= gettext("No shots recorded") %>
-        <%= display_emoji("😔") %>
+        {gettext("No shots recorded")}
+        {display_emoji("😔")}
       </h1>
     <% else %>
       <.live_component

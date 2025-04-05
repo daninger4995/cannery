@@ -1,16 +1,26 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "tailwindcss" source("../..");
 
-$fa-font-path: "@fortawesome/fontawesome-free/webfonts";
-@import "@fortawesome/fontawesome-free/scss/fontawesome";
-@import "@fortawesome/fontawesome-free/scss/regular";
-@import "@fortawesome/fontawesome-free/scss/solid";
-@import "@fortawesome/fontawesome-free/scss/brands";
+@theme {
+  --color-primary-50: oklch(0.985 0.002 247.839);
+  --color-primary-100: oklch(0.967 0.003 264.542);
+  --color-primary-200: oklch(0.928 0.006 264.531);
+  --color-primary-300: oklch(0.872 0.01 258.338);
+  --color-primary-400: oklch(0.707 0.022 261.325);
+  --color-primary-500: oklch(0.551 0.027 264.364);
+  --color-primary-600: oklch(0.446 0.03 256.802);
+  --color-primary-700: oklch(0.373 0.034 259.733);
+  --color-primary-800: oklch(0.278 0.033 256.848);
+  --color-primary-900: oklch(0.21 0.034 264.665);
+  --color-primary-950: oklch(0.13 0.028 261.692);
 
-@import "slim-select/styles";
+}
 
-@import "components";
+@import "@fortawesome/fontawesome-free/css/fontawesome" source("../..");
+@import "@fortawesome/fontawesome-free/css/regular" source("../..");
+@import "@fortawesome/fontawesome-free/css/solid" source("../..");
+@import "@fortawesome/fontawesome-free/css/brands" source("../..");
+
+@import "slim-select/styles" source("../..");
 
 /* fix firefox scrollbars */
 * {
@@ -155,16 +165,66 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
   100% { opacity: 0; }
 }
 
-.ss-main {
-  @apply input;
+/* components */
+.input, .ss-main, .ss-content, .ss-search input[type="search"] {
+  @apply px-4 py-2 rounded-lg border focus:outline-hidden;
+  @apply shadow-sm focus:shadow-lg;
+  @apply transition-all duration-300 ease-in-out;
 }
 
+.input-primary {
+  @apply border-primary-500 hover:border-primary-600 active:border-primary-600;
+  @apply text-black;
+}
+
+.checkbox {
+  -ms-transform: scale(1.5);
+  -moz-transform: scale(1.5);
+  -webkit-transform: scale(1.5);
+  -o-transform: scale(1.5);
+  transform: scale(1.5);
+  padding: 10px;
+  margin: 1em auto;
+}
+
+.title {
+  @apply tracking-wide leading-5;
+}
+
+.btn {
+  @apply px-4 py-2 rounded-lg focus:outline-hidden;
+  @apply shadow-sm focus:shadow-lg;
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.btn-primary {
+  @apply bg-primary-500 focus:bg-primary-600 active:bg-primary-600;
+  @apply border-primary-500 focus:border-primary-600 active:border-primary-600;
+  @apply text-white;
+}
+
+.btn-alert {
+  @apply bg-rose-600 focus:bg-rose-700 active:bg-rose-800;
+  @apply border-rose-600 focus:border-rose-700 active:border-rose-800;
+  @apply text-white;
+}
+
+.hr {
+  @apply w-full max-w-2xl border border-primary-300;
+}
+
+.hr-light {
+  @apply w-full max-w-2xl border border-white;
+}
+
+.link {
+  @apply hover:underline;
+  @apply transition-colors duration-500 ease-in-out;
+}
+
+/* slim select */
 .ss-main.input-primary {
   @apply border-primary-500 hover:border-primary-600 active:border-primary-600;
-}
-
-.ss-content {
-  @apply input;
 }
 
 .ss-content.input-primary {
@@ -179,10 +239,6 @@ $fa-font-path: "@fortawesome/fontawesome-free/webfonts";
 .ss-content.ss-open-below {
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
-}
-
-.ss-search input[type="search"] {
-  @apply input;
 }
 
 .ss-content.input-primary .ss-search input[type="search"] {

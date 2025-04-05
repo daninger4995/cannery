@@ -1,6 +1,6 @@
 <div class="mx-auto pb-8 max-w-2xl flex flex-col justify-center items-center space-y-4">
   <h1 class="title text-primary-600 text-xl">
-    <%= dgettext("actions", "Log in") %>
+    {dgettext("actions", "Log in")}
   </h1>
 
   <.form
@@ -11,39 +11,39 @@
     class="flex flex-col space-y-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 justify-center items-center"
   >
     <p :if={@error_message} class="alert alert-danger col-span-3">
-      <%= @error_message %>
+      {@error_message}
     </p>
 
-    <%= label(f, :email, gettext("Email"), class: "title text-lg text-primary-600") %>
-    <%= email_input(f, :email,
+    {label(f, :email, gettext("Email"), class: "title text-lg text-primary-600")}
+    {email_input(f, :email,
       autocomplete: :email,
       class: "input input-primary col-span-2",
       required: true
-    ) %>
+    )}
 
-    <%= label(f, :password, gettext("Password"), class: "title text-lg text-primary-600") %>
-    <%= password_input(f, :password,
+    {label(f, :password, gettext("Password"), class: "title text-lg text-primary-600")}
+    {password_input(f, :password,
       autocomplete: "current-password",
       class: "input input-primary col-span-2",
       required: true
-    ) %>
+    )}
 
-    <%= label(f, :remember_me, gettext("Keep me logged in for 60 days"),
+    {label(f, :remember_me, gettext("Keep me logged in for 60 days"),
       class: "title text-lg text-primary-600"
-    ) %>
-    <%= checkbox(f, :remember_me, class: "checkbox col-span-2") %>
+    )}
+    {checkbox(f, :remember_me, class: "checkbox col-span-2")}
 
-    <%= submit(dgettext("actions", "Log in"), class: "mx-auto btn btn-primary col-span-3") %>
+    {submit(dgettext("actions", "Log in"), class: "mx-auto btn btn-primary col-span-3")}
   </.form>
 
   <hr class="hr" />
 
   <div class="flex flex-row justify-center items-center space-x-4">
     <.link :if={Accounts.allow_registration?()} href={~p"/users/register"} class="btn btn-primary">
-      <%= dgettext("actions", "Register") %>
+      {dgettext("actions", "Register")}
     </.link>
     <.link href={~p"/users/reset_password"} class="btn btn-primary">
-      <%= dgettext("actions", "Forgot your password?") %>
+      {dgettext("actions", "Forgot your password?")}
     </.link>
   </div>
 </div>

@@ -30,7 +30,7 @@ defmodule Cannery.Ammo.Pack do
     field :container_id, :binary_id
     field :user_id, :binary_id
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @type t :: %__MODULE__{

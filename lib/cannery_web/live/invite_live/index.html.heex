@@ -1,20 +1,20 @@
 <div class="flex flex-col justify-center items-center mx-auto space-y-4 max-w-3xl">
   <h1 class="text-2xl title title-primary-500">
-    <%= gettext("Invites") %>
+    {gettext("Invites")}
   </h1>
 
   <%= if @invites |> Enum.empty?() do %>
     <h1 class="text-xl title text-primary-600">
-      <%= gettext("No invites") %>
-      <%= display_emoji("😔") %>
+      {gettext("No invites")}
+      {display_emoji("😔")}
     </h1>
 
     <.link patch={~p"/invites/new"} class="btn btn-primary">
-      <%= dgettext("actions", "Invite someone new!") %>
+      {dgettext("actions", "Invite someone new!")}
     </.link>
   <% else %>
     <.link patch={~p"/invites/new"} class="btn btn-primary">
-      <%= dgettext("actions", "Create Invite") %>
+      {dgettext("actions", "Create Invite")}
     </.link>
   <% end %>
 
@@ -35,7 +35,7 @@
               dgettext("actions", "Copy invite link for %{invite_name}", invite_name: invite.name)
             }
           >
-            <%= dgettext("actions", "Copy to clipboard") %>
+            {dgettext("actions", "Copy to clipboard")}
           </button>
         </form>
       </:code_actions>
@@ -72,7 +72,7 @@
         phx-click={if invite.disabled_at, do: "enable_invite", else: "disable_invite"}
         phx-value-id={invite.id}
       >
-        <%= if invite.disabled_at, do: gettext("Enable"), else: gettext("Disable") %>
+        {if invite.disabled_at, do: gettext("Enable"), else: gettext("Disable")}
       </.link>
 
       <.link
@@ -87,7 +87,7 @@
           )
         }
       >
-        <%= dgettext("actions", "Set Unlimited") %>
+        {dgettext("actions", "Set Unlimited")}
       </.link>
     </.invite_card>
   </div>
@@ -96,7 +96,7 @@
     <hr class="hr" />
 
     <h1 class="text-2xl title text-primary-600">
-      <%= gettext("Admins") %>
+      {gettext("Admins")}
     </h1>
 
     <div class="flex flex-col justify-center items-stretch space-y-4">
@@ -124,7 +124,7 @@
     <hr class="hr" />
 
     <h1 class="text-2xl title text-primary-600">
-      <%= gettext("Users") %>
+      {gettext("Users")}
     </h1>
 
     <div class="flex flex-col justify-center items-stretch space-y-4">

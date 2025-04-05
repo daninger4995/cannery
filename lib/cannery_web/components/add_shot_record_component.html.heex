@@ -1,6 +1,6 @@
 <div>
   <h2 class="mb-8 text-center title text-xl text-primary-600">
-    <%= gettext("Record shots") %>
+    {gettext("Record shots")}
   </h2>
 
   <.form
@@ -16,47 +16,47 @@
       :if={@changeset.action && not @changeset.valid?}
       class="invalid-feedback col-span-3 text-center"
     >
-      <%= changeset_errors(@changeset) %>
+      {changeset_errors(@changeset)}
     </div>
 
-    <%= label(f, :ammo_left, gettext("Rounds left"), class: "title text-lg text-primary-600") %>
-    <%= number_input(f, :ammo_left,
+    {label(f, :ammo_left, gettext("Rounds left"), class: "title text-lg text-primary-600")}
+    {number_input(f, :ammo_left,
       min: 0,
       max: @pack.count - 1,
       placeholder: gettext("Rounds left"),
       class: "input input-primary"
-    ) %>
+    )}
     <button
       type="button"
       class="mx-2 my-1 text-sm btn btn-primary"
       phx-click={JS.dispatch("cannery:set-zero", to: "#shot-record-form_ammo_left")}
     >
-      <%= gettext("Used up!") %>
+      {gettext("Used up!")}
     </button>
-    <%= error_tag(f, :ammo_left, "col-span-3") %>
+    {error_tag(f, :ammo_left, "col-span-3")}
 
-    <%= label(f, :notes, gettext("Notes"), class: "title text-lg text-primary-600") %>
-    <%= textarea(f, :notes,
+    {label(f, :notes, gettext("Notes"), class: "title text-lg text-primary-600")}
+    {textarea(f, :notes,
       class: "input input-primary col-span-2",
       id: "add-shot-record-form-notes",
       maxlength: 255,
       phx_debounce: 300,
       phx_update: "ignore",
       placeholder: gettext("Really great weather")
-    ) %>
-    <%= error_tag(f, :notes, "col-span-3") %>
+    )}
+    {error_tag(f, :notes, "col-span-3")}
 
-    <%= label(f, :date, gettext("Date"), class: "title text-lg text-primary-600") %>
-    <%= date_input(f, :date,
+    {label(f, :date, gettext("Date"), class: "title text-lg text-primary-600")}
+    {date_input(f, :date,
       class: "input input-primary col-span-2",
       phx_update: "ignore",
       value: Date.utc_today()
-    ) %>
-    <%= error_tag(f, :notes, "col-span-3") %>
+    )}
+    {error_tag(f, :notes, "col-span-3")}
 
-    <%= submit(dgettext("actions", "Save"),
+    {submit(dgettext("actions", "Save"),
       class: "mx-auto btn btn-primary col-span-3",
       phx_disable_with: dgettext("prompts", "Saving...")
-    ) %>
+    )}
   </.form>
 </div>

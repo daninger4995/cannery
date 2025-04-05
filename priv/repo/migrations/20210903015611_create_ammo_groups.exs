@@ -12,7 +12,7 @@ defmodule Cannery.Repo.Migrations.CreateAmmoGroups do
       add :container_id, references(:containers, on_delete: :nothing, type: :binary_id)
       add :user_id, references(:users, on_delete: :delete_all, type: :binary_id)
 
-      timestamps()
+      timestamps(type: :utc_datetime)
     end
 
     create index(:ammo_groups, [:ammo_type_id])

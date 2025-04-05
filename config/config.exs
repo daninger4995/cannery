@@ -10,12 +10,13 @@ import Config
 config :cannery,
   env: :dev,
   ecto_repos: [Cannery.Repo],
-  generators: [binary_id: true]
+  generators: [binary_id: true, timestamp_type: :utc_datetime]
 
 config :cannery, Cannery.Accounts, registration: System.get_env("REGISTRATION", "invite")
 
 # Configures the endpoint
 config :cannery, CanneryWeb.Endpoint,
+  adapter: Bandit.PhoenixAdapter,
   url: [scheme: "https", host: System.get_env("HOST") || "localhost", port: "443"],
   http: [port: String.to_integer(System.get_env("PORT") || "4000")],
   secret_key_base: "KH59P0iZixX5gP/u+zkxxG8vAAj6vgt0YqnwEB5JP5K+E567SsqkCz69uWShjE7I",
@@ -55,14 +56,25 @@ config :cannery, Oban,
   queues: [default: 10, mailers: 20]
 
 # Configure esbuild (the version is required)
-# config :esbuild,
-#   version: "0.14.0",
-#   default: [
-#     args:
-#       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
-#     cd: Path.expand("../assets", __DIR__),
-#     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
-#   ]
+config :esbuild,
+  version: "0.17.11",
+  cannery: [
+    args:
+      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ]
+
+# Configure tailwind (the version is required)
+config :tailwind,
+  version: "4.0.0",
+  cannery: [
+    args: ~w(
+      --input=css/app.css
+      --output=../priv/static/assets/app.css
+    ),
+    cd: Path.expand("../assets", __DIR__)
+  ]
 
 # Configures Elixir's Logger
 config :logger, :console,

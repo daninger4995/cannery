@@ -7,11 +7,11 @@
   />
 
   <h1 class="title text-primary-600 text-2xl">
-    <%= gettext("Welcome to Cannery") %>
+    {gettext("Welcome to Cannery")}
   </h1>
 
   <h2 class="title text-primary-600 text-lg">
-    <%= gettext("The self-hosted firearm tracker website") %>
+    {gettext("The self-hosted firearm tracker website")}
   </h2>
 
   <hr class="hr" />
@@ -19,29 +19,29 @@
   <ul class="flex flex-col space-y-4 text-center">
     <li class="flex flex-col justify-center items-center space-y-2">
       <b class="whitespace-nowrap">
-        <%= gettext("Easy to Use:") %>
+        {gettext("Easy to Use:")}
       </b>
       <p>
-        <%= gettext(
+        {gettext(
           "Cannery lets you easily keep an eye on your ammo levels before and after range day"
-        ) %>
+        )}
       </p>
     </li>
     <li class="flex flex-col justify-center items-center space-y-2">
       <b class="whitespace-nowrap">
-        <%= gettext("Secure:") %>
+        {gettext("Secure:")}
       </b>
       <p>
-        <%= gettext("Self-host your own instance, or use an instance from someone you trust.") %>
-        <%= gettext("Your data stays with you, period") %>
+        {gettext("Self-host your own instance, or use an instance from someone you trust.")}
+        {gettext("Your data stays with you, period")}
       </p>
     </li>
     <li class="flex flex-col justify-center items-center space-y-2">
       <b class="whitespace-nowrap">
-        <%= gettext("Simple:") %>
+        {gettext("Simple:")}
       </b>
       <p>
-        <%= gettext("Access from any internet-capable device") %>
+        {gettext("Access from any internet-capable device")}
       </p>
     </li>
   </ul>
@@ -50,17 +50,17 @@
 
   <ul class="flex flex-col space-y-2 text-center justify-center">
     <h2 class="title text-primary-600 text-lg">
-      <%= gettext("Instance Information") %>
+      {gettext("Instance Information")}
     </h2>
 
     <li class="flex flex-col justify-center space-x-2">
       <b>
-        <%= gettext("Admins:") %>
+        {gettext("Admins:")}
       </b>
       <p>
         <%= if @admins |> Enum.empty?() do %>
           <.link href={~p"/users/register"} class="hover:underline">
-            <%= dgettext("prompts", "Register to setup Cannery") %>
+            {dgettext("prompts", "Register to setup Cannery")}
           </.link>
         <% else %>
           <div class="flex flex-wrap justify-center space-x-2">
@@ -69,7 +69,7 @@
               class="hover:underline"
               href={"mailto:#{email}"}
             >
-              <%= email %>
+              {email}
             </.link>
           </div>
         <% end %>
@@ -77,17 +77,17 @@
     </li>
 
     <li class="flex flex-row justify-center space-x-2">
-      <b><%= gettext("Registration:") %></b>
+      <b>{gettext("Registration:")}</b>
       <p>
-        <%= case Accounts.registration_mode() do
+        {case Accounts.registration_mode() do
           :public -> gettext("Public Signups")
           :invite_only -> gettext("Invite Only")
-        end %>
+        end}
       </p>
     </li>
 
     <li class="flex flex-row justify-center items-center space-x-2">
-      <b><%= gettext("Version:") %></b>
+      <b>{gettext("Version:")}</b>
       <.link
         href="https://gitea.bubbletea.dev/shibao/cannery/src/branch/stable/CHANGELOG.md"
         class="flex flex-row justify-center items-center space-x-2 hover:underline"
@@ -95,7 +95,7 @@
         rel="noopener noreferrer"
       >
         <p>
-          <%= @version %>
+          {@version}
         </p>
         <i class="fas fa-md fa-info-circle"></i>
       </.link>
@@ -106,7 +106,7 @@
 
   <ul class="flex flex-col space-y-2 text-center justify-center">
     <h2 class="title text-primary-600 text-lg">
-      <%= gettext("Get involved!") %>
+      {gettext("Get involved!")}
     </h2>
 
     <li class="flex flex-col justify-center space-x-2">
@@ -116,7 +116,7 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <p><%= gettext("View the source code") %></p>
+        <p>{gettext("View the source code")}</p>
         <i class="fas fa-md fa-code"></i>
       </.link>
     </li>
@@ -127,7 +127,7 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <p><%= gettext("Help translate") %></p>
+        <p>{gettext("Help translate")}</p>
         <i class="fas fa-md fa-language"></i>
       </.link>
     </li>
@@ -138,7 +138,7 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <p><%= gettext("Report bugs or request features") %></p>
+        <p>{gettext("Report bugs or request features")}</p>
         <i class="fas fa-md fa-spider"></i>
       </.link>
     </li>

@@ -101,22 +101,22 @@ msgstr ""
 msgid "You are not authorized to view this page."
 msgstr ""
 
-#: lib/cannery/accounts/user.ex:140
+#: lib/cannery/accounts/user.ex:141
 #, elixir-autogen, elixir-format
 msgid "did not change"
 msgstr ""
 
-#: lib/cannery/accounts/user.ex:161
+#: lib/cannery/accounts/user.ex:162
 #, elixir-autogen, elixir-format
 msgid "does not match password"
 msgstr ""
 
-#: lib/cannery/accounts/user.ex:198
+#: lib/cannery/accounts/user.ex:201
 #, elixir-autogen, elixir-format
 msgid "is not valid"
 msgstr ""
 
-#: lib/cannery/accounts/user.ex:95
+#: lib/cannery/accounts/user.ex:96
 #, elixir-autogen, elixir-format
 msgid "must have the @ sign and no spaces"
 msgstr ""

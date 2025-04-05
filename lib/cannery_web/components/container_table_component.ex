@@ -135,7 +135,7 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
      ~H"""
      <div class="flex flex-wrap justify-center items-center">
        <.link navigate={~p"/container/#{@id}"} class="link">
-         <%= @name %>
+         {@name}
        </.link>
      </div>
      """}
@@ -154,7 +154,7 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
 
     {staged,
      ~H"""
-     <%= render_slot(@range, @container) %>
+     {render_slot(@range, @container)}
      """}
   end
 
@@ -172,7 +172,7 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
      <div class="flex flex-wrap justify-center items-center">
        <.simple_tag_card :for={tag <- @container.tags} :if={@container.tags} tag={tag} />
 
-       <%= render_slot(@tag_actions, @container) %>
+       {render_slot(@tag_actions, @container)}
      </div>
      """}
   end
@@ -181,7 +181,7 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
     assigns = %{actions: actions, container: container}
 
     ~H"""
-    <%= render_slot(@actions, @container) %>
+    {render_slot(@actions, @container)}
     """
   end
 

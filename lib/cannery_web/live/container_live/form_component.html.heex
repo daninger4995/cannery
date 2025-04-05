@@ -1,6 +1,6 @@
 <div>
   <h2 class="mb-8 text-center title text-xl text-primary-600">
-    <%= @title %>
+    {@title}
   </h2>
   <.form
     :let={f}
@@ -15,50 +15,50 @@
       :if={@changeset.action && not @changeset.valid?}
       class="invalid-feedback col-span-3 text-center"
     >
-      <%= changeset_errors(@changeset) %>
+      {changeset_errors(@changeset)}
     </div>
 
-    <%= label(f, :name, gettext("Name"), class: "title text-lg text-primary-600") %>
-    <%= text_input(f, :name,
+    {label(f, :name, gettext("Name"), class: "title text-lg text-primary-600")}
+    {text_input(f, :name,
       class: "input input-primary col-span-2",
       maxlength: 255,
       phx_debounce: 300,
       placeholder: gettext("My cool ammo can")
-    ) %>
-    <%= error_tag(f, :name, "col-span-3 text-center") %>
+    )}
+    {error_tag(f, :name, "col-span-3 text-center")}
 
-    <%= label(f, :desc, gettext("Description"), class: "title text-lg text-primary-600") %>
-    <%= textarea(f, :desc,
+    {label(f, :desc, gettext("Description"), class: "title text-lg text-primary-600")}
+    {textarea(f, :desc,
       class: "input input-primary col-span-2",
       id: "container-form-desc",
       phx_debounce: 300,
       phx_update: "ignore",
       placeholder: gettext("Metal ammo can with the anime girl sticker")
-    ) %>
-    <%= error_tag(f, :desc, "col-span-3 text-center") %>
+    )}
+    {error_tag(f, :desc, "col-span-3 text-center")}
 
-    <%= label(f, :type, gettext("Type"), class: "title text-lg text-primary-600") %>
-    <%= text_input(f, :type,
+    {label(f, :type, gettext("Type"), class: "title text-lg text-primary-600")}
+    {text_input(f, :type,
       class: "input input-primary col-span-2",
       maxlength: 255,
       phx_debounce: 300,
       placeholder: gettext("Magazine, Clip, Ammo Box, etc")
-    ) %>
-    <%= error_tag(f, :type, "col-span-3 text-center") %>
+    )}
+    {error_tag(f, :type, "col-span-3 text-center")}
 
-    <%= label(f, :location, gettext("Location"), class: "title text-lg text-primary-600") %>
-    <%= textarea(f, :location,
+    {label(f, :location, gettext("Location"), class: "title text-lg text-primary-600")}
+    {textarea(f, :location,
       class: "input input-primary col-span-2",
       id: "container-form-location",
       phx_debounce: 300,
       phx_update: "ignore",
       placeholder: gettext("On the bookshelf")
-    ) %>
-    <%= error_tag(f, :location, "col-span-3 text-center") %>
+    )}
+    {error_tag(f, :location, "col-span-3 text-center")}
 
-    <%= submit(dgettext("actions", "Save"),
+    {submit(dgettext("actions", "Save"),
       class: "mx-auto btn btn-primary col-span-3",
       phx_disable_with: dgettext("prompts", "Saving...")
-    ) %>
+    )}
   </.form>
 </div>

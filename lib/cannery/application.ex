@@ -15,6 +15,7 @@ defmodule Cannery.Application do
       CanneryWeb.Telemetry,
       # Start the PubSub system
       {Phoenix.PubSub, name: Cannery.PubSub},
+      {DNSCluster, query: Application.get_env(:cannery, :dns_cluster_query) || :ignore},
       # Start the Endpoint (http/https)
       CanneryWeb.Endpoint,
       # Add Oban

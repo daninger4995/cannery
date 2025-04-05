@@ -76,7 +76,7 @@ defmodule CanneryWeb.Components.TableComponent do
         sort_mode: initial_sort_mode
       )
       |> assign_new(:row_class, fn -> "bg-white" end)
-      |> assign_new(:alternate_row_class, fn -> "bg-gray-200" end)
+      |> assign_new(:alternate_row_class, fn -> "bg-zinc-200" end)
 
     {:ok, socket}
   end

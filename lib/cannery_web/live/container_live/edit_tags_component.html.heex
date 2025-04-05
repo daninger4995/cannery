@@ -1,6 +1,6 @@
 <div class="flex flex-col justify-center items-center text-center space-y-8">
   <h2 class="title text-xl text-primary-600">
-    <%= @title %>
+    {@title}
   </h2>
 
   <div class="flex flex-wrap justify-center items-center">
@@ -21,13 +21,13 @@
         )
       }
     >
-      <%= tag.name %>
+      {tag.name}
       <i class="fa-fw fa-sm fas fa-trash"></i>
     </.link>
 
     <h2 :if={@container.tags |> Enum.empty?()} class="title text-xl text-primary-600">
-      <%= gettext("No tags") %>
-      <%= display_emoji("😔") %>
+      {gettext("No tags")}
+      {display_emoji("😔")}
     </h2>
   </div>
 
@@ -43,17 +43,17 @@
       phx-target={@myself}
       phx-submit="save"
     >
-      <%= select(f, :tag_id, tag_options(@tags, @container),
+      {select(f, :tag_id, tag_options(@tags, @container),
         class: "text-center col-span-2 input input-primary",
         id: "#{@id}-tag-select",
         phx_hook: "SlimSelect"
-      ) %>
-      <%= error_tag(f, :tag_id, "col-span-3 text-center") %>
+      )}
+      {error_tag(f, :tag_id, "col-span-3 text-center")}
 
-      <%= submit(dgettext("actions", "Add"),
+      {submit(dgettext("actions", "Add"),
         class: "mx-auto btn btn-primary",
         phx_disable_with: dgettext("prompts", "Adding...")
-      ) %>
+      )}
     </.form>
   <% end %>
 </div>

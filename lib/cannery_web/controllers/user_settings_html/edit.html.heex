@@ -1,6 +1,6 @@
-<div class="mx-auto pb-8 max-w-3xl flex flex-col justify-center items-center text-right space-y-4">
-  <h1 class="pb-4 title text-primary-600 text-2xl text-center">
-    <%= gettext("Settings") %>
+<div class="flex flex-col justify-center items-center pb-8 mx-auto space-y-4 max-w-3xl text-right">
+  <h1 class="pb-4 text-2xl text-center title text-primary-600">
+    {gettext("Settings")}
   </h1>
 
   <hr class="hr" />
@@ -9,40 +9,40 @@
     :let={f}
     for={@email_changeset}
     action={~p"/users/settings"}
-    class="flex flex-col space-y-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 justify-center items-center"
+    class="flex flex-col justify-center items-center space-y-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4"
   >
-    <h3 class="title text-primary-600 text-lg text-center col-span-3">
-      <%= dgettext("actions", "Change email") %>
+    <h3 class="col-span-3 text-lg text-center title text-primary-600">
+      {dgettext("actions", "Change email")}
     </h3>
 
     <div
       :if={@email_changeset.action && not @email_changeset.valid?}
-      class="alert alert-danger col-span-3"
+      class="col-span-3 alert alert-danger"
     >
-      <%= dgettext("errors", "Oops, something went wrong! Please check the errors below.") %>
+      {dgettext("errors", "Oops, something went wrong! Please check the errors below.")}
     </div>
 
-    <%= hidden_input(f, :action, name: "action", value: "update_email") %>
+    {hidden_input(f, :action, name: "action", value: "update_email")}
 
-    <%= label(f, :email, gettext("Email"), class: "title text-lg text-primary-600") %>
-    <%= email_input(f, :email, required: true, class: "mx-2 my-1 input input-primary col-span-2") %>
-    <%= error_tag(f, :email, "col-span-3") %>
+    {label(f, :email, gettext("Email"), class: "title text-lg text-primary-600")}
+    {email_input(f, :email, required: true, class: "mx-2 my-1 input input-primary col-span-2")}
+    {error_tag(f, :email, "col-span-3")}
 
-    <%= label(f, :current_password, gettext("Current password"),
+    {label(f, :current_password, gettext("Current password"),
       for: "current_password_for_email",
       class: "mx-2 my-1 title text-lg text-primary-600"
-    ) %>
-    <%= password_input(f, :current_password,
+    )}
+    {password_input(f, :current_password,
       required: true,
       name: "current_password",
       id: "current_password_for_email",
       class: "mx-2 my-1 input input-primary col-span-2"
-    ) %>
-    <%= error_tag(f, :current_password, "col-span-3") %>
+    )}
+    {error_tag(f, :current_password, "col-span-3")}
 
-    <%= submit(dgettext("actions", "Change email"),
+    {submit(dgettext("actions", "Change email"),
       class: "mx-auto btn btn-primary col-span-3"
-    ) %>
+    )}
   </.form>
 
   <hr class="hr" />
@@ -51,52 +51,52 @@
     :let={f}
     for={@password_changeset}
     action={~p"/users/settings"}
-    class="flex flex-col space-y-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 justify-center items-center"
+    class="flex flex-col justify-center items-center space-y-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4"
   >
-    <h3 class="title text-primary-600 text-lg text-center col-span-3">
-      <%= dgettext("actions", "Change password") %>
+    <h3 class="col-span-3 text-lg text-center title text-primary-600">
+      {dgettext("actions", "Change password")}
     </h3>
 
     <div
       :if={@password_changeset.action && not @password_changeset.valid?}
-      class="alert alert-danger col-span-3"
+      class="col-span-3 alert alert-danger"
     >
-      <%= dgettext("errors", "Oops, something went wrong! Please check the errors below.") %>
+      {dgettext("errors", "Oops, something went wrong! Please check the errors below.")}
     </div>
 
-    <%= hidden_input(f, :action, name: "action", value: "update_password") %>
+    {hidden_input(f, :action, name: "action", value: "update_password")}
 
-    <%= label(f, :password, gettext("New password"), class: "title text-lg text-primary-600") %>
-    <%= password_input(f, :password,
+    {label(f, :password, gettext("New password"), class: "title text-lg text-primary-600")}
+    {password_input(f, :password,
       required: true,
       class: "mx-2 my-1 input input-primary col-span-2"
-    ) %>
-    <%= error_tag(f, :password, "col-span-3") %>
+    )}
+    {error_tag(f, :password, "col-span-3")}
 
-    <%= label(f, :password_confirmation, gettext("Confirm new password"),
+    {label(f, :password_confirmation, gettext("Confirm new password"),
       class: "title text-lg text-primary-600"
-    ) %>
-    <%= password_input(f, :password_confirmation,
+    )}
+    {password_input(f, :password_confirmation,
       required: true,
       class: "mx-2 my-1 input input-primary col-span-2"
-    ) %>
-    <%= error_tag(f, :password_confirmation, "col-span-3") %>
+    )}
+    {error_tag(f, :password_confirmation, "col-span-3")}
 
-    <%= label(f, :current_password, gettext("Current password"),
+    {label(f, :current_password, gettext("Current password"),
       for: "current_password_for_password",
       class: "title text-lg text-primary-600"
-    ) %>
-    <%= password_input(f, :current_password,
+    )}
+    {password_input(f, :current_password,
       required: true,
       name: "current_password",
       id: "current_password_for_password",
       class: "mx-2 my-1 input input-primary col-span-2"
-    ) %>
-    <%= error_tag(f, :current_password, "col-span-3") %>
+    )}
+    {error_tag(f, :current_password, "col-span-3")}
 
-    <%= submit(dgettext("actions", "Change password"),
+    {submit(dgettext("actions", "Change password"),
       class: "mx-auto btn btn-primary col-span-3"
-    ) %>
+    )}
   </.form>
 
   <hr class="hr" />
@@ -105,22 +105,22 @@
     :let={f}
     for={@locale_changeset}
     action={~p"/users/settings"}
-    class="flex flex-col space-y-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 justify-center items-center"
+    class="flex flex-col justify-center items-center space-y-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4"
   >
-    <%= label(f, :locale, dgettext("actions", "Change Language"),
+    {label(f, :locale, dgettext("actions", "Change Language"),
       class: "title text-primary-600 text-lg text-center col-span-3"
-    ) %>
+    )}
 
     <div
       :if={@locale_changeset.action && not @locale_changeset.valid?}
-      class="alert alert-danger col-span-3"
+      class="col-span-3 alert alert-danger"
     >
-      <%= dgettext("errors", "Oops, something went wrong! Please check the errors below.") %>
+      {dgettext("errors", "Oops, something went wrong! Please check the errors below.")}
     </div>
 
-    <%= hidden_input(f, :action, name: "action", value: "update_locale") %>
+    {hidden_input(f, :action, name: "action", value: "update_locale")}
 
-    <%= select(
+    {select(
       f,
       :locale,
       [
@@ -129,21 +129,21 @@
         {"Français", "fr"},
         {"Español", "es"}
       ],
-      class: "my-1 min-w-md input input-primary col-span-3"
-    ) %>
-    <%= error_tag(f, :locale, "col-span-3") %>
+      class: "my-1 min-w-20 input input-primary col-span-3"
+    )}
+    {error_tag(f, :locale, "col-span-3")}
 
-    <%= submit(dgettext("actions", "Change language"),
+    {submit(dgettext("actions", "Change language"),
       class: "whitespace-nowrap mx-auto btn btn-primary col-span-3",
       data: [qa: dgettext("prompts", "Are you sure you want to change your language?")]
-    ) %>
+    )}
   </.form>
 
   <hr class="hr" />
 
   <div class="flex justify-center items-center">
     <.link href={~p"/export/json"} class="mx-4 my-2 btn btn-primary" target="_blank">
-      <%= dgettext("actions", "Export Data as JSON") %>
+      {dgettext("actions", "Export Data as JSON")}
     </.link>
 
     <.link
@@ -152,7 +152,7 @@
       class="mx-4 my-2 btn btn-alert"
       data-confirm={dgettext("prompts", "Are you sure you want to delete your account?")}
     >
-      <%= dgettext("actions", "Delete User") %>
+      {dgettext("actions", "Delete User")}
     </.link>
   </div>
 </div>

@@ -2,6 +2,7 @@ import Config
 
 # Configure your database
 config :cannery, Cannery.Repo,
+  stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
@@ -12,21 +13,14 @@ config :cannery, Cannery.Repo,
 # watchers to your application. For example, we use it
 # with esbuild to bundle .js and .css sources.
 config :cannery, CanneryWeb.Endpoint,
+  http: [ip: {0, 0, 0, 0}, port: 4000],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
   secret_key_base: "dg2lccMgaY3+ZeKppR+ondk4ZRaANZGIN0LMZT1u1uzscH4jO5W9a9b9V9BkC+MW",
   watchers: [
-    # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    # esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
-    node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--watch",
-      "--watch-options-stdin",
-      cd: Path.expand("../assets", __DIR__)
-    ]
+    esbuild: {Esbuild, :install_and_run, [:cannery, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:cannery, ~w(--watch)]}
   ]
 
 # ## SSL Support
@@ -57,7 +51,7 @@ config :cannery, CanneryWeb.Endpoint,
 config :cannery, CanneryWeb.Endpoint,
   live_reload: [
     patterns: [
-      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
       ~r"lib/cannery_web/*/.*(ex)$"
     ]
@@ -73,3 +67,9 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :phoenix_live_view,
+  # Include HEEx debug annotations as HTML comments in rendered markup
+  debug_heex_annotations: true,
+  # Enable helpful, but potentially expensive runtime checks
+  enable_expensive_runtime_checks: true

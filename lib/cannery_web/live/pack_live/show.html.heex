@@ -1,47 +1,47 @@
 <div class="flex flex-col justify-center items-center mx-auto space-y-4 max-w-3xl">
   <h1 class="text-2xl title title-primary-500">
-    <%= @pack.type.name %>
+    {@pack.type.name}
   </h1>
 
   <div class="flex flex-col justify-center items-center space-y-2">
     <span class="text-lg rounded-lg title">
-      <%= gettext("Count:") %>
-      <%= @pack.count %>
+      {gettext("Count:")}
+      {@pack.count}
     </span>
 
     <span class="text-lg rounded-lg title">
-      <%= gettext("Original count:") %>
-      <%= @original_count %>
+      {gettext("Original count:")}
+      {@original_count}
     </span>
 
     <span class="text-lg rounded-lg title">
-      <%= gettext("Percentage left:") %>
-      <%= gettext("%{percentage}%", percentage: @percentage_remaining) %>
+      {gettext("Percentage left:")}
+      {gettext("%{percentage}%", percentage: @percentage_remaining)}
     </span>
 
     <%= if @pack.notes do %>
       <span class="text-lg rounded-lg title">
-        <%= gettext("Notes:") %>
-        <%= @pack.notes %>
+        {gettext("Notes:")}
+        {@pack.notes}
       </span>
     <% end %>
 
     <span class="text-lg rounded-lg title">
-      <%= gettext("Purchased on:") %>
+      {gettext("Purchased on:")}
       <.date id={"#{@pack.id}-purchased-on"} date={@pack.purchased_on} />
     </span>
 
     <%= if @pack.price_paid do %>
       <span class="text-lg rounded-lg title">
-        <%= gettext("Original cost:") %>
-        <%= gettext("$%{amount}", amount: display_currency(@pack.price_paid)) %>
+        {gettext("Original cost:")}
+        {gettext("$%{amount}", amount: display_currency(@pack.price_paid))}
       </span>
 
       <span class="text-lg rounded-lg title">
-        <%= gettext("Current value:") %>
-        <%= gettext("$%{amount}",
+        {gettext("Current value:")}
+        {gettext("$%{amount}",
           amount: display_currency(@pack.price_paid * @percentage_remaining / 100)
-        ) %>
+        )}
       </span>
     <% end %>
   </div>
@@ -49,7 +49,7 @@
   <div class="flex flex-col justify-center items-center">
     <div class="flex flex-wrap justify-center items-center text-primary-600">
       <.link navigate={~p"/type/#{@pack.type}"} class="mx-4 my-2 btn btn-primary">
-        <%= dgettext("actions", "View in Catalog") %>
+        {dgettext("actions", "View in Catalog")}
       </.link>
 
       <.link
@@ -77,11 +77,11 @@
 
     <div class="flex flex-wrap justify-center items-center text-primary-600">
       <.link patch={~p"/ammo/show/move/#{@pack}"} class="btn btn-primary">
-        <%= dgettext("actions", "Move ammo") %>
+        {dgettext("actions", "Move ammo")}
       </.link>
 
       <.link patch={~p"/ammo/show/add_shot_record/#{@pack}"} class="mx-4 my-2 btn btn-primary">
-        <%= dgettext("actions", "Record shots") %>
+        {dgettext("actions", "Record shots")}
       </.link>
     </div>
   </div>
@@ -91,12 +91,12 @@
   <div>
     <%= if @container do %>
       <h1 class="px-4 py-2 mb-4 text-xl text-center rounded-lg title">
-        <%= gettext("Stored in") %>
+        {gettext("Stored in")}
       </h1>
 
       <.container_card container={@container} current_user={@current_user} />
     <% else %>
-      <%= gettext("This ammo is not in a container") %>
+      {gettext("This ammo is not in a container")}
     <% end %>
   </div>
 
@@ -104,7 +104,7 @@
     <hr class="mb-4 w-full" />
 
     <h1 class="px-4 py-2 mb-4 text-xl text-center rounded-lg title">
-      <%= gettext("Rounds used") %>
+      {gettext("Rounds used")}
     </h1>
 
     <.live_component

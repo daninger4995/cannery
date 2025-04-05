@@ -17,7 +17,7 @@ defmodule Cannery.Accounts.Invite do
 
     has_many :users, User
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @type t :: %__MODULE__{

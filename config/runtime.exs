@@ -7,12 +7,22 @@ import Config
 # any compile-time configuration in here, as it won't be applied.
 # The block below contains prod specific runtime configuration.
 
-# Start the phoenix server if environment is set and running in a release
-if System.get_env("PHX_SERVER") && System.get_env("RELEASE_NAME") do
+# ## Using releases
+#
+# If you use `mix release`, you need to explicitly enable the server
+# by passing the PHX_SERVER=true when you start it:
+#
+#     PHX_SERVER=true bin/cannery start
+#
+# Alternatively, you can use `mix phx.gen.release` to generate a `bin/server`
+# script that automatically sets the env var above.
+if System.get_env("PHX_SERVER") do
   config :cannery, CanneryWeb.Endpoint, server: true
 end
 
 config :cannery, CanneryWeb.HTMLHelpers, shibao_mode: System.get_env("SHIBAO_MODE") == "true"
+
+config :cannery, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
 # Set default locale
 config :gettext, :default_locale, System.get_env("LOCALE", "en_US")

@@ -11,7 +11,7 @@ defmodule Cannery.Containers.ContainerTag do
     belongs_to :container, Container
     belongs_to :tag, Tag
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @type t :: %__MODULE__{

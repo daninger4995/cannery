@@ -278,7 +278,7 @@ defmodule CanneryWeb.Components.TypeTableComponent do
     {type_name,
      ~H"""
      <.link navigate={~p"/type/#{@id}"} class="link">
-       <%= @name %>
+       {@name}
      </.link>
      """}
   end
@@ -287,7 +287,7 @@ defmodule CanneryWeb.Components.TypeTableComponent do
     assigns = %{actions: actions, type: type}
 
     ~H"""
-    <%= render_slot(@actions, @type) %>
+    {render_slot(@actions, @type)}
     """
   end
 

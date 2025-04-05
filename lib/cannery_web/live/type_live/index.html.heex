@@ -1,23 +1,23 @@
-<div class="flex flex-col space-y-8 justify-center items-center">
-  <h1 class="title text-2xl title-primary-500">
-    <%= gettext("Catalog") %>
+<div class="flex flex-col justify-center items-center space-y-8">
+  <h1 class="text-2xl title title-primary-500">
+    {gettext("Catalog")}
   </h1>
 
   <%= if @types_count == 0 do %>
-    <h2 class="title text-xl text-primary-600">
-      <%= gettext("No Types") %>
-      <%= display_emoji("😔") %>
+    <h2 class="text-xl title text-primary-600">
+      {gettext("No Types")}
+      {display_emoji("😔")}
     </h2>
 
     <.link patch={~p"/catalog/new"} class="btn btn-primary">
-      <%= dgettext("actions", "Add your first type!") %>
+      {dgettext("actions", "Add your first type!")}
     </.link>
   <% else %>
     <.link patch={~p"/catalog/new"} class="btn btn-primary">
-      <%= dgettext("actions", "New Type") %>
+      {dgettext("actions", "New Type")}
     </.link>
 
-    <div class="w-full flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 max-w-2xl">
+    <div class="flex flex-col flex-wrap justify-center items-center space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
       <.form
         :let={f}
         for={%{}}
@@ -26,11 +26,9 @@
         phx-submit="change_class"
         class="flex items-center"
       >
-        <%= label(f, :class, gettext("Class"),
-          class: "title text-primary-600 text-lg text-center"
-        ) %>
+        {label(f, :class, gettext("Class"), class: "title text-primary-600 text-lg text-center")}
 
-        <%= select(
+        {select(
           f,
           :class,
           [
@@ -39,9 +37,9 @@
             {gettext("Shotgun"), :shotgun},
             {gettext("Pistol"), :pistol}
           ],
-          class: "mx-2 my-1 min-w-md input input-primary",
+          class: "mx-2 my-1 min-w-20 input input-primary",
           value: @class
-        ) %>
+        )}
       </.form>
 
       <.form
@@ -50,28 +48,28 @@
         as={:search}
         phx-change="search"
         phx-submit="search"
-        class="grow flex items-center"
+        class="flex items-center grow"
       >
-        <%= text_input(f, :search_term,
+        {text_input(f, :search_term,
           class: "grow input input-primary",
           phx_debounce: 300,
           placeholder: gettext("Search catalog"),
           role: "search",
           value: @search
-        ) %>
+        )}
       </.form>
 
       <.toggle_button action="toggle_show_used" value={@show_used}>
-        <span class="title text-lg text-primary-600">
-          <%= gettext("Show used") %>
+        <span class="text-lg title text-primary-600">
+          {gettext("Show used")}
         </span>
       </.toggle_button>
     </div>
 
     <%= if @types |> Enum.empty?() do %>
-      <h2 class="title text-xl text-primary-600">
-        <%= gettext("No Types") %>
-        <%= display_emoji("😔") %>
+      <h2 class="text-xl title text-primary-600">
+        {gettext("No Types")}
+        {display_emoji("😔")}
       </h2>
     <% else %>
       <.live_component
@@ -84,7 +82,7 @@
         class={@class}
       >
         <:actions :let={type}>
-          <div class="px-4 py-2 space-x-4 flex justify-center items-center">
+          <div class="flex justify-center items-center px-4 py-2 space-x-4">
             <.link
               navigate={~p"/type/#{type}"}
               class="text-primary-600 link"

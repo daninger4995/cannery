@@ -2,40 +2,40 @@
   id={"container-#{@container.id}"}
   class="overflow-hidden max-w-full mx-4 mb-4 px-8 py-4
     flex flex-col justify-around items-center space-y-4
-    border border-gray-400 rounded-lg shadow-lg hover:shadow-md
+    border border-zinc-400 rounded-lg shadow-lg hover:shadow-md
     transition-all duration-300 ease-in-out"
 >
   <.link navigate={~p"/container/#{@container}"} class="link">
     <h1 class="px-4 py-2 rounded-lg title text-xl">
-      <%= @container.name %>
+      {@container.name}
     </h1>
   </.link>
 
   <div class="flex flex-col justify-center items-center space-y-2">
     <span :if={@container.desc} class="rounded-lg title text-lg">
-      <%= gettext("Description:") %>
-      <%= @container.desc %>
+      {gettext("Description:")}
+      {@container.desc}
     </span>
 
     <span class="rounded-lg title text-lg">
-      <%= gettext("Type:") %>
-      <%= @container.type %>
+      {gettext("Type:")}
+      {@container.type}
     </span>
 
     <span :if={@container.location} class="rounded-lg title text-lg">
-      <%= gettext("Location:") %>
-      <%= @container.location %>
+      {gettext("Location:")}
+      {@container.location}
     </span>
 
     <%= if Ammo.get_packs_count(@current_user, container_id: @container.id) != 0 do %>
       <span class="rounded-lg title text-lg">
-        <%= gettext("Packs:") %>
-        <%= Ammo.get_packs_count(@current_user, container_id: @container.id) %>
+        {gettext("Packs:")}
+        {Ammo.get_packs_count(@current_user, container_id: @container.id)}
       </span>
 
       <span class="rounded-lg title text-lg">
-        <%= gettext("Rounds:") %>
-        <%= Ammo.get_round_count(@current_user, container_id: @container.id) %>
+        {gettext("Rounds:")}
+        {Ammo.get_round_count(@current_user, container_id: @container.id)}
       </span>
     <% end %>
 
@@ -45,7 +45,7 @@
     >
       <.simple_tag_card :for={tag <- @container.tags} tag={tag} />
 
-      <%= if @tag_actions, do: render_slot(@tag_actions) %>
+      {if @tag_actions, do: render_slot(@tag_actions)}
     </div>
   </div>
 
@@ -53,6 +53,6 @@
     :if={assigns |> Map.has_key?(:inner_block)}
     class="flex space-x-4 justify-center items-center"
   >
-    <%= render_slot(@inner_block) %>
+    {render_slot(@inner_block)}
   </div>
 </div>

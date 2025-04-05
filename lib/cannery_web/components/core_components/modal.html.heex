@@ -29,7 +29,7 @@
       patch={@return_to}
       id="close"
       class="absolute top-8 right-10
-        text-gray-500 hover:text-gray-800
+        text-zinc-500 hover:text-zinc-800
         transition-all duration-500 ease-in-out"
       phx-remove={hide_modal()}
       aria-label={gettext("Close modal")}
@@ -38,7 +38,7 @@
     </.link>
 
     <div class="overflow-x-hidden overflow-y-auto w-full p-8 flex flex-col space-y-4 justify-start items-center">
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </div>
   </div>
 </div>

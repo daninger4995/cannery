@@ -2,66 +2,66 @@
   id={"pack-#{@pack.id}"}
   class="mx-4 my-2 px-8 py-4
     flex flex-col justify-center items-center
-    border border-gray-400 rounded-lg shadow-lg hover:shadow-md
+    border border-zinc-400 rounded-lg shadow-lg hover:shadow-md
     transition-all duration-300 ease-in-out"
 >
   <.link navigate={~p"/ammo/show/#{@pack}"} class="mb-2 link">
     <h1 class="title text-xl title-primary-500">
-      <%= @pack.type.name %>
+      {@pack.type.name}
     </h1>
   </.link>
 
   <div class="flex flex-col justify-center items-center">
     <span class="rounded-lg title text-lg">
-      <%= gettext("Count:") %>
-      <%= if @pack.count == 0, do: gettext("Empty"), else: @pack.count %>
+      {gettext("Count:")}
+      {if @pack.count == 0, do: gettext("Empty"), else: @pack.count}
     </span>
 
     <span :if={@original_count && @original_count != @pack.count} class="rounded-lg title text-lg">
-      <%= gettext("Original Count:") %>
-      <%= @original_count %>
+      {gettext("Original Count:")}
+      {@original_count}
     </span>
 
     <span :if={@pack.notes} class="rounded-lg title text-lg">
-      <%= gettext("Notes:") %>
-      <%= @pack.notes %>
+      {gettext("Notes:")}
+      {@pack.notes}
     </span>
 
     <span :if={@pack.purchased_on} class="rounded-lg title text-lg">
-      <%= gettext("Purchased on:") %>
+      {gettext("Purchased on:")}
       <.date id={"#{@pack.id}-purchased-on"} date={@pack.purchased_on} />
     </span>
 
     <span :if={@last_used_date} class="rounded-lg title text-lg">
-      <%= gettext("Last used on:") %>
+      {gettext("Last used on:")}
       <.date id={"#{@pack.id}-last-used-on"} date={@last_used_date} />
     </span>
 
     <span :if={@pack.price_paid} class="rounded-lg title text-lg">
-      <%= gettext("Price paid:") %>
-      <%= gettext("$%{amount}", amount: display_currency(@pack.price_paid)) %>
+      {gettext("Price paid:")}
+      {gettext("$%{amount}", amount: display_currency(@pack.price_paid))}
     </span>
 
     <span :if={@cpr} class="rounded-lg title text-lg">
-      <%= gettext("CPR:") %>
-      <%= gettext("$%{amount}", amount: display_currency(@cpr)) %>
+      {gettext("CPR:")}
+      {gettext("$%{amount}", amount: display_currency(@cpr))}
     </span>
 
     <span :if={@pack.lot_number} class="rounded-lg title text-lg">
-      <%= gettext("Lot number:") %>
-      <%= @pack.lot_number %>
+      {gettext("Lot number:")}
+      {@pack.lot_number}
     </span>
 
     <span :if={@container} class="rounded-lg title text-lg">
-      <%= gettext("Container:") %>
+      {gettext("Container:")}
 
       <.link navigate={~p"/container/#{@container}"} class="link">
-        <%= @container.name %>
+        {@container.name}
       </.link>
     </span>
   </div>
 
   <div :if={@inner_block} class="mt-4 flex space-x-4 justify-center items-center">
-    <%= render_slot(@inner_block) %>
+    {render_slot(@inner_block)}
   </div>
 </div>

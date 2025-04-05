@@ -27,7 +27,7 @@ defmodule Cannery.Containers.Container do
 
     many_to_many :tags, Tag, join_through: ContainerTag
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @type t :: %__MODULE__{

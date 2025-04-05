@@ -115,22 +115,22 @@ msgstr "Nutzerkonto Bestätigungslink ist ungültig oder abgelaufen."
 msgid "You are not authorized to view this page."
 msgstr "Sie sind nicht berechtigt, diese Seite aufzurufen."
 
-#: lib/cannery/accounts/user.ex:140
+#: lib/cannery/accounts/user.ex:141
 #, elixir-autogen, elixir-format
 msgid "did not change"
 msgstr "hat sich nicht geändert"
 
-#: lib/cannery/accounts/user.ex:161
+#: lib/cannery/accounts/user.ex:162
 #, elixir-autogen, elixir-format
 msgid "does not match password"
 msgstr "Passwort stimmt nicht überein"
 
-#: lib/cannery/accounts/user.ex:198
+#: lib/cannery/accounts/user.ex:201
 #, elixir-autogen, elixir-format
 msgid "is not valid"
 msgstr "ist nicht gültig"
 
-#: lib/cannery/accounts/user.ex:95
+#: lib/cannery/accounts/user.ex:96
 #, elixir-autogen, elixir-format
 msgid "must have the @ sign and no spaces"
 msgstr "Muss ein @ Zeichen und keine Leerzeichen haben"

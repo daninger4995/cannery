@@ -11,7 +11,7 @@ defmodule Cannery.Repo.Migrations.CreateShotGroups do
       add :user_id, references(:users, on_delete: :delete_all, type: :binary_id)
       add :ammo_group_id, references(:ammo_groups, on_delete: :delete_all, type: :binary_id)
 
-      timestamps()
+      timestamps(type: :utc_datetime)
     end
 
     create index(:shot_groups, [:id])

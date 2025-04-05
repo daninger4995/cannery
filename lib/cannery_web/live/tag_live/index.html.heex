@@ -1,47 +1,47 @@
-<div class="flex flex-col space-y-8 justify-center items-center">
-  <h1 class="title text-2xl title-primary-500">
-    <%= gettext("Tags") %>
+<div class="flex flex-col justify-center items-center space-y-8">
+  <h1 class="text-2xl title title-primary-500">
+    {gettext("Tags")}
   </h1>
   <p class="title text-md text-primary-600">
-    <%= gettext("Tags can be added to your containers to help you organize") %>
+    {gettext("Tags can be added to your containers to help you organize")}
   </p>
   <%= if @tags |> Enum.empty?() and @search |> is_nil() do %>
-    <h2 class="title text-xl text-primary-600">
-      <%= gettext("No tags") %>
-      <%= display_emoji("😔") %>
+    <h2 class="text-xl title text-primary-600">
+      {gettext("No tags")}
+      {display_emoji("😔")}
     </h2>
 
     <.link patch={~p"/tags/new"} class="btn btn-primary">
-      <%= dgettext("actions", "Make your first tag!") %>
+      {dgettext("actions", "Make your first tag!")}
     </.link>
   <% else %>
     <.link patch={~p"/tags/new"} class="btn btn-primary">
-      <%= dgettext("actions", "New Tag") %>
+      {dgettext("actions", "New Tag")}
     </.link>
 
-    <div class="w-full flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4 max-w-2xl">
+    <div class="flex flex-col flex-wrap justify-center items-center space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
       <.form
         :let={f}
         for={%{}}
         as={:search}
         phx-change="search"
         phx-submit="search"
-        class="grow flex items-center"
+        class="flex items-center grow"
       >
-        <%= text_input(f, :search_term,
+        {text_input(f, :search_term,
           class: "grow input input-primary",
           phx_debounce: 300,
           placeholder: gettext("Search tags"),
           role: "search",
           value: @search
-        ) %>
+        )}
       </.form>
     </div>
 
     <%= if @tags |> Enum.empty?() do %>
-      <h2 class="title text-xl text-primary-600">
-        <%= gettext("No tags") %>
-        <%= display_emoji("😔") %>
+      <h2 class="text-xl title text-primary-600">
+        {gettext("No tags")}
+        {display_emoji("😔")}
       </h2>
     <% else %>
       <div class="flex flex-row flex-wrap justify-center items-stretch">

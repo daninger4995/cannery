@@ -4,7 +4,7 @@ defmodule CanneryWeb.ErrorHelpers do
   """
 
   use PhoenixHTMLHelpers
-  import Phoenix.{Component, HTML.Form}
+  import Phoenix.Component
   alias Ecto.Changeset
   alias Phoenix.{HTML.Form, LiveView.Rendered}
 
@@ -19,10 +19,10 @@ defmodule CanneryWeb.ErrorHelpers do
     ~H"""
     <span
       :for={error <- Keyword.get_values(@form.errors, @field)}
+      :if={used_input?(@form[@field])}
       class={["invalid-feedback", @extra_class]}
-      phx-feedback-for={input_name(@form, @field)}
     >
-      <%= translate_error(error) %>
+      {translate_error(error)}
     </span>
     """
   end

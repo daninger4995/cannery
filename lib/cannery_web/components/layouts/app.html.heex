@@ -10,7 +10,7 @@
         phx-click="lv:clear-flash"
         phx-value-key="info"
       >
-        <%= Phoenix.Flash.get(@flash, :info) %>
+        {Phoenix.Flash.get(@flash, :info)}
       </p>
 
       <p
@@ -20,13 +20,13 @@
         phx-click="lv:clear-flash"
         phx-value-key="error"
       >
-        <%= Phoenix.Flash.get(@flash, :error) %>
+        {Phoenix.Flash.get(@flash, :error)}
       </p>
     </div>
   </header>
 
   <div class="mx-4 sm:mx-8 md:mx-16 flex flex-col justify-center items-stretch">
-    <%= @inner_content %>
+    {@inner_content}
   </div>
 </main>
 
@@ -40,6 +40,6 @@
   <i class="fas fa-fade text-md fa-satellite-dish"></i>
 
   <h1 class="title text-md title-primary-500">
-    <%= gettext("Reconnecting...") %>
+    {gettext("Reconnecting...")}
   </h1>
 </div>

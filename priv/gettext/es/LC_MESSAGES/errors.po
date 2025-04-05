@@ -117,22 +117,22 @@ msgstr "El enlace de confirmación de usuario no es válido o ha caducado."
 msgid "You are not authorized to view this page."
 msgstr "No está autorizado a ver esta página."
 
-#: lib/cannery/accounts/user.ex:140
+#: lib/cannery/accounts/user.ex:141
 #, elixir-autogen, elixir-format
 msgid "did not change"
 msgstr "no cambió"
 
-#: lib/cannery/accounts/user.ex:161
+#: lib/cannery/accounts/user.ex:162
 #, elixir-autogen, elixir-format
 msgid "does not match password"
 msgstr "no coincide con la contraseña"
 
-#: lib/cannery/accounts/user.ex:198
+#: lib/cannery/accounts/user.ex:201
 #, elixir-autogen, elixir-format
 msgid "is not valid"
 msgstr "no es válido"
 
-#: lib/cannery/accounts/user.ex:95
+#: lib/cannery/accounts/user.ex:96
 #, elixir-autogen, elixir-format
 msgid "must have the @ sign and no spaces"
 msgstr "debe tener el signo @ y no contener espacios"

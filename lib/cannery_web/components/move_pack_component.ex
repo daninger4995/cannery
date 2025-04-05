@@ -74,17 +74,17 @@ defmodule CanneryWeb.Components.MovePackComponent do
     ~H"""
     <div class="w-full flex flex-col space-y-8 justify-center items-center">
       <h2 class="mb-8 text-center title text-xl text-primary-600">
-        <%= dgettext("actions", "Move ammo") %>
+        {dgettext("actions", "Move ammo")}
       </h2>
 
       <%= if @containers |> Enum.empty?() do %>
         <h2 class="title text-xl text-primary-600">
-          <%= gettext("No other containers") %>
-          <%= display_emoji("😔") %>
+          {gettext("No other containers")}
+          {display_emoji("😔")}
         </h2>
 
         <.link navigate={~p"/containers/new"} class="btn btn-primary">
-          <%= dgettext("actions", "Add another container!") %>
+          {dgettext("actions", "Add another container!")}
         </.link>
       <% else %>
         <.live_component
@@ -120,7 +120,7 @@ defmodule CanneryWeb.Components.MovePackComponent do
         phx-target={@myself}
         phx-value-container_id={@container.id}
       >
-        <%= dgettext("actions", "Select") %>
+        {dgettext("actions", "Select")}
       </button>
     </div>
     """

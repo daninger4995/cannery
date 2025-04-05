@@ -1,44 +1,44 @@
 <div class="flex flex-col justify-center items-center space-y-8">
   <h1 class="text-2xl title title-primary-500">
-    <%= gettext("Ammo") %>
+    {gettext("Ammo")}
   </h1>
 
   <%= cond do %>
     <% @containers_count == 0 -> %>
       <div class="flex justify-center items-center">
         <h2 class="m-2 title text-md text-primary-600">
-          <%= dgettext("prompts", "You'll need to") %>
+          {dgettext("prompts", "You'll need to")}
         </h2>
 
         <.link navigate={~p"/containers/new"} class="btn btn-primary">
-          <%= dgettext("actions", "add a container first") %>
+          {dgettext("actions", "add a container first")}
         </.link>
       </div>
     <% @types_count == 0 -> %>
       <div class="flex justify-center items-center">
         <h2 class="m-2 title text-md text-primary-600">
-          <%= dgettext("prompts", "You'll need to") %>
+          {dgettext("prompts", "You'll need to")}
         </h2>
 
         <.link navigate={~p"/catalog/new"} class="btn btn-primary">
-          <%= dgettext("actions", "add a type first") %>
+          {dgettext("actions", "add a type first")}
         </.link>
       </div>
     <% @packs_count == 0 -> %>
       <h2 class="text-xl title text-primary-600">
-        <%= gettext("No ammo") %>
-        <%= display_emoji("😔") %>
+        {gettext("No ammo")}
+        {display_emoji("😔")}
       </h2>
 
       <.link patch={~p"/ammo/new"} class="btn btn-primary">
-        <%= dgettext("actions", "Add your first box!") %>
+        {dgettext("actions", "Add your first box!")}
       </.link>
     <% true -> %>
       <.link patch={~p"/ammo/new"} class="btn btn-primary">
-        <%= dgettext("actions", "Add Ammo") %>
+        {dgettext("actions", "Add Ammo")}
       </.link>
 
-      <div class="flex flex-col justify-center items-center space-y-4 w-full max-w-2xl sm:flex-row sm:space-y-0 sm:space-x-4">
+      <div class="flex flex-col flex-wrap justify-center items-center space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
         <.form
           :let={f}
           for={%{}}
@@ -47,11 +47,9 @@
           phx-submit="change_class"
           class="flex items-center"
         >
-          <%= label(f, :class, gettext("Class"),
-            class: "title text-primary-600 text-lg text-center"
-          ) %>
+          {label(f, :class, gettext("Class"), class: "title text-primary-600 text-lg text-center")}
 
-          <%= select(
+          {select(
             f,
             :class,
             [
@@ -60,9 +58,9 @@
               {gettext("Shotgun"), :shotgun},
               {gettext("Pistol"), :pistol}
             ],
-            class: "mx-2 my-1 min-w-md input input-primary",
+            class: "mx-2 my-1 min-w-20 input input-primary",
             value: @class
-          ) %>
+          )}
         </.form>
 
         <.form
@@ -73,26 +71,26 @@
           phx-submit="search"
           class="flex items-center grow"
         >
-          <%= text_input(f, :search_term,
+          {text_input(f, :search_term,
             class: "grow input input-primary",
             phx_debounce: 300,
             placeholder: gettext("Search ammo"),
             role: "search",
             value: @search
-          ) %>
+          )}
         </.form>
 
         <.toggle_button action="toggle_show_used" value={@show_used}>
           <span class="text-lg title text-primary-600">
-            <%= gettext("Show used") %>
+            {gettext("Show used")}
           </span>
         </.toggle_button>
       </div>
 
       <%= if @packs |> Enum.empty?() do %>
         <h2 class="text-xl title text-primary-600">
-          <%= gettext("No Ammo") %>
-          <%= display_emoji("😔") %>
+          {gettext("No Ammo")}
+          {display_emoji("😔")}
         </h2>
       <% else %>
         <.live_component
@@ -104,7 +102,7 @@
         >
           <:type :let={%{name: type_name} = type}>
             <.link navigate={~p"/type/#{type}"} class="link">
-              <%= type_name %>
+              {type_name}
             </.link>
           </:type>
           <:range :let={pack}>
@@ -113,18 +111,18 @@
                 patch={~p"/ammo/add_shot_record/#{pack}"}
                 class="mx-2 my-1 text-sm btn btn-primary"
               >
-                <%= dgettext("actions", "Record shots") %>
+                {dgettext("actions", "Record shots")}
               </.link>
             </div>
           </:range>
           <:container :let={{pack, %{name: container_name} = container}}>
             <div class="flex flex-wrap justify-center items-center px-4 py-2 h-full min-w-20">
               <.link navigate={~p"/container/#{container}"} class="mx-2 my-1 link">
-                <%= container_name %>
+                {container_name}
               </.link>
 
               <.link patch={~p"/ammo/move/#{pack}"} class="mx-2 my-1 text-sm btn btn-primary">
-                <%= dgettext("actions", "Move ammo") %>
+                {dgettext("actions", "Move ammo")}
               </.link>
             </div>
           </:container>

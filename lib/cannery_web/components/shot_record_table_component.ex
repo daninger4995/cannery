@@ -99,7 +99,7 @@ defmodule CanneryWeb.Components.ShotRecordTableComponent do
     {pack.type.name,
      ~H"""
      <.link navigate={~p"/ammo/show/#{@pack}"} class="link">
-       <%= @pack.type.name %>
+       {@pack.type.name}
      </.link>
      """}
   end
@@ -115,7 +115,7 @@ defmodule CanneryWeb.Components.ShotRecordTableComponent do
     assigns = %{actions: actions, shot_record: shot_record}
 
     ~H"""
-    <%= render_slot(@actions, @shot_record) %>
+    {render_slot(@actions, @shot_record)}
     """
   end
 

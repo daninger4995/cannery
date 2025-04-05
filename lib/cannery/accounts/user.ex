@@ -21,6 +21,7 @@ defmodule Cannery.Accounts.User do
     field :email, :string
     field :password, :string, virtual: true
     field :hashed_password, :string
+    field :current_password, :string, virtual: true, redact: true
     field :confirmed_at, :naive_datetime
     field :role, Ecto.Enum, values: [:admin, :user], default: :user
     field :locale, :string
@@ -29,7 +30,7 @@ defmodule Cannery.Accounts.User do
 
     belongs_to :invite, Invite
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @type t :: %User{
@@ -193,6 +194,8 @@ defmodule Cannery.Accounts.User do
   """
   @spec validate_current_password(changeset(), String.t()) :: changeset()
   def validate_current_password(changeset, password) do
+    changeset = cast(changeset, %{current_password: password}, [:current_password])
+
     if valid_password?(changeset.data, password),
       do: changeset,
       else: changeset |> add_error(:current_password, dgettext("errors", "is not valid"))

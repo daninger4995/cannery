@@ -1,31 +1,31 @@
 <div class="flex flex-col justify-center items-center space-y-4">
   <h1 class="text-2xl title title-primary-500">
-    <%= @container.name %>
+    {@container.name}
   </h1>
 
   <span :if={@container.desc} class="text-lg rounded-lg title">
-    <%= gettext("Description:") %>
-    <%= @container.desc %>
+    {gettext("Description:")}
+    {@container.desc}
   </span>
 
   <span class="text-lg rounded-lg title">
-    <%= gettext("Type:") %>
-    <%= @container.type %>
+    {gettext("Type:")}
+    {@container.type}
   </span>
 
   <span :if={@container.location} class="text-lg rounded-lg title">
-    <%= gettext("Location:") %>
-    <%= @container.location %>
+    {gettext("Location:")}
+    {@container.location}
   </span>
 
   <span class="text-lg rounded-lg title">
-    <%= gettext("Packs:") %>
-    <%= @packs_count %>
+    {gettext("Packs:")}
+    {@packs_count}
   </span>
 
   <span class="text-lg rounded-lg title">
-    <%= gettext("Rounds:") %>
-    <%= @round_count %>
+    {gettext("Rounds:")}
+    {@round_count}
   </span>
 
   <div class="flex justify-center items-center space-x-4 text-primary-600">
@@ -54,9 +54,9 @@
 
   <div class="flex flex-wrap justify-center items-center text-primary-600">
     <button type="button" class="mx-4 my-2 btn btn-primary" phx-click="toggle_staged">
-      <%= if @container.staged,
+      {if @container.staged,
         do: dgettext("actions", "Unstage from range"),
-        else: dgettext("actions", "Stage for range") %>
+        else: dgettext("actions", "Stage for range")}
     </button>
   </div>
 
@@ -65,12 +65,12 @@
   <%= if @container.tags |> Enum.empty?() do %>
     <div class="flex flex-row justify-center items-center space-x-4">
       <h2 class="text-lg title text-primary-600">
-        <%= gettext("No tags for this container") %>
-        <%= display_emoji("😔") %>
+        {gettext("No tags for this container")}
+        {display_emoji("😔")}
       </h2>
 
       <.link patch={~p"/container/edit_tags/#{@container}"} class="btn btn-primary">
-        <%= dgettext("actions", "Why not add one?") %>
+        {dgettext("actions", "Why not add one?")}
       </.link>
     </div>
   <% else %>
@@ -96,9 +96,9 @@
       phx-submit="change_class"
       class="flex items-center"
     >
-      <%= label(f, :class, gettext("Class"), class: "title text-primary-600 text-lg text-center") %>
+      {label(f, :class, gettext("Class"), class: "title text-primary-600 text-lg text-center")}
 
-      <%= select(
+      {select(
         f,
         :class,
         [
@@ -107,14 +107,14 @@
           {gettext("Shotgun"), :shotgun},
           {gettext("Pistol"), :pistol}
         ],
-        class: "mx-2 my-1 min-w-md input input-primary",
+        class: "mx-2 my-1 min-w-20 input input-primary",
         value: @class
-      ) %>
+      )}
     </.form>
 
     <.toggle_button action="toggle_table" value={@view_table}>
       <span class="text-lg title text-primary-600">
-        <%= gettext("View as table") %>
+        {gettext("View as table")}
       </span>
     </.toggle_button>
   </div>
@@ -122,7 +122,7 @@
   <div class="p-4 w-full">
     <%= if @packs |> Enum.empty?() do %>
       <h2 class="mx-4 text-lg text-center title text-primary-600">
-        <%= gettext("No ammo in this container") %>
+        {gettext("No ammo in this container")}
       </h2>
     <% else %>
       <%= if @view_table do %>
@@ -135,7 +135,7 @@
         >
           <:type :let={%{name: type_name} = type}>
             <.link navigate={~p"/type/#{type}"} class="link">
-              <%= type_name %>
+              {type_name}
             </.link>
           </:type>
           <:actions :let={%{count: pack_count} = pack}>

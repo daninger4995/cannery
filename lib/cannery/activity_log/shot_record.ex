@@ -24,7 +24,7 @@ defmodule Cannery.ActivityLog.ShotRecord do
     field :user_id, :binary_id
     field :pack_id, :binary_id
 
-    timestamps()
+    timestamps(type: :utc_datetime)
   end
 
   @type t :: %__MODULE__{

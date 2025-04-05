@@ -5,7 +5,7 @@ defmodule Cannery.MixProject do
     [
       app: :cannery,
       version: "0.9.13",
-      elixir: "1.18.1",
+      elixir: "1.18.3",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -46,13 +46,15 @@ defmodule Cannery.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:bandit, "~> 1.5"},
       {:bcrypt_elixir, "~> 3.0"},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
+      {:dns_cluster, "~> 0.2"},
       {:ecto_psql_extras, "~> 0.6"},
       {:ecto_sql, "~> 3.6"},
-      {:eqrcode, "~> 0.1.10"},
-      # {:esbuild, "~> 0.3", runtime: Mix.env() == :dev},
+      {:eqrcode, "~> 0.2"},
+      {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
       {:ex_doc, "~> 0.27", only: :dev, runtime: false},
       {:floki, ">= 0.30.0", only: :test},
       {:gen_smtp, "~> 1.0"},
@@ -62,14 +64,15 @@ defmodule Cannery.MixProject do
       {:phoenix_ecto, "~> 4.4"},
       {:phoenix_html_helpers, "~> 1.0"},
       {:phoenix_html, "~> 4.0"},
-      {:phoenix_live_dashboard, "~> 0.8"},
+      {:phoenix_live_dashboard, "~> 0.8.3"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_live_view, "~> 0.20.0"},
-      {:phoenix, "~> 1.7.11"},
+      {:phoenix_live_view, "~> 1.0.0"},
+      {:phoenix, "~> 1.7.19"},
       {:plug_cowboy, "~> 2.7"},
       {:postgrex, ">= 0.0.0"},
       {:swoosh, "~> 1.6"},
-      {:telemetry_metrics, "~> 0.6"},
+      {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
+      {:telemetry_metrics, "~> 1.1"},
       {:telemetry_poller, "~> 1.0"}
     ]
   end
@@ -82,17 +85,23 @@ defmodule Cannery.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "compile", "ecto.setup", "cmd npm install --prefix assets"],
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "assets.build": ["tailwind cannery", "esbuild cannery"],
+      "assets.deploy": [
+        "tailwind cannery --minify",
+        "esbuild cannery --minify",
+        "phx.digest"
+      ],
+      "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "format.all": [
-        "cmd npm run format --prefix assets",
+        "assets.build",
         "format",
         "gettext.extract --merge",
         "gettext.merge --no-fuzzy priv/gettext"
       ],
       "test.all": [
-        "cmd npm run test --prefix assets",
+        "assets.build",
         "dialyzer",
         "credo --strict",
         "format --check-formatted",
@@ -101,7 +110,9 @@ defmodule Cannery.MixProject do
         "ecto.create --quiet",
         "ecto.migrate --quiet",
         "test"
-      ]
+      ],
+      setup: ["deps.get", "ecto.setup", "assets.setup", "assets.build"],
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
     ]
   end
 end

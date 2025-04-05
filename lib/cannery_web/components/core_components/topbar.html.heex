@@ -14,7 +14,7 @@
         <span class="mx-2 my-1">
           |
         </span>
-        <%= @title_content %>
+        {@title_content}
       <% end %>
     </div>
 
@@ -25,37 +25,37 @@
       <%= if @current_user do %>
         <li class="mx-2 my-1">
           <.link navigate={~p"/tags"} class="text-white hover:underline">
-            <%= gettext("Tags") %>
+            {gettext("Tags")}
           </.link>
         </li>
         <li class="mx-2 my-1">
           <.link navigate={~p"/containers"} class="text-white hover:underline">
-            <%= gettext("Containers") %>
+            {gettext("Containers")}
           </.link>
         </li>
         <li class="mx-2 my-1">
           <.link navigate={~p"/catalog"} class="text-white hover:underline">
-            <%= gettext("Catalog") %>
+            {gettext("Catalog")}
           </.link>
         </li>
         <li class="mx-2 my-1">
           <.link navigate={~p"/ammo"} class="text-white hover:underline">
-            <%= gettext("Ammo") %>
+            {gettext("Ammo")}
           </.link>
         </li>
         <li class="mx-2 my-1">
           <.link navigate={~p"/range"} class="text-white hover:underline">
-            <%= gettext("Range") %>
+            {gettext("Range")}
           </.link>
         </li>
         <li :if={@current_user |> Accounts.already_admin?()} class="mx-2 my-1">
           <.link navigate={~p"/invites"} class="text-white hover:underline">
-            <%= gettext("Invites") %>
+            {gettext("Invites")}
           </.link>
         </li>
         <li class="mx-2 my-1">
           <.link href={~p"/users/settings"} class="text-white hover:underline truncate">
-            <%= @current_user.email %>
+            {@current_user.email}
           </.link>
         </li>
         <li class="mx-2 my-1">
@@ -86,12 +86,12 @@
       <% else %>
         <li :if={Accounts.allow_registration?()} class="mx-2 my-1">
           <.link href={~p"/users/register"} class="text-white hover:underline truncate">
-            <%= dgettext("actions", "Register") %>
+            {dgettext("actions", "Register")}
           </.link>
         </li>
         <li class="mx-2 my-1">
           <.link href={~p"/users/log_in"} class="text-white hover:underline truncate">
-            <%= dgettext("actions", "Log in") %>
+            {dgettext("actions", "Log in")}
           </.link>
         </li>
       <% end %>

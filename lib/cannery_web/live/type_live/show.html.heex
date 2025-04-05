@@ -1,18 +1,16 @@
-<div class="space-y-4 flex flex-col justify-center items-center">
-  <h1 class="title text-2xl title-primary-500">
-    <%= @type.name %>
+<div class="flex flex-col justify-center items-center space-y-4">
+  <h1 class="text-2xl title title-primary-500">
+    {@type.name}
   </h1>
 
   <span
     :if={@type.desc}
-    class="max-w-2xl w-full px-8 py-4 rounded-lg
-      text-center title text-lg
-      border border-primary-600"
+    class="px-8 py-4 w-full max-w-2xl text-lg text-center rounded-lg border title border-primary-600"
   >
-    <%= @type.desc %>
+    {@type.desc}
   </span>
 
-  <div class="flex space-x-4 justify-center items-center text-primary-600">
+  <div class="flex justify-center items-center space-x-4 text-primary-600">
     <.link
       patch={~p"/type/#{@type}/edit"}
       class="text-primary-600 link"
@@ -41,36 +39,36 @@
   <hr class="hr" />
 
   <%= if @type.class || @custom_fields? do %>
-    <div class="grid sm:grid-cols-2 gap-4 text-center justify-center items-center">
-      <h3 class="title text-lg">
-        <%= gettext("Class") %>
+    <div class="grid gap-4 justify-center items-center text-center sm:grid-cols-2">
+      <h3 class="text-lg title">
+        {gettext("Class")}
       </h3>
 
       <span class="text-primary-600">
         <%= case @type.class do %>
           <% :shotgun -> %>
-            <%= gettext("Shotgun") %>
+            {gettext("Shotgun")}
           <% :rifle -> %>
-            <%= gettext("Rifle") %>
+            {gettext("Rifle")}
           <% :pistol -> %>
-            <%= gettext("Pistol") %>
+            {gettext("Pistol")}
           <% _ -> %>
-            <%= gettext("None specified") %>
+            {gettext("None specified")}
         <% end %>
       </span>
 
       <%= for %{label: label, key: key, type: type} <- @fields_to_display do %>
         <%= if @type |> Map.get(key) do %>
-          <h3 class="title text-lg">
-            <%= label %>
+          <h3 class="text-lg title">
+            {label}
           </h3>
 
           <span class="text-primary-600">
             <%= case type do %>
               <% :boolean -> %>
-                <%= @type |> Map.get(key) |> humanize() %>
+                {@type |> Map.get(key) |> humanize()}
               <% _ -> %>
-                <%= @type |> Map.get(key) %>
+                {@type |> Map.get(key)}
             <% end %>
           </span>
         <% end %>
@@ -80,61 +78,61 @@
     <hr class="hr" />
   <% end %>
 
-  <div class="grid sm:grid-cols-2 gap-4 text-center justify-center items-center">
-    <h3 class="title text-lg">
-      <%= gettext("Rounds:") %>
+  <div class="grid gap-4 justify-center items-center text-center sm:grid-cols-2">
+    <h3 class="text-lg title">
+      {gettext("Rounds:")}
     </h3>
 
     <span class="text-primary-600">
-      <%= @rounds %>
+      {@rounds}
     </span>
 
     <%= if @show_used do %>
-      <h3 class="title text-lg">
-        <%= gettext("Used rounds:") %>
+      <h3 class="text-lg title">
+        {gettext("Used rounds:")}
       </h3>
 
       <span class="text-primary-600">
-        <%= @used_rounds %>
+        {@used_rounds}
       </span>
 
-      <h3 class="title text-lg">
-        <%= gettext("Total ever rounds:") %>
+      <h3 class="text-lg title">
+        {gettext("Total ever rounds:")}
       </h3>
 
       <span class="text-primary-600">
-        <%= @historical_round_count %>
+        {@historical_round_count}
       </span>
     <% end %>
 
-    <h3 class="title text-lg">
-      <%= gettext("Packs:") %>
+    <h3 class="text-lg title">
+      {gettext("Packs:")}
     </h3>
 
     <span class="text-primary-600">
-      <%= @packs_count %>
+      {@packs_count}
     </span>
 
     <%= if @show_used do %>
-      <h3 class="title text-lg">
-        <%= gettext("Used packs:") %>
+      <h3 class="text-lg title">
+        {gettext("Used packs:")}
       </h3>
 
       <span class="text-primary-600">
-        <%= @used_packs_count %>
+        {@used_packs_count}
       </span>
 
-      <h3 class="title text-lg">
-        <%= gettext("Total ever packs:") %>
+      <h3 class="text-lg title">
+        {gettext("Total ever packs:")}
       </h3>
 
       <span class="text-primary-600">
-        <%= @historical_packs_count %>
+        {@historical_packs_count}
       </span>
     <% end %>
 
-    <h3 class="title text-lg">
-      <%= gettext("Added on:") %>
+    <h3 class="text-lg title">
+      {gettext("Added on:")}
     </h3>
 
     <span class="text-primary-600">
@@ -142,16 +140,16 @@
     </span>
 
     <%= if @avg_cost_per_round do %>
-      <h3 class="title text-lg">
-        <%= gettext("Average CPR") %>:
+      <h3 class="text-lg title">
+        {gettext("Average CPR")}:
       </h3>
 
       <span class="text-primary-600">
-        <%= gettext("$%{amount}", amount: display_currency(@avg_cost_per_round)) %>
+        {gettext("$%{amount}", amount: display_currency(@avg_cost_per_round))}
       </span>
     <% else %>
-      <h3 class="mx-8 my-4 title text-lg text-primary-600 col-span-2">
-        <%= gettext("No cost information") %>
+      <h3 class="col-span-2 mx-8 my-4 text-lg title text-primary-600">
+        {gettext("No cost information")}
       </h3>
     <% end %>
   </div>
@@ -160,23 +158,23 @@
 
   <div class="flex justify-center items-center space-x-4">
     <.toggle_button action="toggle_show_used" value={@show_used}>
-      <span class="title text-lg text-primary-600">
-        <%= gettext("Show used") %>
+      <span class="text-lg title text-primary-600">
+        {gettext("Show used")}
       </span>
     </.toggle_button>
 
     <.toggle_button action="toggle_table" value={@view_table}>
-      <span class="title text-lg text-primary-600">
-        <%= gettext("View as table") %>
+      <span class="text-lg title text-primary-600">
+        {gettext("View as table")}
       </span>
     </.toggle_button>
   </div>
 
-  <div class="w-full p-4">
+  <div class="p-4 w-full">
     <%= if @packs |> Enum.empty?() do %>
-      <h2 class="px-4 title text-lg text-primary-600">
-        <%= gettext("No ammo for this type") %>
-        <%= display_emoji("😔") %>
+      <h2 class="px-4 text-lg title text-primary-600">
+        {gettext("No ammo for this type")}
+        {display_emoji("😔")}
       </h2>
     <% else %>
       <%= if @view_table do %>
@@ -189,11 +187,11 @@
         >
           <:container :let={{_pack, %{name: container_name} = container}}>
             <.link navigate={~p"/container/#{container}"} class="mx-2 my-1 link">
-              <%= container_name %>
+              {container_name}
             </.link>
           </:container>
           <:actions :let={%{count: pack_count} = pack}>
-            <div class="py-2 px-4 h-full space-x-4 flex justify-center items-center">
+            <div class="flex justify-center items-center px-4 py-2 space-x-4 h-full">
               <.link
                 navigate={~p"/ammo/show/#{pack}"}
                 class="text-primary-600 link"

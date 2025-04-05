@@ -1,23 +1,23 @@
 <div class="flex flex-col justify-center items-center space-y-8">
   <h1 class="text-2xl title title-primary-500">
-    <%= gettext("Containers") %>
+    {gettext("Containers")}
   </h1>
 
   <%= if @containers |> Enum.empty?() and @search |> is_nil() do %>
     <h2 class="text-xl title text-primary-600">
-      <%= gettext("No containers") %>
-      <%= display_emoji("😔") %>
+      {gettext("No containers")}
+      {display_emoji("😔")}
     </h2>
 
     <.link patch={~p"/containers/new"} class="btn btn-primary">
-      <%= dgettext("actions", "Add your first container!") %>
+      {dgettext("actions", "Add your first container!")}
     </.link>
   <% else %>
     <.link patch={~p"/containers/new"} class="btn btn-primary">
-      <%= dgettext("actions", "New Container") %>
+      {dgettext("actions", "New Container")}
     </.link>
 
-    <div class="flex flex-col justify-center items-center space-y-4 w-full max-w-2xl sm:flex-row sm:space-y-0 sm:space-x-4">
+    <div class="flex flex-col flex-wrap justify-center items-center space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
       <.form
         :let={f}
         for={%{}}
@@ -26,26 +26,26 @@
         phx-submit="search"
         class="flex items-center grow"
       >
-        <%= text_input(f, :search_term,
+        {text_input(f, :search_term,
           class: "grow input input-primary",
           phx_debounce: 300,
           placeholder: gettext("Search containers"),
           role: "search",
           value: @search
-        ) %>
+        )}
       </.form>
 
       <.toggle_button action="toggle_table" value={@view_table}>
         <span class="text-lg title text-primary-600">
-          <%= gettext("View as table") %>
+          {gettext("View as table")}
         </span>
       </.toggle_button>
     </div>
 
     <%= if @containers |> Enum.empty?() do %>
       <h2 class="text-xl title text-primary-600">
-        <%= gettext("No containers") %>
-        <%= display_emoji("😔") %>
+        {gettext("No containers")}
+        {display_emoji("😔")}
       </h2>
     <% else %>
       <%= if @view_table do %>
@@ -57,16 +57,16 @@
           current_user={@current_user}
         >
           <:range :let={container}>
-            <div class="flex justify-center items-center px-4 py-2 h-full min-w-20 flex-wrap">
+            <div class="flex flex-wrap justify-center items-center px-4 py-2 h-full min-w-20">
               <button
                 type="button"
                 class="mx-2 my-1 text-sm btn btn-primary"
                 phx-click="toggle_staged"
                 phx-value-container_id={container.id}
               >
-                <%= if container.staged,
+                {if container.staged,
                   do: dgettext("actions", "Unstage"),
-                  else: dgettext("actions", "Stage") %>
+                  else: dgettext("actions", "Stage")}
               </button>
             </div>
           </:range>

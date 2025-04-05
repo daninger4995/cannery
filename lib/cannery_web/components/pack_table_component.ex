@@ -170,7 +170,7 @@ defmodule CanneryWeb.Components.PackTableComponent do
 
     {type_name,
      ~H"""
-     <%= render_slot(@type_block, @type) %>
+     {render_slot(@type_block, @type)}
      """}
   end
 
@@ -196,7 +196,7 @@ defmodule CanneryWeb.Components.PackTableComponent do
      <%= if @last_used_date do %>
        <.date id={"#{@id}-last-used-date"} date={@last_used_date} />
      <% else %>
-       <%= gettext("Never used") %>
+       {gettext("Never used")}
      <% end %>
      """}
   end
@@ -205,7 +205,7 @@ defmodule CanneryWeb.Components.PackTableComponent do
     assigns = %{range: range, pack: pack}
 
     ~H"""
-    <%= render_slot(@range, @pack) %>
+    {render_slot(@range, @pack)}
     """
   end
 
@@ -222,7 +222,7 @@ defmodule CanneryWeb.Components.PackTableComponent do
     assigns = %{actions: actions, pack: pack}
 
     ~H"""
-    <%= render_slot(@actions, @pack) %>
+    {render_slot(@actions, @pack)}
     """
   end
 
@@ -243,7 +243,7 @@ defmodule CanneryWeb.Components.PackTableComponent do
 
     {container_name,
      ~H"""
-     <%= render_slot(@container_block, {@pack, @container}) %>
+     {render_slot(@container_block, {@pack, @container})}
      """}
   end
 

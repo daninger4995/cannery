@@ -155,7 +155,7 @@ defmodule CanneryWeb.CoreComponents do
 
   @spec cast_datetime(DateTime.t() | nil) :: String.t()
   defp cast_datetime(%DateTime{} = datetime) do
-    datetime |> DateTime.from_naive!("Etc/UTC") |> DateTime.to_iso8601(:extended)
+    datetime |> DateTime.to_iso8601(:extended)
   end
 
   defp cast_datetime(_datetime), do: ""

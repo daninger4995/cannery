@@ -9,8 +9,7 @@ import Config
 
 config :cannery,
   env: :dev,
-  ecto_repos: [Cannery.Repo],
-  generators: [binary_id: true, timestamp_type: :utc_datetime_usec]
+  ecto_repos: [Cannery.Repo]
 
 config :cannery, Cannery.Accounts, registration: System.get_env("REGISTRATION", "invite")
 
@@ -30,9 +29,10 @@ config :cannery, CanneryWeb.Endpoint,
 config :cannery, Cannery.Application, automigrate: false
 
 config :cannery, :generators,
-  migration: true,
   binary_id: true,
-  sample_binary_id: "11111111-1111-1111-1111-111111111111"
+  migration: true,
+  sample_binary_id: "11111111-1111-1111-1111-111111111111",
+  timestamp_type: :utc_datetime_usec
 
 # Configures the mailer
 #

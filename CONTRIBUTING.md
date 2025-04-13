@@ -10,6 +10,9 @@ status](https://weblate.bubbletea.dev/widgets/cannery/-/287x66-black.png)](https
 
 If you're multilingual, this project can use your translations! Visit
 [weblate](https://weblate.bubbletea.dev/engage/cannery/) for more information.
+Also, if your language isn't displayed here, I'd love to add that language so
+you can start! Please contact me at
+(shibao@bubbletea.dev)[mailto:shibao@bubbletea.dev] and let me know!
 
 ## Style Tips
 

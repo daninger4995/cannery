@@ -45,4 +45,47 @@ services:
       - POSTGRES_DB="cannery"
     restart: always
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ./cannery/data:/var/lib/postgresql/data
+
+  # Optional, if you don't have a reverse proxy set up already. You can replace
+  # this with any other reverse proxy like nginx, apache or caddy if you would
+  # like something more minimalist.
+
+  # nginx:
+  #   image: jc21/nginx-proxy-manager
+  #   container_name: nginx
+  #   restart: on-failure
+  #   ports:
+  #     - 443:443
+  #     - 80:80
+  #    # Access via http://localhost:81, although once you access this, you can
+  #    # reverse proxy itself to a domain name to control it from anywhere if
+  #    # you'd like, and then you can remove the following line
+  #     - 127.0.0.1:81:81
+  #   # expose:
+  #   #   - 81
+  #   environment:
+  #     # DISABLE_IPV6: 'true'
+  #     DB_MYSQL_HOST: "nginx-db"
+  #     DB_MYSQL_NAME: "nginx"
+  #     DB_MYSQL_PASSWORD: "my-password"
+  #     DB_MYSQL_PORT: 3306
+  #     DB_MYSQL_USER: "nginx"
+  #     PGID: 9000
+  #     PUID: 9000
+  #   volumes:
+  #     - /etc/letsencrypt:/etc/letsencrypt
+  #     - ./nginx/data:/data
+  #     - /tmp:/tmp
+
+  # nginx-db:
+  #   image: 'jc21/mariadb-aria:latest'
+  #   container_name: nginx-db
+  #   restart: on-failure
+  #   environment:
+  #     MYSQL_DATABASE: 'nginx'
+  #     MYSQL_PASSWORD: 'my-password'
+  #     MYSQL_ROOT_PASSWORD: 'my-root-password'
+  #     MYSQL_USER: 'nginx'
+  #   volumes:
+  #     - ./nginx/mysql:/var/lib/mysql

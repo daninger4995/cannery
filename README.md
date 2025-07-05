@@ -46,6 +46,16 @@ ports:
 ```
 and reverse proxy to `http://localhost:4000`.
 
+If you don't already have a reverse proxy on the machine, I recommend installing
+[Nginx Proxy Manager](https://nginxproxymanager.com/), which is a GUI for Nginx
+that makes it easy to configure and modify as your hosting needs change. By
+adding NPM to cannery's `docker-compose.yml`, you can avoid needing to bind any
+ports to your machine and have all the internal traffic routed through the
+generated docker network, which can be a bit more secure. The example
+configuration is commented out in the `docker-compose.yml` file, and more
+information can be found on their documentation
+[here](https://nginxproxymanager.com/setup/).
+
 # Configuration
 
 You can use the following environment variables to configure Cannery in

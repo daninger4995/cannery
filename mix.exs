@@ -10,7 +10,11 @@ defmodule Cannery.MixProject do
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      dialyzer: [plt_add_apps: [:ex_unit]],
+      dialyzer: [
+        # Added for OTP 28 bug https://github.com/jeremyjh/dialyxir/issues/561
+        flags: [:no_opaque],
+        plt_add_apps: [:ex_unit]
+      ],
       consolidate_protocols: Mix.env() not in [:dev, :test],
       preferred_cli_env: ["test.all": :test],
       # ExDoc

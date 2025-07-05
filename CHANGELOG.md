@@ -1,3 +1,7 @@
+# v0.9.15
+- Update deps
+- Add better reverse proxy and database upgrade instructions
+
 # v0.9.14
 - Update deps
 - Fix wrapping issues with search bars

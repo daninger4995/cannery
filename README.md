@@ -74,6 +74,20 @@ You can use the following environment variables to configure Cannery in
   `no-reply@HOST` where `HOST` was previously defined.
 - `EMAIL_NAME`: Sets the sender name in sent emails. Defaults to "Cannery".
 
+# Upgrading the Database
+
+Typically, PostgreSQL updates can improve the performance of the database, and
+the cannery app. However, these require some additional maintenance. While the
+typical method is to manually dump and restore the database using the `pg_dump`
+tool, I recommend using the
+[pgautoupgrade tool](https://github.com/pgautoupgrade/docker-pgautoupgrade),
+which can perform this for you automatically. In the `docker-compose.yml` file,
+you can do this easily by switching the `image:` value from for example,
+`postgres:13` to `pgautoupgrade/pgautoupgrade:17-alpine` and rerun
+`docker-compose up -d`. This will automatically migrate your database to
+Postgres 17, and then you can switch back to the original `postgres:17` image
+for additional performance, or keep using the upgrade image if you'd like.
+
 # Contribution
 
 Contributions are greatly appreciated, no ability to code needed! You can browse

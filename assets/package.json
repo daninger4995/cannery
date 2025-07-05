@@ -1,6 +1,7 @@
 {
   "engines": {
-    "node": "v23.10.0"
+    "node": "v24.3.0",
+    "npm": "11.4.2"
   },
   "scripts": {
     "format": "standard --fix",
@@ -8,14 +9,14 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
-    "chart.js": "^4.4.8",
+    "chart.js": "^4.5.0",
     "chartjs-adapter-date-fns": "^3.0.0",
     "date-fns": "^4.1.0",
-    "slim-select": "^2.11.0",
+    "slim-select": "^2.12.1",
     "topbar": "^3.0.0"
   },
   "devDependencies": {
-    "npm-check-updates": "^17.1.16",
+    "npm-check-updates": "^18.0.1",
     "standard": "^17.1.2"
   }
 }

@@ -46,7 +46,8 @@
       {select(f, :tag_id, tag_options(@tags, @container),
         class: "text-center col-span-2 input input-primary",
         id: "#{@id}-tag-select",
-        phx_hook: "SlimSelect"
+        phx_hook: "SlimSelect",
+        phx_update: :ignore
       )}
       {error_tag(f, :tag_id, "col-span-3 text-center")}
 

@@ -131,7 +131,7 @@ msgstr "Resetear contraseña"
 #: lib/cannery_web/components/add_shot_record_component.html.heex:57
 #: lib/cannery_web/live/container_live/form_component.html.heex:59
 #: lib/cannery_web/live/invite_live/form_component.html.heex:38
-#: lib/cannery_web/live/pack_live/form_component.html.heex:110
+#: lib/cannery_web/live/pack_live/form_component.html.heex:112
 #: lib/cannery_web/live/range_live/form_component.html.heex:45
 #: lib/cannery_web/live/tag_live/form_component.html.heex:41
 #: lib/cannery_web/live/type_live/form_component.html.heex:378
@@ -149,7 +149,7 @@ msgstr "Enviar instrucciones para reestablecer contraseña"
 msgid "Why not add one?"
 msgstr "¿Por qué no añadir una?"
 
-#: lib/cannery_web/live/container_live/edit_tags_component.html.heex:53
+#: lib/cannery_web/live/container_live/edit_tags_component.html.heex:54
 #, elixir-autogen, elixir-format
 msgid "Add"
 msgstr "Añadir"
@@ -186,7 +186,7 @@ msgstr "Copiar al portapapeles"
 msgid "add a container first"
 msgstr "añade primero un contenedor"
 
-#: lib/cannery_web/live/pack_live/form_component.html.heex:103
+#: lib/cannery_web/live/pack_live/form_component.html.heex:105
 #, elixir-autogen, elixir-format
 msgid "Create"
 msgstr "Crear"

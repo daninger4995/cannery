@@ -1,3 +1,6 @@
+# v0.9.16
+- Fix bug with ammo type selector
+
 # v0.9.15
 - Update deps
 - Add better reverse proxy and database upgrade instructions

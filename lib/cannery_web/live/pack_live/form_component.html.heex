@@ -38,7 +38,8 @@
     {select(f, :type_id, type_options(@types, @class),
       class: "text-center col-span-2 input input-primary",
       id: "pack-form-type-select",
-      phx_hook: "SlimSelect"
+      phx_hook: "SlimSelect",
+      phx_update: :ignore
     )}
     {error_tag(f, :type_id, "col-span-3 text-center")}
 
@@ -85,7 +86,8 @@
     {select(f, :container_id, container_options(@containers),
       class: "text-center col-span-2 input input-primary",
       id: "pack-form-container-select",
-      phx_hook: "SlimSelect"
+      phx_hook: "SlimSelect",
+      phx_update: :ignore
     )}
     {error_tag(f, :container_id, "col-span-3 text-center")}
 

@@ -1,5 +1,6 @@
 # v0.9.16
 - Fix bug with ammo type selector
+- Add a row number column to all tables
 
 # v0.9.15
 - Update deps

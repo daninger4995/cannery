@@ -2,6 +2,7 @@
   <table class="min-w-full table-auto text-center bg-white">
     <thead class="border-b border-primary-600">
       <tr>
+        <th class="p-2 w-12">{gettext("Row")}</th>
         <%= for %{key: key, label: label} = column <- @columns do %>
           <%= if column |> Map.get(:sortable, true) do %>
             <th class={["p-2", column[:class]]}>
@@ -38,6 +39,7 @@
         :for={{values, i} <- @rows |> Enum.with_index()}
         class={if i |> Integer.is_even(), do: @row_class, else: @alternate_row_class}
       >
+        <td class="p-2">{i + 1}</td>
         <td :for={%{key: key} = value <- @columns} class={["p-2", value[:class]]}>
           <%= case values |> Map.get(key) do %>
             <% {_custom_sort_value, value} -> %>

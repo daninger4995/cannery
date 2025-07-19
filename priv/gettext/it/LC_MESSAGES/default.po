@@ -1451,3 +1451,8 @@ msgstr ""
 #, elixir-autogen, elixir-format, fuzzy
 msgid "No containers staged"
 msgstr ""
+
+#: lib/cannery_web/components/table_component.html.heex:5
+#, elixir-autogen, elixir-format
+msgid "Row"
+msgstr ""

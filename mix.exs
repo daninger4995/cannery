@@ -6,6 +6,7 @@ defmodule Cannery.MixProject do
       app: :cannery,
       version: "0.9.16",
       elixir: "1.18.4",
+      elixirc_options: [ignore_module_conflict: true],
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -44,6 +45,10 @@ defmodule Cannery.MixProject do
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
+
+  def cli do
+    [preferred_envs: ["test.all": :test]]
+  end
 
   # Specifies your project dependencies.
   #

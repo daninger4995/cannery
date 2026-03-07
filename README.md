@@ -1,6 +1,6 @@
 # Cannery
 
-![old screenshot](https://gitea.bubbletea.dev/shibao/cannery/raw/branch/stable/home.png)
+![old screenshot](https://codeberg.org/shibao/cannery/raw/branch/stable/home.png)
 
 The self-hosted firearm tracker website.
 
@@ -20,7 +20,7 @@ The self-hosted firearm tracker website.
 # Installation
 
 1. Install [Docker Compose](https://docs.docker.com/compose/install/) or alternatively [Docker Desktop](https://docs.docker.com/desktop/) on your machine.
-1. Copy the example [docker-compose.yml](https://gitea.bubbletea.dev/shibao/cannery/src/branch/stable/docker-compose.yml). into your local machine where you want.
+1. Copy the example [docker-compose.yml](https://codeberg.org/shibao/cannery/src/branch/stable/docker-compose.yml). into your local machine where you want.
    Bind mounts are created in the same directory by default.
 1. Set the configuration variables in `docker-compose.yml`. You'll need to run
    `docker run -it shibaobun/cannery /app/priv/random.sh` to generate a new
@@ -59,7 +59,7 @@ information can be found on their documentation
 # Configuration
 
 You can use the following environment variables to configure Cannery in
-[docker-compose.yml](https://gitea.bubbletea.dev/shibao/cannery/src/branch/stable/docker-compose.yml).
+[docker-compose.yml](https://codeberg.org/shibao/cannery/src/branch/stable/docker-compose.yml).
 
 - `HOST`: External url to generate links with. Must be set with your hosted
   domain name! I.e. `cannery.mywebsite.tld`
@@ -102,33 +102,21 @@ for additional performance, or keep using the upgrade image if you'd like.
 
 Contributions are greatly appreciated, no ability to code needed! You can browse
 the [Contribution
-Guide](https://gitea.bubbletea.dev/shibao/cannery/src/branch/stable/CONTRIBUTING.md)
+Guide](https://codeberg.org/shibao/cannery/src/branch/stable/CONTRIBUTING.md)
 to learn more.
 
-I can be contacted at [shibao@bubbletea.dev](mailto:shibao@bubbletea.dev), or on
-the fediverse at
-[@shibao@misskey.bubbletea.dev](https://misskey.bubbletea.dev/@shibao). Thank
-you!
+I can be contacted at [shibao@shibao.dev](mailto:shibao@shibao.dev). Thank you!
 
 # License
 
 Cannery is licensed under AGPLv3 or later. A copy of the latest version of the
 license can be found at
-[LICENSE.md](https://gitea.bubbletea.dev/shibao/cannery/src/branch/stable/LICENSE.md).
+[LICENSE.md](https://codeberg.org/shibao/cannery/src/branch/stable/LICENSE.md).
 
 # Links
 
 - [Website](https://cannery.app): Project website
-- [Gitea](https://gitea.bubbletea.dev/shibao/cannery): Main repo, feature
+- [Codeberg](https://codeberg.org/shibao/cannery): Main repo, feature
   requests and bug reports
 - [Github](https://github.com/shibaobun/cannery): Source code mirror, please
   don't open pull requests to this repository
-- [Weblate](https://weblate.bubbletea.dev/engage/cannery): Contribute to
-  translations!
-
----
-
-[![Build
-Status](https://drone.bubbletea.dev/api/badges/shibao/cannery/status.svg?ref=refs/heads/dev)](https://drone.bubbletea.dev/shibao/cannery)
-[![translation
-status](https://weblate.bubbletea.dev/widgets/cannery/-/svg-badge.svg)](https://weblate.bubbletea.dev/engage/cannery/)

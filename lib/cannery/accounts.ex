@@ -4,8 +4,8 @@ defmodule Cannery.Accounts do
   """
 
   use Cannery, :context
-  alias Cannery.Mailer
   alias Cannery.Accounts.{Invite, Invites, UserToken}
+  alias Cannery.Mailer
   alias Oban.Job
 
   ## Database getters

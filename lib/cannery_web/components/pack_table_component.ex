@@ -25,7 +25,7 @@ defmodule CanneryWeb.Components.PackTableComponent do
           Socket.t()
         ) :: {:ok, Socket.t()}
   def update(
-        %{id: _id, packs: _pack, current_user: _current_user, show_used: _show_used} = assigns,
+        %{id: _id, packs: _packs, current_user: _current_user, show_used: _show_used} = assigns,
         socket
       ) do
     socket =
@@ -152,11 +152,12 @@ defmodule CanneryWeb.Components.PackTableComponent do
   end
 
   @spec get_row_data_for_pack(Pack.t(), additional_data :: map()) :: map()
-  defp get_row_data_for_pack(pack, %{columns: columns} = additional_data) do
+  defp get_row_data_for_pack(%{id: pack_id} = pack, %{columns: columns} = additional_data) do
     columns
     |> Map.new(fn %{key: key} ->
       {key, get_value_for_key(key, pack, additional_data)}
     end)
+    |> Map.put(:id, pack_id)
   end
 
   @spec get_value_for_key(atom(), Pack.t(), additional_data :: map()) ::

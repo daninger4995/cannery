@@ -4,8 +4,8 @@ defmodule CanneryWeb.InviteLive.FormComponent do
   """
 
   use CanneryWeb, :live_component
-  alias Ecto.Changeset
   alias Cannery.Accounts.{Invite, Invites, User}
+  alias Ecto.Changeset
   alias Phoenix.LiveView.Socket
 
   @impl true

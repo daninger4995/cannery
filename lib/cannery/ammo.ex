@@ -4,10 +4,10 @@ defmodule Cannery.Ammo do
   """
 
   use Cannery, :context
-  alias Cannery.Containers
-  alias Cannery.Containers.{Container, ContainerTag, Tag}
   alias Cannery.{ActivityLog, ActivityLog.ShotRecord}
   alias Cannery.Ammo.{Pack, Type}
+  alias Cannery.Containers
+  alias Cannery.Containers.{Container, ContainerTag, Tag}
 
   @pack_create_limit 10_000
   @pack_preloads [:type]

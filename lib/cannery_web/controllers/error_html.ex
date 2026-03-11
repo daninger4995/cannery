@@ -11,6 +11,12 @@ defmodule CanneryWeb.ErrorHTML do
         _other_path -> dgettext("errors", "Internal server error")
       end
 
-    error(%{error_string: error_string})
+    render_error(%{error_string: error_string})
+  end
+
+  defp render_error(assigns) do
+    ~H"""
+    <p>{@error_string}</p>
+    """
   end
 end

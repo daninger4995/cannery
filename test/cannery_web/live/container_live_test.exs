@@ -61,7 +61,7 @@ defmodule CanneryWeb.ContainerLiveTest do
 
       html =
         index_live
-        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_table-label"}]/)
+        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_table-label"]/)
         |> render_click()
 
       assert html =~ "Containers"
@@ -203,6 +203,120 @@ defmodule CanneryWeb.ContainerLiveTest do
     end
   end
 
+  describe "Index edit tags" do
+    setup [:register_and_log_in_user, :create_container]
+
+    test "adds a tag and immediately displays it in the modal", %{
+      conn: conn,
+      current_user: current_user,
+      container: container
+    } do
+      tag = tag_fixture(%{name: "index tag"}, current_user)
+
+      {:ok, index_live, _html} = live(conn, ~p"/containers")
+
+      # Open edit tags modal from index
+      index_live |> element(~s/a[aria-label="Tag #{container.name}"]/) |> render_click()
+      assert_patch(index_live, ~p"/containers/edit_tags/#{container}")
+
+      # Tag should not be on the container yet
+      refute has_element?(index_live, ~s/a[phx-click="delete"][phx-value-tag-id="#{tag.id}"]/)
+
+      # Add the tag
+      index_live
+      |> form("#add-tag-to-container-form", tag: %{tag_id: tag.id})
+      |> render_submit()
+
+      # Tag should immediately appear as a deletable tag in the modal
+      assert has_element?(index_live, ~s/a[phx-click="delete"][phx-value-tag-id="#{tag.id}"]/)
+      assert render(index_live) =~ "added successfully"
+    end
+
+    test "removes a tag and immediately updates the modal", %{
+      conn: conn,
+      current_user: current_user,
+      container: container
+    } do
+      tag = tag_fixture(%{name: "removable index tag"}, current_user)
+      Containers.add_tag!(container, tag, current_user)
+
+      {:ok, index_live, _html} = live(conn, ~p"/containers")
+
+      # Open edit tags modal
+      index_live |> element(~s/a[aria-label="Tag #{container.name}"]/) |> render_click()
+      assert_patch(index_live, ~p"/containers/edit_tags/#{container}")
+
+      # Tag should be shown as a deletable tag
+      assert has_element?(index_live, ~s/a[phx-click="delete"][phx-value-tag-id="#{tag.id}"]/)
+
+      # Remove the tag
+      index_live
+      |> element(~s/a[phx-click="delete"][phx-value-tag-id="#{tag.id}"]/)
+      |> render_click()
+
+      # Tag should immediately disappear
+      refute has_element?(index_live, ~s/a[phx-click="delete"][phx-value-tag-id="#{tag.id}"]/)
+      assert render(index_live) =~ "removed successfully"
+    end
+  end
+
+  describe "Index edit tags updates table" do
+    setup [:register_and_log_in_user, :create_container]
+
+    test "adding a tag updates the container table behind the modal", %{
+      conn: conn,
+      current_user: current_user,
+      container: container
+    } do
+      tag = tag_fixture(%{name: "table tag"}, current_user)
+
+      {:ok, index_live, html} = live(conn, ~p"/containers")
+
+      # Table should not show the tag initially
+      refute html =~ "table tag"
+
+      # Open edit tags modal and add tag
+      index_live |> element(~s/a[aria-label="Tag #{container.name}"]/) |> render_click()
+      assert_patch(index_live, ~p"/containers/edit_tags/#{container}")
+
+      index_live
+      |> form("#add-tag-to-container-form", tag: %{tag_id: tag.id})
+      |> render_submit()
+
+      # The table behind the modal should now show the tag in the tags cell
+      html = render(index_live)
+      assert html =~ ~r/class="inline-block[^"]*"[^>]*>\s*table tag\s*</
+      assert html =~ "added successfully"
+    end
+
+    test "removing a tag updates the container table behind the modal", %{
+      conn: conn,
+      current_user: current_user,
+      container: container
+    } do
+      tag = tag_fixture(%{name: "removeme"}, current_user)
+      Containers.add_tag!(container, tag, current_user)
+
+      {:ok, index_live, html} = live(conn, ~p"/containers")
+
+      # Table should show the tag initially
+      assert html =~ "removeme"
+
+      # Open edit tags modal and remove tag
+      index_live |> element(~s/a[aria-label="Tag #{container.name}"]/) |> render_click()
+      assert_patch(index_live, ~p"/containers/edit_tags/#{container}")
+
+      index_live
+      |> element(~s/a[phx-click="delete"][phx-value-tag-id="#{tag.id}"]/)
+      |> render_click()
+
+      # The table behind the modal should no longer show the tag
+      html = render(index_live)
+      refute html =~ ~r/class="inline-block[^"]*"[^>]*>\s*removeme\s*</
+      assert html =~ "removed successfully"
+    end
+  end
+
   describe "Show" do
     setup [:register_and_log_in_user, :create_container]
 
@@ -259,41 +373,141 @@ defmodule CanneryWeb.ContainerLiveTest do
       assert html =~ shotgun_pack.type.name
       assert html =~ pistol_pack.type.name
 
-      html =
-        index_live
-        |> form(~s/form[phx-change="change_class"]/)
-        |> render_change(type: %{class: :rifle})
+      index_live
+      |> form(~s/form[phx-change="change_class"]/)
+      |> render_change(type: %{class: :rifle})
 
+      assert_patch(index_live, ~p"/container/#{container}?class=rifle")
+
+      {:ok, _index_live, html} = live(conn, ~p"/container/#{container}?class=rifle")
       assert html =~ rifle_pack.type.name
       refute html =~ shotgun_pack.type.name
       refute html =~ pistol_pack.type.name
 
-      html =
-        index_live
-        |> form(~s/form[phx-change="change_class"]/)
-        |> render_change(type: %{class: :shotgun})
+      {:ok, index_live, _html} = live(conn, ~p"/container/#{container}")
 
+      index_live
+      |> form(~s/form[phx-change="change_class"]/)
+      |> render_change(type: %{class: :shotgun})
+
+      assert_patch(index_live, ~p"/container/#{container}?class=shotgun")
+
+      {:ok, _index_live, html} = live(conn, ~p"/container/#{container}?class=shotgun")
       refute html =~ rifle_pack.type.name
       assert html =~ shotgun_pack.type.name
       refute html =~ pistol_pack.type.name
 
-      html =
-        index_live
-        |> form(~s/form[phx-change="change_class"]/)
-        |> render_change(type: %{class: :pistol})
+      {:ok, index_live, _html} = live(conn, ~p"/container/#{container}")
 
+      index_live
+      |> form(~s/form[phx-change="change_class"]/)
+      |> render_change(type: %{class: :pistol})
+
+      assert_patch(index_live, ~p"/container/#{container}?class=pistol")
+
+      {:ok, _index_live, html} = live(conn, ~p"/container/#{container}?class=pistol")
       refute html =~ rifle_pack.type.name
       refute html =~ shotgun_pack.type.name
       assert html =~ pistol_pack.type.name
 
-      html =
-        index_live
-        |> form(~s/form[phx-change="change_class"]/)
-        |> render_change(type: %{class: :all})
+      {:ok, index_live, _html} = live(conn, ~p"/container/#{container}")
 
+      index_live
+      |> form(~s/form[phx-change="change_class"]/)
+      |> render_change(type: %{class: :all})
+
+      assert_patch(index_live, ~p"/container/#{container}?class=all")
+
+      {:ok, _index_live, html} = live(conn, ~p"/container/#{container}?class=all")
       assert html =~ rifle_pack.type.name
       assert html =~ shotgun_pack.type.name
       assert html =~ pistol_pack.type.name
+    end
+  end
+
+  describe "Show edit tags" do
+    setup [:register_and_log_in_user, :create_container]
+
+    test "adds a tag and immediately displays it", %{
+      conn: conn,
+      current_user: current_user,
+      container: container
+    } do
+      tag = tag_fixture(%{name: "cool tag"}, current_user)
+
+      {:ok, show_live, _html} = live(conn, ~p"/container/#{container}")
+
+      # Open edit tags modal
+      show_live |> element(~s/a[href*="edit_tags"]/) |> render_click()
+      assert_patch(show_live, ~p"/container/edit_tags/#{container}")
+
+      # Tag should not be on the container yet (no delete link for it)
+      refute has_element?(show_live, ~s/a[phx-click="delete"][phx-value-tag-id="#{tag.id}"]/)
+
+      # Add the tag
+      show_live
+      |> form("#add-tag-to-container-form", tag: %{tag_id: tag.id})
+      |> render_submit()
+
+      # Tag should immediately appear as a deletable tag in the modal
+      assert has_element?(show_live, ~s/a[phx-click="delete"][phx-value-tag-id="#{tag.id}"]/)
+      assert render(show_live) =~ "added successfully"
+    end
+
+    test "removes a tag and immediately updates the display", %{
+      conn: conn,
+      current_user: current_user,
+      container: container
+    } do
+      tag = tag_fixture(%{name: "removable tag"}, current_user)
+      Containers.add_tag!(container, tag, current_user)
+
+      {:ok, show_live, _html} = live(conn, ~p"/container/#{container}")
+
+      # Tag should be visible on the show page
+      assert render(show_live) =~ "removable tag"
+
+      # Open edit tags modal
+      show_live |> element(~s/a[href*="edit_tags"]/) |> render_click()
+      assert_patch(show_live, ~p"/container/edit_tags/#{container}")
+
+      # Tag should be shown as a deletable tag
+      assert has_element?(show_live, ~s/a[phx-click="delete"][phx-value-tag-id="#{tag.id}"]/)
+
+      # Remove the tag
+      show_live
+      |> element(~s/a[phx-click="delete"][phx-value-tag-id="#{tag.id}"]/)
+      |> render_click()
+
+      # Tag should immediately disappear without a page refresh
+      refute has_element?(show_live, ~s/a[phx-click="delete"][phx-value-tag-id="#{tag.id}"]/)
+      assert render(show_live) =~ "removed successfully"
+    end
+
+    test "adding a tag updates the container show page", %{
+      conn: conn,
+      current_user: current_user,
+      container: container
+    } do
+      tag = tag_fixture(%{name: "visible tag"}, current_user)
+
+      {:ok, _show_live, html} = live(conn, ~p"/container/#{container}")
+
+      # Should show "no tags" initially
+      assert html =~ "No tags for this container"
+
+      # Open edit tags modal and add tag
+      {:ok, show_live, _html} = live(conn, ~p"/container/edit_tags/#{container}")
+
+      show_live
+      |> form("#add-tag-to-container-form", tag: %{tag_id: tag.id})
+      |> render_submit()
+
+      # Navigate back to show page to verify it persisted
+      {:ok, _show_live, html} = live(conn, ~p"/container/#{container}")
+
+      assert html =~ "visible tag"
+      refute html =~ "No tags for this container"
     end
   end
 
@@ -314,7 +528,7 @@ defmodule CanneryWeb.ContainerLiveTest do
 
       html =
         show_live
-        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_table-label"}]/)
+        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_table-label"]/)
         |> render_click()
 
       assert html =~ type_name

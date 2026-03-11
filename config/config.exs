@@ -43,6 +43,8 @@ config :cannery, :generators,
 # at the `config/runtime.exs`.
 config :cannery, Cannery.Mailer, adapter: Swoosh.Adapters.Local
 
+config :ex_heroicons, type: "outline"
+
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
 

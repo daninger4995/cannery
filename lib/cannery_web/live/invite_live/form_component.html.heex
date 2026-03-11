@@ -2,42 +2,42 @@
   <h2 class="mb-8 text-center title text-xl text-primary-600">
     {@title}
   </h2>
-  <.form
+  <.simple_form
     :let={f}
     for={@changeset}
     id="invite-form"
-    class="flex flex-col space-y-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 justify-center items-center"
+    class="flex flex-col space-y-4 justify-center items-stretch max-w-2xl w-full mx-auto"
     phx-target={@myself}
     phx-change="validate"
     phx-submit="save"
   >
-    <div
-      :if={@changeset.action && not @changeset.valid?}
-      class="invalid-feedback col-span-3 text-center"
-    >
-      {changeset_errors(@changeset)}
-    </div>
+    <.input
+      field={f[:name]}
+      type="text"
+      label={gettext("Name")}
+      class="input input-primary"
+      maxlength="255"
+      phx-debounce="300"
+    />
 
-    {label(f, :name, gettext("Name"),
-      class: "title text-lg text-primary-600",
-      maxlength: 255
-    )}
-    {text_input(f, :name,
-      class: "input input-primary col-span-2",
-      phx_debounce: 300
-    )}
-    {error_tag(f, :name, "col-span-3")}
-
-    {label(f, :uses_left, gettext("Uses left"), class: "title text-lg text-primary-600")}
-    {number_input(f, :uses_left, min: 0, class: "input input-primary col-span-2")}
-    {error_tag(f, :uses_left, "col-span-3")}
-    <span class="col-span-3 text-primary-400 italic text-center">
+    <.input
+      field={f[:uses_left]}
+      type="number"
+      label={gettext("Uses left")}
+      min="0"
+      class="input input-primary"
+    />
+    <span class="text-primary-400 italic text-center">
       {gettext(~s/Leave "Uses left" blank to make invite unlimited/)}
     </span>
 
-    {submit(dgettext("actions", "Save"),
-      class: "mx-auto btn btn-primary col-span-3",
-      phx_disable_with: dgettext("prompts", "Saving...")
-    )}
-  </.form>
+    <:actions>
+      <.button
+        class="mx-auto btn btn-primary"
+        phx-disable-with={dgettext("prompts", "Saving...")}
+      >
+        {dgettext("actions", "Save")}
+      </.button>
+    </:actions>
+  </.simple_form>
 </div>

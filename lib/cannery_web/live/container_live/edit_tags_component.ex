@@ -12,19 +12,17 @@ defmodule CanneryWeb.ContainerLive.EditTagsComponent do
   @spec update(
           %{
             :container => Container.t(),
-            :current_path => String.t(),
             :current_user => User.t(),
             optional(any) => any
           },
           Socket.t()
         ) :: {:ok, Socket.t()}
   def update(
-        %{container: _container, current_path: _current_path, current_user: current_user} =
-          assigns,
+        %{container: _container, current_user: current_user} = assigns,
         socket
       ) do
     tags = Containers.list_tags(current_user)
-    {:ok, socket |> assign(assigns) |> assign(:tags, tags)}
+    socket |> assign(assigns) |> assign(:tags, tags) |> wrap(:ok)
   end
 
   @impl true
@@ -35,24 +33,23 @@ defmodule CanneryWeb.ContainerLive.EditTagsComponent do
           assigns: %{
             tags: tags,
             container: container,
-            current_user: current_user,
-            current_path: current_path
+            current_user: current_user
           }
         } = socket
       ) do
-    socket =
-      case tags |> Enum.find(fn %{id: id} -> tag_id == id end) do
-        nil ->
-          prompt = dgettext("errors", "Tag could not be added")
-          socket |> put_flash(:error, prompt)
+    case tags |> Enum.find(fn %{id: id} -> tag_id == id end) do
+      nil ->
+        prompt = dgettext("errors", "Tag could not be added")
+        send(self(), {__MODULE__, {:tags_updated, {:error, prompt}}})
+        socket |> wrap(:noreply)
 
-        %{name: tag_name} = tag ->
-          _container_tag = Containers.add_tag!(container, tag, current_user)
-          prompt = dgettext("prompts", "%{name} added successfully", name: tag_name)
-          socket |> put_flash(:info, prompt) |> push_patch(to: current_path)
-      end
-
-    {:noreply, socket}
+      %{name: tag_name} = tag ->
+        _container_tag = Containers.add_tag!(container, tag, current_user)
+        prompt = dgettext("prompts", "%{name} added successfully", name: tag_name)
+        container = Containers.get_container!(container.id, current_user)
+        send(self(), {__MODULE__, {:tags_updated, {:info, prompt}}})
+        socket |> assign(:container, container) |> wrap(:noreply)
+    end
   end
 
   def handle_event(
@@ -62,24 +59,23 @@ defmodule CanneryWeb.ContainerLive.EditTagsComponent do
           assigns: %{
             tags: tags,
             container: container,
-            current_user: current_user,
-            current_path: current_path
+            current_user: current_user
           }
         } = socket
       ) do
-    socket =
-      case tags |> Enum.find(fn %{id: id} -> tag_id == id end) do
-        nil ->
-          prompt = dgettext("errors", "Tag could not be removed")
-          socket |> put_flash(:error, prompt)
+    case tags |> Enum.find(fn %{id: id} -> tag_id == id end) do
+      nil ->
+        prompt = dgettext("errors", "Tag could not be removed")
+        send(self(), {__MODULE__, {:tags_updated, {:error, prompt}}})
+        socket |> wrap(:noreply)
 
-        %{name: tag_name} = tag ->
-          _container_tag = Containers.remove_tag!(container, tag, current_user)
-          prompt = dgettext("prompts", "%{name} removed successfully", name: tag_name)
-          socket |> put_flash(:info, prompt) |> push_patch(to: current_path)
-      end
-
-    {:noreply, socket}
+      %{name: tag_name} = tag ->
+        _container_tag = Containers.remove_tag!(container, tag, current_user)
+        prompt = dgettext("prompts", "%{name} removed successfully", name: tag_name)
+        container = Containers.get_container!(container.id, current_user)
+        send(self(), {__MODULE__, {:tags_updated, {:info, prompt}}})
+        socket |> assign(:container, container) |> wrap(:noreply)
+    end
   end
 
   @spec tag_options([Tag.t()], Container.t()) :: [{String.t(), Tag.id()}]

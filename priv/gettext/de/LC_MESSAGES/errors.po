@@ -28,13 +28,13 @@ msgstr ""
 msgid "Container must be empty before deleting"
 msgstr "Behälter muss vor dem Löschen leer sein"
 
-#: lib/cannery_web/live/container_live/index.ex:86
-#: lib/cannery_web/live/container_live/show.ex:67
+#: lib/cannery_web/live/container_live/index.ex:98
+#: lib/cannery_web/live/container_live/show.ex:83
 #, elixir-autogen, elixir-format
 msgid "Could not delete %{name}: %{error}"
 msgstr "Konnte %{name} nicht löschen: %{error}"
 
-#: lib/cannery_web/live/container_live/index.ex:74
+#: lib/cannery_web/live/container_live/index.ex:88
 #, elixir-autogen, elixir-format
 msgid "Could not find that container"
 msgstr "Konnte Behälter nicht finden"
@@ -68,9 +68,7 @@ msgstr "Nicht gefunden"
 #: lib/cannery_web/controllers/user_registration_html/new.html.heex:13
 #: lib/cannery_web/controllers/user_reset_password_html/edit.html.heex:13
 #: lib/cannery_web/controllers/user_settings_html/edit.html.heex:22
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:64
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:118
-#: lib/cannery_web/live/type_live/form_component.html.heex:18
+#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:74
 #, elixir-autogen, elixir-format
 msgid "Oops, something went wrong! Please check the errors below."
 msgstr "Oops, etwas ist schiefgegangen. Bitte beachten Sie den Fehler unten."
@@ -135,12 +133,12 @@ msgstr "ist nicht gültig"
 msgid "must have the @ sign and no spaces"
 msgstr "Muss ein @ Zeichen und keine Leerzeichen haben"
 
-#: lib/cannery_web/live/container_live/show.ex:45
+#: lib/cannery_web/live/container_live/show.ex:63
 #, elixir-autogen, elixir-format
 msgid "Tag not found"
 msgstr "Tag nicht gefunden"
 
-#: lib/cannery_web/live/container_live/edit_tags_component.ex:46
+#: lib/cannery_web/live/container_live/edit_tags_component.ex:42
 #, elixir-autogen, elixir-format
 msgid "Tag could not be added"
 msgstr "Tag konnte nicht hinzugefügt werden"
@@ -153,7 +151,7 @@ msgstr ""
 "Sie müssen ihr Nutzerkonto bestätigen und einloggen, um diese Seite "
 "anzuzeigen."
 
-#: lib/cannery_web/live/container_live/edit_tags_component.ex:73
+#: lib/cannery_web/live/container_live/edit_tags_component.ex:68
 #, elixir-autogen, elixir-format
 msgid "Tag could not be removed"
 msgstr "Tag konnte nicht gelöscht werden"
@@ -170,7 +168,7 @@ msgstr ""
 "Ungültige Nummer an Kopien. Muss zwischen 1 and %{max} liegen. War "
 "%{multiplier}"
 
-#: lib/cannery_web/live/range_live/index.html.heex:83
+#: lib/cannery_web/live/range_live/index.html.heex:87
 #, elixir-autogen, elixir-format
 msgid "Your browser does not support the canvas element."
 msgstr ""
@@ -224,4 +222,17 @@ msgstr ""
 #: lib/cannery/ammo/pack.ex:99
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Please select a valid type"
+msgstr ""
+
+#: lib/cannery_web/live/container_live/index.ex:108
+#: lib/cannery_web/live/container_live/show.ex:91
+#, elixir-autogen, elixir-format
+msgid "Could not delete container"
+msgstr ""
+
+#: lib/cannery_web/live/invite_live/index.ex:63
+#: lib/cannery_web/live/invite_live/index.ex:85
+#: lib/cannery_web/live/invite_live/index.ex:109
+#, elixir-autogen, elixir-format
+msgid "Could not save invite"
 msgstr ""

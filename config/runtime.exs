@@ -60,9 +60,14 @@ config :cannery, CanneryWeb.Endpoint,
     # See the documentation on https://hexdocs.pm/plug_cowboy/Plug.Cowboy.html
     # for details about using IPv6 vs IPv4 and loopback vs public addresses.
     ip: interface,
-    port: String.to_integer(System.get_env("PORT", "4000"))
+    port:
+      if config_env() == :test do
+        String.to_integer(System.get_env("TEST_PORT", "4001"))
+      else
+        String.to_integer(System.get_env("PORT", "4000"))
+      end
   ],
-  server: true
+  server: config_env() != :test
 
 if config_env() in [:dev, :prod] do
   config :cannery, Cannery.Accounts, registration: System.get_env("REGISTRATION", "invite")
@@ -86,14 +91,29 @@ if config_env() == :prod do
   # Automatically apply migrations
   config :cannery, Cannery.Application, automigrate: true
 
+  smtp_host = System.get_env("SMTP_HOST") || raise("No SMTP_HOST set!")
+
   # Set up SMTP settings
   config :cannery, Cannery.Mailer,
     adapter: Swoosh.Adapters.SMTP,
-    relay: System.get_env("SMTP_HOST") || raise("No SMTP_HOST set!"),
-    port: System.get_env("SMTP_PORT", "587"),
+    relay: smtp_host,
+    port: System.get_env("SMTP_PORT", "587") |> String.to_integer(),
     username: System.get_env("SMTP_USERNAME") || raise("No SMTP_USERNAME set!"),
     password: System.get_env("SMTP_PASSWORD") || raise("No SMTP_PASSWORD set!"),
     ssl: System.get_env("SMTP_SSL") == "true",
+    tls: :always,
+    auth: :always,
+    no_mx_lookups: false,
+    tls_options: [
+      versions: [:"tlsv1.3"],
+      verify: :verify_peer,
+      cacerts: :public_key.cacerts_get(),
+      server_name_indication: String.to_charlist(smtp_host),
+      depth: 99,
+      customize_hostname_check: [
+        match_fun: :public_key.pkix_verify_hostname_match_fun(:https)
+      ]
+    ],
     email_from: System.get_env("EMAIL_FROM", "no-reply@#{System.get_env("HOST")}"),
     email_name: System.get_env("EMAIL_NAME", "Cannery")
 

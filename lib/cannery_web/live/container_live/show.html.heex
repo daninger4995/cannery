@@ -1,178 +1,179 @@
-<div class="flex flex-col justify-center items-center space-y-4">
-  <h1 class="text-2xl title title-primary-500">
-    {@container.name}
-  </h1>
+<div class="flex flex-col space-y-4">
+  <div class="max-w-2xl mx-auto w-full flex flex-col items-center space-y-4">
+    <h1 class="text-2xl title title-primary-500">
+      {@container.name}
+    </h1>
 
-  <span :if={@container.desc} class="text-lg rounded-lg title">
-    {gettext("Description:")}
-    {@container.desc}
-  </span>
+    <span :if={@container.desc} class="text-lg rounded-lg title">
+      {gettext("Description:")}
+      {@container.desc}
+    </span>
 
-  <span class="text-lg rounded-lg title">
-    {gettext("Type:")}
-    {@container.type}
-  </span>
+    <span class="text-lg rounded-lg title">
+      {gettext("Type:")}
+      {@container.type}
+    </span>
 
-  <span :if={@container.location} class="text-lg rounded-lg title">
-    {gettext("Location:")}
-    {@container.location}
-  </span>
+    <span :if={@container.location} class="text-lg rounded-lg title">
+      {gettext("Location:")}
+      {@container.location}
+    </span>
 
-  <span class="text-lg rounded-lg title">
-    {gettext("Packs:")}
-    {@packs_count}
-  </span>
+    <span class="text-lg rounded-lg title">
+      {gettext("Packs:")}
+      {@packs_count}
+    </span>
 
-  <span class="text-lg rounded-lg title">
-    {gettext("Rounds:")}
-    {@round_count}
-  </span>
+    <span class="text-lg rounded-lg title">
+      {gettext("Rounds:")}
+      {@round_count}
+    </span>
 
-  <div class="flex justify-center items-center space-x-4 text-primary-600">
-    <.link
-      patch={~p"/container/edit/#{@container}"}
-      class="text-primary-600 link"
-      aria-label={dgettext("actions", "Edit %{container_name}", container_name: @container.name)}
-    >
-      <i class="fa-fw fa-lg fas fa-edit"></i>
-    </.link>
+    <div class="flex justify-center items-center space-x-4 text-primary-600">
+      <.link
+        patch={~p"/container/edit/#{@container}"}
+        class="text-primary-600 link"
+        aria-label={
+          dgettext("actions", "Edit %{container_name}", container_name: @container.name)
+        }
+      >
+        <.icon name="pencil-square" class="size-6" />
+      </.link>
 
-    <.link
-      href="#"
-      class="text-primary-600 link"
-      phx-click="delete_container"
-      data-confirm={
-        dgettext("prompts", "Are you sure you want to delete %{name}?", name: @container.name)
-      }
-      aria-label={
-        dgettext("actions", "Delete %{container_name}", container_name: @container.name)
-      }
-    >
-      <i class="fa-fw fa-lg fas fa-trash"></i>
-    </.link>
-  </div>
-
-  <div class="flex flex-wrap justify-center items-center text-primary-600">
-    <button type="button" class="mx-4 my-2 btn btn-primary" phx-click="toggle_staged">
-      {if @container.staged,
-        do: dgettext("actions", "Unstage from range"),
-        else: dgettext("actions", "Stage for range")}
-    </button>
-  </div>
-
-  <hr class="mb-4 hr" />
-
-  <%= if @container.tags |> Enum.empty?() do %>
-    <div class="flex flex-row justify-center items-center space-x-4">
-      <h2 class="text-lg title text-primary-600">
-        {gettext("No tags for this container")}
-        {display_emoji("😔")}
-      </h2>
-
-      <.link patch={~p"/container/edit_tags/#{@container}"} class="btn btn-primary">
-        {dgettext("actions", "Why not add one?")}
+      <.link
+        href="#"
+        class="text-primary-600 link"
+        phx-click="delete_container"
+        data-confirm={
+          dgettext("prompts", "Are you sure you want to delete %{name}?", name: @container.name)
+        }
+        aria-label={
+          dgettext("actions", "Delete %{container_name}", container_name: @container.name)
+        }
+      >
+        <.icon name="trash" class="size-6" />
       </.link>
     </div>
-  <% else %>
-    <div class="flex flex-wrap justify-center items-center">
-      <.simple_tag_card :for={tag <- @container.tags} tag={tag} />
 
-      <div class="mx-4 my-2">
-        <.link patch={~p"/container/edit_tags/#{@container}"} class="text-primary-600 link">
-          <i class="fa-fw fa-lg fas fa-tags"></i>
+    <div class="flex flex-wrap justify-center items-center text-primary-600">
+      <button type="button" class="mx-4 my-2 btn btn-primary" phx-click="toggle_staged">
+        {if @container.staged,
+          do: dgettext("actions", "Unstage from range"),
+          else: dgettext("actions", "Stage for range")}
+      </button>
+    </div>
+
+    <hr class="mb-4 hr" />
+
+    <%= if @container.tags |> Enum.empty?() do %>
+      <div class="flex flex-row justify-center items-center space-x-4">
+        <h2 class="text-lg title text-primary-600">
+          {gettext("No tags for this container")}
+          {display_emoji("😔")}
+        </h2>
+
+        <.link patch={~p"/container/edit_tags/#{@container}"} class="btn btn-primary">
+          {dgettext("actions", "Why not add one?")}
         </.link>
       </div>
-    </div>
-  <% end %>
-
-  <hr class="mb-4 hr" />
-
-  <div class="flex justify-center items-center space-x-4">
-    <.form
-      :let={f}
-      for={%{}}
-      as={:type}
-      phx-change="change_class"
-      phx-submit="change_class"
-      class="flex items-center"
-    >
-      {label(f, :class, gettext("Class"), class: "title text-primary-600 text-lg text-center")}
-
-      {select(
-        f,
-        :class,
-        [
-          {gettext("All"), :all},
-          {gettext("Rifle"), :rifle},
-          {gettext("Shotgun"), :shotgun},
-          {gettext("Pistol"), :pistol}
-        ],
-        class: "mx-2 my-1 min-w-20 input input-primary",
-        value: @class
-      )}
-    </.form>
-
-    <.toggle_button action="toggle_table" value={@view_table}>
-      <span class="text-lg title text-primary-600">
-        {gettext("View as table")}
-      </span>
-    </.toggle_button>
-  </div>
-
-  <div class="p-4 w-full">
-    <%= if @packs |> Enum.empty?() do %>
-      <h2 class="mx-4 text-lg text-center title text-primary-600">
-        {gettext("No ammo in this container")}
-      </h2>
     <% else %>
-      <%= if @view_table do %>
-        <.live_component
-          module={CanneryWeb.Components.PackTableComponent}
-          id="pack-show-table"
-          packs={@packs}
-          current_user={@current_user}
-          show_used={false}
-        >
-          <:type :let={%{name: type_name} = type}>
-            <.link navigate={~p"/type/#{type}"} class="link">
-              {type_name}
-            </.link>
-          </:type>
-          <:actions :let={%{count: pack_count} = pack}>
-            <div class="flex justify-center items-center px-4 py-2 space-x-4 h-full">
-              <.link
-                navigate={~p"/ammo/show/#{pack}"}
-                class="text-primary-600 link"
-                aria-label={
-                  dgettext("actions", "View pack of %{pack_count} bullets",
-                    pack_count: pack_count
-                  )
-                }
-              >
-                <i class="fa-fw fa-lg fas fa-eye"></i>
-              </.link>
-            </div>
-          </:actions>
-        </.live_component>
-      <% else %>
-        <div class="flex flex-wrap justify-center items-stretch">
-          <.pack_card
-            :for={%{id: pack_id} = pack <- @packs}
-            pack={pack}
-            original_count={Map.fetch!(@original_counts, pack_id)}
-            cpr={Map.get(@cprs, pack_id)}
-            last_used_date={Map.get(@last_used_dates, pack_id)}
-            current_user={@current_user}
-          />
+      <div class="flex flex-wrap justify-center items-center">
+        <.simple_tag_card :for={tag <- @container.tags} tag={tag} />
+
+        <div class="mx-4 my-2">
+          <.link patch={~p"/container/edit_tags/#{@container}"} class="text-primary-600 link">
+            <.icon name="tag" class="size-6" />
+          </.link>
         </div>
-      <% end %>
+      </div>
     <% end %>
+
+    <hr class="mb-4 hr" />
+
+    <div class="flex justify-center items-end space-x-4">
+      <.form
+        :let={f}
+        for={%{}}
+        as={:type}
+        phx-change="change_class"
+        phx-submit="change_class"
+        class="flex items-center"
+      >
+        <.input
+          field={f[:class]}
+          type="select"
+          label={gettext("Class")}
+          options={[
+            {gettext("All"), :all},
+            {gettext("Rifle"), :rifle},
+            {gettext("Shotgun"), :shotgun},
+            {gettext("Pistol"), :pistol}
+          ]}
+          class="mx-2 min-w-20 input input-primary"
+          value={@class}
+        />
+      </.form>
+
+      <div class="pb-1">
+        <.toggle_button action="toggle_table" value={@view_table}>
+          <span class="text-lg title text-primary-600">
+            {gettext("View as table")}
+          </span>
+        </.toggle_button>
+      </div>
+    </div>
   </div>
+
+  <%= if @packs |> Enum.empty?() do %>
+    <h2 class="mx-4 text-lg text-center title text-primary-600">
+      {gettext("No ammo in this container")}
+    </h2>
+  <% else %>
+    <%= if @view_table do %>
+      <.live_component
+        module={CanneryWeb.Components.PackTableComponent}
+        id="pack-show-table"
+        packs={@packs}
+        current_user={@current_user}
+        show_used={false}
+      >
+        <:type :let={%{name: type_name} = type}>
+          <.link navigate={~p"/type/#{type}"} class="link">
+            {type_name}
+          </.link>
+        </:type>
+        <:actions :let={%{count: pack_count} = pack}>
+          <div class="flex justify-center items-center px-4 py-2 space-x-4 h-full">
+            <.link
+              navigate={~p"/ammo/show/#{pack}"}
+              class="text-primary-600 link"
+              aria-label={
+                dgettext("actions", "View pack of %{pack_count} bullets", pack_count: pack_count)
+              }
+            >
+              <.icon name="eye" class="size-6" />
+            </.link>
+          </div>
+        </:actions>
+      </.live_component>
+    <% else %>
+      <div class="flex flex-wrap justify-center items-stretch">
+        <.pack_card
+          :for={%{id: pack_id} = pack <- @packs}
+          pack={pack}
+          original_count={Map.fetch!(@original_counts, pack_id)}
+          cpr={Map.get(@cprs, pack_id)}
+          last_used_date={Map.get(@last_used_dates, pack_id)}
+          current_user={@current_user}
+        />
+      </div>
+    <% end %>
+  <% end %>
 </div>
 
 <%= case @live_action do %>
   <% :edit -> %>
-    <.modal return_to={~p"/container/#{@container}"}>
+    <.modal id="container-edit-modal" on_cancel={JS.patch(~p"/container/#{@container}")}>
       <.live_component
         module={CanneryWeb.ContainerLive.FormComponent}
         id={@container.id}
@@ -184,7 +185,7 @@
       />
     </.modal>
   <% :edit_tags -> %>
-    <.modal return_to={~p"/container/#{@container}"}>
+    <.modal id="container-edit-modal" on_cancel={JS.patch(~p"/container/#{@container}")}>
       <.live_component
         module={CanneryWeb.ContainerLive.EditTagsComponent}
         id={@container.id}
@@ -192,7 +193,6 @@
         action={@live_action}
         container={@container}
         return_to={~p"/container/#{@container}"}
-        current_path={~p"/container/edit_tags/#{@container}"}
         current_user={@current_user}
       />
     </.modal>

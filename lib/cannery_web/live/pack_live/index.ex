@@ -22,8 +22,17 @@ defmodule CanneryWeb.PackLive.Index do
 
   @impl true
   def handle_params(params, _url, %{assigns: %{live_action: live_action}} = socket) do
-    {:noreply, apply_action(socket, live_action, params) |> display_packs()}
+    {:noreply,
+     socket
+     |> assign_class(params)
+     |> apply_action(live_action, params)
+     |> display_packs()}
   end
+
+  defp assign_class(socket, %{"class" => class}) when class in ~w(rifle shotgun pistol),
+    do: socket |> assign(:class, String.to_existing_atom(class))
+
+  defp assign_class(socket, _params), do: socket |> assign(:class, :all)
 
   defp apply_action(
          %{assigns: %{current_user: current_user}} = socket,
@@ -69,11 +78,11 @@ defmodule CanneryWeb.PackLive.Index do
     )
   end
 
-  defp apply_action(socket, :index, _params) do
+  defp apply_action(socket, :index, params) do
     socket
     |> assign(
       page_title: gettext("Ammo"),
-      search: nil,
+      search: params["search"],
       pack: nil
     )
   end
@@ -108,20 +117,10 @@ defmodule CanneryWeb.PackLive.Index do
     {:noreply, socket |> push_patch(to: ~p"/ammo/search/#{search_term}")}
   end
 
-  def handle_event("change_class", %{"type" => %{"class" => "rifle"}}, socket) do
-    {:noreply, socket |> assign(:class, :rifle) |> display_packs()}
-  end
-
-  def handle_event("change_class", %{"type" => %{"class" => "shotgun"}}, socket) do
-    {:noreply, socket |> assign(:class, :shotgun) |> display_packs()}
-  end
-
-  def handle_event("change_class", %{"type" => %{"class" => "pistol"}}, socket) do
-    {:noreply, socket |> assign(:class, :pistol) |> display_packs()}
-  end
-
-  def handle_event("change_class", %{"type" => %{"class" => _all}}, socket) do
-    {:noreply, socket |> assign(:class, :all) |> display_packs()}
+  def handle_event("change_class", %{"type" => %{"class" => class}}, %{assigns: assigns} = socket) do
+    params = %{"class" => class}
+    params = if assigns[:search], do: Map.put(params, "search", assigns.search), else: params
+    {:noreply, socket |> push_patch(to: ~p"/ammo?#{params}")}
   end
 
   defp display_packs(

@@ -9,375 +9,454 @@
     phx-target={@myself}
     phx-change="validate"
     phx-submit="save"
-    class="flex flex-col space-y-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 justify-center items-center"
+    class="flex flex-col space-y-4 justify-center items-stretch max-w-2xl w-full mx-auto"
   >
-    <div
-      :if={@changeset.action && not @changeset.valid?}
-      class="invalid-feedback col-span-3 text-center"
-    >
-      {dgettext("errors", "Oops, something went wrong! Please check the errors below.")}
-    </div>
+    <.input
+      field={f[:name]}
+      type="text"
+      label={gettext("Name")}
+      class="text-center input input-primary"
+      maxlength="255"
+      phx-debounce="300"
+    />
 
-    {label(f, :class, gettext("Class"), class: "title text-lg text-primary-600")}
-    {select(
-      f,
-      :class,
-      [
+    <.input
+      field={f[:class]}
+      type="select"
+      label={gettext("Class")}
+      options={[
         {gettext("Rifle"), :rifle},
         {gettext("Shotgun"), :shotgun},
         {gettext("Pistol"), :pistol}
-      ],
-      class: "text-center col-span-2 input input-primary",
-      maxlength: 255
-    )}
-    {error_tag(f, :class, "col-span-3 text-center")}
+      ]}
+      class="text-center input input-primary"
+      maxlength="255"
+    />
 
-    {label(f, :name, gettext("Name"), class: "title text-lg text-primary-600")}
-    {text_input(f, :name,
-      class: "text-center col-span-2 input input-primary",
-      maxlength: 255,
-      phx_debounce: 300
-    )}
-    {error_tag(f, :name, "col-span-3 text-center")}
+    <.input
+      field={f[:desc]}
+      type="textarea"
+      label={gettext("Description")}
+      class="text-center input input-primary"
+      id="type-form-desc"
+      phx-debounce="300"
+      phx-update="ignore"
+    />
 
-    {label(f, :desc, gettext("Description"), class: "title text-lg text-primary-600")}
-    {textarea(f, :desc,
-      class: "text-center col-span-2 input input-primary",
-      id: "type-form-desc",
-      phx_debounce: 300,
-      phx_update: "ignore"
-    )}
-    {error_tag(f, :desc, "col-span-3 text-center")}
-
-    <h2 class="text-center title text-lg text-primary-600 col-span-3">
+    <h2 class="text-center title text-lg text-primary-600">
       {gettext("Dimensions")}
     </h2>
 
     <%= if Changeset.get_field(@changeset, :class) in [:rifle, :pistol] do %>
-      {label(f, :cartridge, gettext("Cartridge"), class: "title text-lg text-primary-600")}
-      {text_input(f, :cartridge,
-        class: "text-center col-span-2 input input-primary",
-        maxlength: 255,
-        phx_debounce: 300,
-        placeholder: gettext("5.56x46mm NATO")
-      )}
-      {error_tag(f, :cartridge, "col-span-3 text-center")}
+      <.input
+        field={f[:cartridge]}
+        type="text"
+        label={gettext("Cartridge")}
+        class="text-center input input-primary"
+        maxlength="255"
+        phx-debounce="300"
+        placeholder={gettext("5.56x46mm NATO")}
+      />
     <% else %>
-      {hidden_input(f, :cartridge, value: nil)}
+      <.input
+        type="hidden"
+        id="cartridge"
+        field={f[:cartridge]}
+        name="id"
+        value={nil}
+      />
     <% end %>
 
-    {label(
-      f,
-      :caliber,
-      if(Changeset.get_field(@changeset, :class) == :shotgun,
-        do: gettext("Gauge"),
-        else: gettext("Caliber")
-      ),
-      class: "title text-lg text-primary-600"
-    )}
-    {text_input(f, :caliber,
-      class: "text-center col-span-2 input input-primary",
-      maxlength: 255,
-      phx_debounce: 300,
-      placeholder: gettext(".223")
-    )}
-    {error_tag(f, :caliber, "col-span-3 text-center")}
+    <.input
+      field={f[:caliber]}
+      type="text"
+      label={
+        if(Changeset.get_field(@changeset, :class) == :shotgun,
+          do: gettext("Gauge"),
+          else: gettext("Caliber")
+        )
+      }
+      class="text-center input input-primary"
+      maxlength="255"
+      phx-debounce="300"
+      placeholder={gettext(".223")}
+    />
 
     <%= if Changeset.get_field(@changeset, :class) == :shotgun do %>
-      {label(f, :unfired_length, gettext("Unfired shell length"),
-        class: "title text-lg text-primary-600"
-      )}
-      {text_input(f, :unfired_length,
-        class: "text-center col-span-2 input input-primary",
-        maxlength: 255,
-        phx_debounce: 300
-      )}
-      {error_tag(f, :unfired_length, "col-span-3 text-center")}
+      <.input
+        field={f[:unfired_length]}
+        type="text"
+        label={gettext("Unfired shell length")}
+        class="text-center input input-primary"
+        maxlength="255"
+        phx-debounce="300"
+      />
 
-      {label(f, :brass_height, gettext("Brass height"), class: "title text-lg text-primary-600")}
-      {text_input(f, :brass_height,
-        class: "text-center col-span-2 input input-primary",
-        maxlength: 255,
-        phx_debounce: 300
-      )}
-      {error_tag(f, :brass_height, "col-span-3 text-center")}
+      <.input
+        field={f[:brass_height]}
+        type="text"
+        label={gettext("Brass height")}
+        class="text-center input input-primary"
+        maxlength="255"
+        phx-debounce="300"
+      />
 
-      {label(f, :chamber_size, gettext("Chamber size"), class: "title text-lg text-primary-600")}
-      {text_input(f, :chamber_size,
-        class: "text-center col-span-2 input input-primary",
-        maxlength: 255,
-        phx_debounce: 300
-      )}
-      {error_tag(f, :chamber_size, "col-span-3 text-center")}
+      <.input
+        field={f[:chamber_size]}
+        type="text"
+        label={gettext("Chamber size")}
+        class="text-center input input-primary"
+        maxlength="255"
+        phx-debounce="300"
+      />
     <% else %>
-      {hidden_input(f, :unfired_length, value: nil)}
-      {hidden_input(f, :brass_height, value: nil)}
-      {hidden_input(f, :chamber_size, value: nil)}
+      <.input
+        type="hidden"
+        id="unfired_length"
+        field={f[:unfired_length]}
+        name="id"
+        value={nil}
+      />
+      <.input
+        type="hidden"
+        id="brass_height"
+        field={f[:brass_height]}
+        name="id"
+        value={nil}
+      />
+      <.input
+        type="hidden"
+        id="chamber_size"
+        field={f[:chamber_size]}
+        name="id"
+        value={nil}
+      />
     <% end %>
 
-    <h2 class="text-center title text-lg text-primary-600 col-span-3">
+    <h2 class="text-center title text-lg text-primary-600">
       {gettext("Projectile")}
     </h2>
 
-    {label(f, :grains, gettext("Grains"), class: "title text-lg text-primary-600")}
-    {number_input(f, :grains,
-      step: "1",
-      class: "text-center col-span-2 input input-primary",
-      min: 1
-    )}
-    {error_tag(f, :grains, "col-span-3 text-center")}
+    <.input
+      field={f[:grains]}
+      type="number"
+      label={gettext("Grains")}
+      step="1"
+      class="text-center input input-primary"
+      min="1"
+    />
 
     <%= if Changeset.get_field(@changeset, :class) in [:rifle, :pistol] do %>
-      <%= label f, :bullet_type, class: "flex title text-lg text-primary-600 space-x-2" do %>
-        <p>{gettext("Bullet type")}</p>
-
-        <.link
-          href="https://shootersreference.com/reloadingdata/bullet_abbreviations/"
-          class="link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <i class="fas fa-md fa-external-link-alt"></i>
-        </.link>
-      <% end %>
-      {text_input(f, :bullet_type,
-        class: "text-center col-span-2 input input-primary",
-        maxlength: 255,
-        phx_debounce: 300,
-        placeholder: gettext("FMJ")
-      )}
-      {error_tag(f, :bullet_type, "col-span-3 text-center")}
+      <div class="flex flex-col gap-1 w-full">
+        <div class="flex items-center gap-1 text-sm leading-6 text-white">
+          <span>{gettext("Bullet type")}</span>
+          <.link
+            href="https://shootersreference.com/reloadingdata/bullet_abbreviations/"
+            class="link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <.icon name="arrow-top-right-on-square" class="size-4" />
+          </.link>
+        </div>
+        <.input
+          field={f[:bullet_type]}
+          type="text"
+          hidden_label={true}
+          class="text-center input input-primary"
+          maxlength="255"
+          phx-debounce="300"
+          placeholder={gettext("FMJ")}
+        />
+      </div>
     <% else %>
-      {hidden_input(f, :bullet_type, value: nil)}
+      <.input
+        type="hidden"
+        id="bullet_type"
+        field={f[:bullet_type]}
+        name="id"
+        value={nil}
+      />
     <% end %>
 
-    {label(
-      f,
-      :bullet_core,
-      if(Changeset.get_field(@changeset, :class) == :shotgun,
-        do: gettext("Slug core"),
-        else: gettext("Bullet core")
-      ),
-      class: "title text-lg text-primary-600"
-    )}
-    {text_input(f, :bullet_core,
-      class: "text-center col-span-2 input input-primary",
-      maxlength: 255,
-      phx_debounce: 300,
-      placeholder: gettext("Steel")
-    )}
-    {error_tag(f, :bullet_core, "col-span-3 text-center")}
+    <.input
+      field={f[:bullet_core]}
+      type="text"
+      label={
+        if(Changeset.get_field(@changeset, :class) == :shotgun,
+          do: gettext("Slug core"),
+          else: gettext("Bullet core")
+        )
+      }
+      class="text-center input input-primary"
+      maxlength="255"
+      phx-debounce="300"
+      placeholder={gettext("Steel")}
+    />
 
     <%= if Changeset.get_field(@changeset, :class) in [:rifle, :pistol] do %>
-      {label(f, :jacket_type, gettext("Jacket type"), class: "title text-lg text-primary-600")}
-      {text_input(f, :jacket_type,
-        class: "text-center col-span-2 input input-primary",
-        maxlength: 255,
-        phx_debounce: 300,
-        placeholder: gettext("Bimetal")
-      )}
-      {error_tag(f, :jacket_type, "col-span-3 text-center")}
+      <.input
+        field={f[:jacket_type]}
+        type="text"
+        label={gettext("Jacket type")}
+        class="text-center input input-primary"
+        maxlength="255"
+        phx-debounce="300"
+        placeholder={gettext("Bimetal")}
+      />
     <% else %>
-      {hidden_input(f, :jacket_type, value: nil)}
+      <.input
+        type="hidden"
+        id="jacket_type"
+        field={f[:jacket_type]}
+        name="id"
+        value={nil}
+      />
     <% end %>
 
-    {label(f, :case_material, gettext("Case material"), class: "title text-lg text-primary-600")}
-    {text_input(f, :case_material,
-      class: "text-center col-span-2 input input-primary",
-      maxlength: 255,
-      phx_debounce: 300,
-      placeholder: gettext("Brass")
-    )}
-    {error_tag(f, :case_material, "col-span-3 text-center")}
+    <.input
+      field={f[:case_material]}
+      type="text"
+      label={gettext("Case material")}
+      class="text-center input input-primary"
+      maxlength="255"
+      phx-debounce="300"
+      placeholder={gettext("Brass")}
+    />
 
     <%= if Changeset.get_field(@changeset, :class) == :shotgun do %>
-      {label(f, :wadding, gettext("Wadding"), class: "title text-lg text-primary-600")}
-      {text_input(f, :wadding,
-        class: "text-center col-span-2 input input-primary",
-        maxlength: 255,
-        phx_debounce: 300
-      )}
-      {error_tag(f, :wadding, "col-span-3 text-center")}
+      <.input
+        field={f[:wadding]}
+        type="text"
+        label={gettext("Wadding")}
+        class="text-center input input-primary"
+        maxlength="255"
+        phx-debounce="300"
+      />
 
-      {label(f, :shot_type, gettext("Shot type"), class: "title text-lg text-primary-600")}
-      {text_input(f, :shot_type,
-        class: "text-center col-span-2 input input-primary",
-        maxlength: 255,
-        phx_debounce: 300,
-        placeholder: gettext("Target, bird, buck, etc")
-      )}
-      {error_tag(f, :shot_type, "col-span-3 text-center")}
+      <.input
+        field={f[:shot_type]}
+        type="text"
+        label={gettext("Shot type")}
+        class="text-center input input-primary"
+        maxlength="255"
+        phx-debounce="300"
+        placeholder={gettext("Target, bird, buck, etc")}
+      />
 
-      {label(f, :shot_material, gettext("Shot material"), class: "title text-lg text-primary-600")}
-      {text_input(f, :shot_material,
-        class: "text-center col-span-2 input input-primary",
-        maxlength: 255,
-        phx_debounce: 300
-      )}
-      {error_tag(f, :shot_material, "col-span-3 text-center")}
+      <.input
+        field={f[:shot_material]}
+        type="text"
+        label={gettext("Shot material")}
+        class="text-center input input-primary"
+        maxlength="255"
+        phx-debounce="300"
+      />
 
-      {label(f, :shot_size, gettext("Shot size"), class: "title text-lg text-primary-600")}
-      {text_input(f, :shot_size,
-        class: "text-center col-span-2 input input-primary",
-        maxlength: 255,
-        phx_debounce: 300
-      )}
-      {error_tag(f, :shot_size, "col-span-3 text-center")}
+      <.input
+        field={f[:shot_size]}
+        type="text"
+        label={gettext("Shot size")}
+        class="text-center input input-primary"
+        maxlength="255"
+        phx-debounce="300"
+      />
 
-      {label(f, :load_grains, gettext("Load grains"), class: "title text-lg text-primary-600")}
-      {number_input(f, :load_grains,
-        step: "1",
-        class: "text-center col-span-2 input input-primary",
-        min: 1
-      )}
-      {error_tag(f, :load_grains, "col-span-3 text-center")}
+      <.input
+        field={f[:load_grains]}
+        type="number"
+        label={gettext("Load grains")}
+        step="1"
+        class="text-center input input-primary"
+        min="1"
+      />
 
-      {label(f, :shot_charge_weight, gettext("Shot charge weight"),
-        class: "title text-lg text-primary-600"
-      )}
-      {text_input(f, :shot_charge_weight,
-        class: "text-center col-span-2 input input-primary",
-        maxlength: 255,
-        phx_debounce: 300
-      )}
-      {error_tag(f, :shot_charge_weight, "col-span-3 text-center")}
+      <.input
+        field={f[:shot_charge_weight]}
+        type="text"
+        label={gettext("Shot charge weight")}
+        class="text-center input input-primary"
+        maxlength="255"
+        phx-debounce="300"
+      />
     <% else %>
-      {hidden_input(f, :wadding, value: nil)}
-      {hidden_input(f, :shot_type, value: nil)}
-      {hidden_input(f, :shot_material, value: nil)}
-      {hidden_input(f, :shot_size, value: nil)}
-      {hidden_input(f, :load_grains, value: nil)}
-      {hidden_input(f, :shot_charge_weight, value: nil)}
+      <.input type="hidden" id="wadding" field={f[:wadding]} name="id" value={nil} />
+      <.input type="hidden" id="shot_type" field={f[:shot_type]} name="id" value={nil} />
+      <.input type="hidden" id="shot_material" field={f[:shot_material]} name="id" value={nil} />
+      <.input type="hidden" id="shot_size" field={f[:shot_size]} name="id" value={nil} />
+      <.input type="hidden" id="load_grains" field={f[:load_grains]} name="id" value={nil} />
+      <.input
+        type="hidden"
+        id="shot_charge_weight"
+        field={f[:shot_charge_weight]}
+        name="id"
+        value={nil}
+      />
     <% end %>
 
-    <h2 class="text-center title text-lg text-primary-600 col-span-3">
+    <h2 class="text-center title text-lg text-primary-600">
       {gettext("Powder")}
     </h2>
 
-    {label(f, :powder_type, gettext("Powder type"), class: "title text-lg text-primary-600")}
-    {text_input(f, :powder_type,
-      class: "text-center col-span-2 input input-primary",
-      maxlength: 255,
-      phx_debounce: 300
-    )}
-    {error_tag(f, :powder_type, "col-span-3 text-center")}
+    <.input
+      field={f[:powder_type]}
+      type="text"
+      label={gettext("Powder type")}
+      class="text-center input input-primary"
+      maxlength="255"
+      phx-debounce="300"
+    />
 
     <%= if Changeset.get_field(@changeset, :class) in [:rifle, :pistol] do %>
-      {label(f, :powder_grains_per_charge, gettext("Powder grains per charge"),
-        class: "title text-lg text-primary-600"
-      )}
-      {number_input(f, :powder_grains_per_charge,
-        step: "1",
-        class: "text-center col-span-2 input input-primary",
-        min: 1
-      )}
-      {error_tag(f, :powder_grains_per_charge, "col-span-3 text-center")}
+      <.input
+        field={f[:powder_grains_per_charge]}
+        type="number"
+        label={gettext("Powder grains per charge")}
+        step="1"
+        class="text-center input input-primary"
+        min="1"
+      />
     <% else %>
-      {hidden_input(f, :powder_grains_per_charge, value: nil)}
+      <.input
+        type="hidden"
+        id="powder_grains_per_charge"
+        field={f[:powder_grains_per_charge]}
+        name="id"
+        value={nil}
+      />
     <% end %>
 
-    {label(f, :pressure, gettext("Pressure"), class: "title text-lg text-primary-600")}
-    {text_input(f, :pressure,
-      class: "text-center col-span-2 input input-primary",
-      maxlength: 255,
-      phx_debounce: 300,
-      placeholder: gettext("+P")
-    )}
-    {error_tag(f, :pressure, "col-span-3 text-center")}
+    <.input
+      field={f[:pressure]}
+      type="text"
+      label={gettext("Pressure")}
+      class="text-center input input-primary"
+      maxlength="255"
+      phx-debounce="300"
+      placeholder={gettext("+P")}
+    />
 
     <%= if Changeset.get_field(@changeset, :class) == :shotgun do %>
-      {label(f, :dram_equivalent, gettext("Dram equivalent"),
-        class: "title text-lg text-primary-600"
-      )}
-      {text_input(f, :dram_equivalent,
-        class: "text-center col-span-2 input input-primary",
-        maxlength: 255,
-        phx_debounce: 300
-      )}
-      {error_tag(f, :dram_equivalent, "col-span-3 text-center")}
+      <.input
+        field={f[:dram_equivalent]}
+        type="text"
+        label={gettext("Dram equivalent")}
+        class="text-center input input-primary"
+        maxlength="255"
+        phx-debounce="300"
+      />
     <% else %>
-      {hidden_input(f, :dram_equivalent, value: nil)}
+      <.input
+        type="hidden"
+        id="dram_equivalent"
+        field={f[:dram_equivalent]}
+        name="id"
+        value={nil}
+      />
     <% end %>
 
     <%= if Changeset.get_field(@changeset, :class) in [:rifle, :pistol] do %>
-      {label(f, :muzzle_velocity, gettext("Muzzle velocity"),
-        class: "title text-lg text-primary-600"
-      )}
-      {number_input(f, :muzzle_velocity,
-        step: "1",
-        class: "text-center col-span-2 input input-primary",
-        min: 1
-      )}
-      {error_tag(f, :muzzle_velocity, "col-span-3 text-center")}
+      <.input
+        field={f[:muzzle_velocity]}
+        type="number"
+        label={gettext("Muzzle velocity")}
+        step="1"
+        class="text-center input input-primary"
+        min="1"
+      />
     <% else %>
-      {hidden_input(f, :muzzle_velocity, value: nil)}
+      <.input
+        type="hidden"
+        id="muzzle_velocity"
+        field={f[:muzzle_velocity]}
+        name="id"
+        value={nil}
+      />
     <% end %>
 
-    <h2 class="text-center title text-lg text-primary-600 col-span-3">
+    <h2 class="text-center title text-lg text-primary-600">
       {gettext("Primer")}
     </h2>
 
-    {label(f, :primer_type, gettext("Primer type"), class: "title text-lg text-primary-600")}
-    {text_input(f, :primer_type,
-      class: "text-center col-span-2 input input-primary",
-      maxlength: 255,
-      phx_debounce: 300,
-      placeholder: gettext("Boxer")
-    )}
-    {error_tag(f, :primer_type, "col-span-3 text-center")}
+    <.input
+      field={f[:primer_type]}
+      type="text"
+      label={gettext("Primer type")}
+      class="text-center input input-primary"
+      maxlength="255"
+      phx-debounce="300"
+      placeholder={gettext("Boxer")}
+    />
 
-    {label(f, :firing_type, gettext("Firing type"), class: "title text-lg text-primary-600")}
-    {text_input(f, :firing_type,
-      class: "text-center col-span-2 input input-primary",
-      maxlength: 255,
-      phx_debounce: 300,
-      placeholder: gettext("Centerfire")
-    )}
-    {error_tag(f, :firing_type, "col-span-3 text-center")}
+    <.input
+      field={f[:firing_type]}
+      type="text"
+      label={gettext("Firing type")}
+      class="text-center input input-primary"
+      maxlength="255"
+      phx-debounce="300"
+      placeholder={gettext("Centerfire")}
+    />
 
-    <h2 class="text-center title text-lg text-primary-600 col-span-3">
+    <h2 class="text-center title text-lg text-primary-600">
       {gettext("Attributes")}
     </h2>
 
-    {label(f, :tracer, gettext("Tracer"), class: "title text-lg text-primary-600")}
-    {checkbox(f, :tracer, class: "text-center col-span-2 checkbox")}
-    {error_tag(f, :tracer, "col-span-3 text-center")}
+    <.input
+      field={f[:tracer]}
+      type="checkbox"
+      label={gettext("Tracer")}
+      class="text-center checkbox"
+    />
 
-    {label(f, :incendiary, gettext("Incendiary"), class: "title text-lg text-primary-600")}
-    {checkbox(f, :incendiary, class: "text-center col-span-2 checkbox")}
-    {error_tag(f, :incendiary, "col-span-3 text-center")}
+    <.input
+      field={f[:incendiary]}
+      type="checkbox"
+      label={gettext("Incendiary")}
+      class="text-center checkbox"
+    />
 
-    {label(f, :blank, gettext("Blank"), class: "title text-lg text-primary-600")}
-    {checkbox(f, :blank, class: "text-center col-span-2 checkbox")}
-    {error_tag(f, :blank, "col-span-3 text-center")}
+    <.input
+      field={f[:blank]}
+      type="checkbox"
+      label={gettext("Blank")}
+      class="text-center checkbox"
+    />
 
-    {label(f, :corrosive, gettext("Corrosive"), class: "title text-lg text-primary-600")}
-    {checkbox(f, :corrosive, class: "text-center col-span-2 checkbox")}
-    {error_tag(f, :corrosive, "col-span-3 text-center")}
+    <.input
+      field={f[:corrosive]}
+      type="checkbox"
+      label={gettext("Corrosive")}
+      class="text-center checkbox"
+    />
 
-    <h2 class="text-center title text-lg text-primary-600 col-span-3">
+    <h2 class="text-center title text-lg text-primary-600">
       {gettext("Manufacturer")}
     </h2>
 
-    {label(f, :manufacturer, gettext("Manufacturer"), class: "title text-lg text-primary-600")}
-    {text_input(f, :manufacturer,
-      class: "text-center col-span-2 input input-primary",
-      maxlength: 255,
-      phx_debounce: 300
-    )}
-    {error_tag(f, :manufacturer, "col-span-3 text-center")}
+    <.input
+      field={f[:manufacturer]}
+      type="text"
+      label={gettext("Manufacturer")}
+      class="text-center input input-primary"
+      maxlength="255"
+      phx-debounce="300"
+    />
 
-    {label(f, :upc, gettext("UPC"), class: "title text-lg text-primary-600")}
-    {text_input(f, :upc,
-      class: "text-center col-span-2 input input-primary",
-      maxlength: 255,
-      phx_debounce: 300
-    )}
-    {error_tag(f, :upc, "col-span-3 text-center")}
+    <.input
+      field={f[:upc]}
+      type="text"
+      label={gettext("UPC")}
+      class="text-center input input-primary"
+      maxlength="255"
+      phx-debounce="300"
+    />
 
-    {submit(dgettext("actions", "Save"),
-      phx_disable_with: dgettext("prompts", "Saving..."),
-      class: "mx-auto col-span-3 btn btn-primary"
-    )}
+    <.button
+      phx-disable-with={dgettext("prompts", "Saving...")}
+      class="mx-auto btn btn-primary"
+    >
+      {dgettext("actions", "Save")}
+    </.button>
   </.form>
 </div>

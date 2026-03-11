@@ -17,7 +17,7 @@ defmodule CanneryWeb do
   those modules here.
   """
 
-  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt webfonts)
+  def static_paths, do: ~w(assets fonts images favicon.ico robots.txt)
 
   def router do
     quote do
@@ -44,7 +44,6 @@ defmodule CanneryWeb do
 
       use Gettext, backend: CanneryWeb.Gettext
 
-      # credo:disable-for-next-line Credo.Check.Consistency.MultiAliasImportRequireUse
       import Plug.Conn
 
       unquote(verified_routes())
@@ -70,7 +69,6 @@ defmodule CanneryWeb do
 
   def html do
     quote do
-      # credo:disable-for-next-line Credo.Check.Consistency.MultiAliasImportRequireUse
       use Phoenix.Component
 
       # Import convenience functions from controllers
@@ -84,13 +82,18 @@ defmodule CanneryWeb do
 
   defp html_helpers do
     quote do
-      use PhoenixHTMLHelpers
+      # Translation
       use Gettext, backend: CanneryWeb.Gettext
+
+      # HTML escaping functionality
       import Phoenix.{Component, HTML, HTML.Form}
-      import CanneryWeb.{ErrorHelpers, CoreComponents, HTMLHelpers}
+      # Core UI components
+      import CanneryWeb.{CoreComponents, HTMLHelpers}
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
+
+      alias Ecto.Changeset
 
       # Routes generation with the ~p sigil
       unquote(verified_routes())
@@ -107,7 +110,7 @@ defmodule CanneryWeb do
   end
 
   @doc """
-  When used, dispatch to the appropriate controller/view/etc.
+  When used, dispatch to the appropriate controller/live_view/etc.
   """
   defmacro __using__(which) when is_atom(which) do
     apply(__MODULE__, which, [])

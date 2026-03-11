@@ -3,116 +3,123 @@
     {@title}
   </h2>
 
-  <.form
+  <.simple_form
     :let={f}
     for={@changeset}
     id="pack-form"
     phx-target={@myself}
     phx-change="validate"
     phx-submit="save"
-    class="flex flex-col space-y-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 justify-center items-center"
+    class="flex flex-col space-y-4 justify-center items-stretch max-w-2xl w-full mx-auto"
   >
-    <div
-      :if={@changeset.action && not @changeset.valid?}
-      class="invalid-feedback col-span-3 text-center"
-    >
-      {changeset_errors(@changeset)}
-    </div>
-
-    {label(f, :class, gettext("Class"), class: "title text-lg text-primary-600")}
-    {select(
-      f,
-      :class,
-      [
+    <.input
+      field={f[:class]}
+      type="select"
+      label={gettext("Class")}
+      options={[
         {gettext("Any"), :all},
         {gettext("Rifle"), :rifle},
         {gettext("Shotgun"), :shotgun},
         {gettext("Pistol"), :pistol}
-      ],
-      class: "text-center col-span-2 input input-primary",
-      value: @class
-    )}
-    {error_tag(f, :class, "col-span-3 text-center")}
+      ]}
+      class="text-center input input-primary"
+      value={@class}
+    />
 
-    {label(f, :type_id, gettext("Type"), class: "title text-lg text-primary-600")}
-    {select(f, :type_id, type_options(@types, @class),
-      class: "text-center col-span-2 input input-primary",
-      id: "pack-form-type-select",
-      phx_hook: "SlimSelect",
-      phx_update: :ignore
-    )}
-    {error_tag(f, :type_id, "col-span-3 text-center")}
+    <.input
+      field={f[:type_id]}
+      type="select"
+      label={gettext("Type")}
+      options={type_options(@types, @class)}
+      class="text-center input input-primary"
+      id="pack-form-type-select"
+      phx-hook="SlimSelect"
+      phx-update="ignore"
+    />
 
-    {label(f, :count, gettext("Count"), class: "title text-lg text-primary-600")}
-    {number_input(f, :count,
-      class: "text-center col-span-2 input input-primary",
-      min: 0
-    )}
-    {error_tag(f, :count, "col-span-3 text-center")}
+    <.input
+      field={f[:count]}
+      type="number"
+      label={gettext("Count")}
+      class="text-center input input-primary"
+      min="0"
+    />
 
-    {label(f, :price_paid, gettext("Price paid"), class: "title text-lg text-primary-600")}
-    {number_input(f, :price_paid,
-      step: 0.01,
-      class: "text-center col-span-2 input input-primary"
-    )}
-    {error_tag(f, :price_paid, "col-span-3 text-center")}
+    <.input
+      field={f[:price_paid]}
+      type="number"
+      label={gettext("Price paid")}
+      step="0.01"
+      class="text-center input input-primary"
+    />
 
-    {label(f, :lot_number, gettext("Lot number"), class: "title text-lg text-primary-600")}
-    {text_input(f, :lot_number,
-      class: "text-center col-span-2 input input-primary",
-      maxlength: 255,
-      phx_debounce: 300
-    )}
-    {error_tag(f, :price_paid, "col-span-3 text-center")}
+    <.input
+      field={f[:lot_number]}
+      type="text"
+      label={gettext("Lot number")}
+      class="text-center input input-primary"
+      maxlength="255"
+      phx-debounce="300"
+    />
 
-    {label(f, :purchased_on, gettext("Purchased on"), class: "title text-lg text-primary-600")}
-    {date_input(f, :purchased_on,
-      class: "input input-primary col-span-2",
-      phx_update: "ignore",
-      value: @changeset |> Changeset.get_field(:purchased_on) || Date.utc_today()
-    )}
-    {error_tag(f, :purchased_on, "col-span-3 text-center")}
+    <.input
+      field={f[:purchased_on]}
+      type="date"
+      label={gettext("Purchased on")}
+      class="input input-primary"
+      phx-update="ignore"
+      value={@changeset |> Changeset.get_field(:purchased_on) || Date.utc_today()}
+    />
 
-    {label(f, :notes, gettext("Notes"), class: "title text-lg text-primary-600")}
-    {textarea(f, :notes,
-      class: "text-center col-span-2 input input-primary",
-      id: "pack-form-notes",
-      phx_debounce: 300,
-      phx_update: "ignore"
-    )}
-    {error_tag(f, :notes, "col-span-3 text-center")}
+    <.input
+      field={f[:notes]}
+      type="textarea"
+      label={gettext("Notes")}
+      class="text-center input input-primary"
+      id="pack-form-notes"
+      phx-debounce="300"
+      phx-update="ignore"
+    />
 
-    {label(f, :container, gettext("Container"), class: "title text-lg text-primary-600")}
-    {select(f, :container_id, container_options(@containers),
-      class: "text-center col-span-2 input input-primary",
-      id: "pack-form-container-select",
-      phx_hook: "SlimSelect",
-      phx_update: :ignore
-    )}
-    {error_tag(f, :container_id, "col-span-3 text-center")}
+    <.input
+      field={f[:container_id]}
+      type="select"
+      label={gettext("Container")}
+      options={container_options(@containers)}
+      class="text-center input input-primary"
+      id="pack-form-container-select"
+      phx-hook="SlimSelect"
+      phx-update="ignore"
+    />
 
-    <%= case @action do %>
-      <% action when action in [:new, :clone] -> %>
-        <hr class="hr col-span-3" />
+    <:actions :let={f}>
+      <%= case @action do %>
+        <% action when action in [:new, :clone] -> %>
+          <div class="flex flex-row items-end gap-4 w-full">
+            <.input
+              field={f[:multiplier]}
+              type="number"
+              label={gettext("Copies")}
+              class="text-center input input-primary"
+              value="1"
+              phx-update="ignore"
+            />
 
-        {label(f, :multiplier, gettext("Copies"), class: "title text-lg text-primary-600")}
-        {number_input(f, :multiplier,
-          class: "text-center input input-primary",
-          value: 1,
-          phx_update: "ignore"
-        )}
-
-        {submit(dgettext("actions", "Create"),
-          phx_disable_with: dgettext("prompts", "Creating..."),
-          class: "mx-auto btn btn-primary"
-        )}
-
-        {error_tag(f, :multiplier, "col-span-3 text-center")}
-      <% :edit -> %>
-        {submit(dgettext("actions", "Save"),
-          phx_disable_with: dgettext("prompts", "Saving..."),
-          class: "mx-auto col-span-3 btn btn-primary"
-        )}
-    <% end %>
-  </.form>
+            <.button
+              phx-disable-with={dgettext("prompts", "Creating...")}
+              class="btn btn-primary"
+            >
+              {dgettext("actions", "Create")}
+            </.button>
+          </div>
+        <% :edit -> %>
+          <.button
+            phx-disable-with={dgettext("prompts", "Saving...")}
+            class="mx-auto btn btn-primary"
+          >
+            {dgettext("actions", "Save")}
+          </.button>
+      <% end %>
+    </:actions>
+  </.simple_form>
 </div>

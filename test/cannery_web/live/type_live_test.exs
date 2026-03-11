@@ -80,38 +80,52 @@ defmodule CanneryWeb.TypeLiveTest do
       assert html =~ shotgun_type.name
       assert html =~ pistol_type.name
 
-      html =
-        index_live
-        |> form(~s/form[phx-change="change_class"]/)
-        |> render_change(type: %{class: :rifle})
+      index_live
+      |> form(~s/form[phx-change="change_class"]/)
+      |> render_change(type: %{class: :rifle})
 
+      assert_patch(index_live, ~p"/catalog?class=rifle")
+
+      {:ok, _index_live, html} = live(conn, ~p"/catalog?class=rifle")
       assert html =~ rifle_type.name
       refute html =~ shotgun_type.name
       refute html =~ pistol_type.name
 
-      html =
-        index_live
-        |> form(~s/form[phx-change="change_class"]/)
-        |> render_change(type: %{class: :shotgun})
+      {:ok, index_live, _html} = live(conn, ~p"/catalog")
 
+      index_live
+      |> form(~s/form[phx-change="change_class"]/)
+      |> render_change(type: %{class: :shotgun})
+
+      assert_patch(index_live, ~p"/catalog?class=shotgun")
+
+      {:ok, _index_live, html} = live(conn, ~p"/catalog?class=shotgun")
       refute html =~ rifle_type.name
       assert html =~ shotgun_type.name
       refute html =~ pistol_type.name
 
-      html =
-        index_live
-        |> form(~s/form[phx-change="change_class"]/)
-        |> render_change(type: %{class: :pistol})
+      {:ok, index_live, _html} = live(conn, ~p"/catalog")
 
+      index_live
+      |> form(~s/form[phx-change="change_class"]/)
+      |> render_change(type: %{class: :pistol})
+
+      assert_patch(index_live, ~p"/catalog?class=pistol")
+
+      {:ok, _index_live, html} = live(conn, ~p"/catalog?class=pistol")
       refute html =~ rifle_type.name
       refute html =~ shotgun_type.name
       assert html =~ pistol_type.name
 
-      html =
-        index_live
-        |> form(~s/form[phx-change="change_class"]/)
-        |> render_change(type: %{class: :all})
+      {:ok, index_live, _html} = live(conn, ~p"/catalog")
 
+      index_live
+      |> form(~s/form[phx-change="change_class"]/)
+      |> render_change(type: %{class: :all})
+
+      assert_patch(index_live, ~p"/catalog?class=all")
+
+      {:ok, _index_live, html} = live(conn, ~p"/catalog?class=all")
       assert html =~ rifle_type.name
       assert html =~ shotgun_type.name
       assert html =~ pistol_type.name
@@ -121,24 +135,26 @@ defmodule CanneryWeb.TypeLiveTest do
       {:ok, index_live, html} = live(conn, ~p"/catalog")
       assert html =~ type.bullet_type
 
-      assert index_live
-             |> form(~s/form[phx-change="search"]/)
-             |> render_change(search: %{search_term: type.bullet_type}) =~
-               type.bullet_type
+      index_live
+      |> form(~s/form[phx-change="search"]/)
+      |> render_change(search: %{search_term: type.bullet_type})
 
       assert_patch(index_live, ~p"/catalog/search/#{type.bullet_type}")
+      assert render(index_live) =~ type.bullet_type
 
-      refute index_live
-             |> form(~s/form[phx-change="search"]/)
-             |> render_change(search: %{search_term: "something_else"}) =~ type.bullet_type
+      index_live
+      |> form(~s/form[phx-change="search"]/)
+      |> render_change(search: %{search_term: "something_else"})
 
       assert_patch(index_live, ~p"/catalog/search/something_else")
+      refute render(index_live) =~ type.bullet_type
 
-      assert index_live
-             |> form(~s/form[phx-change="search"]/)
-             |> render_change(search: %{search_term: ""}) =~ type.bullet_type
+      index_live
+      |> form(~s/form[phx-change="search"]/)
+      |> render_change(search: %{search_term: ""})
 
       assert_patch(index_live, ~p"/catalog")
+      assert render(index_live) =~ type.bullet_type
     end
 
     test "saves new type", %{conn: conn, current_user: current_user, type: type} do
@@ -254,7 +270,7 @@ defmodule CanneryWeb.TypeLiveTest do
 
       html =
         index_live
-        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_show_used-label"}]/)
+        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_show_used-label"]/)
         |> render_click()
 
       assert html =~ "Used rounds"
@@ -270,7 +286,7 @@ defmodule CanneryWeb.TypeLiveTest do
 
       html =
         index_live
-        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_show_used-label"}]/)
+        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_show_used-label"]/)
         |> render_click()
 
       assert html =~ " 15\n"
@@ -335,7 +351,7 @@ defmodule CanneryWeb.TypeLiveTest do
 
       html =
         show_live
-        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_table-label"}]/)
+        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_table-label"]/)
         |> render_click()
 
       assert html =~ " 20\n"
@@ -354,7 +370,7 @@ defmodule CanneryWeb.TypeLiveTest do
 
       html =
         show_live
-        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_show_used-label"}]/)
+        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_show_used-label"]/)
         |> render_click()
 
       assert html =~ " 20\n"
@@ -368,7 +384,7 @@ defmodule CanneryWeb.TypeLiveTest do
 
       html =
         show_live
-        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_table-label"}]/)
+        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_table-label"]/)
         |> render_click()
 
       assert html =~ "Show used"
@@ -376,7 +392,7 @@ defmodule CanneryWeb.TypeLiveTest do
 
       html =
         show_live
-        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_show_used-label"}]/)
+        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_show_used-label"]/)
         |> render_click()
 
       assert html =~ " 20\n"

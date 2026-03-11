@@ -1,19 +1,19 @@
-<div class="flex flex-col justify-center items-center mx-auto space-y-4 max-w-3xl">
-  <h1 class="text-2xl title title-primary-500">
+<div class="flex flex-col space-y-8 max-w-2xl mx-auto w-full">
+  <h1 class="text-2xl title title-primary-500 self-center">
     {gettext("Invites")}
   </h1>
 
   <%= if @invites |> Enum.empty?() do %>
-    <h1 class="text-xl title text-primary-600">
+    <h1 class="text-xl title text-primary-600 self-center">
       {gettext("No invites")}
       {display_emoji("😔")}
     </h1>
 
-    <.link patch={~p"/invites/new"} class="btn btn-primary">
+    <.link patch={~p"/invites/new"} class="btn btn-primary self-center">
       {dgettext("actions", "Invite someone new!")}
     </.link>
   <% else %>
-    <.link patch={~p"/invites/new"} class="btn btn-primary">
+    <.link patch={~p"/invites/new"} class="btn btn-primary self-center">
       {dgettext("actions", "Create Invite")}
     </.link>
   <% end %>
@@ -46,7 +46,7 @@
           dgettext("actions", "Edit invite for %{invite_name}", invite_name: invite.name)
         }
       >
-        <i class="fa-fw fa-lg fas fa-edit"></i>
+        <.icon name="pencil-square" class="size-6" />
       </.link>
 
       <.link
@@ -63,7 +63,7 @@
           dgettext("actions", "Delete invite for %{invite_name}", invite_name: invite.name)
         }
       >
-        <i class="fa-fw fa-lg fas fa-trash"></i>
+        <.icon name="trash" class="size-6" />
       </.link>
 
       <.link
@@ -95,7 +95,7 @@
   <%= unless @admins |> Enum.empty?() do %>
     <hr class="hr" />
 
-    <h1 class="text-2xl title text-primary-600">
+    <h1 class="text-2xl title text-primary-600 self-center">
       {gettext("Admins")}
     </h1>
 
@@ -114,7 +114,7 @@
             )
           }
         >
-          <i class="fa-fw fa-lg fas fa-trash"></i>
+          <.icon name="trash" class="size-6" />
         </.link>
       </.user_card>
     </div>
@@ -123,7 +123,7 @@
   <%= unless @users |> Enum.empty?() do %>
     <hr class="hr" />
 
-    <h1 class="text-2xl title text-primary-600">
+    <h1 class="text-2xl title text-primary-600 self-center">
       {gettext("Users")}
     </h1>
 
@@ -137,7 +137,7 @@
             phx-click="resend_email_verification"
             phx-value-id={user.id}
           >
-            <i class="fa-fw fa-lg fas fa-paper-plane"></i>
+            <.icon name="paper-airplane" class="size-6" />
           </.link>
           <.link
             class="text-primary-600 link"
@@ -152,7 +152,7 @@
             phx-click="delete_user"
             phx-value-id={user.id}
           >
-            <i class="fa-fw fa-lg fas fa-trash"></i>
+            <.icon name="trash" class="size-6" />
           </.link>
         </div>
       </.user_card>
@@ -160,7 +160,11 @@
   <% end %>
 </div>
 
-<.modal :if={@live_action in [:new, :edit]} return_to={~p"/invites"}>
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="invite-index-modal"
+  on_cancel={JS.patch(~p"/invites")}
+>
   <.live_component
     module={CanneryWeb.InviteLive.FormComponent}
     id={@invite.id || :new}

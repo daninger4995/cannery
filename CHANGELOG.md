@@ -1,3 +1,10 @@
+# v0.9.17
+- Update deps
+- This required extensive changes to update to the latest versions of
+  dependencies, so there may be bugs
+- Hopefully fix email
+- Don't clear the search bar when switching class
+
 # v0.9.16
 - Fix bug with ammo type selector
 - Add a row number column to all tables

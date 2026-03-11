@@ -7,6 +7,7 @@ defmodule CanneryWeb.Components.TypeTableComponent do
   alias CanneryWeb.Components.TableComponent
   alias Ecto.UUID
   alias Phoenix.LiveView.{Rendered, Socket}
+  alias Phoenix.Naming
 
   @impl true
   @spec update(
@@ -218,7 +219,7 @@ defmodule CanneryWeb.Components.TypeTableComponent do
   end
 
   defp get_type_value(:atom, key, type, _other_data),
-    do: type |> Map.get(key) |> humanize()
+    do: type |> Map.get(key) |> Naming.humanize()
 
   defp get_type_value(:round_count, _key, %{id: type_id}, %{round_counts: round_counts}),
     do: Map.get(round_counts, type_id, 0)

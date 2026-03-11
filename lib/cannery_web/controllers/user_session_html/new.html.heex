@@ -1,40 +1,50 @@
-<div class="mx-auto pb-8 max-w-2xl flex flex-col justify-center items-center space-y-4">
+<div class="mx-auto pb-8 max-w-2xl flex flex-col justify-center items-stretch space-y-4">
   <h1 class="title text-primary-600 text-xl">
     {dgettext("actions", "Log in")}
   </h1>
 
-  <.form
+  <.simple_form
     :let={f}
-    for={@conn}
-    action={~p"/users/log_in"}
+    for={to_form(%{}, as: :user)}
     as={:user}
-    class="flex flex-col space-y-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 justify-center items-center"
+    action={~p"/users/log_in"}
+    class="flex flex-col space-y-4 justify-center items-stretch"
   >
     <p :if={@error_message} class="alert alert-danger col-span-3">
       {@error_message}
     </p>
 
-    {label(f, :email, gettext("Email"), class: "title text-lg text-primary-600")}
-    {email_input(f, :email,
-      autocomplete: :email,
-      class: "input input-primary col-span-2",
-      required: true
-    )}
+    <.input
+      field={f[:email]}
+      type="email"
+      label={gettext("Email")}
+      autocomplete="email"
+      class="input input-primary col-span-2"
+      required
+    />
 
-    {label(f, :password, gettext("Password"), class: "title text-lg text-primary-600")}
-    {password_input(f, :password,
-      autocomplete: "current-password",
-      class: "input input-primary col-span-2",
-      required: true
-    )}
+    <.input
+      field={f[:password]}
+      type="password"
+      label={gettext("Password")}
+      autocomplete="current-password"
+      class="input input-primary col-span-2"
+      required
+    />
 
-    {label(f, :remember_me, gettext("Keep me logged in for 60 days"),
-      class: "title text-lg text-primary-600"
-    )}
-    {checkbox(f, :remember_me, class: "checkbox col-span-2")}
+    <.input
+      field={f[:remember_me]}
+      type="checkbox"
+      label={gettext("Keep me logged in for 60 days")}
+      class="checkbox col-span-2"
+    />
 
-    {submit(dgettext("actions", "Log in"), class: "mx-auto btn btn-primary col-span-3")}
-  </.form>
+    <:actions>
+      <.button class="mx-auto btn btn-primary col-span-3">
+        {dgettext("actions", "Log in")}
+      </.button>
+    </:actions>
+  </.simple_form>
 
   <hr class="hr" />
 

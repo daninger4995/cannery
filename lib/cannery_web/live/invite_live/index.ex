@@ -59,8 +59,8 @@ defmodule CanneryWeb.InviteLive.Index do
 
           socket |> put_flash(:info, prompt) |> display_invites()
 
-        {:error, changeset} ->
-          socket |> put_flash(:error, changeset |> changeset_errors())
+        {:error, _changeset} ->
+          socket |> put_flash(:error, dgettext("errors", "Could not save invite"))
       end
 
     {:noreply, socket}
@@ -81,8 +81,8 @@ defmodule CanneryWeb.InviteLive.Index do
 
           socket |> put_flash(:info, prompt) |> display_invites()
 
-        {:error, changeset} ->
-          socket |> put_flash(:error, changeset |> changeset_errors())
+        {:error, _changeset} ->
+          socket |> put_flash(:error, dgettext("errors", "Could not save invite"))
       end
 
     {:noreply, socket}
@@ -105,8 +105,8 @@ defmodule CanneryWeb.InviteLive.Index do
 
           socket |> put_flash(:info, prompt) |> display_invites()
 
-        {:error, changeset} ->
-          socket |> put_flash(:error, changeset |> changeset_errors())
+        {:error, _changeset} ->
+          socket |> put_flash(:error, dgettext("errors", "Could not save invite"))
       end
 
     {:noreply, socket}

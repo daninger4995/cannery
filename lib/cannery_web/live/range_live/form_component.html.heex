@@ -3,48 +3,50 @@
     {@title}
   </h2>
 
-  <.form
+  <.simple_form
     :let={f}
     for={@changeset}
     id="shot-record-form"
-    class="flex flex-col space-y-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 justify-center items-center"
+    class="flex flex-col space-y-4 justify-center items-stretch max-w-2xl w-full mx-auto"
     phx-target={@myself}
     phx-change="validate"
     phx-submit="save"
   >
-    <div
-      :if={@changeset.action && not @changeset.valid?}
-      class="invalid-feedback col-span-3 text-center"
-    >
-      {changeset_errors(@changeset)}
-    </div>
+    <.input
+      field={f[:count]}
+      type="number"
+      label={gettext("Shots fired")}
+      min="1"
+      max={@shot_record.count + @pack.count}
+      class="input input-primary"
+    />
 
-    {label(f, :count, gettext("Shots fired"), class: "title text-lg text-primary-600")}
-    {number_input(f, :count,
-      min: 1,
-      max: @shot_record.count + @pack.count,
-      class: "input input-primary col-span-2"
-    )}
-    {error_tag(f, :count, "col-span-3")}
+    <.input
+      field={f[:notes]}
+      type="textarea"
+      label={gettext("Notes")}
+      class="input input-primary"
+      id="shot-record-form-notes"
+      maxlength="255"
+      phx-debounce="300"
+      phx-update="ignore"
+      placeholder={gettext("Really great weather")}
+    />
 
-    {label(f, :notes, gettext("Notes"), class: "title text-lg text-primary-600")}
-    {textarea(f, :notes,
-      class: "input input-primary col-span-2",
-      id: "shot-record-form-notes",
-      maxlength: 255,
-      phx_debounce: 300,
-      phx_update: "ignore",
-      placeholder: gettext("Really great weather")
-    )}
-    {error_tag(f, :notes, "col-span-3")}
+    <.input
+      field={f[:date]}
+      type="date"
+      label={gettext("Date")}
+      class="input input-primary"
+    />
 
-    {label(f, :date, gettext("Date"), class: "title text-lg text-primary-600")}
-    {date_input(f, :date, class: "input input-primary col-span-2")}
-    {error_tag(f, :notes, "col-span-3")}
-
-    {submit(dgettext("actions", "Save"),
-      class: "mx-auto btn btn-primary col-span-3",
-      phx_disable_with: dgettext("prompts", "Saving...")
-    )}
-  </.form>
+    <:actions>
+      <.button
+        class="mx-auto btn btn-primary"
+        phx-disable-with={dgettext("prompts", "Saving...")}
+      >
+        {dgettext("actions", "Save")}
+      </.button>
+    </:actions>
+  </.simple_form>
 </div>

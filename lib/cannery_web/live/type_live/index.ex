@@ -17,8 +17,16 @@ defmodule CanneryWeb.TypeLive.Index do
 
   @impl true
   def handle_params(params, _url, %{assigns: %{live_action: live_action}} = socket) do
-    {:noreply, apply_action(socket, live_action, params)}
+    {:noreply,
+     socket
+     |> assign_class(params)
+     |> apply_action(live_action, params)}
   end
+
+  defp assign_class(socket, %{"class" => class}) when class in ~w(rifle shotgun pistol),
+    do: socket |> assign(:class, String.to_existing_atom(class))
+
+  defp assign_class(socket, _params), do: socket |> assign(:class, :all)
 
   defp apply_action(%{assigns: %{current_user: current_user}} = socket, :edit, %{"id" => id}) do
     %{name: type_name} = type = Ammo.get_type!(id, current_user)
@@ -46,11 +54,11 @@ defmodule CanneryWeb.TypeLive.Index do
     )
   end
 
-  defp apply_action(socket, :index, _params) do
+  defp apply_action(socket, :index, params) do
     socket
     |> assign(
       page_title: gettext("Catalog"),
-      search: nil,
+      search: params["search"],
       type: nil
     )
     |> list_types()
@@ -85,20 +93,10 @@ defmodule CanneryWeb.TypeLive.Index do
     {:noreply, socket |> push_patch(to: ~p"/catalog/search/#{search_term}")}
   end
 
-  def handle_event("change_class", %{"type" => %{"class" => "rifle"}}, socket) do
-    {:noreply, socket |> assign(:class, :rifle) |> list_types()}
-  end
-
-  def handle_event("change_class", %{"type" => %{"class" => "shotgun"}}, socket) do
-    {:noreply, socket |> assign(:class, :shotgun) |> list_types()}
-  end
-
-  def handle_event("change_class", %{"type" => %{"class" => "pistol"}}, socket) do
-    {:noreply, socket |> assign(:class, :pistol) |> list_types()}
-  end
-
-  def handle_event("change_class", %{"type" => %{"class" => _all}}, socket) do
-    {:noreply, socket |> assign(:class, :all) |> list_types()}
+  def handle_event("change_class", %{"type" => %{"class" => class}}, %{assigns: assigns} = socket) do
+    params = %{"class" => class}
+    params = if assigns[:search], do: Map.put(params, "search", assigns.search), else: params
+    {:noreply, socket |> push_patch(to: ~p"/catalog?#{params}")}
   end
 
   defp list_types(

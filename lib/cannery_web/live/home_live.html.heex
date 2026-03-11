@@ -1,4 +1,4 @@
-<div class="flex flex-col justify-center items-center px-8 mx-auto space-y-4 max-w-3xl text-center sm:px-16">
+<div class="flex flex-col justify-center items-center mx-auto space-y-4 max-w-2xl w-full text-center">
   <img
     src={~p"/images/cannery.svg"}
     alt={gettext("Cannery logo")}
@@ -89,7 +89,7 @@
     <li class="flex flex-row justify-center items-center space-x-2">
       <b>{gettext("Version:")}</b>
       <.link
-        href="https://gitea.bubbletea.dev/shibao/cannery/src/branch/stable/CHANGELOG.md"
+        href="https://codeberg.org/shibao/cannery/src/branch/stable/CHANGELOG.md"
         class="flex flex-row justify-center items-center space-x-2 hover:underline"
         target="_blank"
         rel="noopener noreferrer"
@@ -97,7 +97,7 @@
         <p>
           {@version}
         </p>
-        <i class="fas fa-md fa-info-circle"></i>
+        <.icon name="information-circle" class="size-5" />
       </.link>
     </li>
   </ul>
@@ -112,34 +112,23 @@
     <li class="flex flex-col justify-center space-x-2">
       <.link
         class="flex flex-row justify-center items-center space-x-2 hover:underline"
-        href="https://gitea.bubbletea.dev/shibao/cannery"
+        href="https://codeberg.org/shibao/cannery"
         target="_blank"
         rel="noopener noreferrer"
       >
         <p>{gettext("View the source code")}</p>
-        <i class="fas fa-md fa-code"></i>
+        <.icon name="code-bracket" class="size-5" />
       </.link>
     </li>
     <li class="flex flex-col justify-center space-x-2">
       <.link
         class="flex flex-row justify-center items-center space-x-2 hover:underline"
-        href="https://weblate.bubbletea.dev/engage/cannery"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <p>{gettext("Help translate")}</p>
-        <i class="fas fa-md fa-language"></i>
-      </.link>
-    </li>
-    <li class="flex flex-col justify-center space-x-2">
-      <.link
-        class="flex flex-row justify-center items-center space-x-2 hover:underline"
-        href="https://gitea.bubbletea.dev/shibao/cannery/issues/new"
+        href="https://codeberg.org/shibao/cannery/issues/new"
         target="_blank"
         rel="noopener noreferrer"
       >
         <p>{gettext("Report bugs or request features")}</p>
-        <i class="fas fa-md fa-spider"></i>
+        <.icon name="bug-ant" class="size-5" />
       </.link>
     </li>
   </ul>

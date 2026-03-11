@@ -77,38 +77,52 @@ defmodule CanneryWeb.PackLiveTest do
       assert html =~ shotgun_pack.type.name
       assert html =~ pistol_pack.type.name
 
-      html =
-        index_live
-        |> form(~s/form[phx-change="change_class"]/)
-        |> render_change(type: %{class: :rifle})
+      index_live
+      |> form(~s/form[phx-change="change_class"]/)
+      |> render_change(type: %{class: :rifle})
 
+      assert_patch(index_live, ~p"/ammo?class=rifle")
+
+      {:ok, _index_live, html} = live(conn, ~p"/ammo?class=rifle")
       assert html =~ rifle_pack.type.name
       refute html =~ shotgun_pack.type.name
       refute html =~ pistol_pack.type.name
 
-      html =
-        index_live
-        |> form(~s/form[phx-change="change_class"]/)
-        |> render_change(type: %{class: :shotgun})
+      {:ok, index_live, _html} = live(conn, ~p"/ammo")
 
+      index_live
+      |> form(~s/form[phx-change="change_class"]/)
+      |> render_change(type: %{class: :shotgun})
+
+      assert_patch(index_live, ~p"/ammo?class=shotgun")
+
+      {:ok, _index_live, html} = live(conn, ~p"/ammo?class=shotgun")
       refute html =~ rifle_pack.type.name
       assert html =~ shotgun_pack.type.name
       refute html =~ pistol_pack.type.name
 
-      html =
-        index_live
-        |> form(~s/form[phx-change="change_class"]/)
-        |> render_change(type: %{class: :pistol})
+      {:ok, index_live, _html} = live(conn, ~p"/ammo")
 
+      index_live
+      |> form(~s/form[phx-change="change_class"]/)
+      |> render_change(type: %{class: :pistol})
+
+      assert_patch(index_live, ~p"/ammo?class=pistol")
+
+      {:ok, _index_live, html} = live(conn, ~p"/ammo?class=pistol")
       refute html =~ rifle_pack.type.name
       refute html =~ shotgun_pack.type.name
       assert html =~ pistol_pack.type.name
 
-      html =
-        index_live
-        |> form(~s/form[phx-change="change_class"]/)
-        |> render_change(type: %{class: :all})
+      {:ok, index_live, _html} = live(conn, ~p"/ammo")
 
+      index_live
+      |> form(~s/form[phx-change="change_class"]/)
+      |> render_change(type: %{class: :all})
+
+      assert_patch(index_live, ~p"/ammo?class=all")
+
+      {:ok, _index_live, html} = live(conn, ~p"/ammo?class=all")
       assert html =~ rifle_pack.type.name
       assert html =~ shotgun_pack.type.name
       assert html =~ pistol_pack.type.name
@@ -338,7 +352,7 @@ defmodule CanneryWeb.PackLiveTest do
 
       html =
         show_live
-        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_show_used-label"}]/)
+        |> element(~s/input[type="checkbox"][aria-labelledby="toggle_show_used-label"]/)
         |> render_click()
 
       assert html =~ "$#{display_currency(50.00)}"

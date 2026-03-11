@@ -1,136 +1,148 @@
-<div class="flex flex-col justify-center items-center space-y-8">
-  <h1 class="text-2xl title title-primary-500">
-    {gettext("Catalog")}
-  </h1>
+<div class="flex flex-col space-y-8">
+  <div class="max-w-2xl mx-auto w-full flex flex-col items-center space-y-8">
+    <h1 class="text-2xl title title-primary-500">
+      {gettext("Catalog")}
+    </h1>
 
-  <%= if @types_count == 0 do %>
-    <h2 class="text-xl title text-primary-600">
-      {gettext("No Types")}
-      {display_emoji("😔")}
-    </h2>
-
-    <.link patch={~p"/catalog/new"} class="btn btn-primary">
-      {dgettext("actions", "Add your first type!")}
-    </.link>
-  <% else %>
-    <.link patch={~p"/catalog/new"} class="btn btn-primary">
-      {dgettext("actions", "New Type")}
-    </.link>
-
-    <div class="flex flex-col flex-wrap justify-center items-center space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
-      <.form
-        :let={f}
-        for={%{}}
-        as={:type}
-        phx-change="change_class"
-        phx-submit="change_class"
-        class="flex items-center"
-      >
-        {label(f, :class, gettext("Class"), class: "title text-primary-600 text-lg text-center")}
-
-        {select(
-          f,
-          :class,
-          [
-            {gettext("All"), :all},
-            {gettext("Rifle"), :rifle},
-            {gettext("Shotgun"), :shotgun},
-            {gettext("Pistol"), :pistol}
-          ],
-          class: "mx-2 my-1 min-w-20 input input-primary",
-          value: @class
-        )}
-      </.form>
-
-      <.form
-        :let={f}
-        for={%{}}
-        as={:search}
-        phx-change="search"
-        phx-submit="search"
-        class="flex items-center grow"
-      >
-        {text_input(f, :search_term,
-          class: "grow input input-primary",
-          phx_debounce: 300,
-          placeholder: gettext("Search catalog"),
-          role: "search",
-          value: @search
-        )}
-      </.form>
-
-      <.toggle_button action="toggle_show_used" value={@show_used}>
-        <span class="text-lg title text-primary-600">
-          {gettext("Show used")}
-        </span>
-      </.toggle_button>
-    </div>
-
-    <%= if @types |> Enum.empty?() do %>
+    <%= if @types_count == 0 do %>
       <h2 class="text-xl title text-primary-600">
         {gettext("No Types")}
         {display_emoji("😔")}
       </h2>
+
+      <.link patch={~p"/catalog/new"} class="btn btn-primary">
+        {dgettext("actions", "Add your first type!")}
+      </.link>
     <% else %>
-      <.live_component
-        module={CanneryWeb.Components.TypeTableComponent}
-        id="types-index-table"
-        action={@live_action}
-        types={@types}
-        current_user={@current_user}
-        show_used={@show_used}
-        class={@class}
-      >
-        <:actions :let={type}>
-          <div class="flex justify-center items-center px-4 py-2 space-x-4">
-            <.link
-              navigate={~p"/type/#{type}"}
-              class="text-primary-600 link"
-              aria-label={dgettext("actions", "View %{type_name}", type_name: type.name)}
-            >
-              <i class="fa-fw fa-lg fas fa-eye"></i>
-            </.link>
+      <.link patch={~p"/catalog/new"} class="btn btn-primary">
+        {dgettext("actions", "New Type")}
+      </.link>
 
-            <.link
-              patch={~p"/catalog/edit/#{type}"}
-              class="text-primary-600 link"
-              aria-label={dgettext("actions", "Edit %{type_name}", type_name: type.name)}
-            >
-              <i class="fa-fw fa-lg fas fa-edit"></i>
-            </.link>
+      <div class="flex flex-col flex-wrap justify-center items-end space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
+        <.form
+          :let={f}
+          for={%{}}
+          as={:type}
+          phx-change="change_class"
+          phx-submit="change_class"
+          class="flex items-center"
+        >
+          <.input
+            field={f[:class]}
+            type="select"
+            label={gettext("Class")}
+            options={[
+              {gettext("All"), :all},
+              {gettext("Rifle"), :rifle},
+              {gettext("Shotgun"), :shotgun},
+              {gettext("Pistol"), :pistol}
+            ]}
+            class="mx-2 min-w-20 input input-primary"
+            value={@class}
+          />
+        </.form>
 
-            <.link
-              patch={~p"/catalog/clone/#{type}"}
-              class="text-primary-600 link"
-              aria-label={dgettext("actions", "Clone %{type_name}", type_name: type.name)}
-            >
-              <i class="fa-fw fa-lg fas fa-copy"></i>
-            </.link>
+        <.form
+          :let={f}
+          for={%{}}
+          as={:search}
+          phx-change="search"
+          phx-submit="search"
+          class="flex items-center grow"
+        >
+          <.input
+            field={f[:search_term]}
+            type="text"
+            container_class="flex items-center grow"
+            class="grow input input-primary"
+            phx-debounce="300"
+            placeholder={gettext("Search catalog")}
+            role="search"
+            value={@search}
+          />
+        </.form>
 
-            <.link
-              href="#"
-              class="text-primary-600 link"
-              phx-click="delete"
-              phx-value-id={type.id}
-              data-confirm={
-                dgettext(
-                  "prompts",
-                  "Are you sure you want to delete %{name}? This will delete all %{name} type ammo as well!",
-                  name: type.name
-                )
-              }
-              aria-label={dgettext("actions", "Delete %{type_name}", type_name: type.name)}
-            >
-              <i class="fa-lg fas fa-trash"></i>
-            </.link>
-          </div>
-        </:actions>
-      </.live_component>
+        <div class="pb-1">
+          <.toggle_button action="toggle_show_used" value={@show_used}>
+            <span class="text-lg title text-primary-600">
+              {gettext("Show used")}
+            </span>
+          </.toggle_button>
+        </div>
+      </div>
+
+      <%= if @types |> Enum.empty?() do %>
+        <h2 class="text-xl title text-primary-600">
+          {gettext("No Types")}
+          {display_emoji("😔")}
+        </h2>
+      <% end %>
     <% end %>
+  </div>
+
+  <%= unless @types |> Enum.empty?() do %>
+    <.live_component
+      module={CanneryWeb.Components.TypeTableComponent}
+      id="types-index-table"
+      action={@live_action}
+      types={@types}
+      current_user={@current_user}
+      show_used={@show_used}
+      class={@class}
+    >
+      <:actions :let={type}>
+        <div class="flex justify-center items-center px-4 py-2 space-x-4">
+          <.link
+            navigate={~p"/type/#{type}"}
+            class="text-primary-600 link"
+            aria-label={dgettext("actions", "View %{type_name}", type_name: type.name)}
+          >
+            <.icon name="eye" class="size-6" />
+          </.link>
+
+          <.link
+            patch={~p"/catalog/edit/#{type}"}
+            class="text-primary-600 link"
+            aria-label={dgettext("actions", "Edit %{type_name}", type_name: type.name)}
+          >
+            <.icon name="pencil-square" class="size-6" />
+          </.link>
+
+          <.link
+            patch={~p"/catalog/clone/#{type}"}
+            class="text-primary-600 link"
+            aria-label={dgettext("actions", "Clone %{type_name}", type_name: type.name)}
+          >
+            <.icon name="document-duplicate" class="size-6" />
+          </.link>
+
+          <.link
+            href="#"
+            class="text-primary-600 link"
+            phx-click="delete"
+            phx-value-id={type.id}
+            data-confirm={
+              dgettext(
+                "prompts",
+                "Are you sure you want to delete %{name}? This will delete all %{name} type ammo as well!",
+                name: type.name
+              )
+            }
+            aria-label={dgettext("actions", "Delete %{type_name}", type_name: type.name)}
+          >
+            <.icon name="trash" class="size-6" />
+          </.link>
+        </div>
+      </:actions>
+    </.live_component>
   <% end %>
 </div>
 
-<.modal :if={@live_action in [:new, :edit, :clone]} return_to={~p"/catalog"}>
+<.modal
+  :if={@live_action in [:new, :edit, :clone]}
+  id="type-index-modal"
+  on_cancel={JS.patch(~p"/catalog")}
+>
   <.live_component
     module={CanneryWeb.TypeLive.FormComponent}
     id={@type.id || :new}

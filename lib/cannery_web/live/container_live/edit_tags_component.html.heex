@@ -1,4 +1,4 @@
-<div class="flex flex-col justify-center items-center text-center space-y-8">
+<div class="flex flex-col justify-center items-stretch text-center space-y-8 max-w-2xl w-full mx-auto">
   <h2 class="title text-xl text-primary-600">
     {@title}
   </h2>
@@ -7,7 +7,7 @@
     <.link
       :for={tag <- @container.tags}
       href="#"
-      class="mx-2 my-1 px-4 py-2 rounded-lg title text-xl"
+      class="mx-2 my-1 px-4 py-2 rounded-lg title text-xl inline-flex items-center gap-1"
       style={"color: #{tag.text_color}; background-color: #{tag.bg_color}"}
       phx-click="delete"
       phx-value-tag-id={tag.id}
@@ -22,7 +22,7 @@
       }
     >
       {tag.name}
-      <i class="fa-fw fa-sm fas fa-trash"></i>
+      <.icon name="trash" class="size-4" />
     </.link>
 
     <h2 :if={@container.tags |> Enum.empty?()} class="title text-xl text-primary-600">
@@ -39,22 +39,26 @@
       for={%{}}
       as={:tag}
       id="add-tag-to-container-form"
-      class="flex flex-col space-y-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 justify-center items-center"
+      class="flex flex-col space-y-4 justify-center items-stretch"
       phx-target={@myself}
       phx-submit="save"
     >
-      {select(f, :tag_id, tag_options(@tags, @container),
-        class: "text-center col-span-2 input input-primary",
-        id: "#{@id}-tag-select",
-        phx_hook: "SlimSelect",
-        phx_update: :ignore
-      )}
-      {error_tag(f, :tag_id, "col-span-3 text-center")}
+      <.input
+        field={f[:tag_id]}
+        type="select"
+        options={tag_options(@tags, @container)}
+        class="text-center input input-primary w-full"
+        id={"#{@id}-tag-select"}
+        phx-hook="SlimSelect"
+      />
 
-      {submit(dgettext("actions", "Add"),
-        class: "mx-auto btn btn-primary",
-        phx_disable_with: dgettext("prompts", "Adding...")
-      )}
+      <.button
+        type="submit"
+        class="mx-auto btn btn-primary"
+        phx-disable-with={dgettext("prompts", "Adding...")}
+      >
+        {dgettext("actions", "Add")}
+      </.button>
     </.form>
   <% end %>
 </div>

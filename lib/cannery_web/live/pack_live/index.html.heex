@@ -1,193 +1,193 @@
-<div class="flex flex-col justify-center items-center space-y-8">
-  <h1 class="text-2xl title title-primary-500">
-    {gettext("Ammo")}
-  </h1>
+<div class="flex flex-col space-y-8">
+  <div class="max-w-2xl mx-auto w-full flex flex-col items-center space-y-8">
+    <h1 class="text-2xl title title-primary-500">
+      {gettext("Ammo")}
+    </h1>
 
-  <%= cond do %>
-    <% @containers_count == 0 -> %>
-      <div class="flex justify-center items-center">
-        <h2 class="m-2 title text-md text-primary-600">
-          {dgettext("prompts", "You'll need to")}
-        </h2>
+    <%= cond do %>
+      <% @containers_count == 0 -> %>
+        <div class="flex justify-center items-center">
+          <h2 class="m-2 title text-md text-primary-600">
+            {dgettext("prompts", "You'll need to")}
+          </h2>
 
-        <.link navigate={~p"/containers/new"} class="btn btn-primary">
-          {dgettext("actions", "add a container first")}
-        </.link>
-      </div>
-    <% @types_count == 0 -> %>
-      <div class="flex justify-center items-center">
-        <h2 class="m-2 title text-md text-primary-600">
-          {dgettext("prompts", "You'll need to")}
-        </h2>
+          <.link navigate={~p"/containers/new"} class="btn btn-primary">
+            {dgettext("actions", "add a container first")}
+          </.link>
+        </div>
+      <% @types_count == 0 -> %>
+        <div class="flex justify-center items-center">
+          <h2 class="m-2 title text-md text-primary-600">
+            {dgettext("prompts", "You'll need to")}
+          </h2>
 
-        <.link navigate={~p"/catalog/new"} class="btn btn-primary">
-          {dgettext("actions", "add a type first")}
-        </.link>
-      </div>
-    <% @packs_count == 0 -> %>
-      <h2 class="text-xl title text-primary-600">
-        {gettext("No ammo")}
-        {display_emoji("😔")}
-      </h2>
-
-      <.link patch={~p"/ammo/new"} class="btn btn-primary">
-        {dgettext("actions", "Add your first box!")}
-      </.link>
-    <% true -> %>
-      <.link patch={~p"/ammo/new"} class="btn btn-primary">
-        {dgettext("actions", "Add Ammo")}
-      </.link>
-
-      <div class="flex flex-col flex-wrap justify-center items-center space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
-        <.form
-          :let={f}
-          for={%{}}
-          as={:type}
-          phx-change="change_class"
-          phx-submit="change_class"
-          class="flex items-center"
-        >
-          {label(f, :class, gettext("Class"), class: "title text-primary-600 text-lg text-center")}
-
-          {select(
-            f,
-            :class,
-            [
-              {gettext("All"), :all},
-              {gettext("Rifle"), :rifle},
-              {gettext("Shotgun"), :shotgun},
-              {gettext("Pistol"), :pistol}
-            ],
-            class: "mx-2 my-1 min-w-20 input input-primary",
-            value: @class
-          )}
-        </.form>
-
-        <.form
-          :let={f}
-          for={%{}}
-          as={:search}
-          phx-change="search"
-          phx-submit="search"
-          class="flex items-center grow"
-        >
-          {text_input(f, :search_term,
-            class: "grow input input-primary",
-            phx_debounce: 300,
-            placeholder: gettext("Search ammo"),
-            role: "search",
-            value: @search
-          )}
-        </.form>
-
-        <.toggle_button action="toggle_show_used" value={@show_used}>
-          <span class="text-lg title text-primary-600">
-            {gettext("Show used")}
-          </span>
-        </.toggle_button>
-      </div>
-
-      <%= if @packs |> Enum.empty?() do %>
+          <.link navigate={~p"/catalog/new"} class="btn btn-primary">
+            {dgettext("actions", "add a type first")}
+          </.link>
+        </div>
+      <% @packs_count == 0 -> %>
         <h2 class="text-xl title text-primary-600">
-          {gettext("No Ammo")}
+          {gettext("No ammo")}
           {display_emoji("😔")}
         </h2>
-      <% else %>
-        <.live_component
-          module={CanneryWeb.Components.PackTableComponent}
-          id="pack-index-table"
-          packs={@packs}
-          current_user={@current_user}
-          show_used={@show_used}
-        >
-          <:type :let={%{name: type_name} = type}>
-            <.link navigate={~p"/type/#{type}"} class="link">
-              {type_name}
-            </.link>
-          </:type>
-          <:range :let={pack}>
-            <div class="flex flex-wrap justify-center items-center px-4 py-2 h-full min-w-20">
-              <.link
-                patch={~p"/ammo/add_shot_record/#{pack}"}
-                class="mx-2 my-1 text-sm btn btn-primary"
-              >
-                {dgettext("actions", "Record shots")}
-              </.link>
-            </div>
-          </:range>
-          <:container :let={{pack, %{name: container_name} = container}}>
-            <div class="flex flex-wrap justify-center items-center px-4 py-2 h-full min-w-20">
-              <.link navigate={~p"/container/#{container}"} class="mx-2 my-1 link">
-                {container_name}
-              </.link>
 
-              <.link patch={~p"/ammo/move/#{pack}"} class="mx-2 my-1 text-sm btn btn-primary">
-                {dgettext("actions", "Move ammo")}
-              </.link>
-            </div>
-          </:container>
-          <:actions :let={%{count: pack_count} = pack}>
-            <div class="flex justify-center items-center px-4 py-2 space-x-4 h-full">
-              <.link
-                navigate={~p"/ammo/show/#{pack}"}
-                class="text-primary-600 link"
-                aria-label={
-                  dgettext("actions", "View pack of %{pack_count} bullets",
-                    pack_count: pack_count
-                  )
-                }
-              >
-                <i class="fa-fw fa-lg fas fa-eye"></i>
-              </.link>
+        <.link patch={~p"/ammo/new"} class="btn btn-primary">
+          {dgettext("actions", "Add your first box!")}
+        </.link>
+      <% true -> %>
+        <.link patch={~p"/ammo/new"} class="btn btn-primary">
+          {dgettext("actions", "Add Ammo")}
+        </.link>
 
-              <.link
-                patch={~p"/ammo/edit/#{pack}"}
-                class="text-primary-600 link"
-                aria-label={
-                  dgettext("actions", "Edit pack of %{pack_count} bullets",
-                    pack_count: pack_count
-                  )
-                }
-              >
-                <i class="fa-fw fa-lg fas fa-edit"></i>
-              </.link>
+        <div class="flex flex-col flex-wrap justify-center items-end space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
+          <.form
+            :let={f}
+            for={%{}}
+            as={:type}
+            phx-change="change_class"
+            phx-submit="change_class"
+            class="flex items-center"
+          >
+            <.input
+              field={f[:class]}
+              type="select"
+              label={gettext("Class")}
+              options={[
+                {gettext("All"), :all},
+                {gettext("Rifle"), :rifle},
+                {gettext("Shotgun"), :shotgun},
+                {gettext("Pistol"), :pistol}
+              ]}
+              class="mx-2 min-w-20 input input-primary"
+              value={@class}
+            />
+          </.form>
 
-              <.link
-                patch={~p"/ammo/clone/#{pack}"}
-                class="text-primary-600 link"
-                aria-label={
-                  dgettext("actions", "Clone pack of %{pack_count} bullets",
-                    pack_count: pack_count
-                  )
-                }
-              >
-                <i class="fa-fw fa-lg fas fa-copy"></i>
-              </.link>
+          <.form
+            :let={f}
+            for={%{}}
+            as={:search}
+            phx-change="search"
+            phx-submit="search"
+            class="flex items-center grow"
+          >
+            <.input
+              field={f[:search_term]}
+              type="text"
+              container_class="flex items-center grow"
+              class="grow input input-primary"
+              phx-debounce="300"
+              placeholder={gettext("Search ammo")}
+              role="search"
+              value={@search}
+            />
+          </.form>
 
-              <.link
-                href="#"
-                class="text-primary-600 link"
-                phx-click="delete"
-                phx-value-id={pack.id}
-                data-confirm={dgettext("prompts", "Are you sure you want to delete this ammo?")}
-                aria-label={
-                  dgettext("actions", "Delete pack of %{pack_count} bullets",
-                    pack_count: pack_count
-                  )
-                }
-              >
-                <i class="fa-fw fa-lg fas fa-trash"></i>
-              </.link>
-            </div>
-          </:actions>
-        </.live_component>
-      <% end %>
+          <div class="pb-1">
+            <.toggle_button action="toggle_show_used" value={@show_used}>
+              <span class="text-lg title text-primary-600">
+                {gettext("Show used")}
+              </span>
+            </.toggle_button>
+          </div>
+        </div>
+
+        <%= if @packs |> Enum.empty?() do %>
+          <h2 class="text-xl title text-primary-600">
+            {gettext("No Ammo")}
+            {display_emoji("😔")}
+          </h2>
+        <% end %>
+    <% end %>
+  </div>
+
+  <%= unless @packs |> Enum.empty?() do %>
+    <.live_component
+      module={CanneryWeb.Components.PackTableComponent}
+      id="pack-index-table"
+      packs={@packs}
+      current_user={@current_user}
+      show_used={@show_used}
+    >
+      <:type :let={%{name: type_name} = type}>
+        <.link navigate={~p"/type/#{type}"} class="link">
+          {type_name}
+        </.link>
+      </:type>
+      <:range :let={pack}>
+        <div class="flex flex-wrap justify-center items-center px-4 py-2 h-full min-w-20">
+          <.link
+            patch={~p"/ammo/add_shot_record/#{pack}"}
+            class="mx-2 my-1 text-sm btn btn-primary"
+          >
+            {dgettext("actions", "Record shots")}
+          </.link>
+        </div>
+      </:range>
+      <:container :let={{pack, %{name: container_name} = container}}>
+        <div class="flex flex-wrap justify-center items-center px-4 py-2 h-full min-w-20">
+          <.link navigate={~p"/container/#{container}"} class="mx-2 my-1 link">
+            {container_name}
+          </.link>
+
+          <.link patch={~p"/ammo/move/#{pack}"} class="mx-2 my-1 text-sm btn btn-primary">
+            {dgettext("actions", "Move ammo")}
+          </.link>
+        </div>
+      </:container>
+      <:actions :let={%{count: pack_count} = pack}>
+        <div class="flex justify-center items-center px-4 py-2 space-x-4 h-full">
+          <.link
+            navigate={~p"/ammo/show/#{pack}"}
+            class="text-primary-600 link"
+            aria-label={
+              dgettext("actions", "View pack of %{pack_count} bullets", pack_count: pack_count)
+            }
+          >
+            <.icon name="eye" class="size-6" />
+          </.link>
+
+          <.link
+            patch={~p"/ammo/edit/#{pack}"}
+            class="text-primary-600 link"
+            aria-label={
+              dgettext("actions", "Edit pack of %{pack_count} bullets", pack_count: pack_count)
+            }
+          >
+            <.icon name="pencil-square" class="size-6" />
+          </.link>
+
+          <.link
+            patch={~p"/ammo/clone/#{pack}"}
+            class="text-primary-600 link"
+            aria-label={
+              dgettext("actions", "Clone pack of %{pack_count} bullets", pack_count: pack_count)
+            }
+          >
+            <.icon name="document-duplicate" class="size-6" />
+          </.link>
+
+          <.link
+            href="#"
+            class="text-primary-600 link"
+            phx-click="delete"
+            phx-value-id={pack.id}
+            data-confirm={dgettext("prompts", "Are you sure you want to delete this ammo?")}
+            aria-label={
+              dgettext("actions", "Delete pack of %{pack_count} bullets", pack_count: pack_count)
+            }
+          >
+            <.icon name="trash" class="size-6" />
+          </.link>
+        </div>
+      </:actions>
+    </.live_component>
   <% end %>
 </div>
 
 <%= case @live_action do %>
   <% create when create in [:new, :edit, :clone] -> %>
-    <.modal return_to={~p"/ammo"}>
+    <.modal id="pack-index-modal" on_cancel={JS.patch(~p"/ammo")}>
       <.live_component
         module={CanneryWeb.PackLive.FormComponent}
         id={@pack.id || :new}
@@ -199,7 +199,7 @@
       />
     </.modal>
   <% :add_shot_record -> %>
-    <.modal return_to={~p"/ammo"}>
+    <.modal id="pack-index-modal" on_cancel={JS.patch(~p"/ammo")}>
       <.live_component
         module={CanneryWeb.Components.AddShotRecordComponent}
         id={:new}
@@ -211,7 +211,7 @@
       />
     </.modal>
   <% :move -> %>
-    <.modal return_to={~p"/ammo"}>
+    <.modal id="pack-index-modal" on_cancel={JS.patch(~p"/ammo")}>
       <.live_component
         module={CanneryWeb.Components.MovePackComponent}
         id={@pack.id}

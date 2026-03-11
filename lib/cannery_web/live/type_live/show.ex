@@ -5,6 +5,7 @@ defmodule CanneryWeb.TypeLive.Show do
 
   use CanneryWeb, :live_view
   alias Cannery.{ActivityLog, Ammo, Ammo.Type, Containers}
+  alias Phoenix.Naming
 
   @impl true
   def mount(_params, _session, socket),

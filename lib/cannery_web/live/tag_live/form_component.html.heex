@@ -2,45 +2,49 @@
   <h2 class="mb-8 text-center title text-xl text-primary-600">
     {@title}
   </h2>
-  <.form
+  <.simple_form
     :let={f}
     for={@changeset}
     id="tag-form"
-    class="flex flex-col space-y-4 sm:space-y-0 sm:grid sm:grid-cols-3 sm:gap-4 justify-center items-center"
+    class="flex flex-col space-y-4 justify-center items-stretch max-w-2xl w-full mx-auto"
     phx-target={@myself}
     phx-change="validate"
     phx-submit="save"
   >
-    <div
-      :if={@changeset.action && not @changeset.valid?}
-      class="invalid-feedback col-span-3 text-center"
-    >
-      {changeset_errors(@changeset)}
-    </div>
+    <.input
+      field={f[:name]}
+      type="text"
+      label={gettext("Name")}
+      class="text-center input input-primary"
+      maxlength="255"
+      phx-debounce="300"
+    />
 
-    {label(f, :name, gettext("Name"), class: "title text-lg text-primary-600")}
-    {text_input(f, :name,
-      class: "input input-primary col-span-2",
-      maxlength: 255,
-      phx_debounce: 300
-    )}
-    {error_tag(f, :name, "col-span-3")}
+    <.input
+      field={f[:bg_color]}
+      type="color"
+      label={gettext("Background color")}
+      id="tag-bg-color-input"
+      class="mx-auto"
+      phx-update="ignore"
+    />
 
-    {label(f, :bg_color, gettext("Background color"), class: "title text-lg text-primary-600")}
-    <span id="tag-bg-color-input" class="mx-auto col-span-2" phx-update="ignore">
-      {color_input(f, :bg_color)}
-    </span>
-    {error_tag(f, :bg_color, "col-span-3")}
+    <.input
+      field={f[:text_color]}
+      type="color"
+      label={gettext("Text color")}
+      id="tag-text-color-input"
+      class="mx-auto"
+      phx-update="ignore"
+    />
 
-    {label(f, :text_color, gettext("Text color"), class: "title text-lg text-primary-600")}
-    <span id="tag-text-color-input" class="mx-auto col-span-2" phx-update="ignore">
-      {color_input(f, :text_color)}
-    </span>
-    {error_tag(f, :text_color, "col-span-3")}
-
-    {submit(dgettext("actions", "Save"),
-      class: "mx-auto btn btn-primary col-span-3",
-      phx_disable_with: dgettext("prompts", "Saving...")
-    )}
-  </.form>
+    <:actions>
+      <.button
+        class="mx-auto btn btn-primary"
+        phx-disable-with={dgettext("prompts", "Saving...")}
+      >
+        {dgettext("actions", "Save")}
+      </.button>
+    </:actions>
+  </.simple_form>
 </div>

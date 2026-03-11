@@ -4,31 +4,28 @@ defmodule Cannery.MixProject do
   def project do
     [
       app: :cannery,
-      version: "0.9.16",
-      elixir: "1.18.4",
+      version: "0.9.17",
+      elixir: "1.19.5",
       elixirc_options: [ignore_module_conflict: true],
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
-      dialyzer: [
-        # Added for OTP 28 bug https://github.com/jeremyjh/dialyxir/issues/561
-        flags: [:no_opaque],
-        plt_add_apps: [:ex_unit]
-      ],
+      listeners: [Phoenix.CodeReloader],
       consolidate_protocols: Mix.env() not in [:dev, :test],
       preferred_cli_env: ["test.all": :test],
       # ExDoc
       name: "Cannery",
-      source_url: "https://gitea.bubbletea.dev/shibao/cannery",
-      homepage_url: "https://gitea.bubbletea.dev/shibao/cannery",
+      source_url: "https://codeberg.org/shibao/cannery",
+      homepage_url: "https://codeberg.org/shibao/cannery",
       docs: [
         # The main page in the docs
         main: "README.md",
         # logo: "path/to/logo.png",
         extras: ["README.md"]
       ],
-      authors: ["shibao"]
+      authors: ["shibao"],
+      dialyzer: [ignore_warnings: ".dialyzer_ignore.exs"]
     ]
   end
 
@@ -65,19 +62,27 @@ defmodule Cannery.MixProject do
       {:eqrcode, "~> 0.2"},
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
       {:ex_doc, "~> 0.27", only: :dev, runtime: false},
+      {:ex_heroicons, "~> 3.1.0"},
       {:floki, ">= 0.30.0", only: :test},
+      {:lazy_html, ">= 0.1.0", only: :test},
       {:gen_smtp, "~> 1.0"},
-      {:gettext, "~> 0.18"},
+      {:gettext, "~> 1.0"},
+      {:heroicons,
+       github: "tailwindlabs/heroicons",
+       tag: "v2.1.5",
+       sparse: "optimized",
+       app: false,
+       compile: false,
+       depth: 1},
       {:jason, "~> 1.2"},
       {:oban, "~> 2.10"},
       {:phoenix_ecto, "~> 4.4"},
-      {:phoenix_html_helpers, "~> 1.0"},
       {:phoenix_html, "~> 4.0"},
       {:phoenix_live_dashboard, "~> 0.8.3"},
       {:phoenix_live_reload, "~> 1.6.1", only: :dev},
-      {:phoenix_live_view, "~> 1.0.0"},
-      {:phoenix, "~> 1.7.19"},
-      {:plug_cowboy, "~> 2.7.0"},
+      {:phoenix_live_view, "~> 1.1.27"},
+      {:phoenix, "~> 1.8.5"},
+      {:plug_cowboy, "~> 2.8.0"},
       {:postgrex, ">= 0.0.0"},
       {:swoosh, "~> 1.6"},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},

@@ -1,22 +1,26 @@
-<div class="flex flex-col justify-center items-center space-y-8">
-  <h1 class="text-2xl title title-primary-500">
-    {gettext("Range day")}
-  </h1>
-
-  <%= if @containers |> Enum.empty?() do %>
-    <h1 class="text-xl title text-primary-600">
-      {gettext("No containers staged")}
-      {display_emoji("😔")}
+<div class="flex flex-col items-center space-y-8">
+  <div class="max-w-2xl mx-auto w-full flex flex-col items-center space-y-8">
+    <h1 class="text-2xl title title-primary-500">
+      {gettext("Range day")}
     </h1>
 
-    <.link navigate={~p"/containers"} class="btn btn-primary">
-      {dgettext("actions", "Why not get some ready to shoot?")}
-    </.link>
-  <% else %>
-    <.link navigate={~p"/containers"} class="btn btn-primary">
-      {dgettext("actions", "Stage containers")}
-    </.link>
+    <%= if @containers |> Enum.empty?() do %>
+      <h1 class="text-xl title text-primary-600">
+        {gettext("No containers staged")}
+        {display_emoji("😔")}
+      </h1>
 
+      <.link navigate={~p"/containers"} class="btn btn-primary">
+        {dgettext("actions", "Why not get some ready to shoot?")}
+      </.link>
+    <% else %>
+      <.link navigate={~p"/containers"} class="btn btn-primary">
+        {dgettext("actions", "Stage containers")}
+      </.link>
+    <% end %>
+  </div>
+
+  <%= unless @containers |> Enum.empty?() do %>
     <div class="flex flex-row flex-wrap justify-center items-stretch w-full">
       <.container_card
         :for={{container_id, container} <- @containers}
@@ -60,12 +64,12 @@
   <hr class="hr" />
 
   <%= if @shot_record_count == 0 do %>
-    <h1 class="text-xl title text-primary-600">
+    <h1 class="text-xl title text-primary-600 self-center">
       {gettext("No shots recorded")}
       {display_emoji("😔")}
     </h1>
   <% else %>
-    <h1 class="text-2xl title text-primary-600">
+    <h1 class="text-2xl title text-primary-600 self-center">
       {gettext("Shot log")}
     </h1>
 
@@ -73,7 +77,7 @@
       id="shot-log-chart"
       phx-hook="ShotLogChart"
       phx-update="ignore"
-      class="max-h-72"
+      class="max-h-72 w-full mx-auto"
       data-chart-data={Jason.encode!(@chart_data)}
       data-label={gettext("Rounds shot")}
       data-color={random_color()}
@@ -83,70 +87,76 @@
       {dgettext("errors", "Your browser does not support the canvas element.")}
     </canvas>
 
-    <div class="flex flex-col flex-wrap justify-center items-center space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
-      <.form
-        :let={f}
-        for={%{}}
-        as={:type}
-        phx-change="change_class"
-        phx-submit="change_class"
-        class="flex items-center"
-      >
-        {label(f, :class, gettext("Class"), class: "title text-primary-600 text-lg text-center")}
+    <div class="max-w-2xl mx-auto w-full flex flex-col items-center space-y-8">
+      <div class="flex flex-col flex-wrap justify-center items-end space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
+        <.form
+          :let={f}
+          for={%{}}
+          as={:type}
+          phx-change="change_class"
+          phx-submit="change_class"
+          class="flex items-center"
+        >
+          <.input
+            field={f[:class]}
+            type="select"
+            label={gettext("Class")}
+            options={[
+              {gettext("All"), :all},
+              {gettext("Rifle"), :rifle},
+              {gettext("Shotgun"), :shotgun},
+              {gettext("Pistol"), :pistol}
+            ]}
+            class="mx-2 min-w-20 input input-primary"
+            value={@class}
+          />
+        </.form>
 
-        {select(
-          f,
-          :class,
-          [
-            {gettext("All"), :all},
-            {gettext("Rifle"), :rifle},
-            {gettext("Shotgun"), :shotgun},
-            {gettext("Pistol"), :pistol}
-          ],
-          class: "mx-2 my-1 min-w-20 input input-primary",
-          value: @class
-        )}
-      </.form>
+        <.form
+          :let={f}
+          for={%{}}
+          as={:search}
+          phx-change="search"
+          phx-submit="search"
+          class="flex items-center grow"
+        >
+          <.input
+            field={f[:search_term]}
+            type="text"
+            container_class="flex items-center grow"
+            class="grow input input-primary"
+            phx-debounce="300"
+            placeholder={gettext("Search shot records")}
+            role="search"
+            value={@search}
+          />
+        </.form>
 
-      <.form
-        :let={f}
-        for={%{}}
-        as={:search}
-        phx-change="search"
-        phx-submit="search"
-        class="flex items-center grow"
-      >
-        {text_input(f, :search_term,
-          class: "grow input input-primary",
-          phx_debounce: 300,
-          placeholder: gettext("Search shot records"),
-          role: "search",
-          value: @search
-        )}
-      </.form>
+        <.form
+          :let={f}
+          for={%{}}
+          as={:shot_records}
+          phx-change="change_dates"
+          phx-submit="change_dates"
+          class="flex items-center"
+        >
+          <.label for={f[:dates_start].id} class="title text-primary-600 text-lg text-center">
+            {gettext("Dates")}
+          </.label>
 
-      <.form
-        :let={f}
-        for={%{}}
-        as={:shot_records}
-        phx-change="change_dates"
-        phx-submit="change_dates"
-        class="flex items-center"
-      >
-        {label(f, :dates_start, gettext("Dates"),
-          class: "title text-primary-600 text-lg text-center"
-        )}
+          <.date_range name="dates" />
+        </.form>
+      </div>
 
-        <.date_range name="dates" />
-      </.form>
+      <%= if @shot_records |> Enum.empty?() do %>
+        <h1 class="text-xl title text-primary-600">
+          {gettext("No shots recorded")}
+          {display_emoji("😔")}
+        </h1>
+      <% end %>
     </div>
 
-    <%= if @shot_records |> Enum.empty?() do %>
-      <h1 class="text-xl title text-primary-600">
-        {gettext("No shots recorded")}
-        {display_emoji("😔")}
-      </h1>
-    <% else %>
+    <%= unless @shot_records |> Enum.empty?() do %>
       <.live_component
         module={CanneryWeb.Components.ShotRecordTableComponent}
         id="shot-records-index-table"
@@ -164,7 +174,7 @@
                 )
               }
             >
-              <i class="fa-fw fa-lg fas fa-edit"></i>
+              <.icon name="pencil-square" class="size-6" />
             </.link>
 
             <.link
@@ -181,7 +191,7 @@
                 )
               }
             >
-              <i class="fa-fw fa-lg fas fa-trash"></i>
+              <.icon name="trash" class="size-6" />
             </.link>
           </div>
         </:actions>
@@ -192,7 +202,7 @@
 
 <%= case @live_action do %>
   <% :edit -> %>
-    <.modal return_to={~p"/range"}>
+    <.modal id="range-index-modal" on_cancel={JS.patch(~p"/range")}>
       <.live_component
         module={CanneryWeb.RangeLive.FormComponent}
         id={@shot_record.id}
@@ -204,7 +214,7 @@
       />
     </.modal>
   <% :add_shot_record -> %>
-    <.modal return_to={~p"/range"}>
+    <.modal id="range-index-modal" on_cancel={JS.patch(~p"/range")}>
       <.live_component
         module={CanneryWeb.Components.AddShotRecordComponent}
         id={:new}

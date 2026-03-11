@@ -13,13 +13,31 @@ defmodule CanneryWeb.ContainerLive.Show do
     do: {:ok, socket |> assign(class: :all, view_table: true)}
 
   @impl true
-  def handle_params(%{"id" => id}, _session, %{assigns: %{current_user: current_user}} = socket) do
+  def handle_params(
+        %{"id" => id} = params,
+        _session,
+        %{assigns: %{current_user: current_user}} = socket
+      ) do
     socket =
       socket
+      |> assign_class(params)
       |> assign(:view_table, true)
       |> render_container(id, current_user)
 
     {:noreply, socket}
+  end
+
+  defp assign_class(socket, %{"class" => class}) when class in ~w(rifle shotgun pistol),
+    do: socket |> assign(:class, String.to_existing_atom(class))
+
+  defp assign_class(socket, _params), do: socket |> assign(:class, :all)
+
+  @impl true
+  def handle_info(
+        {CanneryWeb.ContainerLive.EditTagsComponent, {:tags_updated, {level, msg}}},
+        socket
+      ) do
+    socket |> put_flash(level, msg) |> render_container() |> wrap(:noreply)
   end
 
   @impl true
@@ -60,19 +78,17 @@ defmodule CanneryWeb.ContainerLive.Show do
           prompt = dgettext("prompts", "%{name} has been deleted", name: container_name)
           socket |> put_flash(:info, prompt) |> push_navigate(to: ~p"/containers")
 
-        {:error, %{action: :delete, errors: [packs: _error], valid?: false} = changeset} ->
-          packs_error = changeset |> changeset_errors(:packs) |> Enum.join(", ")
-
+        {:error, %{action: :delete, errors: [packs: packs_error], valid?: false} = changeset} ->
           prompt =
             dgettext("errors", "Could not delete %{name}: %{error}",
               name: changeset |> Changeset.get_field(:name, "container"),
-              error: packs_error
+              error: translate_error(packs_error)
             )
 
           socket |> put_flash(:error, prompt)
 
-        {:error, changeset} ->
-          socket |> put_flash(:error, changeset |> changeset_errors())
+        {:error, _changeset} ->
+          socket |> put_flash(:error, dgettext("errors", "Could not delete container"))
       end
 
     {:noreply, socket}
@@ -94,20 +110,12 @@ defmodule CanneryWeb.ContainerLive.Show do
     {:noreply, socket |> assign(:view_table, !view_table) |> render_container()}
   end
 
-  def handle_event("change_class", %{"type" => %{"class" => "rifle"}}, socket) do
-    {:noreply, socket |> assign(:class, :rifle) |> render_container()}
-  end
-
-  def handle_event("change_class", %{"type" => %{"class" => "shotgun"}}, socket) do
-    {:noreply, socket |> assign(:class, :shotgun) |> render_container()}
-  end
-
-  def handle_event("change_class", %{"type" => %{"class" => "pistol"}}, socket) do
-    {:noreply, socket |> assign(:class, :pistol) |> render_container()}
-  end
-
-  def handle_event("change_class", %{"type" => %{"class" => _all}}, socket) do
-    {:noreply, socket |> assign(:class, :all) |> render_container()}
+  def handle_event(
+        "change_class",
+        %{"type" => %{"class" => class}},
+        %{assigns: %{container: container}} = socket
+      ) do
+    {:noreply, socket |> push_patch(to: ~p"/container/#{container}?class=#{class}")}
   end
 
   @spec render_container(Socket.t(), Container.id(), User.t()) :: Socket.t()

@@ -65,6 +65,20 @@ defmodule CanneryWeb.ContainerLive.Index do
   end
 
   @impl true
+  def handle_info(
+        {CanneryWeb.ContainerLive.EditTagsComponent, {:tags_updated, {level, msg}}},
+        %{assigns: %{container: container, current_user: current_user}} = socket
+      ) do
+    container = Containers.get_container!(container.id, current_user)
+
+    socket
+    |> assign(:container, container)
+    |> put_flash(level, msg)
+    |> display_containers()
+    |> wrap(:noreply)
+  end
+
+  @impl true
   def handle_event("delete", %{"id" => id}, %{assigns: %{current_user: current_user}} = socket) do
     socket =
       socket.assigns.containers
@@ -79,21 +93,19 @@ defmodule CanneryWeb.ContainerLive.Index do
               prompt = dgettext("prompts", "%{name} has been deleted", name: container_name)
               socket |> put_flash(:info, prompt) |> display_containers()
 
-            {:error, %{action: :delete, errors: [packs: _error], valid?: false} = changeset} ->
-              packs_error = changeset |> changeset_errors(:packs) |> Enum.join(", ")
-
+            {:error, %{action: :delete, errors: [packs: packs_error], valid?: false} = changeset} ->
               prompt =
                 dgettext(
                   "errors",
                   "Could not delete %{name}: %{error}",
                   name: changeset |> Changeset.get_field(:name, "container"),
-                  error: packs_error
+                  error: translate_error(packs_error)
                 )
 
               socket |> put_flash(:error, prompt)
 
-            {:error, changeset} ->
-              socket |> put_flash(:error, changeset |> changeset_errors())
+            {:error, _changeset} ->
+              socket |> put_flash(:error, dgettext("errors", "Could not delete container"))
           end
       end
 

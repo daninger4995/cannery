@@ -118,5 +118,3 @@ license can be found at
 - [Website](https://cannery.app): Project website
 - [Codeberg](https://codeberg.org/shibao/cannery): Main repo, feature
   requests and bug reports
-- [Github](https://github.com/shibaobun/cannery): Source code mirror, please
-  don't open pull requests to this repository

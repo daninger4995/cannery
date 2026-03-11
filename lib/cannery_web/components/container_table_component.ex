@@ -3,6 +3,7 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
   A component that displays a list of containers
   """
   use CanneryWeb, :live_component
+  import CanneryWeb.CoreComponents, only: [simple_tag_card: 1]
   alias Cannery.{Accounts.User, Ammo, Containers.Container}
   alias CanneryWeb.Components.TableComponent
   alias Ecto.UUID
@@ -98,8 +99,10 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
 
     rows =
       containers
-      |> Enum.map(fn container ->
-        container |> get_row_data_for_container(columns, extra_data)
+      |> Enum.map(fn %{id: id} = container ->
+        container
+        |> get_row_data_for_container(columns, extra_data)
+        |> Map.put(:id, id)
       end)
 
     socket
@@ -113,9 +116,16 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
   def render(assigns) do
     ~H"""
     <div id={@id} class="w-full">
+      <%!--
+        The id includes a hash of @rows to force LiveView to remount the
+        TableComponent when row data changes. Without this, LiveView's diff
+        tracking cannot detect changes to ~H rendered structs that are passed
+        through nested LiveComponent assigns, so the DOM never updates even
+        though the server-side data is correct.
+      --%>
       <.live_component
         module={CanneryWeb.Components.TableComponent}
-        id={"table-#{@id}"}
+        id={"table-#{@id}-#{:erlang.phash2(@rows)}"}
         columns={@columns}
         rows={@rows}
       />
@@ -165,12 +175,12 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
       container.tags
       |> Enum.map(fn %{name: name} -> name end)
       |> Enum.sort()
-      |> Enum.join(" ")
+      |> Enum.join(", ")
 
     {tag_names,
      ~H"""
-     <div class="flex flex-wrap justify-center items-center">
-       <.simple_tag_card :for={tag <- @container.tags} :if={@container.tags} tag={tag} />
+     <div id={"tags-#{@container.id}"} class="flex flex-wrap justify-center items-center">
+       <.simple_tag_card :for={tag <- @container.tags} tag={tag} />
 
        {render_slot(@tag_actions, @container)}
      </div>

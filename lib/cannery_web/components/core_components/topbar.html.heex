@@ -5,9 +5,9 @@
         <img
           src={~p"/images/cannery.svg"}
           alt={gettext("Cannery logo")}
-          class="inline-block h-8 mx-1"
+          class="inline-block h-8 mx-1 align-middle"
         />
-        <h1 class="inline hover:underline">Cannery</h1>
+        <h1 class="inline align-middle hover:underline">Cannery</h1>
       </.link>
 
       <%= if @title_content do %>
@@ -62,10 +62,11 @@
           <.link
             href={~p"/users/log_out"}
             method="delete"
+            class="text-white hover:underline"
             data-confirm={dgettext("prompts", "Are you sure you want to log out?")}
             aria-label={gettext("Log out")}
           >
-            <i class="fas fa-sign-out-alt"></i>
+            <.icon name="arrow-right-start-on-rectangle" class="size-6" />
           </.link>
         </li>
         <li
@@ -80,7 +81,7 @@
             class="text-white hover:underline"
             aria-label={gettext("Live Dashboard")}
           >
-            <i class="fas fa-gauge"></i>
+            <.icon name="gauge" class="size-6" />
           </.link>
         </li>
       <% else %>

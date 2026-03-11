@@ -136,7 +136,7 @@ defmodule CanneryWeb.PackLive.Show do
                   )
                 }
               >
-                <i class="fa-fw fa-lg fas fa-edit"></i>
+                <.icon name="pencil-square" class="size-6" />
               </.link>
 
               <.link
@@ -151,7 +151,7 @@ defmodule CanneryWeb.PackLive.Show do
                   )
                 }
               >
-                <i class="fa-fw fa-lg fas fa-trash"></i>
+                <.icon name="trash" class="size-6" />
               </.link>
             </div>
             """

@@ -59,38 +59,52 @@ defmodule CanneryWeb.RangeLiveTest do
       assert html =~ shotgun_shot_record.notes
       assert html =~ pistol_shot_record.notes
 
-      html =
-        index_live
-        |> form(~s/form[phx-change="change_class"]/)
-        |> render_change(type: %{class: :rifle})
+      index_live
+      |> form(~s/form[phx-change="change_class"]/)
+      |> render_change(type: %{class: :rifle})
 
+      assert_patch(index_live, ~p"/range?class=rifle")
+
+      {:ok, _index_live, html} = live(conn, ~p"/range?class=rifle")
       assert html =~ rifle_shot_record.notes
       refute html =~ shotgun_shot_record.notes
       refute html =~ pistol_shot_record.notes
 
-      html =
-        index_live
-        |> form(~s/form[phx-change="change_class"]/)
-        |> render_change(type: %{class: :shotgun})
+      {:ok, index_live, _html} = live(conn, ~p"/range")
 
+      index_live
+      |> form(~s/form[phx-change="change_class"]/)
+      |> render_change(type: %{class: :shotgun})
+
+      assert_patch(index_live, ~p"/range?class=shotgun")
+
+      {:ok, _index_live, html} = live(conn, ~p"/range?class=shotgun")
       refute html =~ rifle_shot_record.notes
       assert html =~ shotgun_shot_record.notes
       refute html =~ pistol_shot_record.notes
 
-      html =
-        index_live
-        |> form(~s/form[phx-change="change_class"]/)
-        |> render_change(type: %{class: :pistol})
+      {:ok, index_live, _html} = live(conn, ~p"/range")
 
+      index_live
+      |> form(~s/form[phx-change="change_class"]/)
+      |> render_change(type: %{class: :pistol})
+
+      assert_patch(index_live, ~p"/range?class=pistol")
+
+      {:ok, _index_live, html} = live(conn, ~p"/range?class=pistol")
       refute html =~ rifle_shot_record.notes
       refute html =~ shotgun_shot_record.notes
       assert html =~ pistol_shot_record.notes
 
-      html =
-        index_live
-        |> form(~s/form[phx-change="change_class"]/)
-        |> render_change(type: %{class: :all})
+      {:ok, index_live, _html} = live(conn, ~p"/range")
 
+      index_live
+      |> form(~s/form[phx-change="change_class"]/)
+      |> render_change(type: %{class: :all})
+
+      assert_patch(index_live, ~p"/range?class=all")
+
+      {:ok, _index_live, html} = live(conn, ~p"/range?class=all")
       assert html =~ rifle_shot_record.notes
       assert html =~ shotgun_shot_record.notes
       assert html =~ pistol_shot_record.notes

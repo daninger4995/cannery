@@ -1,76 +1,143 @@
-<div class="flex flex-col justify-center items-center space-y-8">
-  <h1 class="text-2xl title title-primary-500">
-    {gettext("Containers")}
-  </h1>
+<div class="flex flex-col space-y-8">
+  <div class="max-w-2xl mx-auto w-full flex flex-col items-center space-y-8">
+    <h1 class="text-2xl title title-primary-500">
+      {gettext("Containers")}
+    </h1>
 
-  <%= if @containers |> Enum.empty?() and @search |> is_nil() do %>
-    <h2 class="text-xl title text-primary-600">
-      {gettext("No containers")}
-      {display_emoji("😔")}
-    </h2>
-
-    <.link patch={~p"/containers/new"} class="btn btn-primary">
-      {dgettext("actions", "Add your first container!")}
-    </.link>
-  <% else %>
-    <.link patch={~p"/containers/new"} class="btn btn-primary">
-      {dgettext("actions", "New Container")}
-    </.link>
-
-    <div class="flex flex-col flex-wrap justify-center items-center space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
-      <.form
-        :let={f}
-        for={%{}}
-        as={:search}
-        phx-change="search"
-        phx-submit="search"
-        class="flex items-center grow"
-      >
-        {text_input(f, :search_term,
-          class: "grow input input-primary",
-          phx_debounce: 300,
-          placeholder: gettext("Search containers"),
-          role: "search",
-          value: @search
-        )}
-      </.form>
-
-      <.toggle_button action="toggle_table" value={@view_table}>
-        <span class="text-lg title text-primary-600">
-          {gettext("View as table")}
-        </span>
-      </.toggle_button>
-    </div>
-
-    <%= if @containers |> Enum.empty?() do %>
+    <%= if @containers |> Enum.empty?() and @search |> is_nil() do %>
       <h2 class="text-xl title text-primary-600">
         {gettext("No containers")}
         {display_emoji("😔")}
       </h2>
+
+      <.link patch={~p"/containers/new"} class="btn btn-primary">
+        {dgettext("actions", "Add your first container!")}
+      </.link>
     <% else %>
-      <%= if @view_table do %>
-        <.live_component
-          module={CanneryWeb.Components.ContainerTableComponent}
-          id="containers-index-table"
-          action={@live_action}
-          containers={@containers}
+      <.link patch={~p"/containers/new"} class="btn btn-primary">
+        {dgettext("actions", "New Container")}
+      </.link>
+
+      <div class="flex flex-col flex-wrap justify-center items-center space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
+        <.form
+          :let={f}
+          for={%{}}
+          as={:search}
+          phx-change="search"
+          phx-submit="search"
+          class="flex items-center grow"
+        >
+          <.input
+            field={f[:search_term]}
+            type="text"
+            container_class="flex items-center grow"
+            class="grow input input-primary"
+            phx-debounce="300"
+            placeholder={gettext("Search containers")}
+            role="search"
+            value={@search}
+          />
+        </.form>
+
+        <.toggle_button action="toggle_table" value={@view_table}>
+          <span class="text-lg title text-primary-600">
+            {gettext("View as table")}
+          </span>
+        </.toggle_button>
+      </div>
+
+      <%= if @containers |> Enum.empty?() do %>
+        <h2 class="text-xl title text-primary-600">
+          {gettext("No containers")}
+          {display_emoji("😔")}
+        </h2>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= unless @containers |> Enum.empty?() do %>
+    <%= if @view_table do %>
+      <.live_component
+        module={CanneryWeb.Components.ContainerTableComponent}
+        id="containers-index-table"
+        action={@live_action}
+        containers={@containers}
+        current_user={@current_user}
+      >
+        <:range :let={container}>
+          <div class="flex flex-wrap justify-center items-center px-4 py-2 h-full min-w-20">
+            <button
+              type="button"
+              class="mx-2 my-1 text-sm btn btn-primary"
+              phx-click="toggle_staged"
+              phx-value-container_id={container.id}
+            >
+              {if container.staged,
+                do: dgettext("actions", "Unstage"),
+                else: dgettext("actions", "Stage")}
+            </button>
+          </div>
+        </:range>
+        <:tag_actions :let={container}>
+          <div class="mx-4 my-2">
+            <.link
+              patch={~p"/containers/edit_tags/#{container}"}
+              class="text-primary-600 link"
+              aria-label={
+                dgettext("actions", "Tag %{container_name}", container_name: container.name)
+              }
+            >
+              <.icon name="tag" class="size-6" />
+            </.link>
+          </div>
+        </:tag_actions>
+        <:actions :let={container}>
+          <.link
+            patch={~p"/containers/edit/#{container}"}
+            class="text-primary-600 link"
+            aria-label={
+              dgettext("actions", "Edit %{container_name}", container_name: container.name)
+            }
+          >
+            <.icon name="pencil-square" class="size-6" />
+          </.link>
+
+          <.link
+            patch={~p"/containers/clone/#{container}"}
+            class="text-primary-600 link"
+            aria-label={
+              dgettext("actions", "Clone %{container_name}", container_name: container.name)
+            }
+          >
+            <.icon name="document-duplicate" class="size-6" />
+          </.link>
+
+          <.link
+            href="#"
+            class="text-primary-600 link"
+            phx-click="delete"
+            phx-value-id={container.id}
+            data-confirm={
+              dgettext("prompts", "Are you sure you want to delete %{name}?",
+                name: container.name
+              )
+            }
+            aria-label={
+              dgettext("actions", "Delete %{container_name}", container_name: container.name)
+            }
+          >
+            <.icon name="trash" class="size-6" />
+          </.link>
+        </:actions>
+      </.live_component>
+    <% else %>
+      <div class="flex flex-row flex-wrap justify-center items-stretch w-full">
+        <.container_card
+          :for={container <- @containers}
+          container={container}
           current_user={@current_user}
         >
-          <:range :let={container}>
-            <div class="flex flex-wrap justify-center items-center px-4 py-2 h-full min-w-20">
-              <button
-                type="button"
-                class="mx-2 my-1 text-sm btn btn-primary"
-                phx-click="toggle_staged"
-                phx-value-container_id={container.id}
-              >
-                {if container.staged,
-                  do: dgettext("actions", "Unstage"),
-                  else: dgettext("actions", "Stage")}
-              </button>
-            </div>
-          </:range>
-          <:tag_actions :let={container}>
+          <:tag_actions>
             <div class="mx-4 my-2">
               <.link
                 patch={~p"/containers/edit_tags/#{container}"}
@@ -79,115 +146,55 @@
                   dgettext("actions", "Tag %{container_name}", container_name: container.name)
                 }
               >
-                <i class="fa-fw fa-lg fas fa-tags"></i>
+                <.icon name="tag" class="size-6" />
               </.link>
             </div>
           </:tag_actions>
-          <:actions :let={container}>
-            <.link
-              patch={~p"/containers/edit/#{container}"}
-              class="text-primary-600 link"
-              aria-label={
-                dgettext("actions", "Edit %{container_name}", container_name: container.name)
-              }
-            >
-              <i class="fa-fw fa-lg fas fa-edit"></i>
-            </.link>
-
-            <.link
-              patch={~p"/containers/clone/#{container}"}
-              class="text-primary-600 link"
-              aria-label={
-                dgettext("actions", "Clone %{container_name}", container_name: container.name)
-              }
-            >
-              <i class="fa-fw fa-lg fas fa-copy"></i>
-            </.link>
-
-            <.link
-              href="#"
-              class="text-primary-600 link"
-              phx-click="delete"
-              phx-value-id={container.id}
-              data-confirm={
-                dgettext("prompts", "Are you sure you want to delete %{name}?",
-                  name: container.name
-                )
-              }
-              aria-label={
-                dgettext("actions", "Delete %{container_name}", container_name: container.name)
-              }
-            >
-              <i class="fa-fw fa-lg fas fa-trash"></i>
-            </.link>
-          </:actions>
-        </.live_component>
-      <% else %>
-        <div class="flex flex-row flex-wrap justify-center items-stretch w-full">
-          <.container_card
-            :for={container <- @containers}
-            container={container}
-            current_user={@current_user}
+          <.link
+            patch={~p"/containers/edit/#{container}"}
+            class="text-primary-600 link"
+            aria-label={
+              dgettext("actions", "Edit %{container_name}", container_name: container.name)
+            }
           >
-            <:tag_actions>
-              <div class="mx-4 my-2">
-                <.link
-                  patch={~p"/containers/edit_tags/#{container}"}
-                  class="text-primary-600 link"
-                  aria-label={
-                    dgettext("actions", "Tag %{container_name}", container_name: container.name)
-                  }
-                >
-                  <i class="fa-fw fa-lg fas fa-tags"></i>
-                </.link>
-              </div>
-            </:tag_actions>
-            <.link
-              patch={~p"/containers/edit/#{container}"}
-              class="text-primary-600 link"
-              aria-label={
-                dgettext("actions", "Edit %{container_name}", container_name: container.name)
-              }
-            >
-              <i class="fa-fw fa-lg fas fa-edit"></i>
-            </.link>
+            <.icon name="pencil-square" class="size-6" />
+          </.link>
 
-            <.link
-              patch={~p"/containers/clone/#{container}"}
-              class="text-primary-600 link"
-              aria-label={
-                dgettext("actions", "Clone %{container_name}", container_name: container.name)
-              }
-            >
-              <i class="fa-fw fa-lg fas fa-copy"></i>
-            </.link>
+          <.link
+            patch={~p"/containers/clone/#{container}"}
+            class="text-primary-600 link"
+            aria-label={
+              dgettext("actions", "Clone %{container_name}", container_name: container.name)
+            }
+          >
+            <.icon name="document-duplicate" class="size-6" />
+          </.link>
 
-            <.link
-              href="#"
-              class="text-primary-600 link"
-              phx-click="delete"
-              phx-value-id={container.id}
-              data-confirm={
-                dgettext("prompts", "Are you sure you want to delete %{name}?",
-                  name: container.name
-                )
-              }
-              aria-label={
-                dgettext("actions", "Delete %{container_name}", container_name: container.name)
-              }
-            >
-              <i class="fa-fw fa-lg fas fa-trash"></i>
-            </.link>
-          </.container_card>
-        </div>
-      <% end %>
+          <.link
+            href="#"
+            class="text-primary-600 link"
+            phx-click="delete"
+            phx-value-id={container.id}
+            data-confirm={
+              dgettext("prompts", "Are you sure you want to delete %{name}?",
+                name: container.name
+              )
+            }
+            aria-label={
+              dgettext("actions", "Delete %{container_name}", container_name: container.name)
+            }
+          >
+            <.icon name="trash" class="size-6" />
+          </.link>
+        </.container_card>
+      </div>
     <% end %>
   <% end %>
 </div>
 
 <%= case @live_action do %>
   <% modifying when modifying in [:new, :edit, :clone] -> %>
-    <.modal return_to={~p"/containers"}>
+    <.modal id="container-index-modal" on_cancel={JS.patch(~p"/containers")}>
       <.live_component
         module={CanneryWeb.ContainerLive.FormComponent}
         id={@container.id || :new}
@@ -199,14 +206,13 @@
       />
     </.modal>
   <% :edit_tags -> %>
-    <.modal return_to={~p"/containers"}>
+    <.modal id="container-index-modal" on_cancel={JS.patch(~p"/containers")}>
       <.live_component
         module={CanneryWeb.ContainerLive.EditTagsComponent}
         id={@container.id}
         title={@page_title}
         action={@live_action}
         container={@container}
-        current_path={~p"/containers/edit_tags/#{@container}"}
         current_user={@current_user}
       />
     </.modal>

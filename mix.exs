@@ -74,7 +74,7 @@ defmodule Cannery.MixProject do
       {:phoenix_html_helpers, "~> 1.0"},
       {:phoenix_html, "~> 4.0"},
       {:phoenix_live_dashboard, "~> 0.8.3"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
+      {:phoenix_live_reload, "~> 1.6.1", only: :dev},
       {:phoenix_live_view, "~> 1.0.0"},
       {:phoenix, "~> 1.7.19"},
       {:plug_cowboy, "~> 2.7.0"},
@@ -82,7 +82,8 @@ defmodule Cannery.MixProject do
       {:swoosh, "~> 1.6"},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:telemetry_metrics, "~> 1.1"},
-      {:telemetry_poller, "~> 1.0"}
+      {:telemetry_poller, "~> 1.0"},
+      {:tidewave, "~> 0.5", only: :dev}
     ]
   end
 

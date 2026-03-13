@@ -10,7 +10,7 @@ defmodule CanneryWeb.PackLive.Show do
   alias Phoenix.LiveView.Socket
 
   @impl true
-  def mount(_params, _session, socket), do: {:ok, socket}
+  def mount(_params, _session, socket), do: socket |> wrap(:ok)
 
   @impl true
   def handle_params(
@@ -20,21 +20,17 @@ defmodule CanneryWeb.PackLive.Show do
       ) do
     shot_record = ActivityLog.get_shot_record!(shot_record_id, current_user)
 
-    socket =
-      socket
-      |> assign(page_title: page_title(live_action), shot_record: shot_record)
-      |> display_pack(id)
-
-    {:noreply, socket}
+    socket
+    |> assign(page_title: page_title(live_action), shot_record: shot_record)
+    |> display_pack(id)
+    |> wrap(:noreply)
   end
 
   def handle_params(%{"id" => id}, _url, %{assigns: %{live_action: live_action}} = socket) do
-    socket =
-      socket
-      |> assign(page_title: page_title(live_action))
-      |> display_pack(id)
-
-    {:noreply, socket}
+    socket
+    |> assign(page_title: page_title(live_action))
+    |> display_pack(id)
+    |> wrap(:noreply)
   end
 
   defp page_title(:add_shot_record), do: gettext("Record Shots")
@@ -54,7 +50,7 @@ defmodule CanneryWeb.PackLive.Show do
     prompt = dgettext("prompts", "Ammo deleted succesfully")
     redirect_to = ~p"/ammo"
 
-    {:noreply, socket |> put_flash(:info, prompt) |> push_navigate(to: redirect_to)}
+    socket |> put_flash(:info, prompt) |> push_navigate(to: redirect_to) |> wrap(:noreply)
   end
 
   def handle_event(
@@ -67,7 +63,7 @@ defmodule CanneryWeb.PackLive.Show do
       |> ActivityLog.delete_shot_record(current_user)
 
     prompt = dgettext("prompts", "Shot records deleted succesfully")
-    {:noreply, socket |> put_flash(:info, prompt) |> display_pack(pack_id)}
+    socket |> put_flash(:info, prompt) |> display_pack(pack_id) |> wrap(:noreply)
   end
 
   @spec display_pack(Socket.t(), Pack.t() | Pack.id()) :: Socket.t()

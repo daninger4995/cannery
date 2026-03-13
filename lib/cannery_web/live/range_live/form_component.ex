@@ -9,7 +9,7 @@ defmodule CanneryWeb.RangeLive.FormComponent do
   alias Phoenix.LiveView.Socket
 
   @impl true
-  def mount(socket), do: {:ok, socket |> assign(:pack, nil)}
+  def mount(socket), do: socket |> assign(:pack, nil) |> wrap(:ok)
 
   @impl true
   @spec update(
@@ -30,16 +30,16 @@ defmodule CanneryWeb.RangeLive.FormComponent do
       )
       when is_binary(pack_id) do
     pack = Ammo.get_pack!(pack_id, current_user)
-    {:ok, socket |> assign(assigns) |> assign(:pack, pack) |> assign_changeset(%{})}
+    socket |> assign(assigns) |> assign(:pack, pack) |> assign_changeset(%{}) |> wrap(:ok)
   end
 
   def update(%{shot_record: %ShotRecord{}} = assigns, socket) do
-    {:ok, socket |> assign(assigns) |> assign_changeset(%{})}
+    socket |> assign(assigns) |> assign_changeset(%{}) |> wrap(:ok)
   end
 
   @impl true
   def handle_event("validate", %{"shot_record" => shot_record_params}, socket) do
-    {:noreply, socket |> assign_changeset(shot_record_params, :validate)}
+    socket |> assign_changeset(shot_record_params, :validate) |> wrap(:noreply)
   end
 
   def handle_event(
@@ -58,7 +58,7 @@ defmodule CanneryWeb.RangeLive.FormComponent do
           socket |> assign(:changeset, changeset)
       end
 
-    {:noreply, socket}
+    socket |> wrap(:noreply)
   end
 
   defp assign_changeset(

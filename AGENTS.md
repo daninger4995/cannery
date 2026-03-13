@@ -218,6 +218,22 @@ custom classes must fully style the input
 - **Never** use the deprecated `live_redirect` and `live_patch` functions, instead **always** use the `<.link navigate={href}>` and  `<.link patch={href}>` in templates, and `push_navigate` and `push_patch` functions LiveViews
 - **Avoid LiveComponent's** unless you have a strong, specific need for them
 - LiveViews should be named like `AppWeb.WeatherLive`, with a `Live` suffix. When you go to add LiveView routes to the router, the default `:browser` scope is **already aliased** with the `AppWeb` module, so you can just do `live "/weather", WeatherLive`
+- **Always** use `wrap/2` from `Cannery.Utils` instead of raw tuples for callback returns. Use `socket |> wrap(:ok)` instead of `{:ok, socket}` and `socket |> wrap(:noreply)` instead of `{:noreply, socket}`. This eliminates extra intermediate variables and reduces indentation by allowing clean pipelines:
+
+      def handle_event("filter", params, socket) do
+        socket
+        |> assign(:filter, params)
+        |> do_something()
+        |> wrap(:noreply)
+      end
+
+  `wrap/2` is also imported into contexts via `use Cannery, :context` for the same reason:
+
+      fn _repo, %{result: %{id: id}} ->
+        Repo.get(MySchema, id)
+        |> preload_thing()
+        |> wrap(:ok)
+      end
 
 ### LiveView streams
 
@@ -241,11 +257,11 @@ custom classes must fully style the input
         # re-fetch the messages based on the filter
         messages = list_messages(filter)
 
-        {:noreply,
-         socket
-         |> assign(:messages_empty?, messages == [])
-         # reset the stream with the new messages
-         |> stream(:messages, messages, reset: true)}
+        socket
+        |> assign(:messages_empty?, messages == [])
+        # reset the stream with the new messages
+        |> stream(:messages, messages, reset: true)
+        |> wrap(:noreply)
       end
 
 - LiveView streams *do not support counting or empty states*. If you need to display a count, you must track it using a separate assign. For empty states, you can use Tailwind classes:
@@ -267,11 +283,11 @@ custom classes must fully style the input
         edit_form = to_form(Chat.change_message(message, %{content: message.content}))
 
         # re-insert message so @editing_message_id toggle logic takes effect for that stream item
-        {:noreply,
-         socket
-         |> stream_insert(:messages, message)
-         |> assign(:editing_message_id, String.to_integer(message_id))
-         |> assign(:edit_form, edit_form)}
+        socket
+        |> stream_insert(:messages, message)
+        |> assign(:editing_message_id, String.to_integer(message_id))
+        |> assign(:edit_form, edit_form)
+        |> wrap(:noreply)
       end
 
   And in the template:
@@ -343,7 +359,9 @@ Use LiveView's `push_event/3` when you need to push events/data to the client fo
 
     # or return the modified socket directly:
     def handle_event("some_event", _, socket) do
-      {:noreply, push_event(socket, "my_event", %{...})}
+      socket
+      |> push_event("my_event", %{...})
+      |> wrap(:noreply)
     end
 
 Pushed events can then be picked up in a JS hook with `this.handleEvent`:
@@ -390,7 +408,9 @@ Where the server handled it via:
 If you want to create a form based on `handle_event` params:
 
     def handle_event("submitted", params, socket) do
-      {:noreply, assign(socket, form: to_form(params))}
+      socket
+      |> assign(:form, to_form(params))
+      |> wrap(:noreply)
     end
 
 When you pass a map to `to_form/1`, it assumes said map contains the form params, which are expected to have string keys.
@@ -398,7 +418,9 @@ When you pass a map to `to_form/1`, it assumes said map contains the form params
 You can also specify a name to nest the params:
 
     def handle_event("submitted", %{"user" => user_params}, socket) do
-      {:noreply, assign(socket, form: to_form(user_params, as: :user))}
+      socket
+      |> assign(:form, to_form(user_params, as: :user))
+      |> wrap(:noreply)
     end
 
 #### Creating a form from changesets

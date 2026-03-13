@@ -22,13 +22,11 @@ defmodule CanneryWeb.Components.ShotRecordTableComponent do
         %{id: _id, shot_records: _shot_records, current_user: _current_user} = assigns,
         socket
       ) do
-    socket =
-      socket
-      |> assign(assigns)
-      |> assign_new(:actions, fn -> [] end)
-      |> display_shot_records()
-
-    {:ok, socket}
+    socket
+    |> assign(assigns)
+    |> assign_new(:actions, fn -> [] end)
+    |> display_shot_records()
+    |> wrap(:ok)
   end
 
   defp display_shot_records(

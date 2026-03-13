@@ -11,6 +11,7 @@ defmodule Cannery do
     quote do
       use Gettext, backend: CanneryWeb.Gettext
       import Ecto.Query
+      import Cannery.Utils, only: [wrap: 2]
       alias Cannery.Accounts.User
       alias Cannery.Repo
       alias Ecto.{Changeset, Multi, Queryable, UUID}

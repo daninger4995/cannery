@@ -9,16 +9,16 @@ defmodule CanneryWeb.TagLive.Index do
 
   @impl true
   def mount(%{"search" => search}, _session, socket) do
-    {:ok, socket |> assign(:search, search) |> display_tags()}
+    socket |> assign(:search, search) |> display_tags() |> wrap(:ok)
   end
 
   def mount(_params, _session, socket) do
-    {:ok, socket |> assign(:search, nil) |> display_tags()}
+    socket |> assign(:search, nil) |> display_tags() |> wrap(:ok)
   end
 
   @impl true
   def handle_params(params, _url, %{assigns: %{live_action: live_action}} = socket) do
-    {:noreply, apply_action(socket, live_action, params)}
+    socket |> apply_action(live_action, params) |> wrap(:noreply)
   end
 
   defp apply_action(%{assigns: %{current_user: current_user}} = socket, :edit, %{"id" => id}) do
@@ -63,15 +63,15 @@ defmodule CanneryWeb.TagLive.Index do
       Containers.get_tag!(id, current_user) |> Containers.delete_tag!(current_user)
 
     prompt = dgettext("prompts", "%{name} deleted succesfully", name: tag_name)
-    {:noreply, socket |> put_flash(:info, prompt) |> display_tags()}
+    socket |> put_flash(:info, prompt) |> display_tags() |> wrap(:noreply)
   end
 
   def handle_event("search", %{"search" => %{"search_term" => ""}}, socket) do
-    {:noreply, socket |> push_patch(to: ~p"/tags")}
+    socket |> push_patch(to: ~p"/tags") |> wrap(:noreply)
   end
 
   def handle_event("search", %{"search" => %{"search_term" => search_term}}, socket) do
-    {:noreply, socket |> push_patch(to: ~p"/tags/search/#{search_term}")}
+    socket |> push_patch(to: ~p"/tags/search/#{search_term}") |> wrap(:noreply)
   end
 
   defp display_tags(%{assigns: %{search: search, current_user: current_user}} = socket) do

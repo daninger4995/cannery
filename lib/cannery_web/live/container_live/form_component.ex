@@ -14,12 +14,12 @@ defmodule CanneryWeb.ContainerLive.FormComponent do
           Socket.t()
         ) :: {:ok, Socket.t()}
   def update(%{container: _container} = assigns, socket) do
-    {:ok, socket |> assign(assigns) |> assign_changeset(%{})}
+    socket |> assign(assigns) |> assign_changeset(%{}) |> wrap(:ok)
   end
 
   @impl true
   def handle_event("validate", %{"container" => container_params}, socket) do
-    {:noreply, socket |> assign_changeset(container_params, :validate)}
+    socket |> assign_changeset(container_params, :validate) |> wrap(:noreply)
   end
 
   def handle_event(
@@ -73,7 +73,7 @@ defmodule CanneryWeb.ContainerLive.FormComponent do
           socket |> assign(:changeset, changeset)
       end
 
-    {:noreply, socket}
+    socket |> wrap(:noreply)
   end
 
   defp save_container(
@@ -92,6 +92,6 @@ defmodule CanneryWeb.ContainerLive.FormComponent do
           socket |> assign(changeset: changeset)
       end
 
-    {:noreply, socket}
+    socket |> wrap(:noreply)
   end
 end

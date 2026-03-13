@@ -65,20 +65,18 @@ defmodule CanneryWeb.Components.TableComponent do
     type = columns |> Enum.find(%{}, fn %{key: key} -> key == initial_key end) |> Map.get(:type)
     rows = rows |> sort_by_custom_sort_value_or_value(initial_key, initial_sort_mode, type)
 
-    socket =
-      socket
-      |> assign(assigns)
-      |> assign(
-        columns: columns,
-        rows: rows,
-        key: initial_key,
-        last_sort_key: initial_key,
-        sort_mode: initial_sort_mode
-      )
-      |> assign_new(:row_class, fn -> "bg-white" end)
-      |> assign_new(:alternate_row_class, fn -> "bg-zinc-200" end)
-
-    {:ok, socket}
+    socket
+    |> assign(assigns)
+    |> assign(
+      columns: columns,
+      rows: rows,
+      key: initial_key,
+      last_sort_key: initial_key,
+      sort_mode: initial_sort_mode
+    )
+    |> assign_new(:row_class, fn -> "bg-white" end)
+    |> assign_new(:alternate_row_class, fn -> "bg-zinc-200" end)
+    |> wrap(:ok)
   end
 
   @impl true
@@ -107,7 +105,7 @@ defmodule CanneryWeb.Components.TableComponent do
       columns |> Enum.find(%{}, fn %{key: column_key} -> column_key == key end) |> Map.get(:type)
 
     rows = rows |> sort_by_custom_sort_value_or_value(key, sort_mode, type)
-    {:noreply, socket |> assign(last_sort_key: key, sort_mode: sort_mode, rows: rows)}
+    socket |> assign(last_sort_key: key, sort_mode: sort_mode, rows: rows) |> wrap(:noreply)
   end
 
   defp sort_by_custom_sort_value_or_value(rows, key, sort_mode, type)

@@ -184,14 +184,12 @@ defmodule Cannery.ActivityLog do
     |> Multi.run(
       :pack,
       fn _repo, %{create_shot_record: %{pack_id: pack_id, user_id: user_id}} ->
-        pack =
-          Repo.one(
-            from p in Pack,
-              where: p.id == ^pack_id,
-              where: p.user_id == ^user_id
-          )
-
-        {:ok, pack}
+        Repo.one(
+          from p in Pack,
+            where: p.id == ^pack_id,
+            where: p.user_id == ^user_id
+        )
+        |> wrap(:ok)
       end
     )
     |> Multi.update(

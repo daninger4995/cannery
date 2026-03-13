@@ -14,12 +14,12 @@ defmodule CanneryWeb.InviteLive.FormComponent do
           Socket.t()
         ) :: {:ok, Socket.t()}
   def update(%{invite: _invite} = assigns, socket) do
-    {:ok, socket |> assign(assigns) |> assign_changeset(%{})}
+    socket |> assign(assigns) |> assign_changeset(%{}) |> wrap(:ok)
   end
 
   @impl true
   def handle_event("validate", %{"invite" => invite_params}, socket) do
-    {:noreply, socket |> assign_changeset(invite_params, :validate)}
+    socket |> assign_changeset(invite_params, :validate) |> wrap(:noreply)
   end
 
   def handle_event("save", %{"invite" => invite_params}, %{assigns: %{action: action}} = socket) do
@@ -65,7 +65,7 @@ defmodule CanneryWeb.InviteLive.FormComponent do
           socket |> assign(:changeset, changeset)
       end
 
-    {:noreply, socket}
+    socket |> wrap(:noreply)
   end
 
   defp save_invite(
@@ -83,6 +83,6 @@ defmodule CanneryWeb.InviteLive.FormComponent do
           socket |> assign(changeset: changeset)
       end
 
-    {:noreply, socket}
+    socket |> wrap(:noreply)
   end
 end

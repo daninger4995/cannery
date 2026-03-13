@@ -345,7 +345,7 @@ defmodule Cannery.Ammo do
     |> Type.create_changeset(user, attrs)
     |> Repo.insert()
     |> case do
-      {:ok, type} -> {:ok, type |> preload_type()}
+      {:ok, type} -> type |> preload_type() |> wrap(:ok)
       {:error, changeset} -> {:error, changeset}
     end
   end
@@ -375,7 +375,7 @@ defmodule Cannery.Ammo do
     |> Type.update_changeset(attrs)
     |> Repo.update()
     |> case do
-      {:ok, type} -> {:ok, type |> preload_type()}
+      {:ok, type} -> type |> preload_type() |> wrap(:ok)
       {:error, changeset} -> {:error, changeset}
     end
   end
@@ -398,7 +398,7 @@ defmodule Cannery.Ammo do
     type
     |> Repo.delete()
     |> case do
-      {:ok, type} -> {:ok, type |> preload_type()}
+      {:ok, type} -> type |> preload_type() |> wrap(:ok)
       {:error, changeset} -> {:error, changeset}
     end
   end
@@ -946,7 +946,7 @@ defmodule Cannery.Ammo do
           returning: true
         )
 
-      {:ok, {count, inserted_packs |> preload_pack()}}
+      {count, inserted_packs |> preload_pack()} |> wrap(:ok)
     else
       changesets
       |> Enum.reject(fn %{valid?: valid} -> valid end)
@@ -1061,7 +1061,7 @@ defmodule Cannery.Ammo do
     |> Pack.update_changeset(attrs, user)
     |> Repo.update()
     |> case do
-      {:ok, pack} -> {:ok, pack |> preload_pack()}
+      {:ok, pack} -> pack |> preload_pack() |> wrap(:ok)
       {:error, changeset} -> {:error, changeset}
     end
   end
@@ -1084,7 +1084,7 @@ defmodule Cannery.Ammo do
     pack
     |> Repo.delete()
     |> case do
-      {:ok, pack} -> {:ok, pack |> preload_pack()}
+      {:ok, pack} -> pack |> preload_pack() |> wrap(:ok)
       {:error, changeset} -> {:error, changeset}
     end
   end

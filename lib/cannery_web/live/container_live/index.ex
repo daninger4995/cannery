@@ -9,16 +9,16 @@ defmodule CanneryWeb.ContainerLive.Index do
 
   @impl true
   def mount(%{"search" => search}, _session, socket) do
-    {:ok, socket |> assign(view_table: true, search: search) |> display_containers()}
+    socket |> assign(view_table: true, search: search) |> display_containers() |> wrap(:ok)
   end
 
   def mount(_params, _session, socket) do
-    {:ok, socket |> assign(view_table: true, search: nil) |> display_containers()}
+    socket |> assign(view_table: true, search: nil) |> display_containers() |> wrap(:ok)
   end
 
   @impl true
   def handle_params(params, _url, %{assigns: %{live_action: live_action}} = socket) do
-    {:noreply, apply_action(socket, live_action, params) |> display_containers()}
+    socket |> apply_action(live_action, params) |> display_containers() |> wrap(:noreply)
   end
 
   defp apply_action(%{assigns: %{current_user: current_user}} = socket, :edit, %{"id" => id}) do
@@ -109,19 +109,19 @@ defmodule CanneryWeb.ContainerLive.Index do
           end
       end
 
-    {:noreply, socket}
+    socket |> wrap(:noreply)
   end
 
   def handle_event("toggle_table", _params, %{assigns: %{view_table: view_table}} = socket) do
-    {:noreply, socket |> assign(:view_table, !view_table) |> display_containers()}
+    socket |> assign(:view_table, !view_table) |> display_containers() |> wrap(:noreply)
   end
 
   def handle_event("search", %{"search" => %{"search_term" => ""}}, socket) do
-    {:noreply, socket |> push_patch(to: ~p"/containers")}
+    socket |> push_patch(to: ~p"/containers") |> wrap(:noreply)
   end
 
   def handle_event("search", %{"search" => %{"search_term" => search_term}}, socket) do
-    {:noreply, socket |> push_patch(to: ~p"/containers/search/#{search_term}")}
+    socket |> push_patch(to: ~p"/containers/search/#{search_term}") |> wrap(:noreply)
   end
 
   def handle_event(
@@ -135,7 +135,7 @@ defmodule CanneryWeb.ContainerLive.Index do
       container
       |> Containers.update_container(current_user, %{"staged" => !container.staged})
 
-    {:noreply, socket |> display_containers()}
+    socket |> display_containers() |> wrap(:noreply)
   end
 
   defp display_containers(%{assigns: %{search: search, current_user: current_user}} = socket) do

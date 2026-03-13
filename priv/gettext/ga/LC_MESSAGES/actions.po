@@ -21,8 +21,8 @@ msgstr ""
 ## Run "mix gettext.extract" to bring this file up to
 ## date. Leave "msgstr"s empty as changing them here has no
 ## effect: edit them in PO (.po) files instead.
-#: lib/cannery_web/live/pack_live/index.ex:68
-#: lib/cannery_web/live/pack_live/index.ex:76
+#: lib/cannery_web/live/pack_live/index.ex:66
+#: lib/cannery_web/live/pack_live/index.ex:74
 #: lib/cannery_web/live/pack_live/index.html.heex:39
 #, elixir-autogen, elixir-format
 msgid "Add Ammo"
@@ -164,12 +164,12 @@ msgstr ""
 msgid "Record shots"
 msgstr ""
 
-#: lib/cannery_web/components/move_pack_component.ex:87
+#: lib/cannery_web/components/move_pack_component.ex:85
 #, elixir-autogen, elixir-format
 msgid "Add another container!"
 msgstr ""
 
-#: lib/cannery_web/components/move_pack_component.ex:123
+#: lib/cannery_web/components/move_pack_component.ex:121
 #, elixir-autogen, elixir-format
 msgid "Select"
 msgstr ""
@@ -204,7 +204,7 @@ msgstr ""
 msgid "View in Catalog"
 msgstr ""
 
-#: lib/cannery_web/components/move_pack_component.ex:77
+#: lib/cannery_web/components/move_pack_component.ex:75
 #: lib/cannery_web/live/pack_live/index.html.heex:134
 #: lib/cannery_web/live/pack_live/show.html.heex:81
 #, elixir-autogen, elixir-format
@@ -318,13 +318,13 @@ msgstr ""
 msgid "View pack of %{pack_count} bullets"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/show.ex:149
+#: lib/cannery_web/live/pack_live/show.ex:145
 #: lib/cannery_web/live/range_live/index.html.heex:189
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Delete shot record of %{shot_record_count} shots"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/show.ex:134
+#: lib/cannery_web/live/pack_live/show.ex:130
 #: lib/cannery_web/live/range_live/index.html.heex:172
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Edit shot record of %{shot_record_count} shots"

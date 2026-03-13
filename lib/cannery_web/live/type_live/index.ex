@@ -8,19 +8,19 @@ defmodule CanneryWeb.TypeLive.Index do
 
   @impl true
   def mount(%{"search" => search}, _session, socket) do
-    {:ok, socket |> assign(class: :all, show_used: false, search: search) |> list_types()}
+    socket |> assign(class: :all, show_used: false, search: search) |> list_types() |> wrap(:ok)
   end
 
   def mount(_params, _session, socket) do
-    {:ok, socket |> assign(class: :all, show_used: false, search: nil) |> list_types()}
+    socket |> assign(class: :all, show_used: false, search: nil) |> list_types() |> wrap(:ok)
   end
 
   @impl true
   def handle_params(params, _url, %{assigns: %{live_action: live_action}} = socket) do
-    {:noreply,
-     socket
-     |> assign_class(params)
-     |> apply_action(live_action, params)}
+    socket
+    |> assign_class(params)
+    |> apply_action(live_action, params)
+    |> wrap(:noreply)
   end
 
   defp assign_class(socket, %{"class" => class}) when class in ~w(rifle shotgun pistol),
@@ -78,25 +78,25 @@ defmodule CanneryWeb.TypeLive.Index do
   def handle_event("delete", %{"id" => id}, %{assigns: %{current_user: current_user}} = socket) do
     %{name: name} = Ammo.get_type!(id, current_user) |> Ammo.delete_type!(current_user)
     prompt = dgettext("prompts", "%{name} deleted succesfully", name: name)
-    {:noreply, socket |> put_flash(:info, prompt) |> list_types()}
+    socket |> put_flash(:info, prompt) |> list_types() |> wrap(:noreply)
   end
 
   def handle_event("toggle_show_used", _params, %{assigns: %{show_used: show_used}} = socket) do
-    {:noreply, socket |> assign(:show_used, !show_used) |> list_types()}
+    socket |> assign(:show_used, !show_used) |> list_types() |> wrap(:noreply)
   end
 
   def handle_event("search", %{"search" => %{"search_term" => ""}}, socket) do
-    {:noreply, socket |> push_patch(to: ~p"/catalog")}
+    socket |> push_patch(to: ~p"/catalog") |> wrap(:noreply)
   end
 
   def handle_event("search", %{"search" => %{"search_term" => search_term}}, socket) do
-    {:noreply, socket |> push_patch(to: ~p"/catalog/search/#{search_term}")}
+    socket |> push_patch(to: ~p"/catalog/search/#{search_term}") |> wrap(:noreply)
   end
 
   def handle_event("change_class", %{"type" => %{"class" => class}}, %{assigns: assigns} = socket) do
     params = %{"class" => class}
     params = if assigns[:search], do: Map.put(params, "search", assigns.search), else: params
-    {:noreply, socket |> push_patch(to: ~p"/catalog?#{params}")}
+    socket |> push_patch(to: ~p"/catalog?#{params}") |> wrap(:noreply)
   end
 
   defp list_types(

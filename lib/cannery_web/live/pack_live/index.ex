@@ -8,25 +8,23 @@ defmodule CanneryWeb.PackLive.Index do
 
   @impl true
   def mount(%{"search" => search}, _session, socket) do
-    socket =
-      socket
-      |> assign(class: :all, show_used: false, search: search)
-      |> display_packs()
-
-    {:ok, socket}
+    socket
+    |> assign(class: :all, show_used: false, search: search)
+    |> display_packs()
+    |> wrap(:ok)
   end
 
   def mount(_params, _session, socket) do
-    {:ok, socket |> assign(class: :all, show_used: false, search: nil) |> display_packs()}
+    socket |> assign(class: :all, show_used: false, search: nil) |> display_packs() |> wrap(:ok)
   end
 
   @impl true
   def handle_params(params, _url, %{assigns: %{live_action: live_action}} = socket) do
-    {:noreply,
-     socket
-     |> assign_class(params)
-     |> apply_action(live_action, params)
-     |> display_packs()}
+    socket
+    |> assign_class(params)
+    |> apply_action(live_action, params)
+    |> display_packs()
+    |> wrap(:noreply)
   end
 
   defp assign_class(socket, %{"class" => class}) when class in ~w(rifle shotgun pistol),
@@ -102,25 +100,25 @@ defmodule CanneryWeb.PackLive.Index do
 
     prompt = dgettext("prompts", "Ammo deleted succesfully")
 
-    {:noreply, socket |> put_flash(:info, prompt) |> display_packs()}
+    socket |> put_flash(:info, prompt) |> display_packs() |> wrap(:noreply)
   end
 
   def handle_event("toggle_show_used", _params, %{assigns: %{show_used: show_used}} = socket) do
-    {:noreply, socket |> assign(:show_used, !show_used) |> display_packs()}
+    socket |> assign(:show_used, !show_used) |> display_packs() |> wrap(:noreply)
   end
 
   def handle_event("search", %{"search" => %{"search_term" => ""}}, socket) do
-    {:noreply, socket |> push_patch(to: ~p"/ammo")}
+    socket |> push_patch(to: ~p"/ammo") |> wrap(:noreply)
   end
 
   def handle_event("search", %{"search" => %{"search_term" => search_term}}, socket) do
-    {:noreply, socket |> push_patch(to: ~p"/ammo/search/#{search_term}")}
+    socket |> push_patch(to: ~p"/ammo/search/#{search_term}") |> wrap(:noreply)
   end
 
   def handle_event("change_class", %{"type" => %{"class" => class}}, %{assigns: assigns} = socket) do
     params = %{"class" => class}
     params = if assigns[:search], do: Map.put(params, "search", assigns.search), else: params
-    {:noreply, socket |> push_patch(to: ~p"/ammo?#{params}")}
+    socket |> push_patch(to: ~p"/ammo?#{params}") |> wrap(:noreply)
   end
 
   defp display_packs(

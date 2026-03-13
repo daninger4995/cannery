@@ -39,7 +39,7 @@ msgid "%{name} deleted succesfully"
 msgstr "%{name} borrado exitosamente"
 
 #: lib/cannery_web/live/container_live/index.ex:93
-#: lib/cannery_web/live/container_live/show.ex:78
+#: lib/cannery_web/live/container_live/show.ex:73
 #, elixir-autogen, elixir-format
 msgid "%{name} has been deleted"
 msgstr "%{name} ha sido borrado"
@@ -155,7 +155,7 @@ msgstr ""
 msgid "%{name} added successfully"
 msgstr "%{name} añadido exitosamente"
 
-#: lib/cannery_web/live/container_live/show.ex:55
+#: lib/cannery_web/live/container_live/show.ex:52
 #, elixir-autogen, elixir-format
 msgid "%{tag_name} has been removed from %{container_name}"
 msgstr "se ha removido %{tag_name} de %{container_name}"
@@ -170,14 +170,14 @@ msgstr "Añadiendo..."
 msgid "Shots recorded successfully"
 msgstr "Tiros registrados exitosamente"
 
-#: lib/cannery_web/live/pack_live/show.ex:147
+#: lib/cannery_web/live/pack_live/show.ex:143
 #: lib/cannery_web/live/range_live/index.html.heex:186
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to delete this shot record?"
 msgstr "¿Está segure que quiere borrar este récord de disparos?"
 
-#: lib/cannery_web/live/pack_live/show.ex:69
-#: lib/cannery_web/live/range_live/index.ex:107
+#: lib/cannery_web/live/pack_live/show.ex:65
+#: lib/cannery_web/live/range_live/index.ex:103
 #, elixir-autogen, elixir-format
 msgid "Shot records deleted succesfully"
 msgstr "Récord de disparos borrado exitosamente"
@@ -192,12 +192,12 @@ msgstr "Récord de disparos actualizado exitosamente"
 msgid "%{email} confirmed successfully."
 msgstr "%{email} confirmado exitosamente."
 
-#: lib/cannery_web/components/move_pack_component.ex:51
+#: lib/cannery_web/components/move_pack_component.ex:49
 #, elixir-autogen, elixir-format
 msgid "Ammo moved to %{name} successfully"
 msgstr "Munición movida a %{name} exitosamente"
 
-#: lib/cannery_web/live/invite_live/index.ex:116
+#: lib/cannery_web/live/invite_live/index.ex:110
 #, elixir-autogen, elixir-format
 msgid "Copied to clipboard"
 msgstr "Copiado al portapapeles"
@@ -228,8 +228,8 @@ msgstr "¿Está segure de que quiere cambiar el idioma?"
 msgid "Language updated successfully."
 msgstr "Idioma cambiado exitosamente."
 
-#: lib/cannery_web/live/pack_live/index.ex:103
-#: lib/cannery_web/live/pack_live/show.ex:54
+#: lib/cannery_web/live/pack_live/index.ex:101
+#: lib/cannery_web/live/pack_live/show.ex:50
 #, elixir-autogen, elixir-format
 msgid "Ammo deleted succesfully"
 msgstr "Munición borrada exitosamente"
@@ -264,22 +264,22 @@ msgstr "Regístrese para configurar %{name}"
 msgid "%{invite_name} deleted succesfully"
 msgstr "%{name} borrado exitosamente"
 
-#: lib/cannery_web/live/invite_live/index.ex:104
+#: lib/cannery_web/live/invite_live/index.ex:99
 #, elixir-autogen, elixir-format, fuzzy
 msgid "%{invite_name} disabled succesfully"
 msgstr "%{name} desactivado exitosamente"
 
-#: lib/cannery_web/live/invite_live/index.ex:80
+#: lib/cannery_web/live/invite_live/index.ex:77
 #, elixir-autogen, elixir-format, fuzzy
 msgid "%{invite_name} enabled succesfully"
 msgstr "%{name} activado exitosamente"
 
-#: lib/cannery_web/live/invite_live/index.ex:58
+#: lib/cannery_web/live/invite_live/index.ex:57
 #, elixir-autogen, elixir-format, fuzzy
 msgid "%{invite_name} updated succesfully"
 msgstr "%{name} actualizado exitosamente"
 
-#: lib/cannery_web/live/invite_live/index.ex:139
+#: lib/cannery_web/live/invite_live/index.ex:133
 #, elixir-autogen, elixir-format, fuzzy
 msgid "%{user_email} deleted succesfully"
 msgstr "%{name} borrado exitosamente"
@@ -294,12 +294,12 @@ msgstr "Está seguro que quiere eliminar la invitación para %{name}?"
 msgid "Are you sure you want to make %{invite_name} unlimited?"
 msgstr "Está seguro que desea hacer %{name} ilimitado?"
 
-#: lib/cannery_web/live/range_live/index.ex:122
+#: lib/cannery_web/live/range_live/index.ex:118
 #, elixir-autogen, elixir-format
 msgid "Container unstaged succesfully"
 msgstr ""
 
-#: lib/cannery_web/live/invite_live/index.ex:128
+#: lib/cannery_web/live/invite_live/index.ex:122
 #, elixir-autogen, elixir-format
 msgid "Email resent to %{user_email} succesfully"
 msgstr ""

@@ -14,12 +14,12 @@ defmodule CanneryWeb.TypeLive.FormComponent do
           Socket.t()
         ) :: {:ok, Socket.t()}
   def update(%{current_user: _current_user} = assigns, socket) do
-    {:ok, socket |> assign(assigns) |> assign_changeset(%{})}
+    socket |> assign(assigns) |> assign_changeset(%{}) |> wrap(:ok)
   end
 
   @impl true
   def handle_event("validate", %{"type" => type_params}, socket) do
-    {:noreply, socket |> assign_changeset(type_params, :validate)}
+    socket |> assign_changeset(type_params, :validate) |> wrap(:noreply)
   end
 
   def handle_event(
@@ -72,7 +72,7 @@ defmodule CanneryWeb.TypeLive.FormComponent do
           socket |> assign(:changeset, changeset)
       end
 
-    {:noreply, socket}
+    socket |> wrap(:noreply)
   end
 
   defp save_type(
@@ -91,6 +91,6 @@ defmodule CanneryWeb.TypeLive.FormComponent do
           socket |> assign(changeset: changeset)
       end
 
-    {:noreply, socket}
+    socket |> wrap(:noreply)
   end
 end

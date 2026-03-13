@@ -27,7 +27,7 @@ msgid "Container must be empty before deleting"
 msgstr ""
 
 #: lib/cannery_web/live/container_live/index.ex:98
-#: lib/cannery_web/live/container_live/show.ex:83
+#: lib/cannery_web/live/container_live/show.ex:78
 #, elixir-autogen, elixir-format
 msgid "Could not delete %{name}: %{error}"
 msgstr ""
@@ -130,7 +130,7 @@ msgstr ""
 msgid "must have the @ sign and no spaces"
 msgstr ""
 
-#: lib/cannery_web/live/container_live/show.ex:63
+#: lib/cannery_web/live/container_live/show.ex:60
 #, elixir-autogen, elixir-format
 msgid "Tag not found"
 msgstr ""
@@ -218,14 +218,14 @@ msgid "Please select a valid type"
 msgstr ""
 
 #: lib/cannery_web/live/container_live/index.ex:108
-#: lib/cannery_web/live/container_live/show.ex:91
+#: lib/cannery_web/live/container_live/show.ex:86
 #, elixir-autogen, elixir-format
 msgid "Could not delete container"
 msgstr ""
 
-#: lib/cannery_web/live/invite_live/index.ex:63
-#: lib/cannery_web/live/invite_live/index.ex:85
-#: lib/cannery_web/live/invite_live/index.ex:109
+#: lib/cannery_web/live/invite_live/index.ex:62
+#: lib/cannery_web/live/invite_live/index.ex:82
+#: lib/cannery_web/live/invite_live/index.ex:104
 #, elixir-autogen, elixir-format
 msgid "Could not save invite"
 msgstr ""

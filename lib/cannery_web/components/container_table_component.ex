@@ -23,15 +23,13 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
           Socket.t()
         ) :: {:ok, Socket.t()}
   def update(%{id: _id, containers: _containers, current_user: _current_user} = assigns, socket) do
-    socket =
-      socket
-      |> assign(assigns)
-      |> assign_new(:range, fn -> [] end)
-      |> assign_new(:tag_actions, fn -> [] end)
-      |> assign_new(:actions, fn -> [] end)
-      |> display_containers()
-
-    {:ok, socket}
+    socket
+    |> assign(assigns)
+    |> assign_new(:range, fn -> [] end)
+    |> assign_new(:tag_actions, fn -> [] end)
+    |> assign_new(:actions, fn -> [] end)
+    |> display_containers()
+    |> wrap(:ok)
   end
 
   defp display_containers(

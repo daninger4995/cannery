@@ -12,7 +12,7 @@ defmodule CanneryWeb.PackLive.FormComponent do
   @impl true
   @spec mount(Socket.t()) :: {:ok, Socket.t()}
   def mount(socket) do
-    {:ok, socket |> assign(:class, :all)}
+    socket |> assign(:class, :all) |> wrap(:ok)
   end
 
   @impl true
@@ -31,7 +31,7 @@ defmodule CanneryWeb.PackLive.FormComponent do
       |> assign(:types, Ammo.list_types(current_user))
       |> assign_new(:containers, fn -> Containers.list_containers(current_user) end)
 
-    {:ok, socket |> assign_changeset(%{})}
+    socket |> assign_changeset(%{}) |> wrap(:ok)
   end
 
   @impl true
@@ -49,7 +49,7 @@ defmodule CanneryWeb.PackLive.FormComponent do
       |> assign_changeset(pack_params, :validate)
       |> assign(:class, matched_class)
 
-    {:noreply, socket}
+    socket |> wrap(:noreply)
   end
 
   def handle_event(
@@ -145,7 +145,7 @@ defmodule CanneryWeb.PackLive.FormComponent do
           socket |> assign(:changeset, changeset)
       end
 
-    {:noreply, socket}
+    socket |> wrap(:noreply)
   end
 
   defp save_pack(
@@ -182,6 +182,6 @@ defmodule CanneryWeb.PackLive.FormComponent do
           socket |> assign(:changeset, changeset)
       end
 
-    {:noreply, socket}
+    socket |> wrap(:noreply)
   end
 end

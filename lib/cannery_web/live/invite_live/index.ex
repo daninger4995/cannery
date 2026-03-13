@@ -10,12 +10,12 @@ defmodule CanneryWeb.InviteLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, socket |> display_invites()}
+    socket |> display_invites() |> wrap(:ok)
   end
 
   @impl true
   def handle_params(params, _url, %{assigns: %{live_action: live_action}} = socket) do
-    {:noreply, socket |> apply_action(live_action, params)}
+    socket |> apply_action(live_action, params) |> wrap(:noreply)
   end
 
   defp apply_action(%{assigns: %{current_user: current_user}} = socket, :edit, %{"id" => id}) do
@@ -41,7 +41,7 @@ defmodule CanneryWeb.InviteLive.Index do
       id |> Invites.get_invite!(current_user) |> Invites.delete_invite!(current_user)
 
     prompt = dgettext("prompts", "%{invite_name} deleted succesfully", invite_name: invite_name)
-    {:noreply, socket |> put_flash(:info, prompt) |> display_invites()}
+    socket |> put_flash(:info, prompt) |> display_invites() |> wrap(:noreply)
   end
 
   def handle_event(
@@ -49,21 +49,19 @@ defmodule CanneryWeb.InviteLive.Index do
         %{"id" => id},
         %{assigns: %{current_user: current_user}} = socket
       ) do
-    socket =
-      Invites.get_invite!(id, current_user)
-      |> Invites.update_invite(%{uses_left: nil}, current_user)
-      |> case do
-        {:ok, %{name: invite_name}} ->
-          prompt =
-            dgettext("prompts", "%{invite_name} updated succesfully", invite_name: invite_name)
+    Invites.get_invite!(id, current_user)
+    |> Invites.update_invite(%{uses_left: nil}, current_user)
+    |> case do
+      {:ok, %{name: invite_name}} ->
+        prompt =
+          dgettext("prompts", "%{invite_name} updated succesfully", invite_name: invite_name)
 
-          socket |> put_flash(:info, prompt) |> display_invites()
+        socket |> put_flash(:info, prompt) |> display_invites()
 
-        {:error, _changeset} ->
-          socket |> put_flash(:error, dgettext("errors", "Could not save invite"))
-      end
-
-    {:noreply, socket}
+      {:error, _changeset} ->
+        socket |> put_flash(:error, dgettext("errors", "Could not save invite"))
+    end
+    |> wrap(:noreply)
   end
 
   def handle_event(
@@ -71,21 +69,19 @@ defmodule CanneryWeb.InviteLive.Index do
         %{"id" => id},
         %{assigns: %{current_user: current_user}} = socket
       ) do
-    socket =
-      Invites.get_invite!(id, current_user)
-      |> Invites.update_invite(%{uses_left: nil, disabled_at: nil}, current_user)
-      |> case do
-        {:ok, %{name: invite_name}} ->
-          prompt =
-            dgettext("prompts", "%{invite_name} enabled succesfully", invite_name: invite_name)
+    Invites.get_invite!(id, current_user)
+    |> Invites.update_invite(%{uses_left: nil, disabled_at: nil}, current_user)
+    |> case do
+      {:ok, %{name: invite_name}} ->
+        prompt =
+          dgettext("prompts", "%{invite_name} enabled succesfully", invite_name: invite_name)
 
-          socket |> put_flash(:info, prompt) |> display_invites()
+        socket |> put_flash(:info, prompt) |> display_invites()
 
-        {:error, _changeset} ->
-          socket |> put_flash(:error, dgettext("errors", "Could not save invite"))
-      end
-
-    {:noreply, socket}
+      {:error, _changeset} ->
+        socket |> put_flash(:error, dgettext("errors", "Could not save invite"))
+    end
+    |> wrap(:noreply)
   end
 
   def handle_event(
@@ -95,25 +91,23 @@ defmodule CanneryWeb.InviteLive.Index do
       ) do
     now = DateTime.utc_now()
 
-    socket =
-      Invites.get_invite!(id, current_user)
-      |> Invites.update_invite(%{uses_left: 0, disabled_at: now}, current_user)
-      |> case do
-        {:ok, %{name: invite_name}} ->
-          prompt =
-            dgettext("prompts", "%{invite_name} disabled succesfully", invite_name: invite_name)
+    Invites.get_invite!(id, current_user)
+    |> Invites.update_invite(%{uses_left: 0, disabled_at: now}, current_user)
+    |> case do
+      {:ok, %{name: invite_name}} ->
+        prompt =
+          dgettext("prompts", "%{invite_name} disabled succesfully", invite_name: invite_name)
 
-          socket |> put_flash(:info, prompt) |> display_invites()
+        socket |> put_flash(:info, prompt) |> display_invites()
 
-        {:error, _changeset} ->
-          socket |> put_flash(:error, dgettext("errors", "Could not save invite"))
-      end
-
-    {:noreply, socket}
+      {:error, _changeset} ->
+        socket |> put_flash(:error, dgettext("errors", "Could not save invite"))
+    end
+    |> wrap(:noreply)
   end
 
   def handle_event("copy_to_clipboard", _params, socket) do
-    {:noreply, socket |> put_flash(:info, dgettext("prompts", "Copied to clipboard"))}
+    socket |> put_flash(:info, dgettext("prompts", "Copied to clipboard")) |> wrap(:noreply)
   end
 
   def handle_event("resend_email_verification", %{"id" => id}, socket) do
@@ -127,7 +121,7 @@ defmodule CanneryWeb.InviteLive.Index do
     prompt =
       dgettext("prompts", "Email resent to %{user_email} succesfully", user_email: user_email)
 
-    {:noreply, socket |> put_flash(:info, prompt) |> display_invites()}
+    socket |> put_flash(:info, prompt) |> display_invites() |> wrap(:noreply)
   end
 
   def handle_event(
@@ -137,7 +131,7 @@ defmodule CanneryWeb.InviteLive.Index do
       ) do
     %{email: user_email} = Accounts.get_user!(id) |> Accounts.delete_user!(current_user)
     prompt = dgettext("prompts", "%{user_email} deleted succesfully", user_email: user_email)
-    {:noreply, socket |> put_flash(:info, prompt) |> display_invites()}
+    socket |> put_flash(:info, prompt) |> display_invites() |> wrap(:noreply)
   end
 
   defp display_invites(%{assigns: %{current_user: current_user}} = socket) do

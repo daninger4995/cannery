@@ -10,7 +10,7 @@ defmodule CanneryWeb.ContainerLive.Show do
 
   @impl true
   def mount(_params, _session, socket),
-    do: {:ok, socket |> assign(class: :all, view_table: true)}
+    do: socket |> assign(class: :all, view_table: true) |> wrap(:ok)
 
   @impl true
   def handle_params(
@@ -18,13 +18,11 @@ defmodule CanneryWeb.ContainerLive.Show do
         _session,
         %{assigns: %{current_user: current_user}} = socket
       ) do
-    socket =
-      socket
-      |> assign_class(params)
-      |> assign(:view_table, true)
-      |> render_container(id, current_user)
-
-    {:noreply, socket}
+    socket
+    |> assign_class(params)
+    |> assign(:view_table, true)
+    |> render_container(id, current_user)
+    |> wrap(:noreply)
   end
 
   defp assign_class(socket, %{"class" => class}) when class in ~w(rifle shotgun pistol),
@@ -46,24 +44,22 @@ defmodule CanneryWeb.ContainerLive.Show do
         %{"tag-id" => tag_id},
         %{assigns: %{container: container, current_user: current_user}} = socket
       ) do
-    socket =
-      case Containers.get_tag(tag_id, current_user) do
-        {:ok, tag} ->
-          _count = Containers.remove_tag!(container, tag, current_user)
+    case Containers.get_tag(tag_id, current_user) do
+      {:ok, tag} ->
+        _count = Containers.remove_tag!(container, tag, current_user)
 
-          prompt =
-            dgettext("prompts", "%{tag_name} has been removed from %{container_name}",
-              tag_name: tag.name,
-              container_name: container.name
-            )
+        prompt =
+          dgettext("prompts", "%{tag_name} has been removed from %{container_name}",
+            tag_name: tag.name,
+            container_name: container.name
+          )
 
-          socket |> put_flash(:info, prompt) |> render_container()
+        socket |> put_flash(:info, prompt) |> render_container()
 
-        {:error, :not_found} ->
-          socket |> put_flash(:error, dgettext("errors", "Tag not found"))
-      end
-
-    {:noreply, socket}
+      {:error, :not_found} ->
+        socket |> put_flash(:error, dgettext("errors", "Tag not found"))
+    end
+    |> wrap(:noreply)
   end
 
   def handle_event(
@@ -71,27 +67,25 @@ defmodule CanneryWeb.ContainerLive.Show do
         _params,
         %{assigns: %{container: container, current_user: current_user}} = socket
       ) do
-    socket =
-      Containers.delete_container(container, current_user)
-      |> case do
-        {:ok, %{name: container_name}} ->
-          prompt = dgettext("prompts", "%{name} has been deleted", name: container_name)
-          socket |> put_flash(:info, prompt) |> push_navigate(to: ~p"/containers")
+    Containers.delete_container(container, current_user)
+    |> case do
+      {:ok, %{name: container_name}} ->
+        prompt = dgettext("prompts", "%{name} has been deleted", name: container_name)
+        socket |> put_flash(:info, prompt) |> push_navigate(to: ~p"/containers")
 
-        {:error, %{action: :delete, errors: [packs: packs_error], valid?: false} = changeset} ->
-          prompt =
-            dgettext("errors", "Could not delete %{name}: %{error}",
-              name: changeset |> Changeset.get_field(:name, "container"),
-              error: translate_error(packs_error)
-            )
+      {:error, %{action: :delete, errors: [packs: packs_error], valid?: false} = changeset} ->
+        prompt =
+          dgettext("errors", "Could not delete %{name}: %{error}",
+            name: changeset |> Changeset.get_field(:name, "container"),
+            error: translate_error(packs_error)
+          )
 
-          socket |> put_flash(:error, prompt)
+        socket |> put_flash(:error, prompt)
 
-        {:error, _changeset} ->
-          socket |> put_flash(:error, dgettext("errors", "Could not delete container"))
-      end
-
-    {:noreply, socket}
+      {:error, _changeset} ->
+        socket |> put_flash(:error, dgettext("errors", "Could not delete container"))
+    end
+    |> wrap(:noreply)
   end
 
   def handle_event(
@@ -103,11 +97,11 @@ defmodule CanneryWeb.ContainerLive.Show do
       container
       |> Containers.update_container(current_user, %{"staged" => !container.staged})
 
-    {:noreply, socket |> render_container()}
+    socket |> render_container() |> wrap(:noreply)
   end
 
   def handle_event("toggle_table", _params, %{assigns: %{view_table: view_table}} = socket) do
-    {:noreply, socket |> assign(:view_table, !view_table) |> render_container()}
+    socket |> assign(:view_table, !view_table) |> render_container() |> wrap(:noreply)
   end
 
   def handle_event(
@@ -115,7 +109,7 @@ defmodule CanneryWeb.ContainerLive.Show do
         %{"type" => %{"class" => class}},
         %{assigns: %{container: container}} = socket
       ) do
-    {:noreply, socket |> push_patch(to: ~p"/container/#{container}?class=#{class}")}
+    socket |> push_patch(to: ~p"/container/#{container}?class=#{class}") |> wrap(:noreply)
   end
 
   @spec render_container(Socket.t(), Container.id(), User.t()) :: Socket.t()

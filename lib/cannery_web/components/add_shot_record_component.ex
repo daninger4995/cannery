@@ -22,7 +22,7 @@ defmodule CanneryWeb.Components.AddShotRecordComponent do
       %ShotRecord{date: Date.utc_today()}
       |> ShotRecord.create_changeset(current_user, pack, %{})
 
-    {:ok, socket |> assign(assigns) |> assign(:changeset, changeset)}
+    socket |> assign(assigns) |> assign(:changeset, changeset) |> wrap(:ok)
   end
 
   @impl true
@@ -43,7 +43,7 @@ defmodule CanneryWeb.Components.AddShotRecordComponent do
         {:error, changeset} -> changeset
       end
 
-    {:noreply, socket |> assign(:changeset, changeset)}
+    socket |> assign(:changeset, changeset) |> wrap(:noreply)
   end
 
   def handle_event(
@@ -66,7 +66,7 @@ defmodule CanneryWeb.Components.AddShotRecordComponent do
           socket |> assign(changeset: changeset)
       end
 
-    {:noreply, socket}
+    socket |> wrap(:noreply)
   end
 
   # calculate count from shots left

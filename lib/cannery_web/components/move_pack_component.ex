@@ -27,12 +27,10 @@ defmodule CanneryWeb.Components.MovePackComponent do
       Containers.list_containers(current_user)
       |> Enum.reject(fn %{id: id} -> id == container_id end)
 
-    socket =
-      socket
-      |> assign(assigns)
-      |> assign(changeset: changeset, containers: containers)
-
-    {:ok, socket}
+    socket
+    |> assign(assigns)
+    |> assign(changeset: changeset, containers: containers)
+    |> wrap(:ok)
   end
 
   @impl true
@@ -55,7 +53,7 @@ defmodule CanneryWeb.Components.MovePackComponent do
           socket |> assign(changeset: changeset)
       end
 
-    {:noreply, socket}
+    socket |> wrap(:noreply)
   end
 
   @impl true

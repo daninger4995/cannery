@@ -23,15 +23,13 @@ defmodule CanneryWeb.Components.TypeTableComponent do
           Socket.t()
         ) :: {:ok, Socket.t()}
   def update(%{id: _id, types: _types, current_user: _current_user} = assigns, socket) do
-    socket =
-      socket
-      |> assign(assigns)
-      |> assign_new(:show_used, fn -> false end)
-      |> assign_new(:class, fn -> :all end)
-      |> assign_new(:actions, fn -> [] end)
-      |> display_types()
-
-    {:ok, socket}
+    socket
+    |> assign(assigns)
+    |> assign_new(:show_used, fn -> false end)
+    |> assign_new(:class, fn -> :all end)
+    |> assign_new(:actions, fn -> [] end)
+    |> display_types()
+    |> wrap(:ok)
   end
 
   defp display_types(

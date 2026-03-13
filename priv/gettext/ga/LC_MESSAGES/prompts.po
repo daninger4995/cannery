@@ -37,7 +37,7 @@ msgid "%{name} deleted succesfully"
 msgstr ""
 
 #: lib/cannery_web/live/container_live/index.ex:93
-#: lib/cannery_web/live/container_live/show.ex:78
+#: lib/cannery_web/live/container_live/show.ex:73
 #, elixir-autogen, elixir-format
 msgid "%{name} has been deleted"
 msgstr ""
@@ -146,7 +146,7 @@ msgstr ""
 msgid "%{name} added successfully"
 msgstr ""
 
-#: lib/cannery_web/live/container_live/show.ex:55
+#: lib/cannery_web/live/container_live/show.ex:52
 #, elixir-autogen, elixir-format
 msgid "%{tag_name} has been removed from %{container_name}"
 msgstr ""
@@ -161,14 +161,14 @@ msgstr ""
 msgid "Shots recorded successfully"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/show.ex:147
+#: lib/cannery_web/live/pack_live/show.ex:143
 #: lib/cannery_web/live/range_live/index.html.heex:186
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to delete this shot record?"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/show.ex:69
-#: lib/cannery_web/live/range_live/index.ex:107
+#: lib/cannery_web/live/pack_live/show.ex:65
+#: lib/cannery_web/live/range_live/index.ex:103
 #, elixir-autogen, elixir-format
 msgid "Shot records deleted succesfully"
 msgstr ""
@@ -183,12 +183,12 @@ msgstr ""
 msgid "%{email} confirmed successfully."
 msgstr ""
 
-#: lib/cannery_web/components/move_pack_component.ex:51
+#: lib/cannery_web/components/move_pack_component.ex:49
 #, elixir-autogen, elixir-format
 msgid "Ammo moved to %{name} successfully"
 msgstr ""
 
-#: lib/cannery_web/live/invite_live/index.ex:116
+#: lib/cannery_web/live/invite_live/index.ex:110
 #, elixir-autogen, elixir-format
 msgid "Copied to clipboard"
 msgstr ""
@@ -219,8 +219,8 @@ msgstr ""
 msgid "Language updated successfully."
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/index.ex:103
-#: lib/cannery_web/live/pack_live/show.ex:54
+#: lib/cannery_web/live/pack_live/index.ex:101
+#: lib/cannery_web/live/pack_live/show.ex:50
 #, elixir-autogen, elixir-format
 msgid "Ammo deleted succesfully"
 msgstr ""
@@ -256,22 +256,22 @@ msgstr ""
 msgid "%{invite_name} deleted succesfully"
 msgstr ""
 
-#: lib/cannery_web/live/invite_live/index.ex:104
+#: lib/cannery_web/live/invite_live/index.ex:99
 #, elixir-autogen, elixir-format, fuzzy
 msgid "%{invite_name} disabled succesfully"
 msgstr ""
 
-#: lib/cannery_web/live/invite_live/index.ex:80
+#: lib/cannery_web/live/invite_live/index.ex:77
 #, elixir-autogen, elixir-format, fuzzy
 msgid "%{invite_name} enabled succesfully"
 msgstr ""
 
-#: lib/cannery_web/live/invite_live/index.ex:58
+#: lib/cannery_web/live/invite_live/index.ex:57
 #, elixir-autogen, elixir-format, fuzzy
 msgid "%{invite_name} updated succesfully"
 msgstr ""
 
-#: lib/cannery_web/live/invite_live/index.ex:139
+#: lib/cannery_web/live/invite_live/index.ex:133
 #, elixir-autogen, elixir-format, fuzzy
 msgid "%{user_email} deleted succesfully"
 msgstr ""
@@ -286,12 +286,12 @@ msgstr ""
 msgid "Are you sure you want to make %{invite_name} unlimited?"
 msgstr ""
 
-#: lib/cannery_web/live/range_live/index.ex:122
+#: lib/cannery_web/live/range_live/index.ex:118
 #, elixir-autogen, elixir-format
 msgid "Container unstaged succesfully"
 msgstr ""
 
-#: lib/cannery_web/live/invite_live/index.ex:128
+#: lib/cannery_web/live/invite_live/index.ex:122
 #, elixir-autogen, elixir-format
 msgid "Email resent to %{user_email} succesfully"
 msgstr ""

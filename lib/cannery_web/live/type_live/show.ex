@@ -9,11 +9,11 @@ defmodule CanneryWeb.TypeLive.Show do
 
   @impl true
   def mount(_params, _session, socket),
-    do: {:ok, socket |> assign(show_used: false, view_table: true)}
+    do: socket |> assign(show_used: false, view_table: true) |> wrap(:ok)
 
   @impl true
   def handle_params(%{"id" => id}, _params, socket) do
-    {:noreply, socket |> display_type(id)}
+    socket |> display_type(id) |> wrap(:noreply)
   end
 
   @impl true
@@ -27,15 +27,15 @@ defmodule CanneryWeb.TypeLive.Show do
     prompt = dgettext("prompts", "%{name} deleted succesfully", name: type_name)
     redirect_to = ~p"/catalog"
 
-    {:noreply, socket |> put_flash(:info, prompt) |> push_navigate(to: redirect_to)}
+    socket |> put_flash(:info, prompt) |> push_navigate(to: redirect_to) |> wrap(:noreply)
   end
 
   def handle_event("toggle_show_used", _params, %{assigns: %{show_used: show_used}} = socket) do
-    {:noreply, socket |> assign(:show_used, !show_used) |> display_type()}
+    socket |> assign(:show_used, !show_used) |> display_type() |> wrap(:noreply)
   end
 
   def handle_event("toggle_table", _params, %{assigns: %{view_table: view_table}} = socket) do
-    {:noreply, socket |> assign(:view_table, !view_table)}
+    socket |> assign(:view_table, !view_table) |> wrap(:noreply)
   end
 
   defp display_type(

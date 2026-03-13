@@ -88,6 +88,7 @@ defmodule CanneryWeb do
       # HTML escaping functionality
       import Phoenix.{Component, HTML, HTML.Form}
       # Core UI components
+      import Cannery.Utils
       import CanneryWeb.{CoreComponents, HTMLHelpers}
 
       # Shortcut for generating JS commands

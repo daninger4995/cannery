@@ -166,7 +166,7 @@ defmodule Cannery.Containers do
     |> Container.create_changeset(user, attrs)
     |> Repo.insert()
     |> case do
-      {:ok, container} -> {:ok, container |> preload_container()}
+      {:ok, container} -> container |> preload_container() |> wrap(:ok)
       {:error, changeset} -> {:error, changeset}
     end
   end
@@ -196,7 +196,7 @@ defmodule Cannery.Containers do
     |> Container.update_changeset(attrs)
     |> Repo.update()
     |> case do
-      {:ok, container} -> {:ok, container |> preload_container()}
+      {:ok, container} -> container |> preload_container() |> wrap(:ok)
       {:error, changeset} -> {:error, changeset}
     end
   end
@@ -226,7 +226,7 @@ defmodule Cannery.Containers do
         container
         |> Repo.delete()
         |> case do
-          {:ok, container} -> {:ok, container |> preload_container()}
+          {:ok, container} -> container |> preload_container() |> wrap(:ok)
           {:error, changeset} -> {:error, changeset}
         end
 

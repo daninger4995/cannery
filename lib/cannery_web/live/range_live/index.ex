@@ -10,39 +10,35 @@ defmodule CanneryWeb.RangeLive.Index do
 
   @impl true
   def mount(%{"search" => search}, _session, socket) do
-    socket =
-      socket
-      |> assign(
-        class: :all,
-        start_date: Date.shift(Date.utc_today(), year: -1),
-        end_date: Date.utc_today(),
-        search: search
-      )
-      |> display_shot_records()
-
-    {:ok, socket}
+    socket
+    |> assign(
+      class: :all,
+      start_date: Date.shift(Date.utc_today(), year: -1),
+      end_date: Date.utc_today(),
+      search: search
+    )
+    |> display_shot_records()
+    |> wrap(:ok)
   end
 
   def mount(_params, _session, socket) do
-    socket =
-      socket
-      |> assign(
-        class: :all,
-        start_date: Date.shift(Date.utc_today(), year: -1),
-        end_date: Date.utc_today(),
-        search: nil
-      )
-      |> display_shot_records()
-
-    {:ok, socket}
+    socket
+    |> assign(
+      class: :all,
+      start_date: Date.shift(Date.utc_today(), year: -1),
+      end_date: Date.utc_today(),
+      search: nil
+    )
+    |> display_shot_records()
+    |> wrap(:ok)
   end
 
   @impl true
   def handle_params(params, _url, %{assigns: %{live_action: live_action}} = socket) do
-    {:noreply,
-     socket
-     |> assign_class(params)
-     |> apply_action(live_action, params)}
+    socket
+    |> assign_class(params)
+    |> apply_action(live_action, params)
+    |> wrap(:noreply)
   end
 
   defp assign_class(socket, %{"class" => class}) when class in ~w(rifle shotgun pistol),
@@ -105,7 +101,7 @@ defmodule CanneryWeb.RangeLive.Index do
       |> ActivityLog.delete_shot_record(current_user)
 
     prompt = dgettext("prompts", "Shot records deleted succesfully")
-    {:noreply, socket |> put_flash(:info, prompt) |> display_shot_records()}
+    socket |> put_flash(:info, prompt) |> display_shot_records() |> wrap(:noreply)
   end
 
   def handle_event(
@@ -120,21 +116,21 @@ defmodule CanneryWeb.RangeLive.Index do
       |> Containers.update_container(current_user, %{"staged" => !container.staged})
 
     prompt = dgettext("prompts", "Container unstaged succesfully")
-    {:noreply, socket |> put_flash(:info, prompt) |> display_shot_records()}
+    socket |> put_flash(:info, prompt) |> display_shot_records() |> wrap(:noreply)
   end
 
   def handle_event("search", %{"search" => %{"search_term" => ""}}, socket) do
-    {:noreply, socket |> push_patch(to: ~p"/range")}
+    socket |> push_patch(to: ~p"/range") |> wrap(:noreply)
   end
 
   def handle_event("search", %{"search" => %{"search_term" => search_term}}, socket) do
-    {:noreply, socket |> push_patch(to: ~p"/range/search/#{search_term}")}
+    socket |> push_patch(to: ~p"/range/search/#{search_term}") |> wrap(:noreply)
   end
 
   def handle_event("change_class", %{"type" => %{"class" => class}}, %{assigns: assigns} = socket) do
     params = %{"class" => class}
     params = if assigns[:search], do: Map.put(params, "search", assigns.search), else: params
-    {:noreply, socket |> push_patch(to: ~p"/range?#{params}")}
+    socket |> push_patch(to: ~p"/range?#{params}") |> wrap(:noreply)
   end
 
   def handle_event(
@@ -145,15 +141,13 @@ defmodule CanneryWeb.RangeLive.Index do
         },
         socket
       ) do
-    socket =
-      socket
-      |> assign(
-        start_date: start_date,
-        end_date: end_date
-      )
-      |> display_shot_records()
-
-    {:noreply, socket}
+    socket
+    |> assign(
+      start_date: start_date,
+      end_date: end_date
+    )
+    |> display_shot_records()
+    |> wrap(:noreply)
   end
 
   @spec display_shot_records(Socket.t()) :: Socket.t()

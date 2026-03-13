@@ -26,31 +26,6 @@ defmodule CanneryWeb.CoreComponents do
 
   embed_templates "core_components/*"
 
-  def wrap(value, key), do: {key, value}
-
-  def unwrap(value, key) do
-    {^key, ret} = value
-    ret
-  end
-
-  def pipe_if(value, condition, if_func, else_func \\ nil) do
-    if condition do
-      if_func.(value)
-    else
-      if else_func, do: else_func.(value), else: value
-    end
-  end
-
-  def dig(struct_or_map, attrs, default \\ nil)
-  def dig(nil, _attrs, default), do: default
-  def dig(struct_or_map, [], _default), do: struct_or_map
-
-  def dig(struct_or_map, [head | tail], default) do
-    struct_or_map
-    |> Map.get(head)
-    |> dig(tail, default)
-  end
-
   attr :title_content, :string, default: nil
   attr :current_user, User, default: nil
 

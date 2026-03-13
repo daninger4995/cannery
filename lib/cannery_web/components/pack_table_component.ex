@@ -28,16 +28,14 @@ defmodule CanneryWeb.Components.PackTableComponent do
         %{id: _id, packs: _packs, current_user: _current_user, show_used: _show_used} = assigns,
         socket
       ) do
-    socket =
-      socket
-      |> assign(assigns)
-      |> assign_new(:type, fn -> [] end)
-      |> assign_new(:range, fn -> [] end)
-      |> assign_new(:container, fn -> [] end)
-      |> assign_new(:actions, fn -> [] end)
-      |> display_packs()
-
-    {:ok, socket}
+    socket
+    |> assign(assigns)
+    |> assign_new(:type, fn -> [] end)
+    |> assign_new(:range, fn -> [] end)
+    |> assign_new(:container, fn -> [] end)
+    |> assign_new(:actions, fn -> [] end)
+    |> display_packs()
+    |> wrap(:ok)
   end
 
   defp display_packs(

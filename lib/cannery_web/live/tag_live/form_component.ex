@@ -12,12 +12,12 @@ defmodule CanneryWeb.TagLive.FormComponent do
   @spec update(%{:tag => Tag.t(), :current_user => User.t(), optional(any) => any}, Socket.t()) ::
           {:ok, Socket.t()}
   def update(%{tag: _tag} = assigns, socket) do
-    {:ok, socket |> assign(assigns) |> assign_changeset(%{})}
+    socket |> assign(assigns) |> assign_changeset(%{}) |> wrap(:ok)
   end
 
   @impl true
   def handle_event("validate", %{"tag" => tag_params}, socket) do
-    {:noreply, socket |> assign_changeset(tag_params, :validate)}
+    socket |> assign_changeset(tag_params, :validate) |> wrap(:noreply)
   end
 
   def handle_event("save", %{"tag" => tag_params}, %{assigns: %{action: action}} = socket) do
@@ -63,7 +63,7 @@ defmodule CanneryWeb.TagLive.FormComponent do
           socket |> assign(:changeset, changeset)
       end
 
-    {:noreply, socket}
+    socket |> wrap(:noreply)
   end
 
   defp save_tag(
@@ -81,6 +81,6 @@ defmodule CanneryWeb.TagLive.FormComponent do
           socket |> assign(changeset: changeset)
       end
 
-    {:noreply, socket}
+    socket |> wrap(:noreply)
   end
 end

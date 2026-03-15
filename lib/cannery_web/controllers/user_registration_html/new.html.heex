@@ -3,7 +3,7 @@
     {dgettext("actions", "Register")}
   </h1>
 
-  <.form
+  <.simple_form
     :let={f}
     for={@changeset}
     action={~p"/users/register"}
@@ -18,7 +18,7 @@
         type="hidden"
         id="invite_token"
         field={f[:invite_token]}
-        name="id"
+        name="user[invite_token]"
         value={@invite_token}
       />
     <% end %>
@@ -52,10 +52,12 @@
       class="input input-primary col-span-2"
     />
 
-    <.button class="mx-auto btn btn-primary col-span-3">
-      {dgettext("actions", "Register")}
-    </.button>
-  </.form>
+    <:actions>
+      <.button class="mx-auto btn btn-primary col-span-3">
+        {dgettext("actions", "Register")}
+      </.button>
+    </:actions>
+  </.simple_form>
 
   <hr class="hr" />
 

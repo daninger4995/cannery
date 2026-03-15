@@ -62,7 +62,6 @@
         type="hidden"
         id="cartridge"
         field={f[:cartridge]}
-        name="id"
         value={nil}
       />
     <% end %>
@@ -114,21 +113,18 @@
         type="hidden"
         id="unfired_length"
         field={f[:unfired_length]}
-        name="id"
         value={nil}
       />
       <.input
         type="hidden"
         id="brass_height"
         field={f[:brass_height]}
-        name="id"
         value={nil}
       />
       <.input
         type="hidden"
         id="chamber_size"
         field={f[:chamber_size]}
-        name="id"
         value={nil}
       />
     <% end %>
@@ -174,7 +170,6 @@
         type="hidden"
         id="bullet_type"
         field={f[:bullet_type]}
-        name="id"
         value={nil}
       />
     <% end %>
@@ -209,7 +204,6 @@
         type="hidden"
         id="jacket_type"
         field={f[:jacket_type]}
-        name="id"
         value={nil}
       />
     <% end %>
@@ -280,16 +274,15 @@
         phx-debounce="300"
       />
     <% else %>
-      <.input type="hidden" id="wadding" field={f[:wadding]} name="id" value={nil} />
-      <.input type="hidden" id="shot_type" field={f[:shot_type]} name="id" value={nil} />
-      <.input type="hidden" id="shot_material" field={f[:shot_material]} name="id" value={nil} />
-      <.input type="hidden" id="shot_size" field={f[:shot_size]} name="id" value={nil} />
-      <.input type="hidden" id="load_grains" field={f[:load_grains]} name="id" value={nil} />
+      <.input type="hidden" id="wadding" field={f[:wadding]} value={nil} />
+      <.input type="hidden" id="shot_type" field={f[:shot_type]} value={nil} />
+      <.input type="hidden" id="shot_material" field={f[:shot_material]} value={nil} />
+      <.input type="hidden" id="shot_size" field={f[:shot_size]} value={nil} />
+      <.input type="hidden" id="load_grains" field={f[:load_grains]} value={nil} />
       <.input
         type="hidden"
         id="shot_charge_weight"
         field={f[:shot_charge_weight]}
-        name="id"
         value={nil}
       />
     <% end %>
@@ -321,7 +314,6 @@
         type="hidden"
         id="powder_grains_per_charge"
         field={f[:powder_grains_per_charge]}
-        name="id"
         value={nil}
       />
     <% end %>
@@ -350,7 +342,6 @@
         type="hidden"
         id="dram_equivalent"
         field={f[:dram_equivalent]}
-        name="id"
         value={nil}
       />
     <% end %>
@@ -369,7 +360,6 @@
         type="hidden"
         id="muzzle_velocity"
         field={f[:muzzle_velocity]}
-        name="id"
         value={nil}
       />
     <% end %>

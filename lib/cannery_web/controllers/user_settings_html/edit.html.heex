@@ -22,13 +22,7 @@
       {dgettext("errors", "Oops, something went wrong! Please check the errors below.")}
     </div>
 
-    <.input
-      type="hidden"
-      id="action"
-      field={f[:action]}
-      name="action"
-      value="update_email"
-    />
+    <input type="hidden" name="action" value="update_email" />
 
     <.input
       field={f[:email]}
@@ -74,13 +68,7 @@
       {dgettext("errors", "Oops, something went wrong! Please check the errors below.")}
     </div>
 
-    <.input
-      type="hidden"
-      id="action"
-      field={f[:action]}
-      name="action"
-      value="update_password"
-    />
+    <input type="hidden" name="action" value="update_password" />
 
     <.input
       field={f[:password]}
@@ -123,6 +111,8 @@
     action={~p"/users/settings"}
     class="flex flex-col justify-center items-stretch space-y-4"
   >
+    <input type="hidden" name="action" value="update_locale" />
+
     <.input
       field={f[:locale]}
       type="select"

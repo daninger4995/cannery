@@ -46,13 +46,13 @@ msgid "Add your first type!"
 msgstr "Fügen Sie ihre erste Munitionsart hinzu!"
 
 #: lib/cannery_web/controllers/user_settings_html/edit.html.heex:15
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:53
+#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:47
 #, elixir-autogen, elixir-format
 msgid "Change email"
 msgstr "Mailadresse ändern"
 
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:67
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:113
+#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:61
+#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:101
 #, elixir-autogen, elixir-format
 msgid "Change password"
 msgstr "Passwort ändern"
@@ -62,12 +62,12 @@ msgstr "Passwort ändern"
 msgid "Create Invite"
 msgstr "Einladung erstellen"
 
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:162
+#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:152
 #, elixir-autogen, elixir-format
 msgid "Delete User"
 msgstr "Benutzer löschen"
 
-#: lib/cannery_web/controllers/user_registration_html/new.html.heex:67
+#: lib/cannery_web/controllers/user_registration_html/new.html.heex:69
 #: lib/cannery_web/controllers/user_reset_password_html/new.html.heex:3
 #: lib/cannery_web/controllers/user_session_html/new.html.heex:56
 #, elixir-autogen, elixir-format
@@ -80,10 +80,10 @@ msgid "Invite someone new!"
 msgstr "Laden Sie jemanden ein!"
 
 #: lib/cannery_web/components/core_components/topbar.html.heex:95
-#: lib/cannery_web/controllers/user_confirmation_html/new.html.heex:33
-#: lib/cannery_web/controllers/user_registration_html/new.html.heex:64
+#: lib/cannery_web/controllers/user_confirmation_html/new.html.heex:35
+#: lib/cannery_web/controllers/user_registration_html/new.html.heex:66
 #: lib/cannery_web/controllers/user_reset_password_html/edit.html.heex:46
-#: lib/cannery_web/controllers/user_reset_password_html/new.html.heex:33
+#: lib/cannery_web/controllers/user_reset_password_html/new.html.heex:35
 #: lib/cannery_web/controllers/user_session_html/new.html.heex:3
 #: lib/cannery_web/controllers/user_session_html/new.html.heex:44
 #, elixir-autogen, elixir-format
@@ -106,18 +106,18 @@ msgid "New Tag"
 msgstr "Neuer Tag"
 
 #: lib/cannery_web/components/core_components/topbar.html.heex:90
-#: lib/cannery_web/controllers/user_confirmation_html/new.html.heex:30
+#: lib/cannery_web/controllers/user_confirmation_html/new.html.heex:32
 #: lib/cannery_web/controllers/user_registration_html/new.html.heex:3
-#: lib/cannery_web/controllers/user_registration_html/new.html.heex:56
+#: lib/cannery_web/controllers/user_registration_html/new.html.heex:57
 #: lib/cannery_web/controllers/user_reset_password_html/edit.html.heex:43
-#: lib/cannery_web/controllers/user_reset_password_html/new.html.heex:30
+#: lib/cannery_web/controllers/user_reset_password_html/new.html.heex:32
 #: lib/cannery_web/controllers/user_session_html/new.html.heex:53
 #, elixir-autogen, elixir-format
 msgid "Register"
 msgstr "Registrieren"
 
 #: lib/cannery_web/controllers/user_confirmation_html/new.html.heex:3
-#: lib/cannery_web/controllers/user_confirmation_html/new.html.heex:22
+#: lib/cannery_web/controllers/user_confirmation_html/new.html.heex:23
 #, elixir-autogen, elixir-format
 msgid "Resend confirmation instructions"
 msgstr "Bestätigungsmail erneut senden"
@@ -134,12 +134,12 @@ msgstr "Passwort zurücksetzen"
 #: lib/cannery_web/live/pack_live/form_component.html.heex:120
 #: lib/cannery_web/live/range_live/form_component.html.heex:48
 #: lib/cannery_web/live/tag_live/form_component.html.heex:46
-#: lib/cannery_web/live/type_live/form_component.html.heex:459
+#: lib/cannery_web/live/type_live/form_component.html.heex:449
 #, elixir-autogen, elixir-format
 msgid "Save"
 msgstr "Speichern"
 
-#: lib/cannery_web/controllers/user_reset_password_html/new.html.heex:22
+#: lib/cannery_web/controllers/user_reset_password_html/new.html.heex:23
 #, elixir-autogen, elixir-format
 msgid "Send instructions to reset password"
 msgstr "Anleitung zum Passwort zurücksetzen zusenden"
@@ -191,12 +191,12 @@ msgstr "Zuerst einen Behälter hinzufügen"
 msgid "Create"
 msgstr "Erstellen"
 
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:129
+#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:119
 #, elixir-autogen, elixir-format
 msgid "Change Language"
 msgstr "Sprache wechseln"
 
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:144
+#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:134
 #, elixir-autogen, elixir-format
 msgid "Change language"
 msgstr "Sprache wechseln"
@@ -228,7 +228,7 @@ msgstr ""
 msgid "Unstage from range"
 msgstr ""
 
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:153
+#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:143
 #, elixir-autogen, elixir-format
 msgid "Export Data as JSON"
 msgstr ""

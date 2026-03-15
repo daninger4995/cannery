@@ -69,7 +69,7 @@ msgstr "Ní feidir é a fáil"
 #: lib/cannery_web/controllers/user_registration_html/new.html.heex:13
 #: lib/cannery_web/controllers/user_reset_password_html/edit.html.heex:13
 #: lib/cannery_web/controllers/user_settings_html/edit.html.heex:22
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:74
+#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:68
 #, elixir-autogen, elixir-format
 msgid "Oops, something went wrong! Please check the errors below."
 msgstr ""

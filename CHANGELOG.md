@@ -4,6 +4,7 @@
   dependencies, so there may be bugs
 - Hopefully fix email
 - Don't clear the search bar when switching class
+- Fix error page
 
 # v0.9.16
 - Fix bug with ammo type selector

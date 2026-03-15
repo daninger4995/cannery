@@ -44,12 +44,12 @@ msgstr "Konnte Behälter nicht finden"
 msgid "Email change link is invalid or it has expired."
 msgstr "Mailadressenänderungs-Link ist ungültig oder abgelaufen."
 
-#: lib/cannery_web/controllers/error_html/error.html.heex:8
+#: lib/cannery_web/controllers/error_html/render_error.html.heex:7
 #, elixir-autogen, elixir-format
 msgid "Error"
 msgstr "Fehler"
 
-#: lib/cannery_web/controllers/error_html/error.html.heex:28
+#: lib/cannery_web/controllers/error_html/render_error.html.heex:26
 #, elixir-autogen, elixir-format
 msgid "Go back home"
 msgstr "Zur Hauptseite zurückkehren"
@@ -59,7 +59,7 @@ msgstr "Zur Hauptseite zurückkehren"
 msgid "Invalid email or password"
 msgstr "Ungültige Mailadresse oder Passwort"
 
-#: lib/cannery_web/controllers/error_html.ex:9
+#: lib/cannery_web/controllers/error_html.ex:10
 #: lib/cannery_web/controllers/error_json.ex:7
 #, elixir-autogen, elixir-format
 msgid "Not found"
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Unable to delete user"
 msgstr "Dieser Nutzer konnte nicht gelöscht werden"
 
-#: lib/cannery_web/controllers/error_html.ex:10
+#: lib/cannery_web/controllers/error_html.ex:11
 #: lib/cannery_web/controllers/error_json.ex:8
 #, elixir-autogen, elixir-format
 msgid "Unauthorized"
@@ -198,7 +198,7 @@ msgstr "Anzahl muss weniger als %{count} betragen"
 msgid "can't be blank"
 msgstr ""
 
-#: lib/cannery_web/controllers/error_html.ex:11
+#: lib/cannery_web/controllers/error_html.ex:12
 #: lib/cannery_web/controllers/error_json.ex:9
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Internal server error"

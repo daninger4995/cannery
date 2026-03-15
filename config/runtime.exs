@@ -105,7 +105,7 @@ if config_env() == :prod do
     auth: :always,
     no_mx_lookups: false,
     tls_options: [
-      versions: [:"tlsv1.3"],
+      versions: [:"tlsv1.2", :"tlsv1.3"],
       verify: :verify_peer,
       cacerts: :public_key.cacerts_get(),
       server_name_indication: String.to_charlist(smtp_host),

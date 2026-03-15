@@ -12,17 +12,17 @@
                 phx-value-sort-key={key}
                 phx-target={@myself}
               >
-                <.icon name="chevron-up" class="w-0 float-right opacity-0 size-4" />
+                <.icon name="chevron-up" class="shrink-0 size-4 opacity-0" />
                 <span class={if @last_sort_key == key, do: "underline"}>{label}</span>
                 <%= if @last_sort_key == key do %>
                   <%= case @sort_mode do %>
                     <% :asc -> %>
-                      <.icon name="chevron-down" class="w-0 float-right size-4" />
+                      <.icon name="chevron-down" class="shrink-0 size-4" />
                     <% :desc -> %>
-                      <.icon name="chevron-up" class="w-0 float-right size-4" />
+                      <.icon name="chevron-up" class="shrink-0 size-4" />
                   <% end %>
                 <% else %>
-                  <.icon name="chevron-up" class="w-0 float-right opacity-0 size-4" />
+                  <.icon name="chevron-up" class="shrink-0 size-4 opacity-0" />
                 <% end %>
               </span>
             </th>

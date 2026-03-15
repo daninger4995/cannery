@@ -160,7 +160,7 @@ msgstr "%{name} añadido exitosamente"
 msgid "%{tag_name} has been removed from %{container_name}"
 msgstr "se ha removido %{tag_name} de %{container_name}"
 
-#: lib/cannery_web/live/container_live/edit_tags_component.html.heex:58
+#: lib/cannery_web/live/container_live/edit_tags_component.html.heex:59
 #, elixir-autogen, elixir-format
 msgid "Adding..."
 msgstr "Añadiendo..."

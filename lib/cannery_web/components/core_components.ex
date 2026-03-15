@@ -842,10 +842,10 @@ defmodule CanneryWeb.CoreComponents do
 
   ## Examples
 
-      <.copy_to_clipboard text="Text to copy" />
+      <.copy_to_clipboard id="my-copy-btn" text="Text to copy" />
   """
   attr :text, :string, required: true
-  attr :id, :string, default: "copy-to-clipboard-#{System.unique_integer()}"
+  attr :id, :string, required: true
   slot :inner_block, required: true
 
   def copy_to_clipboard(assigns) do

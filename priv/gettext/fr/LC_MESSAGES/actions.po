@@ -149,7 +149,7 @@ msgstr "Envoyer les instructions pour réinitialiser le mot de passe"
 msgid "Why not add one?"
 msgstr "Pourquoi pas en ajouter un ?"
 
-#: lib/cannery_web/live/container_live/edit_tags_component.html.heex:60
+#: lib/cannery_web/live/container_live/edit_tags_component.html.heex:61
 #, elixir-autogen, elixir-format
 msgid "Add"
 msgstr "Ajouter"

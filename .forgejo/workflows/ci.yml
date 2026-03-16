@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - '**'
+    branches-ignore:
+      - weblate
   pull_request:
   create:
     tags:

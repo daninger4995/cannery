@@ -560,11 +560,6 @@ msgstr ""
 msgid "Firing type"
 msgstr ""
 
-#: lib/cannery_web/components/layouts/app.html.heex:43
-#, elixir-autogen, elixir-format
-msgid "Reconnecting..."
-msgstr ""
-
 #: lib/cannery_web/live/container_live/index.ex:28
 #: lib/cannery_web/live/container_live/show.ex:132
 #, elixir-autogen, elixir-format
@@ -1491,4 +1486,9 @@ msgstr ""
 #: lib/cannery_web/components/core_components.ex:152
 #, elixir-autogen, elixir-format
 msgid "close"
+msgstr ""
+
+#: lib/cannery_web/components/layouts/app.html.heex:43
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Reconnecting…"
 msgstr ""

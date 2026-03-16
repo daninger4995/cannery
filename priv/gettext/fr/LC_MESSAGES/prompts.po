@@ -129,17 +129,6 @@ msgstr "Mot de passe mis à jour avec succès."
 msgid "Please check your email to verify your account"
 msgstr "Veuillez vérifier votre mél pour confirmer votre compte"
 
-#: lib/cannery_web/components/add_shot_record_component.html.heex:56
-#: lib/cannery_web/live/container_live/form_component.html.heex:58
-#: lib/cannery_web/live/invite_live/form_component.html.heex:37
-#: lib/cannery_web/live/pack_live/form_component.html.heex:117
-#: lib/cannery_web/live/range_live/form_component.html.heex:46
-#: lib/cannery_web/live/tag_live/form_component.html.heex:44
-#: lib/cannery_web/live/type_live/form_component.html.heex:446
-#, elixir-autogen, elixir-format
-msgid "Saving..."
-msgstr "Sauvegarde en cours…"
-
 #: lib/cannery_web/controllers/user_settings_controller.ex:94
 #, elixir-autogen, elixir-format
 msgid "Your account has been deleted"
@@ -161,11 +150,6 @@ msgstr "%{name} a été ajouté avec succès"
 #, elixir-autogen, elixir-format
 msgid "%{tag_name} has been removed from %{container_name}"
 msgstr "%{tag_name} a été retiré de %{container_name}"
-
-#: lib/cannery_web/live/container_live/edit_tags_component.html.heex:59
-#, elixir-autogen, elixir-format
-msgid "Adding..."
-msgstr "Ajout en cours…"
 
 #: lib/cannery_web/components/add_shot_record_component.ex:62
 #, elixir-autogen, elixir-format
@@ -214,11 +198,6 @@ msgstr "%{name} retiré avec succès"
 #, elixir-autogen, elixir-format
 msgid "You'll need to"
 msgstr "Vous aurez besoin de"
-
-#: lib/cannery_web/live/pack_live/form_component.html.heex:109
-#, elixir-autogen, elixir-format
-msgid "Creating..."
-msgstr "Création en cours…"
 
 #: lib/cannery_web/controllers/user_settings_html/edit.html.heex:132
 #, elixir-autogen, elixir-format
@@ -303,3 +282,24 @@ msgstr ""
 #, elixir-autogen, elixir-format
 msgid "Email resent to %{user_email} succesfully"
 msgstr ""
+
+#: lib/cannery_web/live/container_live/edit_tags_component.html.heex:59
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Adding…"
+msgstr "Ajout en cours…"
+
+#: lib/cannery_web/live/pack_live/form_component.html.heex:109
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Creating…"
+msgstr "Création en cours…"
+
+#: lib/cannery_web/components/add_shot_record_component.html.heex:56
+#: lib/cannery_web/live/container_live/form_component.html.heex:58
+#: lib/cannery_web/live/invite_live/form_component.html.heex:37
+#: lib/cannery_web/live/pack_live/form_component.html.heex:117
+#: lib/cannery_web/live/range_live/form_component.html.heex:46
+#: lib/cannery_web/live/tag_live/form_component.html.heex:44
+#: lib/cannery_web/live/type_live/form_component.html.heex:446
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Saving…"
+msgstr "Sauvegarde en cours…"

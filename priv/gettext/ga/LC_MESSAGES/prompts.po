@@ -120,17 +120,6 @@ msgstr ""
 msgid "Please check your email to verify your account"
 msgstr ""
 
-#: lib/cannery_web/components/add_shot_record_component.html.heex:56
-#: lib/cannery_web/live/container_live/form_component.html.heex:58
-#: lib/cannery_web/live/invite_live/form_component.html.heex:37
-#: lib/cannery_web/live/pack_live/form_component.html.heex:117
-#: lib/cannery_web/live/range_live/form_component.html.heex:46
-#: lib/cannery_web/live/tag_live/form_component.html.heex:44
-#: lib/cannery_web/live/type_live/form_component.html.heex:446
-#, elixir-autogen, elixir-format
-msgid "Saving..."
-msgstr ""
-
 #: lib/cannery_web/controllers/user_settings_controller.ex:94
 #, elixir-autogen, elixir-format
 msgid "Your account has been deleted"
@@ -149,11 +138,6 @@ msgstr ""
 #: lib/cannery_web/live/container_live/show.ex:52
 #, elixir-autogen, elixir-format
 msgid "%{tag_name} has been removed from %{container_name}"
-msgstr ""
-
-#: lib/cannery_web/live/container_live/edit_tags_component.html.heex:59
-#, elixir-autogen, elixir-format
-msgid "Adding..."
 msgstr ""
 
 #: lib/cannery_web/components/add_shot_record_component.ex:62
@@ -202,11 +186,6 @@ msgstr ""
 #: lib/cannery_web/live/pack_live/index.html.heex:21
 #, elixir-autogen, elixir-format
 msgid "You'll need to"
-msgstr ""
-
-#: lib/cannery_web/live/pack_live/form_component.html.heex:109
-#, elixir-autogen, elixir-format
-msgid "Creating..."
 msgstr ""
 
 #: lib/cannery_web/controllers/user_settings_html/edit.html.heex:132
@@ -294,4 +273,25 @@ msgstr ""
 #: lib/cannery_web/live/invite_live/index.ex:122
 #, elixir-autogen, elixir-format
 msgid "Email resent to %{user_email} succesfully"
+msgstr ""
+
+#: lib/cannery_web/live/container_live/edit_tags_component.html.heex:59
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Adding…"
+msgstr ""
+
+#: lib/cannery_web/live/pack_live/form_component.html.heex:109
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Creating…"
+msgstr ""
+
+#: lib/cannery_web/components/add_shot_record_component.html.heex:56
+#: lib/cannery_web/live/container_live/form_component.html.heex:58
+#: lib/cannery_web/live/invite_live/form_component.html.heex:37
+#: lib/cannery_web/live/pack_live/form_component.html.heex:117
+#: lib/cannery_web/live/range_live/form_component.html.heex:46
+#: lib/cannery_web/live/tag_live/form_component.html.heex:44
+#: lib/cannery_web/live/type_live/form_component.html.heex:446
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Saving…"
 msgstr ""

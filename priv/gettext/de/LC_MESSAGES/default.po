@@ -555,11 +555,6 @@ msgstr "Neues Passwort"
 msgid "Firing type"
 msgstr "Patronenhülsenform"
 
-#: lib/cannery_web/components/layouts/app.html.heex:43
-#, elixir-autogen, elixir-format
-msgid "Reconnecting..."
-msgstr "Neu verbinden..."
-
 #: lib/cannery_web/live/container_live/index.ex:28
 #: lib/cannery_web/live/container_live/show.ex:132
 #, elixir-autogen, elixir-format
@@ -1498,3 +1493,8 @@ msgstr ""
 #, elixir-autogen, elixir-format
 msgid "close"
 msgstr ""
+
+#: lib/cannery_web/components/layouts/app.html.heex:43
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Reconnecting…"
+msgstr "Neu verbinden..."

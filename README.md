@@ -118,3 +118,9 @@ license can be found at
 - [Website](https://cannery.app): Project website
 - [Codeberg](https://codeberg.org/shibao/cannery): Main repo, feature
   requests and bug reports
+- [Weblate](https://translate.codeberg.org/engage/cannery/): Contribute to
+  translations!
+
+---
+
+[![translation status](https://translate.codeberg.org/widgets/cannery/-/svg-badge.svg)](https://translate.codeberg.org/engage/cannery/)

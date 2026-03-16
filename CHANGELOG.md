@@ -1,3 +1,6 @@
+# v0.9.19
+- Fix Live Dashboard icon in topbar
+
 # v0.9.18
 - Add translation link to homepage whoops
 

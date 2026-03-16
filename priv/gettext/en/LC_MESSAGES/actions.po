@@ -66,7 +66,7 @@ msgstr ""
 msgid "Invite someone new!"
 msgstr ""
 
-#: lib/cannery_web/components/core_components/topbar.html.heex:95
+#: lib/cannery_web/components/core_components/topbar.html.heex:92
 #: lib/cannery_web/controllers/user_confirmation_html/new.html.heex:35
 #: lib/cannery_web/controllers/user_registration_html/new.html.heex:66
 #: lib/cannery_web/controllers/user_reset_password_html/edit.html.heex:46
@@ -92,7 +92,7 @@ msgstr ""
 msgid "New Tag"
 msgstr ""
 
-#: lib/cannery_web/components/core_components/topbar.html.heex:90
+#: lib/cannery_web/components/core_components/topbar.html.heex:87
 #: lib/cannery_web/controllers/user_confirmation_html/new.html.heex:32
 #: lib/cannery_web/controllers/user_registration_html/new.html.heex:3
 #: lib/cannery_web/controllers/user_registration_html/new.html.heex:57

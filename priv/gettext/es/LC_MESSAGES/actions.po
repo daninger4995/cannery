@@ -79,7 +79,7 @@ msgstr "¿Has olvidado tu contraseña?"
 msgid "Invite someone new!"
 msgstr "¡Invita a alguien nuevo!"
 
-#: lib/cannery_web/components/core_components/topbar.html.heex:95
+#: lib/cannery_web/components/core_components/topbar.html.heex:92
 #: lib/cannery_web/controllers/user_confirmation_html/new.html.heex:35
 #: lib/cannery_web/controllers/user_registration_html/new.html.heex:66
 #: lib/cannery_web/controllers/user_reset_password_html/edit.html.heex:46
@@ -105,7 +105,7 @@ msgstr "Nuevo Contenedor"
 msgid "New Tag"
 msgstr "Nueva Etiqueta"
 
-#: lib/cannery_web/components/core_components/topbar.html.heex:90
+#: lib/cannery_web/components/core_components/topbar.html.heex:87
 #: lib/cannery_web/controllers/user_confirmation_html/new.html.heex:32
 #: lib/cannery_web/controllers/user_registration_html/new.html.heex:3
 #: lib/cannery_web/controllers/user_registration_html/new.html.heex:57

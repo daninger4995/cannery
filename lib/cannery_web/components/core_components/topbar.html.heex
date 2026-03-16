@@ -70,10 +70,7 @@
           </.link>
         </li>
         <li
-          :if={
-            @current_user |> Accounts.already_admin?() and
-              function_exported?(Routes, :live_dashboard_path, 2)
-          }
+          :if={@current_user.role == :admin}
           class="mx-2 my-1"
         >
           <.link
@@ -81,7 +78,7 @@
             class="text-white hover:underline"
             aria-label={gettext("Live Dashboard")}
           >
-            <.icon name="chart-bar-square" class="size-6" />
+            <.icon name="cpu-chip" class="size-6" />
           </.link>
         </li>
       <% else %>

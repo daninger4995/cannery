@@ -666,7 +666,7 @@ msgstr "Langue"
 msgid "Get involved!"
 msgstr "Impliquez-vous !"
 
-#: lib/cannery_web/live/home_live.html.heex:130
+#: lib/cannery_web/live/home_live.html.heex:141
 #, elixir-autogen, elixir-format
 msgid "Report bugs or request features"
 msgstr "Remonter des bugs ou une demande de fonctionnalité"
@@ -1150,7 +1150,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: lib/cannery_web/components/core_components/topbar.html.heex:82
+#: lib/cannery_web/components/core_components/topbar.html.heex:79
 #, elixir-autogen, elixir-format
 msgid "Live Dashboard"
 msgstr ""
@@ -1501,3 +1501,8 @@ msgstr ""
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Reconnecting…"
 msgstr "Reconnexion en cours…"
+
+#: lib/cannery_web/live/home_live.html.heex:130
+#, elixir-autogen, elixir-format
+msgid "Help translate"
+msgstr ""

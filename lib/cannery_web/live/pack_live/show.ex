@@ -7,6 +7,7 @@ defmodule CanneryWeb.PackLive.Show do
   alias Cannery.{ActivityLog, ActivityLog.ShotRecord}
   alias Cannery.{Ammo, Ammo.Pack}
   alias Cannery.{ComparableDate, Containers}
+  alias CanneryWeb.Components.TableComponent
   alias Phoenix.LiveView.Socket
 
   @impl true
@@ -66,6 +67,13 @@ defmodule CanneryWeb.PackLive.Show do
     socket |> put_flash(:info, prompt) |> display_pack(pack_id) |> wrap(:noreply)
   end
 
+  def handle_event("sort_by", params, socket) do
+    socket
+    |> TableComponent.apply_sort(params)
+    |> display_pack(socket.assigns.pack)
+    |> wrap(:noreply)
+  end
+
   @spec display_pack(Socket.t(), Pack.t() | Pack.id()) :: Socket.t()
   defp display_pack(
          %{assigns: %{current_user: current_user}} = socket,
@@ -80,11 +88,22 @@ defmodule CanneryWeb.PackLive.Show do
 
     shot_records = ActivityLog.list_shot_records(current_user, pack_id: pack.id)
 
+    {sort_key, sort_mode} =
+      TableComponent.init_sort(socket, columns, %{
+        initial_key: :date,
+        initial_sort_mode: :desc
+      })
+
+    type_for_sort = TableComponent.get_sort_type(columns, sort_key)
+
     rows =
       shot_records
       |> Enum.map(fn shot_record ->
-        pack |> get_table_row_for_shot_record(shot_record, columns)
+        pack
+        |> get_table_row_for_shot_record(shot_record, columns)
+        |> Map.put(:row_id, "shot-record-#{shot_record.id}")
       end)
+      |> TableComponent.sort_rows(sort_key, sort_mode, type_for_sort)
 
     socket
     |> assign(
@@ -94,7 +113,9 @@ defmodule CanneryWeb.PackLive.Show do
       container: container_id && Containers.get_container!(container_id, current_user),
       shot_records: shot_records,
       columns: columns,
-      rows: rows
+      rows: rows,
+      last_sort_key: sort_key,
+      sort_mode: sort_mode
     )
   end
 

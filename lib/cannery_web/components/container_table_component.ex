@@ -32,6 +32,14 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
     |> wrap(:ok)
   end
 
+  @impl true
+  def handle_event("sort_by", params, socket) do
+    socket
+    |> TableComponent.apply_sort(params)
+    |> display_containers()
+    |> wrap(:noreply)
+  end
+
   defp display_containers(
          %{
            assigns: %{
@@ -78,6 +86,9 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
         )
       )
 
+    {sort_key, sort_mode} = TableComponent.init_sort(socket, columns, socket.assigns)
+    type_for_sort = TableComponent.get_sort_type(columns, sort_key)
+
     extra_data = %{
       current_user: current_user,
       range: range,
@@ -97,16 +108,21 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
 
     rows =
       containers
-      |> Enum.map(fn %{id: id} = container ->
+      |> Enum.map(fn container ->
+        tag_ids = container.tags |> Enum.map(& &1.id) |> Enum.sort() |> Enum.join("-")
+
         container
         |> get_row_data_for_container(columns, extra_data)
-        |> Map.put(:id, id)
+        |> Map.put(:row_id, "container-#{container.id}-#{container.staged}-#{tag_ids}")
       end)
+      |> TableComponent.sort_rows(sort_key, sort_mode, type_for_sort)
 
     socket
     |> assign(
       columns: columns,
-      rows: rows
+      rows: rows,
+      last_sort_key: sort_key,
+      sort_mode: sort_mode
     )
   end
 
@@ -114,18 +130,12 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
   def render(assigns) do
     ~H"""
     <div id={@id} class="w-full">
-      <%!--
-        The id includes a hash of @rows to force LiveView to remount the
-        TableComponent when row data changes. Without this, LiveView's diff
-        tracking cannot detect changes to ~H rendered structs that are passed
-        through nested LiveComponent assigns, so the DOM never updates even
-        though the server-side data is correct.
-      --%>
-      <.live_component
-        module={CanneryWeb.Components.TableComponent}
-        id={"table-#{@id}-#{:erlang.phash2(@rows)}"}
+      <TableComponent.table
         columns={@columns}
         rows={@rows}
+        last_sort_key={@last_sort_key}
+        sort_mode={@sort_mode}
+        target={@myself}
       />
     </div>
     """
@@ -177,8 +187,10 @@ defmodule CanneryWeb.Components.ContainerTableComponent do
 
     {tag_names,
      ~H"""
-     <div id={"tags-#{@container.id}"} class="flex flex-wrap justify-center items-center">
-       <.simple_tag_card :for={tag <- @container.tags} tag={tag} />
+     <div class="flex flex-wrap justify-center items-center">
+       <%= for tag <- @container.tags do %>
+         <.simple_tag_card tag={tag} />
+       <% end %>
 
        {render_slot(@tag_actions, @container)}
      </div>

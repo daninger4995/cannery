@@ -56,7 +56,11 @@
     </div>
 
     <div class="flex flex-wrap justify-center items-center text-primary-600">
-      <button type="button" class="mx-4 my-2 btn btn-primary" phx-click="toggle_staged">
+      <button
+        class="mx-4 my-2 btn btn-primary cursor-pointer"
+        phx-click="toggle_staged"
+        type="button"
+      >
         {if @container.staged,
           do: dgettext("actions", "Unstage from range"),
           else: dgettext("actions", "Stage for range")}

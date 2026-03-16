@@ -317,6 +317,36 @@ defmodule CanneryWeb.ContainerLiveTest do
     end
   end
 
+  describe "Index toggle staged" do
+    setup [:register_and_log_in_user, :create_container]
+
+    test "toggles staged in table view", %{conn: conn, container: container} do
+      {:ok, index_live, _html} = live(conn, ~p"/containers")
+
+      # Table view is on by default; button should say "Stage"
+      assert has_element?(index_live, "button", "Stage")
+      refute has_element?(index_live, "button", "Unstage")
+
+      # Click Stage
+      index_live
+      |> element(~s/button[phx-click="toggle_staged"][phx-value-container_id="#{container.id}"]/)
+      |> render_click()
+
+      # Button should now say "Unstage"
+      assert has_element?(index_live, "button", "Unstage")
+      refute has_element?(index_live, "button", "Stage")
+
+      # Click Unstage
+      index_live
+      |> element(~s/button[phx-click="toggle_staged"][phx-value-container_id="#{container.id}"]/)
+      |> render_click()
+
+      # Button should be back to "Stage"
+      assert has_element?(index_live, "button", "Stage")
+      refute has_element?(index_live, "button", "Unstage")
+    end
+  end
+
   describe "Show" do
     setup [:register_and_log_in_user, :create_container]
 

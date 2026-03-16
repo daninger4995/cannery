@@ -109,11 +109,11 @@
       {gettext("Rounds used")}
     </h1>
 
-    <.live_component
-      module={CanneryWeb.Components.TableComponent}
-      id="pack-shot-records-table"
+    <CanneryWeb.Components.TableComponent.table
       columns={@columns}
       rows={@rows}
+      last_sort_key={@last_sort_key}
+      sort_mode={@sort_mode}
     />
   <% end %>
 </div>

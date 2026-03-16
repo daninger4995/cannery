@@ -38,6 +38,14 @@ defmodule CanneryWeb.Components.PackTableComponent do
     |> wrap(:ok)
   end
 
+  @impl true
+  def handle_event("sort_by", params, socket) do
+    socket
+    |> TableComponent.apply_sort(params)
+    |> display_packs()
+    |> wrap(:noreply)
+  end
+
   defp display_packs(
          %{
            assigns: %{
@@ -107,6 +115,9 @@ defmodule CanneryWeb.Components.PackTableComponent do
         type != []
       )
 
+    {sort_key, sort_mode} = TableComponent.init_sort(socket, columns, socket.assigns)
+    type_for_sort = TableComponent.get_sort_type(columns, sort_key)
+
     containers =
       packs
       |> Enum.map(fn %{container_id: container_id} -> container_id end)
@@ -131,31 +142,33 @@ defmodule CanneryWeb.Components.PackTableComponent do
       |> Enum.map(fn pack ->
         pack |> get_row_data_for_pack(extra_data)
       end)
+      |> TableComponent.sort_rows(sort_key, sort_mode, type_for_sort)
 
-    socket |> assign(columns: columns, rows: rows)
+    socket |> assign(columns: columns, rows: rows, last_sort_key: sort_key, sort_mode: sort_mode)
   end
 
   @impl true
   def render(assigns) do
     ~H"""
     <div id={@id} class="w-full">
-      <.live_component
-        module={TableComponent}
-        id={"pack-table-#{@id}"}
+      <TableComponent.table
         columns={@columns}
         rows={@rows}
+        last_sort_key={@last_sort_key}
+        sort_mode={@sort_mode}
+        target={@myself}
       />
     </div>
     """
   end
 
   @spec get_row_data_for_pack(Pack.t(), additional_data :: map()) :: map()
-  defp get_row_data_for_pack(%{id: pack_id} = pack, %{columns: columns} = additional_data) do
+  defp get_row_data_for_pack(pack, %{columns: columns} = additional_data) do
     columns
     |> Map.new(fn %{key: key} ->
       {key, get_value_for_key(key, pack, additional_data)}
     end)
-    |> Map.put(:id, pack_id)
+    |> Map.put(:row_id, "pack-#{pack.id}")
   end
 
   @spec get_value_for_key(atom(), Pack.t(), additional_data :: map()) ::

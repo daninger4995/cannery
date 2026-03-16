@@ -1,3 +1,6 @@
+# v0.9.18
+- Add translation link to homepage whoops
+
 # v0.9.17
 - Update deps
 - This required extensive changes to update to the latest versions of

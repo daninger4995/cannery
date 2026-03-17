@@ -38,14 +38,6 @@ defmodule CanneryWeb.Components.PackTableComponent do
     |> wrap(:ok)
   end
 
-  @impl true
-  def handle_event("sort_by", params, socket) do
-    socket
-    |> TableComponent.apply_sort(params)
-    |> display_packs()
-    |> wrap(:noreply)
-  end
-
   defp display_packs(
          %{
            assigns: %{
@@ -115,9 +107,6 @@ defmodule CanneryWeb.Components.PackTableComponent do
         type != []
       )
 
-    {sort_key, sort_mode} = TableComponent.init_sort(socket, columns, socket.assigns)
-    type_for_sort = TableComponent.get_sort_type(columns, sort_key)
-
     containers =
       packs
       |> Enum.map(fn %{container_id: container_id} -> container_id end)
@@ -142,21 +131,19 @@ defmodule CanneryWeb.Components.PackTableComponent do
       |> Enum.map(fn pack ->
         pack |> get_row_data_for_pack(extra_data)
       end)
-      |> TableComponent.sort_rows(sort_key, sort_mode, type_for_sort)
 
-    socket |> assign(columns: columns, rows: rows, last_sort_key: sort_key, sort_mode: sort_mode)
+    socket |> assign(columns: columns, rows: rows)
   end
 
   @impl true
   def render(assigns) do
     ~H"""
     <div id={@id} class="w-full">
-      <TableComponent.table
+      <.live_component
+        module={TableComponent}
+        id={"pack-table-#{@id}"}
         columns={@columns}
         rows={@rows}
-        last_sort_key={@last_sort_key}
-        sort_mode={@sort_mode}
-        target={@myself}
       />
     </div>
     """

@@ -5,7 +5,6 @@ defmodule CanneryWeb.Components.MovePackComponent do
 
   use CanneryWeb, :live_component
   alias Cannery.{Accounts.User, Ammo, Ammo.Pack, Containers, Containers.Container}
-  alias CanneryWeb.Components.TableComponent
   alias Ecto.Changeset
   alias Phoenix.LiveView.Socket
 
@@ -31,7 +30,6 @@ defmodule CanneryWeb.Components.MovePackComponent do
     socket
     |> assign(assigns)
     |> assign(changeset: changeset, containers: containers)
-    |> display_move_table()
     |> wrap(:ok)
   end
 
@@ -43,27 +41,23 @@ defmodule CanneryWeb.Components.MovePackComponent do
       ) do
     %{name: container_name} = Containers.get_container!(container_id, current_user)
 
-    pack
-    |> Ammo.update_pack(%{"container_id" => container_id}, current_user)
-    |> case do
-      {:ok, _pack} ->
-        prompt = dgettext("prompts", "Ammo moved to %{name} successfully", name: container_name)
-        socket |> put_flash(:info, prompt) |> push_navigate(to: return_to)
+    socket =
+      pack
+      |> Ammo.update_pack(%{"container_id" => container_id}, current_user)
+      |> case do
+        {:ok, _pack} ->
+          prompt = dgettext("prompts", "Ammo moved to %{name} successfully", name: container_name)
+          socket |> put_flash(:info, prompt) |> push_navigate(to: return_to)
 
-      {:error, %Changeset{} = changeset} ->
-        socket |> assign(changeset: changeset)
-    end
-    |> wrap(:noreply)
+        {:error, %Changeset{} = changeset} ->
+          socket |> assign(changeset: changeset)
+      end
+
+    socket |> wrap(:noreply)
   end
 
-  def handle_event("sort_by", params, socket) do
-    socket
-    |> TableComponent.apply_sort(params)
-    |> display_move_table()
-    |> wrap(:noreply)
-  end
-
-  defp display_move_table(%{assigns: %{containers: containers}} = socket) do
+  @impl true
+  def render(%{containers: containers} = assigns) do
     columns = [
       %{label: gettext("Container"), key: :name},
       %{label: gettext("Type"), key: :type},
@@ -71,26 +65,10 @@ defmodule CanneryWeb.Components.MovePackComponent do
       %{label: gettext("Actions"), key: :actions, sortable: false}
     ]
 
-    {sort_key, sort_mode} = TableComponent.init_sort(socket, columns, socket.assigns)
-    type = TableComponent.get_sort_type(columns, sort_key)
+    rows = containers |> get_rows_for_containers(assigns, columns)
 
-    rows =
-      containers
-      |> Enum.map(fn container ->
-        columns
-        |> Map.new(fn %{key: key} ->
-          {key, get_row_value_by_key(key, container, socket.assigns)}
-        end)
-        |> Map.put(:row_id, "move-container-#{container.id}")
-      end)
-      |> TableComponent.sort_rows(sort_key, sort_mode, type)
+    assigns = assigns |> Map.merge(%{columns: columns, rows: rows})
 
-    socket
-    |> assign(columns: columns, rows: rows, last_sort_key: sort_key, sort_mode: sort_mode)
-  end
-
-  @impl true
-  def render(assigns) do
     ~H"""
     <div class="w-full flex flex-col space-y-8 justify-center items-center">
       <h2 class="mb-8 text-center title text-xl text-primary-600">
@@ -107,16 +85,25 @@ defmodule CanneryWeb.Components.MovePackComponent do
           {dgettext("actions", "Add another container!")}
         </.link>
       <% else %>
-        <TableComponent.table
+        <.live_component
+          module={CanneryWeb.Components.TableComponent}
+          id="move-pack-table"
           columns={@columns}
           rows={@rows}
-          last_sort_key={@last_sort_key}
-          sort_mode={@sort_mode}
-          target={@myself}
         />
       <% end %>
     </div>
     """
+  end
+
+  @spec get_rows_for_containers([Container.t()], map(), [map()]) :: [map()]
+  defp get_rows_for_containers(containers, assigns, columns) do
+    containers
+    |> Enum.map(fn container ->
+      columns
+      |> Map.new(fn %{key: key} -> {key, get_row_value_by_key(key, container, assigns)} end)
+      |> Map.put(:row_id, "move-container-#{container.id}")
+    end)
   end
 
   @spec get_row_value_by_key(atom(), Container.t(), map()) :: any()

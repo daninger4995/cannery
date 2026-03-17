@@ -4,7 +4,6 @@ defmodule CanneryWeb.Components.ShotRecordTableComponent do
   """
   use CanneryWeb, :live_component
   alias Cannery.{Accounts.User, ActivityLog.ShotRecord, Ammo, ComparableDate}
-  alias CanneryWeb.Components.TableComponent
   alias Ecto.UUID
   alias Phoenix.LiveView.{Rendered, Socket}
 
@@ -30,14 +29,6 @@ defmodule CanneryWeb.Components.ShotRecordTableComponent do
     |> wrap(:ok)
   end
 
-  @impl true
-  def handle_event("sort_by", params, socket) do
-    socket
-    |> TableComponent.apply_sort(params)
-    |> display_shot_records()
-    |> wrap(:noreply)
-  end
-
   defp display_shot_records(
          %{
            assigns: %{
@@ -55,14 +46,6 @@ defmodule CanneryWeb.Components.ShotRecordTableComponent do
       %{label: gettext("Actions"), key: :actions, sortable: false}
     ]
 
-    {sort_key, sort_mode} =
-      TableComponent.init_sort(socket, columns, %{
-        initial_key: :date,
-        initial_sort_mode: :desc
-      })
-
-    type_for_sort = TableComponent.get_sort_type(columns, sort_key)
-
     packs =
       shot_records
       |> Enum.map(fn %{pack_id: pack_id} -> pack_id end)
@@ -77,14 +60,11 @@ defmodule CanneryWeb.Components.ShotRecordTableComponent do
         |> get_row_data_for_shot_record(columns, extra_data)
         |> Map.put(:row_id, "shot-record-#{shot_record.id}")
       end)
-      |> TableComponent.sort_rows(sort_key, sort_mode, type_for_sort)
 
     socket
     |> assign(
       columns: columns,
-      rows: rows,
-      last_sort_key: sort_key,
-      sort_mode: sort_mode
+      rows: rows
     )
   end
 
@@ -92,12 +72,13 @@ defmodule CanneryWeb.Components.ShotRecordTableComponent do
   def render(assigns) do
     ~H"""
     <div id={@id} class="w-full">
-      <TableComponent.table
+      <.live_component
+        module={CanneryWeb.Components.TableComponent}
+        id={"shot-record-table-#{@id}"}
         columns={@columns}
         rows={@rows}
-        last_sort_key={@last_sort_key}
-        sort_mode={@sort_mode}
-        target={@myself}
+        initial_key={:date}
+        initial_sort_mode={:desc}
       />
     </div>
     """

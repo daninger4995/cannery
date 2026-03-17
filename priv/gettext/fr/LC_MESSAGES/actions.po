@@ -166,12 +166,12 @@ msgstr "Pourquoi pas en préparer pour tirer ?"
 msgid "Record shots"
 msgstr "Enregistrer des tirs"
 
-#: lib/cannery_web/components/move_pack_component.ex:107
+#: lib/cannery_web/components/move_pack_component.ex:85
 #, elixir-autogen, elixir-format
 msgid "Add another container!"
 msgstr "Ajoutez un autre conteneur !"
 
-#: lib/cannery_web/components/move_pack_component.ex:135
+#: lib/cannery_web/components/move_pack_component.ex:122
 #, elixir-autogen, elixir-format
 msgid "Select"
 msgstr "Sélectionner"
@@ -206,7 +206,7 @@ msgstr "Changer la langue"
 msgid "View in Catalog"
 msgstr "Voir en catalogue"
 
-#: lib/cannery_web/components/move_pack_component.ex:97
+#: lib/cannery_web/components/move_pack_component.ex:75
 #: lib/cannery_web/live/pack_live/index.html.heex:134
 #: lib/cannery_web/live/pack_live/show.html.heex:81
 #, elixir-autogen, elixir-format
@@ -320,13 +320,13 @@ msgstr ""
 msgid "View pack of %{pack_count} bullets"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/show.ex:166
+#: lib/cannery_web/live/pack_live/show.ex:147
 #: lib/cannery_web/live/range_live/index.html.heex:189
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Delete shot record of %{shot_record_count} shots"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/show.ex:151
+#: lib/cannery_web/live/pack_live/show.ex:132
 #: lib/cannery_web/live/range_live/index.html.heex:172
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Edit shot record of %{shot_record_count} shots"

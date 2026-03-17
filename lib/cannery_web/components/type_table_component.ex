@@ -32,14 +32,6 @@ defmodule CanneryWeb.Components.TypeTableComponent do
     |> wrap(:ok)
   end
 
-  @impl true
-  def handle_event("sort_by", params, socket) do
-    socket
-    |> TableComponent.apply_sort(params)
-    |> display_types()
-    |> wrap(:noreply)
-  end
-
   defp display_types(
          %{
            assigns: %{
@@ -158,9 +150,6 @@ defmodule CanneryWeb.Components.TypeTableComponent do
       )
       |> TableComponent.maybe_compose_columns(%{label: gettext("Name"), key: :name, type: :name})
 
-    {sort_key, sort_mode} = TableComponent.init_sort(socket, columns, socket.assigns)
-    type_for_sort = TableComponent.get_sort_type(columns, sort_key)
-
     round_counts = Ammo.get_grouped_round_count(current_user, types: types, group_by: :type_id)
     packs_count = Ammo.get_grouped_packs_count(current_user, types: types, group_by: :type_id)
     average_costs = Ammo.get_average_costs(types, current_user)
@@ -204,21 +193,19 @@ defmodule CanneryWeb.Components.TypeTableComponent do
         |> get_type_values(columns, extra_data)
         |> Map.put(:row_id, "type-#{type.id}")
       end)
-      |> TableComponent.sort_rows(sort_key, sort_mode, type_for_sort)
 
-    socket |> assign(columns: columns, rows: rows, last_sort_key: sort_key, sort_mode: sort_mode)
+    socket |> assign(columns: columns, rows: rows)
   end
 
   @impl true
   def render(assigns) do
     ~H"""
     <div id={@id} class="w-full">
-      <TableComponent.table
+      <.live_component
+        module={TableComponent}
+        id={"type-table-#{@id}"}
         columns={@columns}
         rows={@rows}
-        last_sort_key={@last_sort_key}
-        sort_mode={@sort_mode}
-        target={@myself}
       />
     </div>
     """

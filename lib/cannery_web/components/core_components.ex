@@ -417,7 +417,7 @@ defmodule CanneryWeb.CoreComponents do
   def input(%{type: "select"} = assigns) do
     ~H"""
     <div class={@container_class}>
-      <.label for={@id} class={[@hidden_label && "sr-only", "pl-2"]}>{@label}</.label>
+      <.label for={@id} class={[@hidden_label && "sr-only", "block text-sm leading-6 text-zinc-900 dark:text-neutral-200"]}>{@label}</.label>
       <select
         id={@id}
         name={@name}

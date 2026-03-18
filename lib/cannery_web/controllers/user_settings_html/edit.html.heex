@@ -9,7 +9,7 @@
     :let={f}
     for={@email_changeset}
     action={~p"/users/settings"}
-    class="flex flex-col justify-center items-stretch space-y-4"
+    class="flex flex-col justify-center items-stretch pb-4 space-y-4"
   >
     <h3 class="text-lg text-center title text-primary-600 dark:text-white">
       {dgettext("actions", "Change email")}
@@ -55,7 +55,7 @@
     :let={f}
     for={@password_changeset}
     action={~p"/users/settings"}
-    class="flex flex-col justify-center items-stretch space-y-4"
+    class="flex flex-col justify-center items-stretch pb-4 space-y-4"
   >
     <h3 class="text-lg text-center title text-primary-600 dark:text-white">
       {dgettext("actions", "Change password")}
@@ -109,20 +109,18 @@
     :let={f}
     for={@locale_changeset}
     action={~p"/users/settings"}
-    class="flex flex-col justify-center items-stretch space-y-4"
+    class="flex flex-col justify-center items-stretch pb-4 space-y-4"
   >
-    <.input
-      type="hidden"
-      id="action-locale"
-      field={f[:action]}
-      name="action"
-      value="update_locale"
-    />
+    <h3 class="text-lg text-center title text-primary-600 dark:text-white">
+      {dgettext("actions", "Change language")}
+    </h3>
+
+    <input type="hidden" name="action" value="update_locale" />
 
     <.input
       field={f[:locale]}
       type="select"
-      label={dgettext("actions", "Change Language")}
+      label={gettext("Locale")}
       options={[
         {"English", "en_US"},
         {"Deutsch", "de"},

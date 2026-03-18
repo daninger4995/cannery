@@ -1,3 +1,7 @@
+# v0.9.20
+- Improve settings field margins even more
+- Fix locale field suggestions being too light in dark mode
+
 # v0.9.19
 - Fix Live Dashboard icon in topbar
 - Add light/dark mode switcher

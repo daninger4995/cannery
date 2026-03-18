@@ -284,3 +284,7 @@ input[type="color"]::-moz-color-swatch {
 .ss-content .ss-list .ss-option {
   border-radius: var(--ss-border-radius);
 }
+
+:is(.dark .ss-main, .dark .ss-content, .dark .ss-content .ss-search input[type="search"], .dark .ss-content .ss-list .ss-option) {
+  color: white;
+}

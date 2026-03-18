@@ -64,7 +64,7 @@ msgstr ""
 msgid "Are you sure you want to delete this ammo?"
 msgstr ""
 
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:156
+#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:157
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to delete your account?"
 msgstr ""
@@ -177,7 +177,7 @@ msgstr ""
 msgid "You'll need to"
 msgstr ""
 
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:138
+#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:139
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to change your language?"
 msgstr ""

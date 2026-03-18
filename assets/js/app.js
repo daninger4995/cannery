@@ -59,6 +59,12 @@ window.addEventListener('beforeunload', info => topbar.show())
 // connect if there are any LiveViews on the page
 liveSocket.connect()
 
+// Initialize slim-select on dead view elements
+import SSLib from 'slim-select'
+document.querySelectorAll('[data-slim-select]').forEach(el => {
+  new SSLib({ select: el, settings: { contentPosition: 'fixed' } })
+})
+
 // expose liveSocket on window for web console debug logs and latency simulation:
 // >> liveSocket.enableDebug()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session

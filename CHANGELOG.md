@@ -4,6 +4,7 @@
 - Fix tag color input fields
 - Fix settings fields on mobile
 - Fix flash message when changing locale
+- Use slim select for locale selection
 
 # v0.9.18
 - Add translation link to homepage whoops

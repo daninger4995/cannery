@@ -22,15 +22,7 @@ function getStoredTheme() {
 }
 
 function applyTheme(theme) {
-  if (theme === 'dark') {
-    document.documentElement.classList.add('dark')
-  } else {
-    document.documentElement.classList.remove('dark')
-  }
-  // Toggle icon visibility — show sun in dark mode, moon in light mode
-  document.querySelectorAll('[data-theme-icon]').forEach(el => {
-    el.style.display = el.dataset.themeIcon === theme ? '' : 'none'
-  })
+  document.documentElement.classList.toggle('dark', theme === 'dark')
 }
 
 // Apply theme immediately to prevent flash

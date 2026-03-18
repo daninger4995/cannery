@@ -69,11 +69,11 @@
             id="theme-toggle"
             phx-hook=".ThemeToggle"
             type="button"
-            class="flex items-center text-white cursor-pointer transition-all duration-300 ease-in-out"
+            class="flex items-center justify-center w-5 h-5 text-white cursor-pointer transition-all duration-300 ease-in-out"
             aria-label={gettext("Toggle dark mode")}
           >
-            <.icon name="sun" data-theme-icon="dark" class="size-6" style="display:none" />
-            <.icon name="moon" data-theme-icon="light" class="size-6" style="display:none" />
+            <.icon name="sun" class="size-6 inline dark:hidden" />
+            <.icon name="moon" class="size-6 hidden dark:inline" />
           </button>
         </li>
         <script :type={ColocatedHook} name=".ThemeToggle">
@@ -82,24 +82,12 @@
               (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
           }
 
-          function applyThemeIcons(theme) {
-            document.querySelectorAll('[data-theme-icon]').forEach(el => {
-              el.style.display = el.dataset.themeIcon === theme ? '' : 'none'
-            })
-          }
-
           export default {
             mounted() {
-              applyThemeIcons(getStoredTheme())
               this.el.addEventListener('click', () => {
                 const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark'
                 localStorage.setItem('theme', next)
-                if (next === 'dark') {
-                  document.documentElement.classList.add('dark')
-                } else {
-                  document.documentElement.classList.remove('dark')
-                }
-                applyThemeIcons(next)
+                document.documentElement.classList.toggle('dark', next === 'dark')
               })
             }
           }

@@ -1147,12 +1147,12 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: lib/cannery_web/components/core_components/topbar.html.heex:125
+#: lib/cannery_web/components/core_components/topbar.html.heex:113
 #, elixir-autogen, elixir-format
 msgid "Live Dashboard"
 msgstr ""
 
-#: lib/cannery_web/components/core_components/topbar.html.heex:113
+#: lib/cannery_web/components/core_components/topbar.html.heex:101
 #, elixir-autogen, elixir-format
 msgid "Log out"
 msgstr ""

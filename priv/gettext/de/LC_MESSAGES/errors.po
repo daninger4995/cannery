@@ -39,7 +39,7 @@ msgstr "Konnte %{name} nicht löschen: %{error}"
 msgid "Could not find that container"
 msgstr "Konnte Behälter nicht finden"
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:83
+#: lib/cannery_web/controllers/user_settings_controller.ex:85
 #, elixir-autogen, elixir-format
 msgid "Email change link is invalid or it has expired."
 msgstr "Mailadressenänderungs-Link ist ungültig oder abgelaufen."
@@ -92,7 +92,7 @@ msgid "Sorry, this invite was not found or expired"
 msgstr ""
 "Entschuldigung, aber diese Einladung wurde nicht gefunden oder ist abgelaufen"
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:98
+#: lib/cannery_web/controllers/user_settings_controller.ex:100
 #, elixir-autogen, elixir-format
 msgid "Unable to delete user"
 msgstr "Dieser Nutzer konnte nicht gelöscht werden"

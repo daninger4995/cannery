@@ -89,7 +89,7 @@ msgstr "Sind Sie sicher, dass sie Ihren Account löschen möchten?"
 msgid "Are you sure you want to log out?"
 msgstr "Wirklich ausloggen?"
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:76
+#: lib/cannery_web/controllers/user_settings_controller.ex:78
 #, elixir-autogen, elixir-format
 msgid "Email changed successfully."
 msgstr "Mailadresse erfolgreich geändert."
@@ -128,7 +128,7 @@ msgstr "Passwort erfolgreich geändert."
 msgid "Please check your email to verify your account"
 msgstr "Bitte überprüfen Sie ihre Mailbox und bestätigen Sie das Nutzerkonto"
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:94
+#: lib/cannery_web/controllers/user_settings_controller.ex:96
 #, elixir-autogen, elixir-format
 msgid "Your account has been deleted"
 msgstr "Ihr Nutzerkonto wurde gelöscht"
@@ -203,7 +203,7 @@ msgstr "Sie müssen"
 msgid "Are you sure you want to change your language?"
 msgstr "Möchten Sie die Sprache wechseln?"
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:64
+#: lib/cannery_web/controllers/user_settings_controller.ex:66
 #, elixir-autogen, elixir-format
 msgid "Language updated successfully."
 msgstr "Spracheinstellung gespeichert."

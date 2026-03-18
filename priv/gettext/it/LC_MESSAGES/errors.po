@@ -37,7 +37,7 @@ msgstr ""
 msgid "Could not find that container"
 msgstr ""
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:83
+#: lib/cannery_web/controllers/user_settings_controller.ex:85
 #, elixir-autogen, elixir-format
 msgid "Email change link is invalid or it has expired."
 msgstr ""
@@ -89,7 +89,7 @@ msgstr ""
 msgid "Sorry, this invite was not found or expired"
 msgstr ""
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:98
+#: lib/cannery_web/controllers/user_settings_controller.ex:100
 #, elixir-autogen, elixir-format
 msgid "Unable to delete user"
 msgstr ""

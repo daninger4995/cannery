@@ -29,7 +29,7 @@
       type="email"
       label={gettext("Email")}
       required
-      class="mx-2 my-1 input input-primary"
+      class="input input-primary"
     />
 
     <.input
@@ -37,7 +37,7 @@
       type="password"
       label={gettext("Current password")}
       id="current_password_for_email"
-      class="mx-2 my-1 input input-primary"
+      class="input input-primary"
       required
       name="current_password"
     />
@@ -75,7 +75,7 @@
       type="password"
       label={gettext("New password")}
       required
-      class="mx-2 my-1 input input-primary"
+      class="input input-primary"
     />
 
     <.input
@@ -83,7 +83,7 @@
       type="password"
       label={gettext("Confirm new password")}
       required
-      class="mx-2 my-1 input input-primary"
+      class="input input-primary"
     />
 
     <.input
@@ -91,7 +91,7 @@
       type="password"
       label={gettext("Current password")}
       id="current_password_for_password"
-      class="mx-2 my-1 input input-primary"
+      class="input input-primary"
       required
       name="current_password"
     />
@@ -123,13 +123,13 @@
         {"Français", "fr"},
         {"Español", "es"}
       ]}
-      class="my-1 min-w-20 input input-primary"
+      class="w-full input input-primary"
     />
 
     <:actions>
       <.button
-        class="whitespace-nowrap mx-auto btn btn-primary"
-        data-qa={dgettext("prompts", "Are you sure you want to change your language?")}
+        class="mx-auto btn btn-primary"
+        data-confirm={dgettext("prompts", "Are you sure you want to change your language?")}
       >
         {dgettext("actions", "Change language")}
       </.button>

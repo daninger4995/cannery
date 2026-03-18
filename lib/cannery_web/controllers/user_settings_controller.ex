@@ -60,6 +60,8 @@ defmodule CanneryWeb.UserSettingsController do
       ) do
     case Accounts.update_user_locale(user, locale) do
       {:ok, _user} ->
+        Gettext.put_locale(locale)
+
         conn
         |> put_flash(:info, dgettext("prompts", "Language updated successfully."))
         |> redirect(to: ~p"/users/settings")

@@ -39,7 +39,7 @@ msgstr "Impossible de supprimer %{name} : %{error}"
 msgid "Could not find that container"
 msgstr "Impossible de trouver ce conteneur"
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:83
+#: lib/cannery_web/controllers/user_settings_controller.ex:85
 #, elixir-autogen, elixir-format
 msgid "Email change link is invalid or it has expired."
 msgstr "Le lien de changement de mél est invalide ou a expiré."
@@ -93,7 +93,7 @@ msgstr "Désolé, l’enregistrement public est désactivé"
 msgid "Sorry, this invite was not found or expired"
 msgstr "Désolé, cette invitation n’est pas trouvée ou est expirée"
 
-#: lib/cannery_web/controllers/user_settings_controller.ex:98
+#: lib/cannery_web/controllers/user_settings_controller.ex:100
 #, elixir-autogen, elixir-format
 msgid "Unable to delete user"
 msgstr "Impossible de supprimer l’utilisateur·ice"

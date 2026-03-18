@@ -111,7 +111,13 @@
     action={~p"/users/settings"}
     class="flex flex-col justify-center items-stretch space-y-4"
   >
-    <input type="hidden" name="action" value="update_locale" />
+    <.input
+      type="hidden"
+      id="action-locale"
+      field={f[:action]}
+      name="action"
+      value="update_locale"
+    />
 
     <.input
       field={f[:locale]}

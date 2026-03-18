@@ -62,7 +62,7 @@ msgstr "Passwort ändern"
 msgid "Create Invite"
 msgstr "Einladung erstellen"
 
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:152
+#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:158
 #, elixir-autogen, elixir-format
 msgid "Delete User"
 msgstr "Benutzer löschen"
@@ -191,12 +191,12 @@ msgstr "Zuerst einen Behälter hinzufügen"
 msgid "Create"
 msgstr "Erstellen"
 
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:119
+#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:125
 #, elixir-autogen, elixir-format
 msgid "Change Language"
 msgstr "Sprache wechseln"
 
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:134
+#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:140
 #, elixir-autogen, elixir-format
 msgid "Change language"
 msgstr "Sprache wechseln"
@@ -228,7 +228,7 @@ msgstr ""
 msgid "Unstage from range"
 msgstr ""
 
-#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:143
+#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:149
 #, elixir-autogen, elixir-format
 msgid "Export Data as JSON"
 msgstr ""

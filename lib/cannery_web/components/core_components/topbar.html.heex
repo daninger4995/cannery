@@ -51,6 +51,9 @@
             {gettext("Range")}
           </.link>
         </li>
+        <li class="mx-2 my-1 self-stretch flex items-center" aria-hidden="true">
+          <span class="block w-px h-6 bg-white/50"></span>
+        </li>
         <li :if={@current_user |> Accounts.already_admin?()} class="mx-2 my-1">
           <.link navigate={~p"/invites"} class="text-white hover:underline">
             {gettext("Invites")}
@@ -61,37 +64,50 @@
             {@current_user.email}
           </.link>
         </li>
-        <li class="mx-2 my-1 self-stretch flex items-center" aria-hidden="true">
-          <span class="block w-px h-6 bg-white/50"></span>
+      <% else %>
+        <li :if={Accounts.allow_registration?()} class="mx-2 my-1">
+          <.link href={~p"/users/register"} class="text-white hover:underline truncate">
+            {dgettext("actions", "Register")}
+          </.link>
         </li>
-        <li class="mx-2 my-1" id="theme-toggle-wrapper" phx-update="ignore">
-          <button
-            id="theme-toggle"
-            phx-hook=".ThemeToggle"
-            type="button"
-            class="flex items-center justify-center w-5 h-5 text-white cursor-pointer transition-all duration-300 ease-in-out"
-            aria-label={gettext("Toggle dark mode")}
-          >
-            <.icon name="sun" class="size-6 inline dark:hidden" />
-            <.icon name="moon" class="size-6 hidden dark:inline" />
-          </button>
+        <li class="mx-2 my-1">
+          <.link href={~p"/users/log_in"} class="text-white hover:underline truncate">
+            {dgettext("actions", "Log in")}
+          </.link>
         </li>
-        <script :type={ColocatedHook} name=".ThemeToggle">
-          function getStoredTheme() {
-            return localStorage.getItem('theme') ||
-              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-          }
+      <% end %>
+      <li class="mx-2 my-1 self-stretch flex items-center" aria-hidden="true">
+        <span class="block w-px h-6 bg-white/50"></span>
+      </li>
+      <li class="mx-2 my-1" id="theme-toggle-wrapper" phx-update="ignore">
+        <button
+          id="theme-toggle"
+          phx-hook=".ThemeToggle"
+          type="button"
+          class="flex items-center justify-center w-5 h-5 text-white cursor-pointer transition-all duration-300 ease-in-out"
+          aria-label={gettext("Toggle dark mode")}
+        >
+          <.icon name="sun" class="size-6 inline dark:hidden" />
+          <.icon name="moon" class="size-6 hidden dark:inline" />
+        </button>
+      </li>
+      <script :type={ColocatedHook} name=".ThemeToggle">
+        function getStoredTheme() {
+          return localStorage.getItem('theme') ||
+            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        }
 
-          export default {
-            mounted() {
-              this.el.addEventListener('click', () => {
-                const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark'
-                localStorage.setItem('theme', next)
-                document.documentElement.classList.toggle('dark', next === 'dark')
-              })
-            }
+        export default {
+          mounted() {
+            this.el.addEventListener('click', () => {
+              const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark'
+              localStorage.setItem('theme', next)
+              document.documentElement.classList.toggle('dark', next === 'dark')
+            })
           }
-        </script>
+        }
+      </script>
+      <%= if @current_user do %>
         <li class="mx-2 my-1">
           <.link
             href={~p"/users/log_out"}
@@ -113,17 +129,6 @@
             aria-label={gettext("Live Dashboard")}
           >
             <.icon name="cpu-chip" class="size-6" />
-          </.link>
-        </li>
-      <% else %>
-        <li :if={Accounts.allow_registration?()} class="mx-2 my-1">
-          <.link href={~p"/users/register"} class="text-white hover:underline truncate">
-            {dgettext("actions", "Register")}
-          </.link>
-        </li>
-        <li class="mx-2 my-1">
-          <.link href={~p"/users/log_in"} class="text-white hover:underline truncate">
-            {dgettext("actions", "Log in")}
           </.link>
         </li>
       <% end %>

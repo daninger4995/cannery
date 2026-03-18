@@ -80,7 +80,7 @@ msgstr ""
 msgid "Are you sure you want to delete your account?"
 msgstr ""
 
-#: lib/cannery_web/components/core_components/topbar.html.heex:100
+#: lib/cannery_web/components/core_components/topbar.html.heex:116
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to log out?"
 msgstr ""

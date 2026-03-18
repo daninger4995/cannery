@@ -1120,7 +1120,7 @@ msgid "Really great weather"
 msgstr ""
 
 #: lib/cannery_web/components/container_table_component.ex:73
-#: lib/cannery_web/components/core_components.ex:621
+#: lib/cannery_web/components/core_components.ex:629
 #: lib/cannery_web/components/move_pack_component.ex:65
 #: lib/cannery_web/components/pack_table_component.ex:60
 #: lib/cannery_web/components/shot_record_table_component.ex:46
@@ -1436,7 +1436,7 @@ msgstr ""
 msgid "Attempting to reconnect"
 msgstr ""
 
-#: lib/cannery_web/components/core_components.ex:867
+#: lib/cannery_web/components/core_components.ex:875
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Copied!"
 msgstr ""
@@ -1446,7 +1446,7 @@ msgstr ""
 msgid "Error!"
 msgstr ""
 
-#: lib/cannery_web/components/core_components.ex:873
+#: lib/cannery_web/components/core_components.ex:881
 #, elixir-autogen, elixir-format
 msgid "Failed!"
 msgstr ""
@@ -1490,4 +1490,9 @@ msgstr ""
 #: lib/cannery_web/components/core_components/topbar.html.heex:88
 #, elixir-autogen, elixir-format
 msgid "Toggle dark mode"
+msgstr ""
+
+#: lib/cannery_web/controllers/user_settings_html/edit.html.heex:123
+#, elixir-autogen, elixir-format
+msgid "Locale"
 msgstr ""

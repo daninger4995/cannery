@@ -5,7 +5,7 @@
     </h1>
 
     <%= if @containers |> Enum.empty?() and @search |> is_nil() do %>
-      <h2 class="text-xl title text-primary-600">
+      <h2 class="text-xl title text-primary-600 dark:text-white">
         {gettext("No containers")}
         {display_emoji("😔")}
       </h2>
@@ -40,14 +40,14 @@
         </.form>
 
         <.toggle_button action="toggle_table" value={@view_table}>
-          <span class="text-lg title text-primary-600">
+          <span class="text-lg title text-primary-600 dark:text-white">
             {gettext("View as table")}
           </span>
         </.toggle_button>
       </div>
 
       <%= if @containers |> Enum.empty?() do %>
-        <h2 class="text-xl title text-primary-600">
+        <h2 class="text-xl title text-primary-600 dark:text-white">
           {gettext("No containers")}
           {display_emoji("😔")}
         </h2>
@@ -82,7 +82,7 @@
           <div class="mx-4 my-2">
             <.link
               patch={~p"/containers/edit_tags/#{container}"}
-              class="text-primary-600 link"
+              class="text-primary-600 dark:text-white link"
               aria-label={
                 dgettext("actions", "Tag %{container_name}", container_name: container.name)
               }
@@ -94,7 +94,7 @@
         <:actions :let={container}>
           <.link
             patch={~p"/containers/edit/#{container}"}
-            class="text-primary-600 link"
+            class="text-primary-600 dark:text-white link"
             aria-label={
               dgettext("actions", "Edit %{container_name}", container_name: container.name)
             }
@@ -104,7 +104,7 @@
 
           <.link
             patch={~p"/containers/clone/#{container}"}
-            class="text-primary-600 link"
+            class="text-primary-600 dark:text-white link"
             aria-label={
               dgettext("actions", "Clone %{container_name}", container_name: container.name)
             }
@@ -114,7 +114,7 @@
 
           <.link
             href="#"
-            class="text-primary-600 link"
+            class="text-primary-600 dark:text-white link"
             phx-click="delete"
             phx-value-id={container.id}
             data-confirm={
@@ -141,7 +141,7 @@
             <div class="mx-4 my-2">
               <.link
                 patch={~p"/containers/edit_tags/#{container}"}
-                class="text-primary-600 link"
+                class="text-primary-600 dark:text-white link"
                 aria-label={
                   dgettext("actions", "Tag %{container_name}", container_name: container.name)
                 }
@@ -152,7 +152,7 @@
           </:tag_actions>
           <.link
             patch={~p"/containers/edit/#{container}"}
-            class="text-primary-600 link"
+            class="text-primary-600 dark:text-white link"
             aria-label={
               dgettext("actions", "Edit %{container_name}", container_name: container.name)
             }
@@ -162,7 +162,7 @@
 
           <.link
             patch={~p"/containers/clone/#{container}"}
-            class="text-primary-600 link"
+            class="text-primary-600 dark:text-white link"
             aria-label={
               dgettext("actions", "Clone %{container_name}", container_name: container.name)
             }
@@ -172,7 +172,7 @@
 
           <.link
             href="#"
-            class="text-primary-600 link"
+            class="text-primary-600 dark:text-white link"
             phx-click="delete"
             phx-value-id={container.id}
             data-confirm={

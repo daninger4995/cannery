@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" class="p-0 m-0 w-full h-full bg-white">
+<html
+  lang="en"
+  class="p-0 m-0 w-full h-full bg-white dark:bg-neutral-800 transition-[background-color] duration-500 ease-in-out"
+>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,11 +12,19 @@
       {assigns[:page_title] || gettext("Cannery")}
     </.live_title>
     <link phx-track-static rel="stylesheet" href={~p"/assets/style.css"} />
+    <script>
+      (function() {
+        var t = localStorage.getItem('theme') ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        if (t === 'dark') document.documentElement.classList.add('dark');
+        window.__theme = t;
+      })();
+    </script>
     <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
     </script>
   </head>
 
-  <body class="p-0 m-0 w-full h-full subpixel-antialiased">
+  <body class="p-0 m-0 w-full h-full subpixel-antialiased dark:text-white transition-[background-color,color] duration-500 ease-in-out">
     {@inner_content}
   </body>
 </html>

@@ -4,7 +4,7 @@
   </h1>
 
   <%= if @invites |> Enum.empty?() do %>
-    <h1 class="text-xl title text-primary-600 self-center">
+    <h1 class="text-xl title text-primary-600 dark:text-white self-center">
       {gettext("No invites")}
       {display_emoji("😔")}
     </h1>
@@ -41,7 +41,7 @@
       </:code_actions>
       <.link
         patch={~p"/invites/edit/#{invite}"}
-        class="text-primary-600 link"
+        class="text-primary-600 dark:text-white link"
         aria-label={
           dgettext("actions", "Edit invite for %{invite_name}", invite_name: invite.name)
         }
@@ -51,7 +51,7 @@
 
       <.link
         href="#"
-        class="text-primary-600 link"
+        class="text-primary-600 dark:text-white link"
         phx-click="delete_invite"
         phx-value-id={invite.id}
         data-confirm={
@@ -95,7 +95,7 @@
   <%= unless @admins |> Enum.empty?() do %>
     <hr class="hr" />
 
-    <h1 class="text-2xl title text-primary-600 self-center">
+    <h1 class="text-2xl title text-primary-600 dark:text-white self-center">
       {gettext("Admins")}
     </h1>
 
@@ -103,7 +103,7 @@
       <.user_card :for={admin <- @admins} user={admin}>
         <.link
           href="#"
-          class="text-primary-600 link"
+          class="text-primary-600 dark:text-white link"
           phx-click="delete_user"
           phx-value-id={admin.id}
           data-confirm={
@@ -123,7 +123,7 @@
   <%= unless @users |> Enum.empty?() do %>
     <hr class="hr" />
 
-    <h1 class="text-2xl title text-primary-600 self-center">
+    <h1 class="text-2xl title text-primary-600 dark:text-white self-center">
       {gettext("Users")}
     </h1>
 
@@ -132,7 +132,7 @@
         <div class="flex justify-center items-center space-x-2">
           <.link
             :if={!user.confirmed_at}
-            class="text-primary-600 link"
+            class="text-primary-600 dark:text-white link"
             href="#"
             phx-click="resend_email_verification"
             phx-value-id={user.id}
@@ -140,7 +140,7 @@
             <.icon name="paper-airplane" class="size-6" />
           </.link>
           <.link
-            class="text-primary-600 link"
+            class="text-primary-600 dark:text-white link"
             data-confirm={
               dgettext(
                 "prompts",

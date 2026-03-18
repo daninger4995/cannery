@@ -11,10 +11,10 @@
       {@type.desc}
     </span>
 
-    <div class="flex justify-center items-center space-x-4 text-primary-600">
+    <div class="flex justify-center items-center space-x-4 text-primary-600 dark:text-white">
       <.link
         patch={~p"/type/#{@type}/edit"}
-        class="text-primary-600 link"
+        class="text-primary-600 dark:text-white link"
         aria-label={dgettext("actions", "Edit %{type_name}", type_name: @type.name)}
       >
         <.icon name="pencil-square" class="size-6" />
@@ -22,7 +22,7 @@
 
       <.link
         href="#"
-        class="text-primary-600 link"
+        class="text-primary-600 dark:text-white link"
         phx-click="delete"
         data-confirm={
           dgettext(
@@ -45,7 +45,7 @@
           {gettext("Class")}
         </h3>
 
-        <span class="text-primary-600">
+        <span class="text-primary-600 dark:text-white">
           <%= case @type.class do %>
             <% :shotgun -> %>
               {gettext("Shotgun")}
@@ -64,7 +64,7 @@
               {label}
             </h3>
 
-            <span class="text-primary-600">
+            <span class="text-primary-600 dark:text-white">
               <%= case type do %>
                 <% :boolean -> %>
                   {@type |> Map.get(key) |> Naming.humanize()}
@@ -84,7 +84,7 @@
         {gettext("Rounds:")}
       </h3>
 
-      <span class="text-primary-600">
+      <span class="text-primary-600 dark:text-white">
         {@rounds}
       </span>
 
@@ -93,7 +93,7 @@
           {gettext("Used rounds:")}
         </h3>
 
-        <span class="text-primary-600">
+        <span class="text-primary-600 dark:text-white">
           {@used_rounds}
         </span>
 
@@ -101,7 +101,7 @@
           {gettext("Total ever rounds:")}
         </h3>
 
-        <span class="text-primary-600">
+        <span class="text-primary-600 dark:text-white">
           {@historical_round_count}
         </span>
       <% end %>
@@ -110,7 +110,7 @@
         {gettext("Packs:")}
       </h3>
 
-      <span class="text-primary-600">
+      <span class="text-primary-600 dark:text-white">
         {@packs_count}
       </span>
 
@@ -119,7 +119,7 @@
           {gettext("Used packs:")}
         </h3>
 
-        <span class="text-primary-600">
+        <span class="text-primary-600 dark:text-white">
           {@used_packs_count}
         </span>
 
@@ -127,7 +127,7 @@
           {gettext("Total ever packs:")}
         </h3>
 
-        <span class="text-primary-600">
+        <span class="text-primary-600 dark:text-white">
           {@historical_packs_count}
         </span>
       <% end %>
@@ -136,7 +136,7 @@
         {gettext("Added on:")}
       </h3>
 
-      <span class="text-primary-600">
+      <span class="text-primary-600 dark:text-white">
         <.datetime id={"#{@type.id}-inserted-at"} datetime={@type.inserted_at} />
       </span>
 
@@ -145,11 +145,11 @@
           {gettext("Average CPR")}:
         </h3>
 
-        <span class="text-primary-600">
+        <span class="text-primary-600 dark:text-white">
           {gettext("$%{amount}", amount: display_currency(@avg_cost_per_round))}
         </span>
       <% else %>
-        <h3 class="col-span-2 mx-8 my-4 text-lg title text-primary-600">
+        <h3 class="col-span-2 mx-8 my-4 text-lg title text-primary-600 dark:text-white">
           {gettext("No cost information")}
         </h3>
       <% end %>
@@ -159,13 +159,13 @@
 
     <div class="flex justify-center items-center space-x-4">
       <.toggle_button action="toggle_show_used" value={@show_used}>
-        <span class="text-lg title text-primary-600">
+        <span class="text-lg title text-primary-600 dark:text-white">
           {gettext("Show used")}
         </span>
       </.toggle_button>
 
       <.toggle_button action="toggle_table" value={@view_table}>
-        <span class="text-lg title text-primary-600">
+        <span class="text-lg title text-primary-600 dark:text-white">
           {gettext("View as table")}
         </span>
       </.toggle_button>
@@ -173,7 +173,7 @@
   </div>
 
   <%= if @packs |> Enum.empty?() do %>
-    <h2 class="px-4 text-lg text-center title text-primary-600">
+    <h2 class="px-4 text-lg text-center title text-primary-600 dark:text-white">
       {gettext("No ammo for this type")}
       {display_emoji("😔")}
     </h2>
@@ -195,7 +195,7 @@
           <div class="flex justify-center items-center px-4 py-2 space-x-4 h-full">
             <.link
               navigate={~p"/ammo/show/#{pack}"}
-              class="text-primary-600 link"
+              class="text-primary-600 dark:text-white link"
               aria-label={
                 dgettext("actions", "View pack of %{pack_count} bullets", pack_count: pack_count)
               }

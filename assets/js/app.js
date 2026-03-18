@@ -15,6 +15,27 @@
 //     import "some-package"
 //
 
+// Theme toggle (light/dark mode)
+function getStoredTheme() {
+  return localStorage.getItem('theme') ||
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+}
+
+function applyTheme(theme) {
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+  // Toggle icon visibility — show sun in dark mode, moon in light mode
+  document.querySelectorAll('[data-theme-icon]').forEach(el => {
+    el.style.display = el.dataset.themeIcon === theme ? '' : 'none'
+  })
+}
+
+// Apply theme immediately to prevent flash
+applyTheme(getStoredTheme())
+
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
 import 'phoenix_html'
 // Establish Phoenix Socket and LiveView configuration.
@@ -25,17 +46,21 @@ import DateTime from './datetime'
 import ShotLogChart from './shot_log_chart'
 import SlimSelect from './slim_select'
 import topbar from 'topbar'
+import { hooks as colocatedHooks } from 'phoenix-colocated/cannery'
 
 const csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute('content')
 const liveSocket = new LiveSocket('/live', Socket, {
   params: { _csrf_token: csrfToken },
-  hooks: { Date, DateTime, ShotLogChart, SlimSelect }
+  hooks: { Date, DateTime, ShotLogChart, SlimSelect, ...colocatedHooks }
 })
 
 // Show progress bar on live navigation and form submits
 topbar.config({ barColors: { 0: '#29d' }, shadowColor: 'rgba(0, 0, 0, .3)' })
 window.addEventListener('phx:page-loading-start', info => topbar.show())
-window.addEventListener('phx:page-loading-stop', info => topbar.hide())
+window.addEventListener('phx:page-loading-stop', info => {
+  topbar.hide()
+  applyTheme(getStoredTheme())
+})
 window.addEventListener('submit', info => topbar.show())
 window.addEventListener('beforeunload', info => topbar.show())
 

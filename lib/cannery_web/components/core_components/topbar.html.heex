@@ -1,4 +1,7 @@
-<nav role="navigation" class="mb-8 px-8 py-4 w-full bg-primary-500">
+<nav
+  role="navigation"
+  class="mb-8 px-8 py-4 w-full bg-primary-500 dark:bg-surface-dark transition-[background-color] duration-500 ease-in-out"
+>
   <div class="flex flex-col sm:flex-row justify-between items-center">
     <div class="mb-4 sm:mb-0 sm:mr-8 flex flex-row justify-start items-center space-x-2">
       <.link navigate={~p"/"} class="inline mx-2 my-1 leading-5 text-xl text-white">
@@ -58,6 +61,49 @@
             {@current_user.email}
           </.link>
         </li>
+        <li class="mx-2 my-1 self-stretch flex items-center" aria-hidden="true">
+          <span class="block w-px h-6 bg-white/50"></span>
+        </li>
+        <li class="mx-2 my-1" id="theme-toggle-wrapper" phx-update="ignore">
+          <button
+            id="theme-toggle"
+            phx-hook=".ThemeToggle"
+            type="button"
+            class="flex items-center text-white cursor-pointer transition-all duration-300 ease-in-out"
+            aria-label={gettext("Toggle dark mode")}
+          >
+            <.icon name="sun" data-theme-icon="dark" class="size-6" style="display:none" />
+            <.icon name="moon" data-theme-icon="light" class="size-6" style="display:none" />
+          </button>
+        </li>
+        <script :type={ColocatedHook} name=".ThemeToggle">
+          function getStoredTheme() {
+            return localStorage.getItem('theme') ||
+              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+          }
+
+          function applyThemeIcons(theme) {
+            document.querySelectorAll('[data-theme-icon]').forEach(el => {
+              el.style.display = el.dataset.themeIcon === theme ? '' : 'none'
+            })
+          }
+
+          export default {
+            mounted() {
+              applyThemeIcons(getStoredTheme())
+              this.el.addEventListener('click', () => {
+                const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark'
+                localStorage.setItem('theme', next)
+                if (next === 'dark') {
+                  document.documentElement.classList.add('dark')
+                } else {
+                  document.documentElement.classList.remove('dark')
+                }
+                applyThemeIcons(next)
+              })
+            }
+          }
+        </script>
         <li class="mx-2 my-1">
           <.link
             href={~p"/users/log_out"}

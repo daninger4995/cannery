@@ -73,8 +73,12 @@ defmodule CanneryWeb.Components.TableComponent do
       last_sort_key: sort_key,
       sort_mode: sort_mode
     )
-    |> assign_new(:row_class, fn -> "bg-white" end)
-    |> assign_new(:alternate_row_class, fn -> "bg-zinc-200" end)
+    |> assign_new(:row_class, fn ->
+      "bg-white dark:bg-surface-dark transition-[background-color] duration-500 ease-in-out"
+    end)
+    |> assign_new(:alternate_row_class, fn ->
+      "bg-zinc-200 dark:bg-neutral-600 transition-[background-color] duration-500 ease-in-out"
+    end)
     |> wrap(:ok)
   end
 

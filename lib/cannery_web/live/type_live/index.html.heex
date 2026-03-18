@@ -5,7 +5,7 @@
     </h1>
 
     <%= if @types_count == 0 do %>
-      <h2 class="text-xl title text-primary-600">
+      <h2 class="text-xl title text-primary-600 dark:text-white">
         {gettext("No Types")}
         {display_emoji("😔")}
       </h2>
@@ -18,7 +18,7 @@
         {dgettext("actions", "New Type")}
       </.link>
 
-      <div class="flex flex-col flex-wrap justify-center items-end space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
+      <div class="flex flex-col flex-wrap justify-center items-center space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
         <.form
           :let={f}
           for={%{}}
@@ -31,6 +31,7 @@
             field={f[:class]}
             type="select"
             label={gettext("Class")}
+            hidden_label={true}
             options={[
               {gettext("All"), :all},
               {gettext("Rifle"), :rifle},
@@ -62,17 +63,15 @@
           />
         </.form>
 
-        <div class="pb-1">
-          <.toggle_button action="toggle_show_used" value={@show_used}>
-            <span class="text-lg title text-primary-600">
-              {gettext("Show used")}
-            </span>
-          </.toggle_button>
-        </div>
+        <.toggle_button action="toggle_show_used" value={@show_used}>
+          <span class="text-lg title text-primary-600 dark:text-white">
+            {gettext("Show used")}
+          </span>
+        </.toggle_button>
       </div>
 
       <%= if @types |> Enum.empty?() do %>
-        <h2 class="text-xl title text-primary-600">
+        <h2 class="text-xl title text-primary-600 dark:text-white">
           {gettext("No Types")}
           {display_emoji("😔")}
         </h2>
@@ -94,7 +93,7 @@
         <div class="flex justify-center items-center px-4 py-2 space-x-4">
           <.link
             navigate={~p"/type/#{type}"}
-            class="text-primary-600 link"
+            class="text-primary-600 dark:text-white link"
             aria-label={dgettext("actions", "View %{type_name}", type_name: type.name)}
           >
             <.icon name="eye" class="size-6" />
@@ -102,7 +101,7 @@
 
           <.link
             patch={~p"/catalog/edit/#{type}"}
-            class="text-primary-600 link"
+            class="text-primary-600 dark:text-white link"
             aria-label={dgettext("actions", "Edit %{type_name}", type_name: type.name)}
           >
             <.icon name="pencil-square" class="size-6" />
@@ -110,7 +109,7 @@
 
           <.link
             patch={~p"/catalog/clone/#{type}"}
-            class="text-primary-600 link"
+            class="text-primary-600 dark:text-white link"
             aria-label={dgettext("actions", "Clone %{type_name}", type_name: type.name)}
           >
             <.icon name="document-duplicate" class="size-6" />
@@ -118,7 +117,7 @@
 
           <.link
             href="#"
-            class="text-primary-600 link"
+            class="text-primary-600 dark:text-white link"
             phx-click="delete"
             phx-value-id={type.id}
             data-confirm={

@@ -24,7 +24,7 @@ defmodule CanneryWeb.HTMLHelpers do
     img_data =
       content
       |> EQRCode.encode()
-      |> EQRCode.png(width: width)
+      |> EQRCode.png(width: width, background_color: :transparent)
       |> Base.encode64()
 
     "data:image/png;base64," <> img_data

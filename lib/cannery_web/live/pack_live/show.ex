@@ -127,7 +127,7 @@ defmodule CanneryWeb.PackLive.Show do
             <div class="flex justify-center items-center px-4 py-2 space-x-4">
               <.link
                 patch={~p"/ammo/show/#{@pack}/edit/#{@shot_record}"}
-                class="text-primary-600 link"
+                class="text-primary-600 dark:text-white link"
                 aria-label={
                   dgettext("actions", "Edit shot record of %{shot_record_count} shots",
                     shot_record_count: @shot_record.count
@@ -139,7 +139,7 @@ defmodule CanneryWeb.PackLive.Show do
 
               <.link
                 href="#"
-                class="text-primary-600 link"
+                class="text-primary-600 dark:text-white link"
                 phx-click="delete_shot_record"
                 phx-value-id={@shot_record.id}
                 data-confirm={dgettext("prompts", "Are you sure you want to delete this shot record?")}

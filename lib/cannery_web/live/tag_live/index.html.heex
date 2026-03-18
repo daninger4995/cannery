@@ -3,11 +3,11 @@
     <h1 class="text-2xl title title-primary-500">
       {gettext("Tags")}
     </h1>
-    <p class="title text-md text-primary-600">
+    <p class="title text-md text-primary-600 dark:text-white">
       {gettext("Tags can be added to your containers to help you organize")}
     </p>
     <%= if @tags |> Enum.empty?() and @search |> is_nil() do %>
-      <h2 class="text-xl title text-primary-600">
+      <h2 class="text-xl title text-primary-600 dark:text-white">
         {gettext("No tags")}
         {display_emoji("😔")}
       </h2>
@@ -43,7 +43,7 @@
       </div>
 
       <%= if @tags |> Enum.empty?() do %>
-        <h2 class="text-xl title text-primary-600">
+        <h2 class="text-xl title text-primary-600 dark:text-white">
           {gettext("No tags")}
           {display_emoji("😔")}
         </h2>
@@ -56,7 +56,7 @@
       <.tag_card :for={tag <- @tags} tag={tag}>
         <.link
           patch={~p"/tags/edit/#{tag}"}
-          class="text-primary-600 link"
+          class="text-primary-600 dark:text-white link"
           aria-label={dgettext("actions", "Edit %{tag_name}", tag_name: tag.name)}
         >
           <.icon name="pencil-square" class="size-6" />
@@ -64,7 +64,7 @@
 
         <.link
           href="#"
-          class="text-primary-600 link"
+          class="text-primary-600 dark:text-white link"
           phx-click="delete"
           phx-value-id={tag.id}
           data-confirm={

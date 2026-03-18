@@ -71,12 +71,12 @@ defmodule CanneryWeb.Components.MovePackComponent do
 
     ~H"""
     <div class="w-full flex flex-col space-y-8 justify-center items-center">
-      <h2 class="mb-8 text-center title text-xl text-primary-600">
+      <h2 class="mb-8 text-center title text-xl text-primary-600 dark:text-white">
         {dgettext("actions", "Move ammo")}
       </h2>
 
       <%= if @containers |> Enum.empty?() do %>
-        <h2 class="title text-xl text-primary-600">
+        <h2 class="title text-xl text-primary-600 dark:text-white">
           {gettext("No other containers")}
           {display_emoji("😔")}
         </h2>

@@ -1,4 +1,5 @@
 @import "tailwindcss" source("../..");
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --color-primary-50: oklch(0.985 0.002 247.839);
@@ -12,9 +13,15 @@
   --color-primary-800: oklch(0.278 0.033 256.848);
   --color-primary-900: oklch(0.21 0.034 264.665);
   --color-primary-950: oklch(0.13 0.028 261.692);
+  --color-surface-dark: #333333;
 }
 
 @import "slim-select/styles" source("../..");
+
+/* dark mode: transition text colors at same rate as backgrounds */
+.text-primary-600 {
+  transition: color 500ms ease-in-out;
+}
 
 /* fix firefox scrollbars */
 * {
@@ -155,6 +162,12 @@
   @apply px-4 py-2 rounded-lg border focus:outline-hidden;
   @apply shadow-sm focus:shadow-lg;
   @apply transition-all duration-300 ease-in-out;
+  @apply dark:bg-surface-dark dark:border-neutral-600 dark:text-white dark:placeholder-neutral-400;
+  @apply dark:shadow-[0_1px_2px_rgba(255,255,255,0.08)] dark:focus:shadow-[0_2px_6px_rgba(255,255,255,0.12)];
+}
+
+.dark .input {
+  color-scheme: dark;
 }
 
 select.input {
@@ -164,7 +177,7 @@ select.input {
 
 .input-primary {
   @apply border-primary-500 hover:border-primary-600 active:border-primary-600;
-  @apply text-black;
+  @apply text-black dark:text-white;
 }
 
 .checkbox {
@@ -183,6 +196,7 @@ select.input {
   @apply px-4 py-2 rounded-lg focus:outline-hidden;
   @apply shadow-sm focus:shadow-lg;
   @apply transition-all duration-300 ease-in-out;
+  @apply dark:shadow-[0_1px_2px_rgba(255,255,255,0.08)] dark:focus:shadow-[0_2px_6px_rgba(255,255,255,0.12)];
 }
 
 .btn-primary {
@@ -207,7 +221,6 @@ select.input {
 
 .link {
   @apply hover:underline;
-  @apply transition-colors duration-500 ease-in-out;
 }
 
 /* slim select */

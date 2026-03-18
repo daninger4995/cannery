@@ -48,14 +48,14 @@
     </div>
 
     <div class="flex flex-col justify-center items-center">
-      <div class="flex flex-wrap justify-center items-center text-primary-600">
+      <div class="flex flex-wrap justify-center items-center text-primary-600 dark:text-white">
         <.link navigate={~p"/type/#{@pack.type}"} class="mx-4 my-2 btn btn-primary">
           {dgettext("actions", "View in Catalog")}
         </.link>
 
         <.link
           patch={~p"/ammo/show/edit/#{@pack}"}
-          class="mx-4 my-2 text-primary-600 link"
+          class="mx-4 my-2 text-primary-600 dark:text-white link"
           aria-label={
             dgettext("actions", "Edit pack of %{pack_count} bullets", pack_count: @pack.count)
           }
@@ -65,7 +65,7 @@
 
         <.link
           href="#"
-          class="mx-4 my-2 text-primary-600 link"
+          class="mx-4 my-2 text-primary-600 dark:text-white link"
           phx-click="delete"
           data-confirm={dgettext("prompts", "Are you sure you want to delete this ammo?")}
           aria-label={
@@ -76,7 +76,7 @@
         </.link>
       </div>
 
-      <div class="flex flex-wrap justify-center items-center text-primary-600">
+      <div class="flex flex-wrap justify-center items-center text-primary-600 dark:text-white">
         <.link patch={~p"/ammo/show/move/#{@pack}"} class="btn btn-primary">
           {dgettext("actions", "Move ammo")}
         </.link>

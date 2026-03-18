@@ -22,7 +22,7 @@ defmodule CanneryWeb.CoreComponents do
   alias Cannery.{Ammo, Ammo.Pack}
   alias Cannery.{Containers.Container, Containers.Tag}
   alias Phoenix.HTML.Form
-  alias Phoenix.LiveView.JS
+  alias Phoenix.LiveView.{ColocatedHook, JS}
 
   embed_templates "core_components/*"
 
@@ -85,10 +85,10 @@ defmodule CanneryWeb.CoreComponents do
               class="hidden"
             >
               <div
-                class="p-0.5 rounded-2xl bg-radial-[at_25%_75%] bg-white"
+                class="p-0.5 rounded-2xl bg-radial-[at_25%_75%] bg-white dark:bg-surface-dark"
                 style="filter: drop-shadow(#ffffff15 0rem 0rem 0.3rem)"
               >
-                <div class="relative p-14 rounded-2xl shadow-lg bg-white border-2">
+                <div class="relative p-14 rounded-2xl shadow-lg bg-white dark:bg-surface-dark border-2 dark:border-neutral-600 dark:shadow-[0_4px_12px_rgba(255,255,255,0.1)]">
                   <div class="absolute right-5 top-6">
                     <button
                       phx-click={JS.exec("data-cancel", to: "##{@id}")}
@@ -98,7 +98,7 @@ defmodule CanneryWeb.CoreComponents do
                     >
                       <.icon
                         name="x-mark"
-                        class="w-5 h-5 text-zinc-500 hover:text-zinc-800 transition-all duration-500 ease-in-out"
+                        class="w-5 h-5 text-zinc-500 hover:text-zinc-800 transition-all duration-300 ease-in-out"
                       />
                     </button>
                   </div>
@@ -353,7 +353,7 @@ defmodule CanneryWeb.CoreComponents do
 
     ~H"""
     <div class={@container_class}>
-      <label class="flex gap-4 leading-6 text-zinc-900 items-center justify-center text-sm">
+      <label class="flex gap-4 leading-6 text-zinc-900 dark:text-neutral-200 items-center justify-center text-sm">
         <input type="hidden" name={@name} value="false" disabled={@rest[:disabled]} />
         <input
           type="checkbox"
@@ -471,7 +471,7 @@ defmodule CanneryWeb.CoreComponents do
         id={@id}
         value={Phoenix.HTML.Form.normalize_value(@type, @value)}
         class={[
-          "px-2 py-1 block w-full rounded-lg border text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6",
+          "px-2 py-1 block w-full rounded-lg border text-zinc-900 dark:text-white focus:ring-0 sm:text-sm sm:leading-6",
           @errors == [] && "border-gray-300 focus:border-gray-100",
           @errors != [] && "border-red-300 focus:border-red-400",
           (@rest[:disabled] || @rest[:readonly]) && "bg-gray-700 text-white hover:cursor-not-allowed",
@@ -535,7 +535,7 @@ defmodule CanneryWeb.CoreComponents do
 
   def label(assigns) do
     ~H"""
-    <label for={@for} class={@class || "block text-sm leading-6 text-zinc-900"}>
+    <label for={@for} class={@class || "block text-sm leading-6 text-zinc-900 dark:text-neutral-200"}>
       {render_slot(@inner_block)}
     </label>
     """
@@ -708,10 +708,11 @@ defmodule CanneryWeb.CoreComponents do
   """
   attr :name, :string, required: true
   attr :class, :string, default: "size-5"
+  attr :rest, :global
 
   def icon(assigns) do
     ~H"""
-    <Heroicons.icon name={@name} class={@class} />
+    <Heroicons.icon name={@name} class={@class} {@rest} />
     """
   end
 

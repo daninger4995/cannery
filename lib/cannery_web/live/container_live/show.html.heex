@@ -29,10 +29,10 @@
       {@round_count}
     </span>
 
-    <div class="flex justify-center items-center space-x-4 text-primary-600">
+    <div class="flex justify-center items-center space-x-4 text-primary-600 dark:text-white">
       <.link
         patch={~p"/container/edit/#{@container}"}
-        class="text-primary-600 link"
+        class="text-primary-600 dark:text-white link"
         aria-label={
           dgettext("actions", "Edit %{container_name}", container_name: @container.name)
         }
@@ -42,7 +42,7 @@
 
       <.link
         href="#"
-        class="text-primary-600 link"
+        class="text-primary-600 dark:text-white link"
         phx-click="delete_container"
         data-confirm={
           dgettext("prompts", "Are you sure you want to delete %{name}?", name: @container.name)
@@ -55,7 +55,7 @@
       </.link>
     </div>
 
-    <div class="flex flex-wrap justify-center items-center text-primary-600">
+    <div class="flex flex-wrap justify-center items-center text-primary-600 dark:text-white">
       <button
         class="mx-4 my-2 btn btn-primary cursor-pointer"
         phx-click="toggle_staged"
@@ -71,7 +71,7 @@
 
     <%= if @container.tags |> Enum.empty?() do %>
       <div class="flex flex-row justify-center items-center space-x-4">
-        <h2 class="text-lg title text-primary-600">
+        <h2 class="text-lg title text-primary-600 dark:text-white">
           {gettext("No tags for this container")}
           {display_emoji("😔")}
         </h2>
@@ -85,7 +85,10 @@
         <.simple_tag_card :for={tag <- @container.tags} tag={tag} />
 
         <div class="mx-4 my-2">
-          <.link patch={~p"/container/edit_tags/#{@container}"} class="text-primary-600 link">
+          <.link
+            patch={~p"/container/edit_tags/#{@container}"}
+            class="text-primary-600 dark:text-white link"
+          >
             <.icon name="tag" class="size-6" />
           </.link>
         </div>
@@ -94,7 +97,7 @@
 
     <hr class="mb-4 hr" />
 
-    <div class="flex justify-center items-end space-x-4">
+    <div class="flex justify-center items-center space-x-4">
       <.form
         :let={f}
         for={%{}}
@@ -107,6 +110,7 @@
           field={f[:class]}
           type="select"
           label={gettext("Class")}
+          hidden_label={true}
           options={[
             {gettext("All"), :all},
             {gettext("Rifle"), :rifle},
@@ -118,18 +122,16 @@
         />
       </.form>
 
-      <div class="pb-1">
-        <.toggle_button action="toggle_table" value={@view_table}>
-          <span class="text-lg title text-primary-600">
-            {gettext("View as table")}
-          </span>
-        </.toggle_button>
-      </div>
+      <.toggle_button action="toggle_table" value={@view_table}>
+        <span class="text-lg title text-primary-600 dark:text-white">
+          {gettext("View as table")}
+        </span>
+      </.toggle_button>
     </div>
   </div>
 
   <%= if @packs |> Enum.empty?() do %>
-    <h2 class="mx-4 text-lg text-center title text-primary-600">
+    <h2 class="mx-4 text-lg text-center title text-primary-600 dark:text-white">
       {gettext("No ammo in this container")}
     </h2>
   <% else %>
@@ -150,7 +152,7 @@
           <div class="flex justify-center items-center px-4 py-2 space-x-4 h-full">
             <.link
               navigate={~p"/ammo/show/#{pack}"}
-              class="text-primary-600 link"
+              class="text-primary-600 dark:text-white link"
               aria-label={
                 dgettext("actions", "View pack of %{pack_count} bullets", pack_count: pack_count)
               }

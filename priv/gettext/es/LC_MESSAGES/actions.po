@@ -79,7 +79,7 @@ msgstr "¿Has olvidado tu contraseña?"
 msgid "Invite someone new!"
 msgstr "¡Invita a alguien nuevo!"
 
-#: lib/cannery_web/components/core_components/topbar.html.heex:92
+#: lib/cannery_web/components/core_components/topbar.html.heex:138
 #: lib/cannery_web/controllers/user_confirmation_html/new.html.heex:35
 #: lib/cannery_web/controllers/user_registration_html/new.html.heex:66
 #: lib/cannery_web/controllers/user_reset_password_html/edit.html.heex:46
@@ -105,7 +105,7 @@ msgstr "Nuevo Contenedor"
 msgid "New Tag"
 msgstr "Nueva Etiqueta"
 
-#: lib/cannery_web/components/core_components/topbar.html.heex:87
+#: lib/cannery_web/components/core_components/topbar.html.heex:133
 #: lib/cannery_web/controllers/user_confirmation_html/new.html.heex:32
 #: lib/cannery_web/controllers/user_registration_html/new.html.heex:3
 #: lib/cannery_web/controllers/user_registration_html/new.html.heex:57
@@ -149,7 +149,7 @@ msgstr "Enviar instrucciones para reestablecer contraseña"
 msgid "Why not add one?"
 msgstr "¿Por qué no añadir una?"
 
-#: lib/cannery_web/live/container_live/edit_tags_component.html.heex:61
+#: lib/cannery_web/live/container_live/edit_tags_component.html.heex:64
 #, elixir-autogen, elixir-format
 msgid "Add"
 msgstr "Añadir"
@@ -159,7 +159,7 @@ msgstr "Añadir"
 msgid "Why not get some ready to shoot?"
 msgstr "¿Por qué no preparar parte para disparar?"
 
-#: lib/cannery_web/live/pack_live/index.html.heex:123
+#: lib/cannery_web/live/pack_live/index.html.heex:122
 #: lib/cannery_web/live/pack_live/show.html.heex:85
 #: lib/cannery_web/live/range_live/index.html.heex:58
 #, elixir-autogen, elixir-format
@@ -207,7 +207,7 @@ msgid "View in Catalog"
 msgstr "Ver en Catalogo"
 
 #: lib/cannery_web/components/move_pack_component.ex:75
-#: lib/cannery_web/live/pack_live/index.html.heex:134
+#: lib/cannery_web/live/pack_live/index.html.heex:133
 #: lib/cannery_web/live/pack_live/show.html.heex:81
 #, elixir-autogen, elixir-format
 msgid "Move ammo"
@@ -296,54 +296,54 @@ msgstr ""
 msgid "Unstage"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/index.html.heex:164
+#: lib/cannery_web/live/pack_live/index.html.heex:163
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Clone pack of %{pack_count} bullets"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/index.html.heex:177
+#: lib/cannery_web/live/pack_live/index.html.heex:176
 #: lib/cannery_web/live/pack_live/show.html.heex:72
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Delete pack of %{pack_count} bullets"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/index.html.heex:154
+#: lib/cannery_web/live/pack_live/index.html.heex:153
 #: lib/cannery_web/live/pack_live/show.html.heex:60
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Edit pack of %{pack_count} bullets"
 msgstr ""
 
-#: lib/cannery_web/live/container_live/show.html.heex:155
-#: lib/cannery_web/live/pack_live/index.html.heex:144
+#: lib/cannery_web/live/container_live/show.html.heex:157
+#: lib/cannery_web/live/pack_live/index.html.heex:143
 #: lib/cannery_web/live/type_live/show.html.heex:200
 #, elixir-autogen, elixir-format, fuzzy
 msgid "View pack of %{pack_count} bullets"
 msgstr ""
 
 #: lib/cannery_web/live/pack_live/show.ex:147
-#: lib/cannery_web/live/range_live/index.html.heex:189
+#: lib/cannery_web/live/range_live/index.html.heex:193
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Delete shot record of %{shot_record_count} shots"
 msgstr ""
 
 #: lib/cannery_web/live/pack_live/show.ex:132
-#: lib/cannery_web/live/range_live/index.html.heex:172
+#: lib/cannery_web/live/range_live/index.html.heex:176
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Edit shot record of %{shot_record_count} shots"
 msgstr ""
 
-#: lib/cannery_web/live/type_live/index.html.heex:114
+#: lib/cannery_web/live/type_live/index.html.heex:113
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Clone %{type_name}"
 msgstr ""
 
-#: lib/cannery_web/live/type_live/index.html.heex:131
+#: lib/cannery_web/live/type_live/index.html.heex:130
 #: lib/cannery_web/live/type_live/show.html.heex:34
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Delete %{type_name}"
 msgstr ""
 
-#: lib/cannery_web/live/type_live/index.html.heex:106
+#: lib/cannery_web/live/type_live/index.html.heex:105
 #: lib/cannery_web/live/type_live/show.html.heex:18
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Edit %{type_name}"
@@ -354,7 +354,7 @@ msgstr ""
 msgid "New Type"
 msgstr "Nuevo tipo de Munición"
 
-#: lib/cannery_web/live/type_live/index.html.heex:98
+#: lib/cannery_web/live/type_live/index.html.heex:97
 #, elixir-autogen, elixir-format, fuzzy
 msgid "View %{type_name}"
 msgstr ""

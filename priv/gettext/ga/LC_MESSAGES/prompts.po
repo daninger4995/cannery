@@ -69,7 +69,7 @@ msgstr ""
 msgid "Are you sure you want to delete %{name}?"
 msgstr ""
 
-#: lib/cannery_web/live/pack_live/index.html.heex:175
+#: lib/cannery_web/live/pack_live/index.html.heex:174
 #: lib/cannery_web/live/pack_live/show.html.heex:70
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to delete this ammo?"
@@ -80,7 +80,7 @@ msgstr ""
 msgid "Are you sure you want to delete your account?"
 msgstr ""
 
-#: lib/cannery_web/components/core_components/topbar.html.heex:66
+#: lib/cannery_web/components/core_components/topbar.html.heex:112
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to log out?"
 msgstr ""
@@ -146,7 +146,7 @@ msgid "Shots recorded successfully"
 msgstr ""
 
 #: lib/cannery_web/live/pack_live/show.ex:145
-#: lib/cannery_web/live/range_live/index.html.heex:186
+#: lib/cannery_web/live/range_live/index.html.heex:190
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to delete this shot record?"
 msgstr ""
@@ -219,7 +219,7 @@ msgstr[2] ""
 msgstr[3] ""
 msgstr[4] ""
 
-#: lib/cannery_web/live/type_live/index.html.heex:125
+#: lib/cannery_web/live/type_live/index.html.heex:124
 #: lib/cannery_web/live/type_live/show.html.heex:28
 #, elixir-autogen, elixir-format
 msgid "Are you sure you want to delete %{name}? This will delete all %{name} type ammo as well!"
@@ -275,7 +275,7 @@ msgstr ""
 msgid "Email resent to %{user_email} succesfully"
 msgstr ""
 
-#: lib/cannery_web/live/container_live/edit_tags_component.html.heex:59
+#: lib/cannery_web/live/container_live/edit_tags_component.html.heex:62
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Adding…"
 msgstr ""

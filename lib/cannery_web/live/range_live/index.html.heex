@@ -5,7 +5,7 @@
     </h1>
 
     <%= if @containers |> Enum.empty?() do %>
-      <h1 class="text-xl title text-primary-600">
+      <h1 class="text-xl title text-primary-600 dark:text-white">
         {gettext("No containers staged")}
         {display_emoji("😔")}
       </h1>
@@ -64,12 +64,12 @@
   <hr class="hr" />
 
   <%= if @shot_record_count == 0 do %>
-    <h1 class="text-xl title text-primary-600 self-center">
+    <h1 class="text-xl title text-primary-600 dark:text-white self-center">
       {gettext("No shots recorded")}
       {display_emoji("😔")}
     </h1>
   <% else %>
-    <h1 class="text-2xl title text-primary-600 self-center">
+    <h1 class="text-2xl title text-primary-600 dark:text-white self-center">
       {gettext("Shot log")}
     </h1>
 
@@ -88,7 +88,7 @@
     </canvas>
 
     <div class="max-w-2xl mx-auto w-full flex flex-col items-center space-y-8">
-      <div class="flex flex-col flex-wrap justify-center items-end space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
+      <div class="flex flex-col flex-wrap justify-center items-center space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
         <.form
           :let={f}
           for={%{}}
@@ -101,6 +101,7 @@
             field={f[:class]}
             type="select"
             label={gettext("Class")}
+            hidden_label={true}
             options={[
               {gettext("All"), :all},
               {gettext("Rifle"), :rifle},
@@ -140,7 +141,10 @@
           phx-submit="change_dates"
           class="flex items-center"
         >
-          <.label for={f[:dates_start].id} class="title text-primary-600 text-lg text-center">
+          <.label
+            for={f[:dates_start].id}
+            class="title text-primary-600 dark:text-white text-lg text-center"
+          >
             {gettext("Dates")}
           </.label>
 
@@ -149,7 +153,7 @@
       </div>
 
       <%= if @shot_records |> Enum.empty?() do %>
-        <h1 class="text-xl title text-primary-600">
+        <h1 class="text-xl title text-primary-600 dark:text-white">
           {gettext("No shots recorded")}
           {display_emoji("😔")}
         </h1>
@@ -167,7 +171,7 @@
           <div class="flex justify-center items-center px-4 py-2 space-x-4">
             <.link
               patch={~p"/range/edit/#{shot_record}"}
-              class="text-primary-600 link"
+              class="text-primary-600 dark:text-white link"
               aria-label={
                 dgettext("actions", "Edit shot record of %{shot_record_count} shots",
                   shot_record_count: shot_record.count
@@ -179,7 +183,7 @@
 
             <.link
               href="#"
-              class="text-primary-600 link"
+              class="text-primary-600 dark:text-white link"
               phx-click="delete"
               phx-value-id={shot_record.id}
               data-confirm={

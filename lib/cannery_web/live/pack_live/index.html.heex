@@ -7,7 +7,7 @@
     <%= cond do %>
       <% @containers_count == 0 -> %>
         <div class="flex justify-center items-center">
-          <h2 class="m-2 title text-md text-primary-600">
+          <h2 class="m-2 title text-md text-primary-600 dark:text-white">
             {dgettext("prompts", "You'll need to")}
           </h2>
 
@@ -17,7 +17,7 @@
         </div>
       <% @types_count == 0 -> %>
         <div class="flex justify-center items-center">
-          <h2 class="m-2 title text-md text-primary-600">
+          <h2 class="m-2 title text-md text-primary-600 dark:text-white">
             {dgettext("prompts", "You'll need to")}
           </h2>
 
@@ -26,7 +26,7 @@
           </.link>
         </div>
       <% @packs_count == 0 -> %>
-        <h2 class="text-xl title text-primary-600">
+        <h2 class="text-xl title text-primary-600 dark:text-white">
           {gettext("No ammo")}
           {display_emoji("😔")}
         </h2>
@@ -39,7 +39,7 @@
           {dgettext("actions", "Add Ammo")}
         </.link>
 
-        <div class="flex flex-col flex-wrap justify-center items-end space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
+        <div class="flex flex-col flex-wrap justify-center items-center space-y-4 w-full sm:flex-row sm:space-y-0 sm:space-x-4">
           <.form
             :let={f}
             for={%{}}
@@ -52,6 +52,7 @@
               field={f[:class]}
               type="select"
               label={gettext("Class")}
+              hidden_label={true}
               options={[
                 {gettext("All"), :all},
                 {gettext("Rifle"), :rifle},
@@ -83,17 +84,15 @@
             />
           </.form>
 
-          <div class="pb-1">
-            <.toggle_button action="toggle_show_used" value={@show_used}>
-              <span class="text-lg title text-primary-600">
-                {gettext("Show used")}
-              </span>
-            </.toggle_button>
-          </div>
+          <.toggle_button action="toggle_show_used" value={@show_used}>
+            <span class="text-lg title text-primary-600 dark:text-white">
+              {gettext("Show used")}
+            </span>
+          </.toggle_button>
         </div>
 
         <%= if @packs |> Enum.empty?() do %>
-          <h2 class="text-xl title text-primary-600">
+          <h2 class="text-xl title text-primary-600 dark:text-white">
             {gettext("No Ammo")}
             {display_emoji("😔")}
           </h2>
@@ -139,7 +138,7 @@
         <div class="flex justify-center items-center px-4 py-2 space-x-4 h-full">
           <.link
             navigate={~p"/ammo/show/#{pack}"}
-            class="text-primary-600 link"
+            class="text-primary-600 dark:text-white link"
             aria-label={
               dgettext("actions", "View pack of %{pack_count} bullets", pack_count: pack_count)
             }
@@ -149,7 +148,7 @@
 
           <.link
             patch={~p"/ammo/edit/#{pack}"}
-            class="text-primary-600 link"
+            class="text-primary-600 dark:text-white link"
             aria-label={
               dgettext("actions", "Edit pack of %{pack_count} bullets", pack_count: pack_count)
             }
@@ -159,7 +158,7 @@
 
           <.link
             patch={~p"/ammo/clone/#{pack}"}
-            class="text-primary-600 link"
+            class="text-primary-600 dark:text-white link"
             aria-label={
               dgettext("actions", "Clone pack of %{pack_count} bullets", pack_count: pack_count)
             }
@@ -169,7 +168,7 @@
 
           <.link
             href="#"
-            class="text-primary-600 link"
+            class="text-primary-600 dark:text-white link"
             phx-click="delete"
             phx-value-id={pack.id}
             data-confirm={dgettext("prompts", "Are you sure you want to delete this ammo?")}

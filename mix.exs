@@ -116,6 +116,14 @@ defmodule Cannery.MixProject do
         "gettext.extract --merge",
         "gettext.merge --no-fuzzy priv/gettext"
       ],
+      precommit: [
+        "assets.build",
+        "compile --warnings-as-errors",
+        "format --check-formatted",
+        "gettext.extract --check-up-to-date",
+        "credo --strict",
+        "test"
+      ],
       "test.all": [
         "assets.build",
         "dialyzer",

@@ -40,3 +40,8 @@ npm-debug.log
 
 # direnv
 .envrc
+
+# local environment files
+.env
+.env.*
+!.env.example

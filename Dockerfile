@@ -1,55 +1,47 @@
 FROM elixir:1.19.5-otp-28-alpine AS build
 
-# install build dependencies
-RUN apk add --no-cache build-base npm git python3
+RUN apk add --no-cache build-base git nodejs npm python3
 
-# prepare build dir
 WORKDIR /app
 
-# install hex + rebar
-RUN mix local.rebar --force && \
-    mix local.hex --force
-
-# set build ENV
 ENV MIX_ENV=prod
 
-# install mix dependencies
-COPY mix.exs mix.lock ./
-COPY config config
-RUN mix do deps.get, deps.compile
+RUN mix local.hex --force && mix local.rebar --force
 
-# build assets
+COPY mix.exs mix.lock ./
+COPY config ./config
+RUN mix deps.get --only $MIX_ENV
+RUN mix deps.compile
+
 COPY assets/package.json assets/package-lock.json ./assets/
 RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
 
-COPY lib lib
-COPY priv priv
-COPY assets assets
-RUN mix do phx.digest, gettext.extract
+COPY lib ./lib
+COPY priv ./priv
+COPY assets ./assets
+RUN mix assets.deploy
+RUN mix release
 
-# compile and build release
-# uncomment COPY if rel/ exists
-# COPY rel rel
-RUN mix do assets.deploy, compile, release
+FROM alpine:3.22.1 AS app
 
-# prepare release image
-FROM alpine:latest AS app
-
-RUN apk upgrade --no-cache && \
-    apk add --no-cache bash openssl libssl3 libcrypto3 libgcc libstdc++ ncurses-libs
+RUN apk add --no-cache bash ca-certificates libgcc libstdc++ ncurses-libs openssl tzdata
 
 WORKDIR /app
 
-RUN chown nobody:nobody /app
+RUN addgroup -S cannery && adduser -S cannery -G cannery -h /app
 
 ENV MIX_ENV=prod
+ENV HOME=/app
 
-USER nobody:nobody
-
-COPY --from=build --chown=nobody:nobody /app/_build/prod/rel/cannery ./
-COPY --from=build --chown=nobody:nobody /app/priv /app/priv
+COPY --from=build --chown=cannery:cannery /app/_build/prod/rel/cannery ./
+COPY --from=build --chown=cannery:cannery /app/priv/random.sh ./priv/random.sh
 RUN chmod +x /app/priv/random.sh
 
-ENV HOME=/app
+USER cannery:cannery
+
+EXPOSE 4000
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=5 \
+  CMD wget -q -O /dev/null http://127.0.0.1:${PORT:-4000}/ || exit 1
 
 CMD ["bin/cannery", "start"]

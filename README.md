@@ -19,58 +19,45 @@ The self-hosted firearm tracker website.
 
 # Installation
 
-1. Install [Docker Compose](https://docs.docker.com/compose/install/) or alternatively [Docker Desktop](https://docs.docker.com/desktop/) on your machine.
-1. Copy the example [docker-compose.yml](https://codeberg.org/shibao/cannery/src/branch/stable/docker-compose.yml). into your local machine where you want.
-   Bind mounts are created in the same directory by default.
-1. Set the configuration variables in `docker-compose.yml`. You'll need to run
-   `docker run -it shibaobun/cannery /app/priv/random.sh` to generate a new
-   secret key base.
-1. Use `docker-compose up` or `docker-compose up -d` to start the container!
+1. Install [Docker Engine with Docker Compose v2](https://docs.docker.com/compose/install/) (or Docker Desktop).
+1. Copy `.env.example` to `.env` and set your production values:
+   ```sh
+   cp .env.example .env
+   ```
+1. Generate a strong `SECRET_KEY_BASE` and paste it into `.env`:
+   ```sh
+   openssl rand -base64 64 | tr -d '\n'
+   ```
+1. Start the stack:
+   ```sh
+   docker compose up -d --build
+   ```
+1. Open `http://localhost:4000` for first-time setup.
 
 The first created user will be created as an admin.
 
 ## Reverse proxy
 
-Finally, reverse proxy to port `4000` of the container. If you're using a reverse proxy in another docker container, you can reverse proxy to `http://cannery:4000`. Otherwise, you'll need to modify the `docker-compose.yml` to bind the port to your local machine.
+Set `HOST` in `.env` to your public hostname (for example, `cannery.example.com`) and reverse proxy to `http://cannery:4000` if your proxy is on the same Docker network.
 
-For instance, instead of
-```
-expose:
-  - "4000"
-```
-
-use
-```
-ports:
-  - "127.0.0.1:4000:4000"
-```
-and reverse proxy to `http://localhost:4000`.
-
-If you don't already have a reverse proxy on the machine, I recommend installing
-[Nginx Proxy Manager](https://nginxproxymanager.com/), which is a GUI for Nginx
-that makes it easy to configure and modify as your hosting needs change. By
-adding NPM to cannery's `docker-compose.yml`, you can avoid needing to bind any
-ports to your machine and have all the internal traffic routed through the
-generated docker network, which can be a bit more secure. The example
-configuration is commented out in the `docker-compose.yml` file, and more
-information can be found on their documentation
-[here](https://nginxproxymanager.com/setup/).
+The included compose file binds the app to `127.0.0.1:4000` by default for safer local exposure. If you need direct LAN/public access, update the binding in `docker-compose.yml`.
 
 # Configuration
 
 You can use the following environment variables to configure Cannery in
-[docker-compose.yml](https://codeberg.org/shibao/cannery/src/branch/stable/docker-compose.yml).
+[`.env`](./.env.example).
 
 - `HOST`: External url to generate links with. Must be set with your hosted
   domain name! I.e. `cannery.mywebsite.tld`
-- `PORT`: Internal port to bind to. Defaults to `4000`. Must be reverse proxied!
-- `DATABASE_URL`: Controls the database url to connect to. Defaults to
-  `ecto://postgres:postgres@cannery-db/cannery`.
+- `PORT`: Internal port to bind to. Defaults to `4000`.
+- `POSTGRES_USER`: PostgreSQL username. Defaults to `postgres`.
+- `POSTGRES_PASSWORD`: PostgreSQL password.
+- `POSTGRES_DB`: PostgreSQL database name. Defaults to `cannery`.
+- `DATABASE_URL`: Full database URL. Keep this in sync with the PostgreSQL vars above.
 - `ECTO_IPV6`: If set to `true`, Ecto should use ipv6 to connect to PostgreSQL.
   Defaults to `false`.
 - `POOL_SIZE`: Controls the pool size to use with PostgreSQL. Defaults to `10`.
-- `SECRET_KEY_BASE`: Secret key base used to sign cookies. Must be generated
-  with `docker run -it shibaobun/cannery priv/random.sh` and set for server to start.
+- `SECRET_KEY_BASE`: Secret key base used to sign cookies. Must be randomly generated and set for server startup.
 - `REGISTRATION`: Controls if user sign-up should be invite only or set to
   public. Set to `public` to enable public registration. Defaults to `invite`.
 - `LOCALE`: Sets a custom default locale. Defaults to `en_US`
@@ -93,9 +80,9 @@ tool, I recommend using the
 [pgautoupgrade tool](https://github.com/pgautoupgrade/docker-pgautoupgrade),
 which can perform this for you automatically. In the `docker-compose.yml` file,
 you can do this easily by switching the `image:` value from for example,
-`postgres:13` to `pgautoupgrade/pgautoupgrade:17-alpine` and rerun
-`docker-compose up -d`. This will automatically migrate your database to
-Postgres 17, and then you can switch back to the original `postgres:17` image
+`postgres:17-alpine` to `pgautoupgrade/pgautoupgrade:17-alpine` and rerun
+`docker compose up -d`. This will automatically migrate your database to
+Postgres 17, and then you can switch back to the original `postgres:17-alpine` image
 for additional performance, or keep using the upgrade image if you'd like.
 
 # Contribution
@@ -111,7 +98,8 @@ I can be contacted at [shibao@shibao.dev](mailto:shibao@shibao.dev). Thank you!
 
 Cannery is licensed under AGPLv3 or later. A copy of the latest version of the
 license can be found at
-[LICENSE.md](https://codeberg.org/shibao/cannery/src/branch/stable/LICENSE.md).
+[LICENSE.md](https://codebe
+rg.org/shibao/cannery/src/branch/stable/LICENSE.md).
 
 # Links
 

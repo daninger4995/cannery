@@ -67,9 +67,17 @@ config :esbuild,
     env: %{"NODE_PATH" => [Path.expand("../deps", __DIR__), Mix.Project.build_path()]}
   ]
 
+tailwind_bin =
+  case :os.type() do
+    {:win32, _} -> Path.expand("../assets/node_modules/.bin/tailwindcss.cmd", __DIR__)
+    _ -> Path.expand("../assets/node_modules/.bin/tailwindcss", __DIR__)
+  end
+
 # Configure tailwind (the version is required)
 config :tailwind,
   version: "4.2.2",
+  version_check: false,
+  path: tailwind_bin,
   cannery: [
     args: ~w(
       --input=css/style.css

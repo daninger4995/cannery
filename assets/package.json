@@ -16,7 +16,9 @@
     "topbar": "^3.0.0"
   },
   "devDependencies": {
+    "@tailwindcss/cli": "^4.3.0",
     "npm-check-updates": "^18.0.1",
-    "standard": "^17.1.2"
+    "standard": "^17.1.2",
+    "tailwindcss": "^4.3.0"
   }
 }

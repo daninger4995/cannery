@@ -19,6 +19,7 @@ RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
 COPY lib ./lib
 COPY priv ./priv
 COPY assets ./assets
+RUN mix compile
 RUN mix assets.deploy
 RUN mix release
 
